@@ -1,0 +1,76 @@
+.lineContainer {
+  background-color: rgb(10,10,10);
+  background-image: repeating-linear-gradient(-65deg,
+    rgba(0,0,0,1),
+    rgba(55,55,55,1) 10px,
+    rgba(0,0,0,1) 20px);
+    box-sizing:border-box;
+}
+.stringContainer {
+
+}
+.objectContainer {
+    border: 2px solid orange;
+    border-radius:10px;
+    box-shadow: 0px 0px 1px 2px black inset;
+    padding:1px;
+}
+.title {
+    background-color: rgb(0,245,247);
+    font-weight: bold;
+    text-decoration: underline;
+    vertical-align:top;
+}
+.lineBody {
+  margin-left:1rem;
+  width:100%;
+  min-height:1rem;
+  background-color: rgb(230,230,0);
+  display: inline-block;
+}
+.textField {
+  cursor: text;
+  background-color: rgb(250,255,250);
+
+  min-height:1rem;
+  width:100%;
+}
+.textField:hover {
+  background-color: rgb(255,255,255);
+  box-shadow:0px 0px 1px 1px black ;
+}
+.addLine {
+  font-size:.7rem;
+  margin-left:4px;
+  padding:1px;
+  border: none;
+  border-radius:10px;
+  font-weight:bold;
+  background-color: rgb(150,255,150);
+}
+.deleteLine {
+  font-size:.7rem;
+  margin-left:4px;
+  padding:1px;
+  border: none;
+  border-radius:10px;
+  font-weight:bold;
+  background-color: rgb(70,0,0);
+  color: rgb(240,240,0);
+}
+.deleteLine:hover {
+  box-shadow: 0px 1px 1px 2px black;
+  background-color: rgb(99,0,0);
+}
+.focusMe {
+  font-size:.7rem;
+  margin-left:4px;
+  padding:1px;
+  border: 3px ridge black;
+  border-radius:10px;
+  font-weight:bold;
+  background-color: rgb(70,0,255);
+}
+.focusMe:hover {
+  border: 3px groove;
+}
