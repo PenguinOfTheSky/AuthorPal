@@ -338,25 +338,10 @@ Book.html = {
       return {options: options, main: doc}
     },
     faqButton: function() {
-      let faqMenu = Object.assign(document.createElement('div'), {
-        style: '',
-        innerHTML : `
-          Testing, testing
-        `,
-        onclick: function() {
-        }
-      })
-      let attached = false;
       let button = Object.assign(document.createElement('button'), {
         style: Book.css.black + 'border: 2px solid gold;',
         onclick: function() {
-          if (attached) {
-            faqMenu.remove()
-            attached = false;
-          } else {
-            this.appendChild(faqMenu)
-            attached = true;
-          }
+          window.open('FAQ.html', '_blank')
         },
         innerText: 'FAQ'
       })
