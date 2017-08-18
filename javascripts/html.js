@@ -11,7 +11,8 @@ Book.html = {
       let startMessage = document.createElement('div')
       startMessage.innerHTML = `<h4>To get started click the buttons above ^ </h4>
         Lycelia's <i>AuthorPal</i>
-        Version 1.05
+        Version 1.05 <br>
+        Confused? Click FAQ or go to <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a>
       `
       let currentID = ''
       let sorted = ''
