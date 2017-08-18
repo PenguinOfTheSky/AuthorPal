@@ -11,6 +11,7 @@ Book.html = {
       let startMessage = document.createElement('div')
       startMessage.innerHTML = `<h4>To get started click the buttons above ^ </h4>
         Lycelia's <i>AuthorPal</i>
+        Version 1.05
       `
       let currentID = ''
       let sorted = ''
@@ -146,7 +147,7 @@ Book.html = {
           })
           title.appendChild(add)
           title.appendChild(focusMe)
-          if (maxDepth === undefined || depth <= maxDepth) {
+          if (maxDepth === undefined || depth < maxDepth) {
             for (let x in item) {
               lineBody.appendChild(determine(item[x], x, item, {maxDepth: maxDepth, depth: 1+depth}))
             }
@@ -167,7 +168,11 @@ Book.html = {
         fold: function(n) {
           root.innerHTML = '';
           root.appendChild(style)
-          root.appendChild(determine(Book.data.chosenFile[id], id, Book.data.chosenFile, {maxDepth:n}))
+          if (focused.length == 0)
+            root.appendChild(determine(Book.data.chosenFile[id], id, Book.data.chosenFile, {maxDepth:n}))
+          else {
+            root.appendChild(determine(focused[0], focused[1], focused[2], {maxDepth:n}))
+          }
         },
         focus: function(path, itemName) {
           root.innerHTML = '';
@@ -244,7 +249,7 @@ Book.html = {
       let buttons
       let commands = {
         file : function(choice) {
-          let modal = Book.html.modals[choice + 'File'](commands[choice])
+          let modal = Book.html.modals[choice + 'File']({commands: commands})
           Book.refs.container.appendChild(modal)
         },
         changeTab : function(choice) {
@@ -254,6 +259,8 @@ Book.html = {
           buttons.remove();
           buttons = Book.html._navBars.mainButtons(commands.changeTab)
           root.appendChild(buttons)
+          let firstItem = Object.keys(Book.data.chosenFile)[0]
+          display.render(firstItem)
         }
       }
       let file = Book.html._navBars.file(commands.file)
@@ -488,7 +495,7 @@ Book.html = {
       }
       return box
     },
-    createFile : function() {
+    createFile : function({commands}) {
       let box = Object.assign(document.createElement('div'), {
         id: 'Book.html.modals.createFile'
       })
@@ -514,21 +521,26 @@ Book.html = {
           let template = this.querySelector('#selectTemplate').value
           if (name != '' && Book.data.local.files[name] === undefined) {
             Book.data.local.files[name] = Book.js.templates.standard()
-            root.innerHTML = 'file created!'
-            setTimeout(function(){box.remove()}, 2000)
+            box.remove()
+            Book.data.chosenFile = Book.data.local.files[name]
+            commands.open()
+          } else {
+            let msg = Object.assign(document.createElement('b'), {
+              innerText: ' | Name is already taken! | ',
+              style: 'color: blue;'
+            })
+            root.appendChild(msg)
           }
           return false;
         }
       })
-
-
       root.appendChild(form)
       form.querySelector('#exit').onclick = function() {
         box.remove();
       }
       return box;
     },
-    openFile: function(callback) {
+    openFile: function({commands}) {
       let background = Object.assign(document.createElement('div'), {
         id: 'Book.html.modals.openFile',
         onclick: function() {
@@ -562,7 +574,7 @@ Book.html = {
           innerText: x,
           onclick: function() {
             Book.data.chosenFile = Book.data.local.files[x]
-            callback();
+            commands.open()
             background.remove()
           }
         })
