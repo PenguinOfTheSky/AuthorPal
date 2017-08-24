@@ -11,7 +11,7 @@ Book.html = {
       let startMessage = document.createElement('div')
       startMessage.innerHTML = `<h4>To get started click the buttons above ^ </h4>
         Lycelia's <i>AuthorPal</i>
-        Version 1.05 <br>
+        Version 1.06 <br>
         Confused? Click FAQ or go to <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a>
       `
       let currentID = ''
@@ -35,7 +35,6 @@ Book.html = {
           root.innerHTML = ''
           sorted = Book.html.display.sort(currentID)
           root.appendChild(sorted.element)
-          console.log(focused)
           sorted.opts.update(focused)
         }
       }
@@ -131,11 +130,30 @@ Book.html = {
           let textField = Object.assign(document.createElement('div'), {
             className: 'textField',
             innerHTML: item,
+            isRaw: "false",
             contentEditable: true,
             onblur: function() {
+              if (this.getAttribute('isRaw') == "false")
               path[itemName] = this.innerHTML
+              else {
+                path[itemName] = this.innerText
+                this.innerHTML = this.innerText;
+                this.setAttribute('isRaw', 'false')
+                this.className = 'textField'
+              }
             }
           })
+          let htmlEdit = Object.assign(document.createElement('button'), {
+            innerText: 'editHTML',
+            className: 'editHTML',
+            onclick: function() {
+              textField.setAttribute('isRaw', 'true');
+              textField.className = 'textField isRaw'
+              textField.innerText = path[itemName];
+            },
+            contentEditable: false
+          })
+          title.appendChild(htmlEdit)
           lineBody.appendChild(textField)
         }
         else if (typeof(item) == 'object') {
@@ -144,7 +162,7 @@ Book.html = {
             onclick : function() {
               Book.refs.container.appendChild(Book.html.modals.addLine(path[itemName], focused))
             },
-            innerHTML: 'Add new line'
+            innerHTML: '+New Line'
           })
           title.appendChild(add)
           title.appendChild(focusMe)

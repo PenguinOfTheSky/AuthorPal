@@ -10,13 +10,11 @@ Book.js = {
     },
     character: function() {
       let obj = {
-        "personal timeline": {},
         "blurb": ``,
         "bio": {
+          "timeline": ``,
           "appearance": ``,
-          "image":``,
-          "character": ``,
-          "goals": ``
+          "personality": ``
         }
       }
       return obj

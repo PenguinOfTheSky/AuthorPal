@@ -22,18 +22,16 @@
     vertical-align:top;
 }
 .lineBody {
-  margin-left:1rem;
-  width:100%;
-  min-height:1rem;
+  margin-left:.5rem;
+  min-height:.5rem;
   background-color: rgb(230,230,0);
-  display: inline-block;
+  display: block;
 }
 .textField {
   cursor: text;
   background-color: rgb(250,255,250);
 
-  min-height:1rem;
-  width:100%;
+  min-height:.5rem;
 }
 .textField:hover {
   background-color: rgb(255,255,255);
@@ -47,6 +45,10 @@
   border-radius:10px;
   font-weight:bold;
   background-color: rgb(150,255,150);
+}
+.addLine:hover {
+  box-shadow: 0px 1px 1px 2px black;
+  background-color: rgb(200,255,220);
 }
 .deleteLine {
   font-size:.7rem;
@@ -73,4 +75,19 @@
 }
 .focusMe:hover {
   border: 3px groove;
+}
+.editHTML {
+  font-size:.7rem;
+  margin-left:4px;
+  padding:1px;
+  border: 1px ridge black;
+  border-radius:10px;
+  font-weight:bold;
+  background-color: rgb(255,0,200);
+}
+.editHTML:hover {
+  border: 3px groove;
+}
+.isRaw {
+  box-shadow: 0px 0px 1px 3px rgba(222, 0, 222, .5) inset;
 }
