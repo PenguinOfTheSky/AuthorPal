@@ -8,12 +8,12 @@ Book.html = {
       })
       box.style = Book.css.glass;
       let root = box.createShadowRoot()
-	  let style = document.createElement('style');
+	    let style = document.createElement('style');
       style.innerText = `
-	  h4 {
-        text-align:center;
-		color:red;
-      }`
+	      h4 {
+            text-align:center;
+		        color:red;
+        }`
       root.appendChild(style)
       let startMessage = document.createElement('div')
       startMessage.innerHTML = `<h4>To get started click the buttons above ^ </h4>
@@ -108,6 +108,9 @@ Book.html = {
             }
           }
         })
+        let buttonGroup = Object.assign(document.createElement('span'), {
+          className: 'buttonGroup'
+        })
         let keyDelete = Object.assign(document.createElement('button'), {
           innerText: 'Delete',
           className: 'deleteLine',
@@ -128,7 +131,8 @@ Book.html = {
           contentEditable: false
         })
         title.appendChild(titleContent)
-        title.appendChild(keyDelete)
+        title.appendChild(buttonGroup)
+        buttonGroup.appendChild(keyDelete)
         line.appendChild(title)
         lineBody = Object.assign(document.createElement('div'), {
           className: 'lineBody'
@@ -160,7 +164,7 @@ Book.html = {
             },
             contentEditable: false
           })
-          title.appendChild(htmlEdit)
+          buttonGroup.appendChild(htmlEdit)
           lineBody.appendChild(textField)
         }
         else if (typeof(item) == 'object') {
@@ -171,8 +175,8 @@ Book.html = {
             },
             innerHTML: '+New Line'
           })
-          title.appendChild(add)
-          title.appendChild(focusMe)
+          buttonGroup.appendChild(add)
+          buttonGroup.appendChild(focusMe)
           if (maxDepth === undefined || depth < maxDepth) {
             for (let x in item) {
               lineBody.appendChild(determine(item[x], x, item, {maxDepth: maxDepth, depth: 1+depth}))

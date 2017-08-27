@@ -38,12 +38,6 @@
   box-shadow:0px 0px 1px 1px black ;
 }
 .addLine {
-  font-size:.7rem;
-  margin-left:4px;
-  padding:1px;
-  border: none;
-  border-radius:10px;
-  font-weight:bold;
   background-color: rgb(150,255,150);
 }
 .addLine:hover {
@@ -51,12 +45,6 @@
   background-color: rgb(200,255,220);
 }
 .deleteLine {
-  font-size:.7rem;
-  margin-left:4px;
-  padding:1px;
-  border: none;
-  border-radius:10px;
-  font-weight:bold;
   background-color: rgb(70,0,0);
   color: rgb(240,240,0);
 }
@@ -65,29 +53,34 @@
   background-color: rgb(99,0,0);
 }
 .focusMe {
-  font-size:.7rem;
-  margin-left:4px;
-  padding:1px;
-  border: 3px ridge black;
-  border-radius:10px;
-  font-weight:bold;
   background-color: rgb(70,0,255);
 }
 .focusMe:hover {
-  border: 3px groove;
 }
 .editHTML {
-  font-size:.7rem;
-  margin-left:4px;
-  padding:1px;
-  border: 1px ridge black;
-  border-radius:10px;
-  font-weight:bold;
   background-color: rgb(255,0,200);
 }
 .editHTML:hover {
-  border: 3px groove;
 }
 .isRaw {
   box-shadow: 0px 0px 1px 3px rgba(222, 0, 222, .5) inset;
+}
+.buttonGroup {
+  border: 1px solid black;
+  border-radius: .4rem;
+}
+.buttonGroup button {
+  border: none;
+  margin: 0px;
+  font-size: .7rem;
+  padding: 1px;
+  font-weight: bold;
+}
+.buttonGroup button:first-child {
+  border-top-left-radius: .4rem;
+  border-bottom-left-radius: .4rem;
+}
+.buttonGroup button:last-child {
+  border-top-right-radius: .4rem;
+  border-bottom-right-radius: .4rem;
 }
