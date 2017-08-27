@@ -276,6 +276,9 @@ Book.html = {
         id: 'Book.html._navBars.mainNavBar'
       })
       let root = box.createShadowRoot();
+      let style = document.createElement('style')
+      style.innerHTML = Book.css.topLeftNav
+      root.appendChild(style)
       let buttons
       let commands = {
         file : function(choice) {
@@ -297,14 +300,15 @@ Book.html = {
       let faq = Book.html._navBars.faqButton()
       let Lycelia = Object.assign(document.createElement('button'), {
         innerHTML :`<a href='http://www.lycelia.com'><i>Lycelia</i></a>`,
-        style: `font-family:cursive;font-size:1rem;text-shadow:1px 1px black;`,
-        onmouseover: function() {this.style["background-color"] = "gold";},
-        onmouseout : function() {this.style["background-color"] = "#DDD";}
+        id: 'LyceliaButton'
       })
       buttons = Book.html._navBars.mainButtons()
-      root.appendChild(file)
-      root.appendChild(Lycelia)
-      root.appendChild(faq)
+      let left = Object.assign(document.createElement('div'), {
+        id: 'left'
+      })
+      let leftItems = [Lycelia, file, faq]
+      leftItems.forEach((ele) => left.appendChild(ele))
+      root.appendChild(left)
       return box;
     },
     displayTopUI : function({mainDisplay, id}) {
@@ -376,7 +380,6 @@ Book.html = {
     },
     faqButton: function() {
       let button = Object.assign(document.createElement('button'), {
-        style: Book.css.black + 'border: 2px solid gold;',
         onclick: function() {
           window.open('FAQ.html', '_blank')
         },
@@ -386,7 +389,6 @@ Book.html = {
     },
     file: function(callback) {
       let select = Object.assign(document.createElement('select'), {
-        style: "border-radius: 5px; box-shadow: 1px 2px 1px 2px rgba(0,0,0,.5);border:2px solid #ffe13e;" + Book.css.gold,
         onclick: function() {
           if (this.selectedIndex > 0) {
             callback(this.value)
@@ -398,7 +400,6 @@ Book.html = {
       let values = ['File', 'Open', 'New', 'Download', 'Upload']
       for (var j = 0; j < options.length; j++) {
         let option = Object.assign(document.createElement('option'), {
-          style: 'color: black',
           'value': options[j],
           'innerText': values[j]
         })
