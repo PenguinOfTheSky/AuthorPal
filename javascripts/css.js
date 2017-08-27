@@ -1,5 +1,10 @@
 Book.css = {
+	centerText : `
+	margin:20px;
+	text-align:center;
+  `,
   glass : `
+  box-sizing:border-box;
     background-color: rgba(245, 250, 255, .1);
     box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
     border: 1px solid black;
