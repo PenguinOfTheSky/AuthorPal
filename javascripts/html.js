@@ -108,7 +108,7 @@ Book.html = {
             }
           }
         })
-        let buttonGroup = Object.assign(document.createElement('span'), {
+        let buttonGroup = Object.assign(document.createElement('div'), {
           className: 'buttonGroup'
         })
         let keyDelete = Object.assign(document.createElement('button'), {
