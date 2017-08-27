@@ -3,16 +3,17 @@ Book.html = {
     start: function() {
       let box = document.createElement('div')
       Object.assign(box, {
-        style: Book.css.glass,
+        style: Book.css.centerText+Book.css.glass ,
         id: 'Book.html.display'
       })
+      box.style = Book.css.glass;
       let root = box.createShadowRoot()
-      let style = document.createElement('style');
+	  let style = document.createElement('style');
       style.innerText = `
-      h4 {
+	  h4 {
         text-align:center;
-      }
-      `
+		color:red;
+      }`
       root.appendChild(style)
       let startMessage = document.createElement('div')
       startMessage.innerHTML = `<h4>To get started click the buttons above ^ </h4>
