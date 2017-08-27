@@ -44,6 +44,7 @@ Book.css = {
     }
     #left > * {
       border: none;
+      box-shadow: 0px 0px 1px 2px rgba(200,200,100,.5) inset;
       color: white;
       font-size: 1rem;
       background-color: rgba(0,0,0,0);
@@ -70,8 +71,12 @@ Book.css = {
       box-shadow: 0px 1px 1px 2px rgb(0,0,20);
       background: linear-gradient(0deg, rgb(10,10,10), rgb(55,105,55) 40%, rgb(40,80,40));
     }
+    .chosen {
+      background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40)); 
+    }
     #addColumn {
       border-radius: 5px;
+      font-size: 1rem;
       ${Book.css.green};
     }
     #addColumn:hover {
@@ -80,6 +85,31 @@ Book.css = {
     }
     `
     return str
-  }
+  },
+  displayUI: `
+    #baseButtonsDiv {
+      display:inline-flex;
+      margin-right:.5rem;
+    }
+    #baseButtonsDiv button:first-child {
+      border-top-left-radius: .4rem;
+      border-bottom-left-radius: .4rem;
+    }
+    #baseButtonsDiv button:last-child {
+      border-top-right-radius: .4rem;
+      border-bottom-right-radius: .4rem;
+    }
+
+    button {
+      font-size: 1rem;
+      box-shadow: 0px 1px 1px 2px rgb(20, 20, 20, .5);
+      margin:0px;
+    }
+    button:hover {
+      box-shadow: 0px 0px .1rem .2rem rgba(255,185,0,.8) inset;
+    }
+    .rightButtons {
+      background-color: rgba(20,255,20,.5);
+    }`
 
 }
