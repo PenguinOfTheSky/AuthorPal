@@ -3,7 +3,7 @@ Book.html = {
     start: function() {
       let box = document.createElement('div')
       Object.assign(box, {
-        style: Book.css.centerText+Book.css.glass + 'padding-top:4px;',
+        style: /*Book.css.centerText+  cascades to rest of textbox, need to confine the centering*/Book.css.glass + 'padding-top:4px;',
         id: 'Book.html.display'
       })
       let root = box.createShadowRoot()
