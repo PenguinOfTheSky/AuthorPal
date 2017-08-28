@@ -3,10 +3,9 @@ Book.html = {
     start: function() {
       let box = document.createElement('div')
       Object.assign(box, {
-        style: Book.css.centerText+Book.css.glass ,
+        style: Book.css.centerText+Book.css.glass + 'padding-top:4px;',
         id: 'Book.html.display'
       })
-      box.style = Book.css.glass;
       let root = box.createShadowRoot()
 	    let style = document.createElement('style');
       style.innerText = `
@@ -277,12 +276,12 @@ Book.html = {
     mainNavBar: function(display) {
       let box = document.createElement('div')
       Object.assign(box, {
-        style: Book.css.glass + 'display:flex;max-width:100%;box-sizing:border-box;',
-        id: 'Book.html._navBars.mainNavBar'
+        id: 'Book.html._navBars.mainNavBar',
+        style: `${Book.css.glass} display:flex; max-width:100%;`
       })
       let root = box.createShadowRoot();
       let style = document.createElement('style')
-      style.innerHTML = Book.css.topLeftNav
+      style.innerHTML = Book.css.topLeftNav()
       root.appendChild(style)
       let buttons
       let chosenButton
@@ -300,6 +299,25 @@ Book.html = {
           display.render(choice)
         },
         open : function() {
+          box.onmouseover = function() {
+            box.style = `${Book.css.glass} display:flex; max-width:100%;`
+            clearTimeout(Book.events.hideNavBar)
+          }
+          box.onmouseout = function() {
+            Book.events.hideNavBar = setTimeout(function(){
+              let height = box.clientHeight
+              let bodyHeight = document.body.clientHeight
+              let increment = height/20;
+              Book.events.hideNavBarAnim = setInterval(function() {
+                height -= increment
+                box.style = `${Book.css.glass} display:flex; max-width:100%;height:${height}px;overflow-y:hidden;`
+                if (height <= .017 * bodyHeight) {
+                  clearInterval(Book.events.hideNavBarAnim)
+                  box.style = `${Book.css.glass} display:flex; max-width:100%;height:${height}px;border-top:${height}px groove purple;overflow-y:hidden;`
+                }
+              }, 40)
+            },2000)
+          }
           buttons.remove();
           buttons = Book.html._navBars.mainButtons(commands.changeTab)
           root.appendChild(buttons)
@@ -317,7 +335,7 @@ Book.html = {
       let left = Object.assign(document.createElement('div'), {
         id: 'left'
       })
-      let leftItems = [Lycelia, file, faq]
+      let leftItems = [file, Lycelia, faq]
       leftItems.forEach((ele) => left.appendChild(ele))
       root.appendChild(left)
       return box;

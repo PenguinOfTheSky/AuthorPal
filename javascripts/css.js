@@ -1,6 +1,6 @@
 Book.css = {
   centerText : `
-    margin:20px;
+    margin:5px;
     text-align:center;
   `,
   glass : `
@@ -24,35 +24,38 @@ Book.css = {
   green: `
     background: linear-gradient(0deg, rgb(0,200,0), rgb(0,255,55) 40%, rgb(40,240,40));
   `,
-  topLeftNav: `
-    #left {
-      display: inline-flex;
-      background-color: #222;
-    }
-    #left select option{
-      color: white;
-      background-color: rgb(0,0,0);
-      border: none;
-      font-size: 1rem;
-    }
-    #LyceliaButton {
-      font-family:cursive;font-size:1rem;text-shadow:1px 1px white;
-    }
-    #LyceliaButton a {
-      text-decoration: none;
-      color: white;
-    }
-    #left > * {
-      border: none;
-      box-shadow: 0px 0px 1px 2px rgba(200,200,100,.5) inset;
-      color: white;
-      font-size: 1rem;
-      background-color: rgba(0,0,0,0);
-    }
-    #left > *:hover {
-      box-shadow: 0px 0px .1rem .2rem rgb(205,255,255) inset;
-    }
-  `,
+  topLeftNav: function() {
+    let str = `
+      #left {
+        display: inline-flex;
+        background-color: #222;
+      }
+      #left select option{
+        color: white;
+        background-color: rgb(0,0,0);
+        border: none;
+        font-size: 1rem;
+      }
+      #LyceliaButton {
+        font-family:cursive;font-size:1rem;text-shadow:1px 1px white;
+      }
+      #LyceliaButton a {
+        text-decoration: none;
+        color: white;
+      }
+      #left > * {
+        border: none;
+        box-shadow: 0px 0px 1px 2px rgba(200,200,100,.5) inset;
+        color: white;
+        font-size: 1rem;
+        background-color: rgba(0,0,0,0);
+      }
+      #left > *:hover {
+        box-shadow: 0px 0px .1rem .2rem rgb(205,255,255) inset;
+      }
+    `
+    return str
+  },
   mainButtons: function() {
     let str = `
     :host {
