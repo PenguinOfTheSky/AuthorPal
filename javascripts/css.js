@@ -72,7 +72,7 @@ Book.css = {
       background: linear-gradient(0deg, rgb(10,10,10), rgb(55,105,55) 40%, rgb(40,80,40));
     }
     .chosen {
-      background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40)); 
+      background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40));
     }
     #addColumn {
       border-radius: 5px;
@@ -87,6 +87,9 @@ Book.css = {
     return str
   },
   displayUI: `
+    :host {
+      background-color: white;
+    }
     #baseButtonsDiv {
       display:inline-flex;
       margin-right:.5rem;

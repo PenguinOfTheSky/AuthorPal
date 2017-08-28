@@ -64,6 +64,11 @@ Book.html = {
         }
       }
       root.appendChild(topUI.main)
+      let navFiller = document.createElement('div')
+      let script = document.createElement('script')
+      script.innerHTML = `document.currentScript.parentNode.style.height = document.currentScript.parentNode.parentNode.firstChild.clientHeight + 3 + 'px';`
+      navFiller.appendChild(script)
+      root.appendChild(navFiller)
       root.appendChild(mainDisplay.element)
       let opts = {
         update: mainDisplay.opts.update
@@ -319,7 +324,7 @@ Book.html = {
     },
     displayTopUI : function({mainDisplay, id}) {
       let doc = Object.assign(document.createElement('div'), {
-      style : Book.css.glass + `min-height:1.5rem;display:flex;`
+      style :  `background-color: white; min-height:1.5rem;display:flex;position:fixed;`
       })
       let root = doc.createShadowRoot();
       let style = Object.assign(document.createElement('style'), {
