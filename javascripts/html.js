@@ -64,6 +64,11 @@ Book.html = {
         }
       }
       root.appendChild(topUI.main)
+      let navFiller = document.createElement('div')
+      let script = document.createElement('script')
+      script.innerHTML = `document.currentScript.parentNode.style.height = document.currentScript.parentNode.parentNode.firstChild.clientHeight + 3 + 'px';`
+      navFiller.appendChild(script)
+      root.appendChild(navFiller)
       root.appendChild(mainDisplay.element)
       let opts = {
         update: mainDisplay.opts.update
@@ -247,7 +252,7 @@ Book.html = {
               className: 'navButton',
               innerText: ele,
               onclick: function() {
-                changeTab(ele)
+                changeTab(ele, this)
               }
             })
             root.appendChild(button)
@@ -280,12 +285,18 @@ Book.html = {
       style.innerHTML = Book.css.topLeftNav
       root.appendChild(style)
       let buttons
+      let chosenButton
       let commands = {
         file : function(choice) {
           let modal = Book.html.modals[choice + 'File']({commands: commands})
           Book.refs.container.appendChild(modal)
         },
-        changeTab : function(choice) {
+        changeTab : function(choice, ele) {
+          try {
+            chosenButton.className = 'navButton'
+          } catch(err) {}
+          chosenButton = ele
+          ele.className = 'navButton chosen'
           display.render(choice)
         },
         open : function() {
@@ -313,35 +324,27 @@ Book.html = {
     },
     displayTopUI : function({mainDisplay, id}) {
       let doc = Object.assign(document.createElement('div'), {
-      style : Book.css.glass + `min-height:1.5rem;display:flex;`
+      style :  `background-color: white; min-height:1.5rem;display:flex;position:fixed;`
       })
       let root = doc.createShadowRoot();
       let style = Object.assign(document.createElement('style'), {
-        innerHTML: `
-        button {
-          border-radius: 5px;
-          box-shadow: 0px 1px 1px 2px rgb(20, 20, 20, .5);
-          margin:2px;
-        }
-        .rightButtons {
-          background-color: #777;
-          color: white;
-        }`
+        innerHTML: Book.css.displayUI
       })
       root.appendChild(style)
       let baseButtons = Object.assign(document.createElement('div'), {
-        style: 'display:inline-flex;margin-right:4px;border:2px solid black;'
+        id: 'baseButtonsDiv'
       })
       let showAll = Object.assign(document.createElement('button'), {
         innerHTML : 'Show all',
+        className: 'leftButtons',
         style: `background-color: rgba(255,205,200,.6); `,
         onclick : function () {
-          console.log(mainDisplay)
           mainDisplay.showAll()
         }
       })
       let fold1 =Object.assign(document.createElement('button'), {
         innerHTML : 'Fold > 1',
+        className: 'leftButtons',
         style: `background-color: rgba(200,205,255,.6);`,
         onclick : function () {
           mainDisplay.fold(1)
@@ -349,6 +352,7 @@ Book.html = {
       })
       let fold2 = Object.assign(document.createElement('button'), {
         innerHTML : 'Fold > 2',
+        className: 'leftButtons',
         style: `background-color: rgba(170,185,255,.8);`,
         onclick : function () {
           mainDisplay.fold(2)
@@ -602,7 +606,7 @@ Book.html = {
       root.appendChild(exit)
       for (let x in Book.data.local.files) {
         let file = Object.assign(document.createElement('button'), {
-          style: Book.css.gold,
+          style: Book.css.gold + 'font-size:1rem;margin:1px;',
           innerText: x,
           onclick: function() {
             Book.data.chosenFile = Book.data.local.files[x]

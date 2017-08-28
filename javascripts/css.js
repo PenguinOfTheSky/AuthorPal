@@ -1,7 +1,7 @@
 Book.css = {
-	centerText : `
-	  margin:20px;
-	  text-align:center;
+  centerText : `
+    margin:20px;
+    text-align:center;
   `,
   glass : `
     box-sizing:border-box;
@@ -24,34 +24,35 @@ Book.css = {
   green: `
     background: linear-gradient(0deg, rgb(0,200,0), rgb(0,255,55) 40%, rgb(40,240,40));
   `,
-	topLeftNav: `
-		#left {
-			display: inline-flex;
-			background-color: #222;
-		}
-		#left select option{
-			color: white;
-			background-color: rgb(0,0,0);
-			border: none;
-			font-size: 1rem;
-		}
-		#LyceliaButton {
-			font-family:cursive;font-size:1rem;text-shadow:1px 1px white;
-		}
-		#LyceliaButton a {
-			text-decoration: none;
-			color: white;
-		}
-		#left > * {
-			border: none;
-			color: white;
-			font-size: 1rem;
-			background-color: rgba(0,0,0,0);
-		}
-		#left > *:hover {
-			box-shadow: 0px 0px .1rem .2rem rgb(205,255,255) inset;
-		}
-	`,
+  topLeftNav: `
+    #left {
+      display: inline-flex;
+      background-color: #222;
+    }
+    #left select option{
+      color: white;
+      background-color: rgb(0,0,0);
+      border: none;
+      font-size: 1rem;
+    }
+    #LyceliaButton {
+      font-family:cursive;font-size:1rem;text-shadow:1px 1px white;
+    }
+    #LyceliaButton a {
+      text-decoration: none;
+      color: white;
+    }
+    #left > * {
+      border: none;
+      box-shadow: 0px 0px 1px 2px rgba(200,200,100,.5) inset;
+      color: white;
+      font-size: 1rem;
+      background-color: rgba(0,0,0,0);
+    }
+    #left > *:hover {
+      box-shadow: 0px 0px .1rem .2rem rgb(205,255,255) inset;
+    }
+  `,
   mainButtons: function() {
     let str = `
     :host {
@@ -62,7 +63,7 @@ Book.css = {
     }
     .navButton {
       border-radius: 5px;
-			font-size: 1rem;
+      font-size: 1rem;
       ${Book.css.black};
     }
     .navButton:hover {
@@ -70,8 +71,12 @@ Book.css = {
       box-shadow: 0px 1px 1px 2px rgb(0,0,20);
       background: linear-gradient(0deg, rgb(10,10,10), rgb(55,105,55) 40%, rgb(40,80,40));
     }
+    .chosen {
+      background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40));
+    }
     #addColumn {
       border-radius: 5px;
+      font-size: 1rem;
       ${Book.css.green};
     }
     #addColumn:hover {
@@ -80,6 +85,34 @@ Book.css = {
     }
     `
     return str
-  }
+  },
+  displayUI: `
+    :host {
+      background-color: white;
+    }
+    #baseButtonsDiv {
+      display:inline-flex;
+      margin-right:.5rem;
+    }
+    #baseButtonsDiv button:first-child {
+      border-top-left-radius: .4rem;
+      border-bottom-left-radius: .4rem;
+    }
+    #baseButtonsDiv button:last-child {
+      border-top-right-radius: .4rem;
+      border-bottom-right-radius: .4rem;
+    }
+
+    button {
+      font-size: 1rem;
+      box-shadow: 0px 1px 1px 2px rgb(20, 20, 20, .5);
+      margin:0px;
+    }
+    button:hover {
+      box-shadow: 0px 0px .1rem .2rem rgba(255,185,0,.8) inset;
+    }
+    .rightButtons {
+      background-color: rgba(20,255,20,.5);
+    }`
 
 }
