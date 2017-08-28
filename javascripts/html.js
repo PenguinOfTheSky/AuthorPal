@@ -324,7 +324,8 @@ Book.html = {
           margin:2px;
         }
         .rightButtons {
-          background-color: rgba(20,255,20,.5);
+          background-color: #777;
+          color: white;
         }`
       })
       root.appendChild(style)

@@ -18,7 +18,7 @@
 .title {
   height: 1.3rem;
   line-height: 1.1rem;
-  background-color: rgb(0,245,247);
+  background-color: rgb(211,211,211);
   font-weight: bold;
 }
 .lineBody {
@@ -38,19 +38,19 @@
   box-shadow:0px 0px 1px 1px black ;
 }
 .addLine {
-  background-color: rgb(0,220,0);
+  background-color: rgb(92, 184, 92);
 }
 .deleteLine {
-  background-color: rgb(190,0,0);
+  background-color: rgb(217, 83, 79);
   color: rgb(255,255,255);
 }
 
 .focusMe {
-  background-color: rgb(0,0,225);
+  background-color: rgb(51, 122, 183);
 }
 
 .editHTML {
-  background-color: rgb(255,0,200);
+  background-color: rgb(91, 192, 222);
 }
 
 .isRaw {
