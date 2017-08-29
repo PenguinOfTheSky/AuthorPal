@@ -16,16 +16,14 @@
     padding:1px;
 }
 .title {
-  font-size: 1rem;
   height: 1.3rem;
   line-height: 1.1rem;
-  background-color: rgb(0,245,247);
+  background-color: rgb(211,211,211);
   font-weight: bold;
 }
 .lineBody {
   margin-left:.5rem;
   min-height:.5rem;
-  font-size: 1rem;
   background-color: rgb(230,230,0);
   display: block;
 }
@@ -40,21 +38,30 @@
   box-shadow:0px 0px 1px 1px black ;
 }
 .addLine {
-  background-color: rgb(0,220,0);
+  background-color: rgb(92, 184, 92);
+}
+.addLine:hover {
+  box-shadow: 0px 1px 1px 2px black;
+  background-color: rgb(200,255,220);
 }
 .deleteLine {
-  background-color: rgb(190,0,0);
+  background-color: rgb(217, 83, 79);
   color: rgb(255,255,255);
 }
-
+.deleteLine:hover {
+  box-shadow: 0px 1px 1px 2px black;
+  background-color: rgb(159,0,0);
+}
 .focusMe {
-  background-color: rgb(0,0,225);
+  background-color: rgb(51, 122, 183);
 }
-
+.focusMe:hover {
+}
 .editHTML {
-  background-color: rgb(255,0,200);
+  background-color: rgb(91, 192, 222);
 }
-
+.editHTML:hover {
+}
 .isRaw {
   box-shadow: 0px 0px 1px 3px rgba(222, 0, 222, .5) inset;
 }
@@ -67,10 +74,8 @@
   display:inline-flex;
 }
 .buttonGroup button {
-  color: #FBFDFD;
   border: none;
   margin: 0px;
-  font-size: .7rem;
   padding-top: 1px;
   padding-left: .1rem;
   padding-right: .1rem;
@@ -78,7 +83,7 @@
   font-weight: bold;
 }
 .buttonGroup button:hover {
-  box-shadow: 0px 0px 1px 2px rgba(255,255,255,.8) inset;
+  box-shadow: 0px 0px 1px 2px rgba(0,0,0)
 }
 .buttonGroup button:first-child {
   border-top-left-radius: .4rem;
