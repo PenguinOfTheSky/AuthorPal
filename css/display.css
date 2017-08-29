@@ -21,6 +21,8 @@
   line-height: 1.1rem;
   background-color: rgb(211,211,211);
   font-weight: bold;
+  padding: .15rem;
+  border-radius: .2rem;
 }
 .lineBody {
   margin-left:.5rem;
