@@ -298,13 +298,18 @@ Book.html = {
           ele.className = 'navButton chosen'
           display.render(choice)
         },
+        preferences : function() {
+          console.log('preferences')
+        },
         open : function() {
           box.onmouseover = function() {
             box.style = `${Book.css.glass} display:flex; max-width:100%;`
             Book.refs.topNavFiller.style.height = box.clientHeight + 'px'
             clearTimeout(Book.events.hideNavBar)
+            clearInterval(Book.events.hideNavBarAnim)
           }
           box.onmouseout = function() {
+            console.log('test')
             Book.events.hideNavBar = setTimeout(function(){
               let height = box.clientHeight
               let bodyHeight = document.body.clientHeight
@@ -421,8 +426,8 @@ Book.html = {
           }
         }
       })
-      let options = ['file', 'open', 'create', 'save', 'upload']
-      let values = ['File', 'Open', 'New', 'Download', 'Upload']
+      let options = ['file', 'open', 'create', 'save', 'upload', 'preferences']
+      let values = ['File', 'Open', 'New', 'Download', 'Upload', 'Preferences']
       for (var j = 0; j < options.length; j++) {
         let option = Object.assign(document.createElement('option'), {
           'value': options[j],
@@ -434,6 +439,36 @@ Book.html = {
     }
   },
   modals : {
+    preferencesFile : function() {
+          let box = Object.assign(document.createElement('div'), {
+            id: 'Book.html.modals.saveFile',
+            style: Book.css.black
+              + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 5;top:10%;min-height:20%; width:80%;left:0;right:0;margin: 0 auto;'
+          })
+          let root = box.createShadowRoot();
+          let div = Object.assign(document.createElement('div'), {
+            innerHTML : `
+              <b>Edit Preferences (Not currently functional, coming soon!)</b>
+              <button id='exit' style='float:right;${Book.css.gold}'>X</button>
+              <br>
+              <div>
+                <label>Choose navbar alignment</label>
+                <select id='navbarSelect'>
+                  <option value='top'>Top</option>
+                  <option value='left'>Left</option>
+                </select>
+              </div>
+              <input type = 'submit' id='submit'>
+            `,
+            style: 'text-align: center;'
+          })
+
+          root.appendChild(div)
+          div.querySelector('#exit').onclick = function() {
+            box.remove();
+          }
+          return box
+        },
     addLine : function(path, focused) {
       let box = Object.assign(document.createElement('div'), {
         id: 'Book.html.modals.addLine'
