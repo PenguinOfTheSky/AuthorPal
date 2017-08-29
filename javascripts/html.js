@@ -3,7 +3,7 @@ Book.html = {
     start: function() {
       let box = document.createElement('div')
       Object.assign(box, {
-        style: /*Book.css.centerText+  cascades to rest of textbox, need to confine the centering*/Book.css.glass + 'padding-top:4px;',
+        style: /*Book.css.centerText+  cascades to rest of textbox, need to confine the centering*/Book.css.glass + 'padding-top:.6rem;',
         id: 'Book.html.display'
       })
       let root = box.createShadowRoot()
@@ -266,6 +266,7 @@ Book.html = {
           }
         })
         root.appendChild(addColumn)
+        setTimeout(function() {Book.refs.topNavFiller.style.height = box.clientHeight + 'px';}, 20) //find a better way to do this.
       }
       render()
       Book.events.columnChange = function() {
@@ -276,8 +277,7 @@ Book.html = {
     mainNavBar: function(display) {
       let box = document.createElement('div')
       Object.assign(box, {
-        id: 'Book.html._navBars.mainNavBar',
-        style: `${Book.css.glass} display:flex; max-width:100%;`
+        id: 'Book.html._navBars.mainNavBar'
       })
       let root = box.createShadowRoot();
       let style = document.createElement('style')
@@ -301,22 +301,24 @@ Book.html = {
         open : function() {
           box.onmouseover = function() {
             box.style = `${Book.css.glass} display:flex; max-width:100%;`
+            Book.refs.topNavFiller.style.height = box.clientHeight + 'px'
             clearTimeout(Book.events.hideNavBar)
           }
           box.onmouseout = function() {
             Book.events.hideNavBar = setTimeout(function(){
               let height = box.clientHeight
               let bodyHeight = document.body.clientHeight
-              let increment = height/20;
+              let increment = height/40;
               Book.events.hideNavBarAnim = setInterval(function() {
                 height -= increment
                 box.style = `${Book.css.glass} display:flex; max-width:100%;height:${height}px;overflow-y:hidden;`
+                Book.refs.topNavFiller.style.height = height + 'px'
                 if (height <= .017 * bodyHeight) {
                   clearInterval(Book.events.hideNavBarAnim)
                   box.style = `${Book.css.glass} display:flex; max-width:100%;height:${height}px;border-top:${height}px groove purple;overflow-y:hidden;`
                 }
-              }, 40)
-            },2000)
+              }, 20)
+            },300)
           }
           buttons.remove();
           buttons = Book.html._navBars.mainButtons(commands.changeTab)

@@ -26,8 +26,15 @@ Book.css = {
   `,
   topLeftNav: function() {
     let str = `
+      :host {
+        ${Book.css.glass} display:flex; width:100%;
+        position: fixed;
+      }
+      :host(:hover) {
+
+      }
       #left {
-        display: inline-flex;
+        display: inline-block;
         background-color: #222;
       }
       #left select option{
