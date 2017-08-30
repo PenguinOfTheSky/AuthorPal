@@ -699,6 +699,38 @@ Book.html = {
       }
       background.appendChild(box)
       return background;
+    },
+    confirmationDelete : function(name) {
+      //name is name of item being deleted
+      let background = Object.assign(document.createElement('div'), {
+        id: 'Book.html.modals.confirmationDelete',
+        onclick: function() {
+          this.remove()
+        },
+        style: "background-color: rgba(0,0,0,.4);"
+          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 4;top:0;height:100%; width:100%;'
+
+      })
+      let box = Object.assign(document.createElement('div'), {
+        id: 'centerModal',
+        onclick: function(event) {
+          event.stopPropagation()
+        },
+        style: Book.css.black
+          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 5;top:10%;min-height:20%; width:80%;left:0;right:0;margin: 0 auto;'
+
+      })
+      let root = box.createShadowRoot();
+      let exit =  Object.assign(document.createElement('button'), {
+        style: Book.css.gold + 'border: 2px solid red;float:right;font-size:1rem;',
+        innerText:'X',
+        onclick: function() {
+          background.remove()
+        }
+      })
+      root.appendChild(exit)
+      background.appendChild(box)
+      return background;
     }
   }
 }
