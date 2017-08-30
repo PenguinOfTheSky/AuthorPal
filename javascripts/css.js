@@ -25,12 +25,17 @@
     topLeftNav: function() {
       let str = `
         :host {
-          ${Book.css.glass}  width:100%;
+          box-sizing:border-box;
+          background-color:#111;
+          padding-top:.3rem;
+          box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
+          border: 1px solid black;
+          width:100%;
           position: fixed;
           background: background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
         }
         :host(:hover) {
-
+          box-shadow: 0px 0px .1rem .2rem rgba(255, 255, 255, .1) inset;
         }
         #topDiv {
           display:flex;
@@ -76,7 +81,8 @@
 
         display:inline-block;
         box-sizing: border-box;
-        ${Book.css.glass};
+        background-color:#111;
+
         width: 100%;
       }
       .navButton {
