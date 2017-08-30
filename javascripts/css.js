@@ -26,17 +26,26 @@
       let str = `
         :host {
 <<<<<<< HEAD
+<<<<<<< HEAD
           ${Book.css.glass}
           display:flex;
           width:100%;
 =======
           ${Book.css.glass}  width:100%;
 >>>>>>> 3bc5058541c232875f700d006f479d2d7a94310a
+=======
+          box-sizing:border-box;
+          background-color:#111;
+          padding-top:.3rem;
+          box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
+          border: 1px solid black;
+          width:100%;
+>>>>>>> 00c25c5623f9d82baf32ab50394f1435c77383e2
           position: fixed;
           background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
         }
         :host(:hover) {
-
+          box-shadow: 0px 0px .1rem .2rem rgba(255, 255, 255, .1) inset;
         }
         #topDiv {
           display:flex;
@@ -82,7 +91,8 @@
 
         display:inline-block;
         box-sizing: border-box;
-        ${Book.css.glass};
+        background-color:#111;
+
         width: 100%;
       }
       .navButton {
