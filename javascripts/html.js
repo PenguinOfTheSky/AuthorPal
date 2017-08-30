@@ -11,14 +11,14 @@ Book.html = {
       style.innerText = `
 	      h4 {
             text-align:center;
-		        color:red;
+		        color:white;
         }`
       root.appendChild(style)
       let startMessage = document.createElement('div')
       startMessage.innerHTML = `<h4>To get started click the buttons above ^ </h4>
         Lycelia's <i>AuthorPal</i>
-        Version 1.06 <br>
-        Confused? Click FAQ or go to <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a>
+        Version <span style="color:blue">1.06</span> <br>
+        Confused? Click FAQ or go to <a style="color:grey" href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a>
       `
       let currentID = ''
       let sorted = ''
@@ -100,6 +100,7 @@ Book.html = {
         })
         let titleContent = Object.assign(document.createElement('span'), {
           className: 'titleContent',
+          style: "color:black;margin: auto;padding:.5rem;",
           innerHTML: itemName,
           contentEditable: true,
           onblur: function() {
