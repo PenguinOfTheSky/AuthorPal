@@ -93,8 +93,7 @@
       `
       return str
     },
-    displayUI: function() {
-      return `
+    displayUI: `
         :host {
           background-color: white;
         }
@@ -120,10 +119,9 @@
           box-shadow: 0px 0px .1rem .2rem rgba(255,185,0,.8) inset;
         }
         .rightButtons {
-        }`
-    },
+          background-color: rgba(20,255,20,.5);
+        }`,
     display : function() {
-      console.log('testing')
       let str = `
         .lineContainer {
           background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
@@ -139,7 +137,7 @@
         }
         .title {
           line-height: 1.1rem;
-          background-color: rgb(211,211,211);
+          background-color: rgb(211,221,231);
           font-weight: bold;
           padding: .15rem;
           border-radius: .2rem;
@@ -151,11 +149,12 @@
           display: block;
         }
         .textField {
+          color: black;
           cursor: text;
-          background-color: rgb(250,255,250);
+          background-color: rgb(240,245,240);
           min-height:.5rem;
         }
-        .textField:hover {
+        .textField:focus {
           background-color: rgb(255,255,255);
           box-shadow:0px 0px 1px 1px black ;
         }
