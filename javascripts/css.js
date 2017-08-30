@@ -93,33 +93,152 @@
       `
       return str
     },
-    displayUI: `
-      :host {
-        background-color: white;
-      }
-      #baseButtonsDiv {
-        display:inline-flex;
-        margin-right:.5rem;
-      }
-      #baseButtonsDiv button:first-child {
-        border-top-left-radius: .4rem;
-        border-bottom-left-radius: .4rem;
-      }
-      #baseButtonsDiv button:last-child {
-        border-top-right-radius: .4rem;
-        border-bottom-right-radius: .4rem;
-      }
+    displayUI: function() {
+      return `
+        :host {
+          background-color: white;
+        }
+        #baseButtonsDiv {
+          display:inline-flex;
+          margin-right:.5rem;
+        }
+        #baseButtonsDiv button:first-child {
+          border-top-left-radius: .4rem;
+          border-bottom-left-radius: .4rem;
+        }
+        #baseButtonsDiv button:last-child {
+          border-top-right-radius: .4rem;
+          border-bottom-right-radius: .4rem;
+        }
 
-      button {
-        font-size: 1rem;
-        box-shadow: 0px 1px 1px 2px rgb(20, 20, 20, .5);
-        margin:0px;
-      }
-      button:hover {
-        box-shadow: 0px 0px .1rem .2rem rgba(255,185,0,.8) inset;
-      }
-      .rightButtons {
-      }`
-
+        button {
+          font-size: 1rem;
+          box-shadow: 0px 1px 1px 2px rgb(20, 20, 20, .5);
+          margin:0px;
+        }
+        button:hover {
+          box-shadow: 0px 0px .1rem .2rem rgba(255,185,0,.8) inset;
+        }
+        .rightButtons {
+        }`
+    },
+    display : function() {
+      return `
+        .lineContainer {
+          background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
+          box-sizing:border-box;
+        }
+        .stringContainer {
+        }
+        .objectContainer {
+            border: 2px solid orange;
+            border-radius:10px;
+            box-shadow: 0px 0px 1px 2px black inset;
+            padding:1px;
+        }
+        .title {
+          line-height: 1.1rem;
+          background-color: rgb(211,211,211);
+          font-weight: bold;
+          padding: .15rem;
+          border-radius: .2rem;
+        }
+        .lineBody {
+          margin-left:.5rem;
+          min-height:.5rem;
+          background-color: rgb(230,230,0);
+          display: block;
+        }
+        .textField {
+          cursor: text;
+          background-color: rgb(250,255,250);
+          min-height:.5rem;
+        }
+        .textField:hover {
+          background-color: rgb(255,255,255);
+          box-shadow:0px 0px 1px 1px black ;
+        }
+        .addLine {
+          background-color: #5cb85c;
+          border-color: #4cae4c;
+        }
+        .addLine:hover {
+          background-color: #449d44;
+          border-color: #398439;
+        }
+        .deleteLine {
+          background-color: #d9534f;
+          border-color: #d43f3a;
+        }
+        .deleteLine:hover {
+          background-color: #c9302c;
+          border-color: #ac2925;
+        }
+        .focusMe {
+          background-color: #337ab7;
+          border-color: #2e6da4;
+        }
+        .focusMe:hover {
+          background-color: #286090;
+          border-color: #204d74;
+        }
+        .editHTML {
+          background-color: #5bc0de;
+          border-color: #46b8da;
+        }
+        .editHTML:hover {
+          background-color: #31b0d5;
+          border-color: #269abc;
+        }
+        .isRaw {
+          box-shadow: 0px 0px 1px 3px rgba(222, 0, 222, .5) inset;
+        }
+        .buttonGroup {
+          margin-left: .4rem;
+          line-height: 1.1rem;
+          vertical-align: middle;
+          display:inline-flex;
+        }
+        .buttonGroup button {
+          font-weight: bold;
+          color: white;
+          padding: .15rem;
+          margin: auto;
+        }
+        .buttonGroup button:hover {
+          outline:none;
+        }
+        .buttonGroup button:first-child {
+          border-top-left-radius: .4rem;
+          border-bottom-left-radius: .4rem;
+        }
+        .buttonGroup button:last-child {
+          border-top-right-radius: .4rem;
+          border-bottom-right-radius: .4rem;
+        }
+        `
+    },
+    add : function() {
+      return `
+        :host {
+          color: rgb(253,255,255);
+          background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));
+          padding:5px;
+          position: absolute;
+          z-index: 5;
+          top:10%;
+          min-height:20%;
+          width:80%;
+          left:0;
+          right:0;
+          margin: 0 auto;
+        }
+        select:active, select:hover {
+          outline-color: red
+        }
+        option:active, option:hover {
+          color: red
+        }`
+    }
   }
 }

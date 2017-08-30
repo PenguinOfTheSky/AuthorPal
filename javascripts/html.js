@@ -83,9 +83,7 @@ Book.html = {
       })
       let root = box.createShadowRoot()
       let style = document.createElement('style');
-      style.innerText = `
-        @import url("css/display.css")
-      `
+      style.innerText = Book.css.display
       root.appendChild(style)
       let determine = function(item, itemName, path, {maxDepth, depth}) {
         if (depth == undefined) depth = 0;
@@ -476,7 +474,7 @@ Book.html = {
       })
       let root = box.createShadowRoot();
       let style = document.createElement('style')
-      style.innerText = `@import url("css/add.css")`
+      style.innerText = Book.css.add()
       root.appendChild(style)
       let form = Object.assign(document.createElement('form'), {
         style: `width: 100%;height:100%;font-align: center;`,
@@ -593,7 +591,7 @@ Book.html = {
       })
       let root = box.createShadowRoot();
       let style = document.createElement('style')
-      style.innerText = `@import url('css/add.css')`
+      style.innerText = Book.css.add()
       root.appendChild(style)
       let form = Object.assign(document.createElement('form'), {
         style: `width: 100%;height:100%;font-align: center;`,
