@@ -25,9 +25,11 @@
     topLeftNav: function() {
       let str = `
         :host {
-          ${Book.css.glass} display:flex; width:100%;
+          ${Book.css.glass}
+          display:flex;
+          width:100%;
           position: fixed;
-          background: background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
+          background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
         }
         :host(:hover) {
 
