@@ -25,19 +25,34 @@
     topLeftNav: function() {
       let str = `
         :host {
+<<<<<<< HEAD
           ${Book.css.glass}
           display:flex;
           width:100%;
+=======
+          ${Book.css.glass}  width:100%;
+>>>>>>> 3bc5058541c232875f700d006f479d2d7a94310a
           position: fixed;
           background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
         }
         :host(:hover) {
 
         }
+        #topDiv {
+          display:flex;
+        }
+        #collapseNav {
+          font-weight:900;
+          background-color:rgba(0,0,0,0);font-size:1rem;padding:none;color:white;top:-.3rem;position:relative;border:none;max-height:.9rem;
+        }
+        #collapseNav:hover {
+          box-shadow: 0px 0px .1rem .2rem rgba(100,255,188,.6) inset;
+        }
         #left {
-          display: inline-block;
+          display: inline-flex;
         }
         #left select option{
+          max-width: 2rem;
           color: white;
           background-color: rgb(0,0,0);
           border: none;
@@ -95,8 +110,7 @@
       `
       return str
     },
-    displayUI: function() {
-      return `
+    displayUI: `
         :host {
           background-color: white;
         }
@@ -122,10 +136,9 @@
           box-shadow: 0px 0px .1rem .2rem rgba(255,185,0,.8) inset;
         }
         .rightButtons {
-        }`
-    },
+          background-color: rgba(20,255,20,.5);
+        }`,
     display : function() {
-      console.log('testing')
       let str = `
         .lineContainer {
           background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
@@ -139,9 +152,12 @@
             box-shadow: 0px 0px 1px 2px black inset;
             padding:1px;
         }
+        .objectContainer > .title > .titleContent {
+          text-decoration: underline;
+        }
         .title {
           line-height: 1.1rem;
-          background-color: rgb(211,211,211);
+          background: linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140));
           font-weight: bold;
           padding: .15rem;
           border-radius: .2rem;
@@ -153,11 +169,12 @@
           display: block;
         }
         .textField {
+          color: black;
           cursor: text;
-          background-color: rgb(250,255,250);
+          background-color: rgb(240,245,240);
           min-height:.5rem;
         }
-        .textField:hover {
+        .textField:focus {
           background-color: rgb(255,255,255);
           box-shadow:0px 0px 1px 1px black ;
         }
