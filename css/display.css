@@ -1,13 +1,8 @@
 .lineContainer {
-  background-color: rgb(10,10,10);
-  background-image: repeating-linear-gradient(-65deg,
-    rgba(0,0,0,1),
-    rgba(55,55,55,1) 10px,
-    rgba(0,0,0,1) 20px);
-    box-sizing:border-box;
+  background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
+  box-sizing:border-box;
 }
 .stringContainer {
-
 }
 .objectContainer {
     border: 2px solid orange;
@@ -16,7 +11,6 @@
     padding:1px;
 }
 .title {
-  height: 1.3rem;
   line-height: 1.1rem;
   background-color: rgb(211,211,211);
   font-weight: bold;
@@ -32,7 +26,6 @@
 .textField {
   cursor: text;
   background-color: rgb(250,255,250);
-
   min-height:.5rem;
 }
 .textField:hover {
@@ -40,52 +33,54 @@
   box-shadow:0px 0px 1px 1px black ;
 }
 .addLine {
-  background-color: rgb(92, 184, 92);
+  background-color: #5cb85c;
+  border-color: #4cae4c;
 }
 .addLine:hover {
-  box-shadow: 0px 1px 1px 2px black;
-  background-color: rgb(200,255,220);
+  background-color: #449d44;
+  border-color: #398439;
 }
 .deleteLine {
-  background-color: rgb(217, 83, 79);
-  color: rgb(255,255,255);
+  background-color: #d9534f;
+  border-color: #d43f3a;
 }
 .deleteLine:hover {
-  box-shadow: 0px 1px 1px 2px black;
-  background-color: rgb(159,0,0);
+  background-color: #c9302c;
+  border-color: #ac2925;
 }
 .focusMe {
-  background-color: rgb(51, 122, 183);
+  background-color: #337ab7;
+  border-color: #2e6da4;
 }
 .focusMe:hover {
+  background-color: #286090;
+  border-color: #204d74;
 }
 .editHTML {
-  background-color: rgb(91, 192, 222);
+  background-color: #5bc0de;
+  border-color: #46b8da;
 }
 .editHTML:hover {
+  background-color: #31b0d5;
+  border-color: #269abc;
 }
 .isRaw {
   box-shadow: 0px 0px 1px 3px rgba(222, 0, 222, .5) inset;
 }
 .buttonGroup {
   margin-left: .4rem;
-  height: 1.1rem;
-  padding: 0px;
   line-height: 1.1rem;
   vertical-align: middle;
   display:inline-flex;
 }
 .buttonGroup button {
-  border: none;
-  margin: 0px;
-  padding-top: 1px;
-  padding-left: .1rem;
-  padding-right: .1rem;
-  padding-bottom: 0px;
   font-weight: bold;
+  color: white;
+  padding: .15rem;
+  margin: auto;
 }
 .buttonGroup button:hover {
-  box-shadow: 0px 0px 1px 2px rgba(0,0,0)
+  outline:none;
 }
 .buttonGroup button:first-child {
   border-top-left-radius: .4rem;
