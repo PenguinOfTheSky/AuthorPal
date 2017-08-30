@@ -3,22 +3,21 @@ Book.html = {
     start: function() {
       let box = document.createElement('div')
       Object.assign(box, {
-        style: /*Book.css.centerText+  cascades to rest of textbox, need to confine the centering*/Book.css.glass + 'padding-top:.6rem;',
+        style: '',
         id: 'Book.html.display'
       })
       let root = box.createShadowRoot()
-	    let style = document.createElement('style');
-      style.innerText = `
-	      h4 {
-            text-align:center;
-		        color:white;
-        }`
-      root.appendChild(style)
       let startMessage = document.createElement('div')
-      startMessage.innerHTML = `<h4>To get started click the buttons above ^ </h4>
-        Lycelia's <i>AuthorPal</i>
-        Version <span style="color:blue">1.06</span> <br>
-        Confused? Click FAQ or go to <a style="color:grey" href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a>
+      //"splash page - consider making into a web component"
+      startMessage.innerHTML = `
+
+        <h1 style='text-align:center;'>Lycelia's <i>AuthorPal</i>
+        <span style="color:#DFD">v1.07</span> <br></h1>
+        <div style = 'text-indent:1rem;'>
+          <h2>To get started click File (top left) and create a new project </h2>
+          <p>To learn more click FAQ above.
+          Bug reports and feature requests can be filed at <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a></p>
+        </div>
       `
       let currentID = ''
       let sorted = ''
@@ -118,10 +117,13 @@ Book.html = {
           innerText: 'Delete',
           className: 'deleteLine',
           onclick: function() {
-            delete path[itemName]
-            Book.events.columnChange()
-            if (focused.length > 0 && focused[1] !== itemName) Book.events.bodyChange(focused)
-            else Book.events.bodyChange([])
+            let sure = window.confirm('are you sure you want to delete this?');
+            if (sure) {
+              delete path[itemName]
+              Book.events.columnChange()
+              if (focused.length > 0 && focused[1] !== itemName) {Book.events.bodyChange(focused)}
+              else Book.events.bodyChange([])
+            }
           },
           contentEditable: false
         })
@@ -265,7 +267,10 @@ Book.html = {
           }
         })
         root.appendChild(addColumn)
-        setTimeout(function() {Book.refs.topNavFiller.style.height = box.clientHeight + 'px';}, 20) //find a better way to do this.
+        setTimeout(function() {
+          window.x = box
+            Book.refs.topNavFiller.style.height = Book.refs.topNav.clientHeight + 'px';
+        }, 40) //find a better way to do this.
       }
       render()
       Book.events.columnChange = function() {
@@ -301,36 +306,34 @@ Book.html = {
           console.log('preferences')
         },
         open : function() {
-          box.onmouseover = function() {
-            box.style = `${Book.css.glass} display:flex; max-width:100%;`
-            Book.refs.topNavFiller.style.height = box.clientHeight + 'px'
-            clearTimeout(Book.events.hideNavBar)
-            clearInterval(Book.events.hideNavBarAnim)
-          }
-          box.onmouseout = function() {
-            console.log('test')
-            Book.events.hideNavBar = setTimeout(function(){
-              let height = box.clientHeight
-              let bodyHeight = document.body.clientHeight
-              let increment = height/40;
-              Book.events.hideNavBarAnim = setInterval(function() {
-                height -= increment
-                box.style = `${Book.css.glass} display:flex; max-width:100%;height:${height}px;overflow-y:hidden;`
-                Book.refs.topNavFiller.style.height = height + 'px'
-                if (height <= .017 * bodyHeight) {
-                  clearInterval(Book.events.hideNavBarAnim)
-                  box.style = `${Book.css.glass} display:flex; max-width:100%;height:${height}px;border-top:${height}px groove purple;overflow-y:hidden;`
-                }
-              }, 20)
-            },300)
-          }
           buttons.remove();
           buttons = Book.html._navBars.mainButtons(commands.changeTab)
-          root.appendChild(buttons)
+          topDiv.appendChild(buttons)
           let firstItem = Object.keys(Book.data.chosenFile)[0]
           display.render(firstItem)
         }
       }
+      let topDiv = document.createElement('div');
+      topDiv.id = 'topDiv'
+      let collapsed = false;
+      let bottomDiv = Object.assign(document.createElement('div'), {
+        innerHTML: `<button id='collapseNav'>^</button>
+        `,
+        style: `height: .4rem;text-align:center;`,
+        onclick: function() {
+          collapsed = !collapsed;
+          if (collapsed) {
+            topDiv.style.display = 'none';
+            this.style = 'height: .4rem;text-align:center;margin-top: .2rem;'
+          }
+          else {
+            topDiv.style.display = 'flex';
+            this.style = 'height: .4rem;text-align:center;margin-top: 0rem;'
+          }
+          Book.refs.topNavFiller.style.height = Book.refs.topNav.clientHeight + 'px'
+        }
+      })
+
       let file = Book.html._navBars.file(commands.file)
       let faq = Book.html._navBars.faqButton()
       let Lycelia = Object.assign(document.createElement('button'), {
@@ -343,12 +346,14 @@ Book.html = {
       })
       let leftItems = [file, Lycelia, faq]
       leftItems.forEach((ele) => left.appendChild(ele))
-      root.appendChild(left)
+      topDiv.appendChild(left)
+      root.appendChild(topDiv)
+      root.appendChild(bottomDiv)
       return box;
     },
     displayTopUI : function({mainDisplay, id}) {
       let doc = Object.assign(document.createElement('div'), {
-      style :  `background-color: white; min-height:1.5rem;display:flex;position:fixed;`
+      style :  `background-color: #DFD; min-height:1.5rem;display:flex;position:fixed;width:100%;`
       })
       let root = doc.createShadowRoot();
       let style = Object.assign(document.createElement('style'), {
@@ -425,8 +430,8 @@ Book.html = {
           }
         }
       })
-      let options = ['file', 'open', 'create', 'save', 'upload', 'preferences']
-      let values = ['File', 'Open', 'New', 'Download', 'Upload', 'Preferences']
+      let options = ['file', 'open', 'create', 'save', 'upload'/*, 'preferences'*/]
+      let values = ['File', 'Open', 'New File', 'Download', 'Upload'/*, 'Preferences'*/]
       for (var j = 0; j < options.length; j++) {
         let option = Object.assign(document.createElement('option'), {
           'value': options[j],
@@ -479,7 +484,13 @@ Book.html = {
       let form = Object.assign(document.createElement('form'), {
         style: `width: 100%;height:100%;font-align: center;`,
         innerHTML :
-          `<legend>Create New Line</legend>
+          `
+          <style>
+            button, input, select {
+              font-size:1rem;
+            }
+          </style>
+          <legend>Create New Line</legend>
           <button id='exit' style='float:right;${Book.css.gold}'>X</button>
           <br>
           <label>line name</label> <input required id ='name' type='text' placeholder='name'><br>
@@ -521,6 +532,11 @@ Book.html = {
           let root = box.createShadowRoot();
           let div = Object.assign(document.createElement('div'), {
             innerHTML : `
+              <style>
+                button, input, select {
+                  font-size:1rem;
+                }
+              </style>
               <b>Upload backup</b>
               <button id='exit' style='float:right;${Book.css.gold}'>X</button>
               <br>
@@ -569,12 +585,17 @@ Book.html = {
       let date = new Date()
       let div = Object.assign(document.createElement('div'), {
         innerHTML : `
+          <style>
+            button, input, select {
+              font-size:1rem;
+            }
+          </style>
           <b>Save a Backup</b>
           <button id='exit' style='float:right;${Book.css.gold}'>X</button>
           <br>
-          Your files are saved automatically to your localStorage every sixty seconds but if you wipe your cookies you could lose them.
-          To avoid that, save a backup copy to our computer using the button below.
-          Left-click to save to downloads folder or right-click to choose location on harddrive.
+          Your files are saved automatically to your localStorage every fifteen seconds but if you wipe your cookies you could lose them.
+          To avoid that, save a backup copy to your computer using the button below.
+          Left-click to save to downloads folder or right-click to choose location on harddrive to save to.
           <a href="${url}" download="AuthorPal-${date.toDateString()}">Download</a>
         `,
         style: 'text-align: center;'
@@ -596,7 +617,13 @@ Book.html = {
       let form = Object.assign(document.createElement('form'), {
         style: `width: 100%;height:100%;font-align: center;`,
         innerHTML :
-          `<legend>Create New Project</legend>
+          `
+          <style>
+            button, input, select {
+              font-size:1rem;
+            }
+          </style>
+          <legend>Create New Project</legend>
           <button id='exit' style='float:right;${Book.css.gold}'>X</button>
           <br>
           <label>Project name</label> <input required id ='name' type='text' placeholder='name'><br>
@@ -651,7 +678,7 @@ Book.html = {
       })
       let root = box.createShadowRoot();
       let exit =  Object.assign(document.createElement('button'), {
-        style: Book.css.gold + 'border: 2px solid red;float:right;',
+        style: Book.css.gold + 'border: 2px solid red;float:right;font-size:1rem;',
         innerText:'X',
         onclick: function() {
           background.remove()

@@ -25,17 +25,28 @@
     topLeftNav: function() {
       let str = `
         :host {
-          ${Book.css.glass} display:flex; width:100%;
+          ${Book.css.glass}  width:100%;
           position: fixed;
           background: background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
         }
         :host(:hover) {
 
         }
+        #topDiv {
+          display:flex;
+        }
+        #collapseNav {
+          font-weight:900;
+          background-color:rgba(0,0,0,0);font-size:1rem;padding:none;color:white;top:-.3rem;position:relative;border:none;max-height:.9rem;
+        }
+        #collapseNav:hover {
+          box-shadow: 0px 0px .1rem .2rem rgba(100,255,188,.6) inset;
+        }
         #left {
-          display: inline-block;
+          display: inline-flex;
         }
         #left select option{
+          max-width: 2rem;
           color: white;
           background-color: rgb(0,0,0);
           border: none;
@@ -135,9 +146,12 @@
             box-shadow: 0px 0px 1px 2px black inset;
             padding:1px;
         }
+        .objectContainer > .title > .titleContent {
+          text-decoration: underline;
+        }
         .title {
           line-height: 1.1rem;
-          background-color: rgb(211,221,231);
+          background: linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140));
           font-weight: bold;
           padding: .15rem;
           border-radius: .2rem;

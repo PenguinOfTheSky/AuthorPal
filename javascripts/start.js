@@ -20,9 +20,12 @@ Book.start = function(parent) {
   parent.appendChild(navBar)
   let navFiller = document.createElement('div')
   let script = document.createElement('script')
-  script.innerHTML = `document.currentScript.parentNode.style.height = document.currentScript.parentNode.parentNode.firstChild.clientHeight + 3 + 'px';`
+  script.innerHTML = `document.currentScript.parentNode.style.height = document.currentScript.parentNode.parentNode.firstChild.clientHeight + 3 + 'px';
+  `
+
   navFiller.appendChild(script)
   parent.appendChild(navFiller)
   Book.refs.topNavFiller = navFiller
+  Book.refs.topNav = navBar
   parent.appendChild(display.element)
 }
