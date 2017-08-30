@@ -83,7 +83,7 @@ Book.html = {
       })
       let root = box.createShadowRoot()
       let style = document.createElement('style');
-      style.innerText = Book.css.display
+      style.innerText = Book.css.display()
       root.appendChild(style)
       let determine = function(item, itemName, path, {maxDepth, depth}) {
         if (depth == undefined) depth = 0;

@@ -123,7 +123,8 @@
         }`
     },
     display : function() {
-      return `
+      console.log('testing')
+      let str = `
         .lineContainer {
           background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
           box-sizing:border-box;
@@ -217,9 +218,10 @@
           border-bottom-right-radius: .4rem;
         }
         `
+      return str
     },
     add : function() {
-      return `
+      let str =  `
         :host {
           color: rgb(253,255,255);
           background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));
@@ -239,6 +241,7 @@
         option:active, option:hover {
           color: red
         }`
+      return str
     }
   }
 }
