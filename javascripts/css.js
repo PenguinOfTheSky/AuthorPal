@@ -25,7 +25,6 @@
     topLeftNav: function() {
       let str = `
         :host {
-          ${Book.css.glass}
           box-sizing:border-box;
           background-color:#111;
           padding-top:.3rem;
@@ -33,7 +32,7 @@
           border: 1px solid black;
           width:100%;
           position: fixed;
-          background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
+          background: background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
         }
         :host(:hover) {
           box-shadow: 0px 0px .1rem .2rem rgba(255, 255, 255, .1) inset;
