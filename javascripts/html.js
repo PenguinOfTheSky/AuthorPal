@@ -117,13 +117,13 @@ Book.html = {
           innerText: 'Delete',
           className: 'deleteLine',
           onclick: function() {
-            let sure = window.confirm('are you sure you want to delete this?');
-            if (sure) {
+            callback = function() {
               delete path[itemName]
               Book.events.columnChange()
               if (focused.length > 0 && focused[1] !== itemName) {Book.events.bodyChange(focused)}
               else Book.events.bodyChange([])
             }
+            document.body.appendChild(Book.html.modals.confirmationDelete(itemName, callback))
           },
           contentEditable: false
         })
@@ -700,10 +700,9 @@ Book.html = {
       background.appendChild(box)
       return background;
     },
-    confirmationDelete : function(name) {
-      //name is name of item being deleted
+    confirmationDelete : function(name, callback) {
       let background = Object.assign(document.createElement('div'), {
-        id: 'Book.html.modals.confirmationDelete',
+        loc: 'Book.html.modals.confirmationDelete',
         onclick: function() {
           this.remove()
         },
@@ -728,19 +727,27 @@ Book.html = {
           background.remove()
         }
       })
-      root.appendChild(exit)
-      let main = Object.assign(document.createElement('div'), {
-        innerHTML : `
-          <style>
-
-          </style>
-          <h2>"Are you sure you would like to delete ${name}?"</h2>
-          <input type='button' value='Yes' onclick = 'Book.events.confirmationModal(1)' style="${Book.css.gold}">
-
-          <input type='button' value='Cancel' onclick = 'Book.events.confirmationModal(1)' style="${Book.css.gold}">
+      let style = Object.assign(document.createElement('style'), {
+        innerHTML: Book.css.confirmationDelete()
+      })
+      let title = Object.assign(document.createElement('h2'), {
+        innerHTML : `Are you sure you would like to delete "${name}"?
         `
       })
-      root.appendChild(main)
+      let yes = Object.assign(document.createElement('input'), {
+        onclick: function() {callback(); background.remove()},
+        value: 'yes',
+        type: 'button',
+        id: 'yes'
+      })
+      let no = Object.assign(document.createElement('input'), {
+        onclick: function() {background.remove()},
+        value: 'cancel',
+        type: 'button',
+        id: 'cancel'
+      })
+      let items = [style,exit,title,yes,no]
+      items.forEach(ele => root.appendChild(ele))
       background.appendChild(box)
       return background;
     }

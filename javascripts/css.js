@@ -261,6 +261,17 @@
           color: red
         }`
       return str
+    },
+    confirmationDelete : function() {
+      let str = `
+        input {
+          box-radius: .1rem;
+        }
+        h2 {
+
+        }
+      `
+      return str
     }
   }
 }
