@@ -729,6 +729,18 @@ Book.html = {
         }
       })
       root.appendChild(exit)
+      let main = Object.assign(document.createElement('div'), {
+        innerHTML : `
+          <style>
+
+          </style>
+          <h2>"Are you sure you would like to delete ${name}?"</h2>
+          <input type='button' value='Yes' onclick = 'Book.events.confirmationModal(1)' style="${Book.css.gold}">
+
+          <input type='button' value='Cancel' onclick = 'Book.events.confirmationModal(1)' style="${Book.css.gold}">
+        `
+      })
+      root.appendChild(main)
       background.appendChild(box)
       return background;
     }
