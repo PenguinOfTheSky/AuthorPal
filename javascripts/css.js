@@ -263,15 +263,29 @@
       return str
     },
     confirmationDelete : function() {
-      let str = `
+      return `
+        :host {
+          text-align:center;
+        }
         input {
-          box-radius: .1rem;
+          border-radius: .4rem;
+          border: 3px groove black;
+          margin: .2rem;
+          font-size: 1rem;
+        }
+        input:hover {
+          box-shadow: 0px 0px .1rem .2rem rgba(235,255,255,.5) inset;
         }
         h2 {
 
         }
+        #yes {
+          background-color : red;
+        }
+        #cancel {
+          background-color: rgb(0,50,255);
+        }
       `
-      return str
     }
   }
 }
