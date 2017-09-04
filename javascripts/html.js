@@ -751,13 +751,13 @@ Book.html = {
       })
       let yes = Object.assign(document.createElement('input'), {
         onclick: function() {callback(); background.remove()},
-        value: 'yes',
+        value: 'Yes',
         type: 'button',
         id: 'yes'
       })
       let no = Object.assign(document.createElement('input'), {
         onclick: function() {background.remove()},
-        value: 'cancel',
+        value: 'Cancel',
         type: 'button',
         id: 'cancel'
       })
