@@ -1,17 +1,24 @@
+  /*
+  If using css to affect all divs, make sure to exclude .component class if desired
+  */
 Book.html = {
   display: {
-    start: function() {
-      let box = document.createElement('div')
-      Object.assign(box, {
-        style: '',
-        id: 'Book.html.display'
-      })
-      let root = box.createShadowRoot()
-      let startMessage = document.createElement('div')
-      //"splash page - consider making into a web component"
-      startMessage.innerHTML = `
-
-        <h1 style='text-align:center;'>Lycelia's <i>AuthorPal</i>
+    splash : function() {
+      return Book.lib.createComponent({
+      ref: 'Book.html.display.splash',
+      id: 'splashPage',
+      css: `
+        #splashPage {
+          padding: 3%;
+        }
+        h1 {
+          text-align:center;
+        }
+      `,
+      js: function({style, box, parent}) {
+      },
+      html: `
+        <h1>Lycelia's <i>AuthorPal</i>
         <span style="color:#DFD">v1.07</span> <br></h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
@@ -19,9 +26,17 @@ Book.html = {
           Bug reports and feature requests can be filed at <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a></p>
         </div>
       `
+    })},
+    start: function() {
+      let box = document.createElement('div')
+      Object.assign(box, {
+        style: '',
+        id: 'Book.html.display'
+      })
+      let root = box.createShadowRoot()
       let currentID = ''
       let sorted = ''
-      root.appendChild(startMessage)
+      root.appendChild(Book.html.display.splash().box)
       let opts = {
         element : box,
         render : function(id) {
