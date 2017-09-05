@@ -1,5 +1,5 @@
 {
-  let superManColor = "blue;" //use by typing ${superManColor}
+  let superManColor = "blue"; //use by typing ${superManColor}
   Book.css = {
     glass : `
       box-sizing:border-box;
@@ -22,6 +22,14 @@
     green: `
       background: linear-gradient(0deg, rgb(0,200,0), rgb(0,255,55) 40%, rgb(40,240,40));
     `,
+    body: function() {
+      let str = `
+        #root {
+          background:blue;
+        }
+      `
+      return str
+    },
     topLeftNav: function() {
       let str = `
         :host {
@@ -32,7 +40,7 @@
           border: 1px solid black;
           width:100%;
           position: fixed;
-          background: background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
+          background:linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
         }
         :host(:hover) {
           box-shadow: 0px 0px .1rem .2rem rgba(255, 255, 255, .1) inset;
@@ -42,7 +50,13 @@
         }
         #collapseNav {
           font-weight:900;
-          background-color:rgba(0,0,0,0);font-size:1rem;padding:none;color:white;top:-.3rem;position:relative;border:none;max-height:.9rem;
+          background-color:rgba(0,0,0,0);font-size:1rem;
+          padding:none;
+          color:white;
+          top:-.3rem;
+          position:relative;
+          border:none;
+          max-height:.9rem;
         }
         #collapseNav:hover {
           box-shadow: 0px 0px .1rem .2rem rgba(100,255,188,.6) inset;
@@ -58,7 +72,9 @@
           font-size: 1rem;
         }
         #LyceliaButton {
-          font-family:cursive;font-size:1rem;text-shadow:1px 1px white;
+          font-family:cursive;
+          font-size:1rem;
+          text-shadow:1px 1px white;
         }
         #LyceliaButton a {
           text-decoration: none;
@@ -78,11 +94,9 @@
     mainButtons: function() {
       let str = `
       :host {
-
         display:inline-block;
         box-sizing: border-box;
         background-color:#111;
-
         width: 100%;
       }
       .navButton {
@@ -91,7 +105,6 @@
         ${Book.css.black};
       }
       .navButton:hover {
-        background-color: rgb(100,100,255);
         box-shadow: 0px 1px 1px 2px rgb(0,0,20);
         background: linear-gradient(0deg, rgb(10,10,10), rgb(55,105,55) 40%, rgb(40,80,40));
       }
@@ -112,7 +125,7 @@
     },
     displayUI: `
         :host {
-          background-color: white;
+          background-color: blue;
         }
         #baseButtonsDiv {
           display:inline-flex;
@@ -126,7 +139,6 @@
           border-top-right-radius: .4rem;
           border-bottom-right-radius: .4rem;
         }
-
         button {
           font-size: 1rem;
           box-shadow: 0px 1px 1px 2px rgb(20, 20, 20, .5);
@@ -265,25 +277,13 @@
     confirmationDelete : function() {
       return `
         :host {
-          text-align:center;
         }
         input {
-          border-radius: .4rem;
-          border: 3px groove black;
-          margin: .2rem;
+          ${Book.css.gold};
           font-size: 1rem;
         }
         input:hover {
           box-shadow: 0px 0px .1rem .2rem rgba(235,255,255,.5) inset;
-        }
-        h2 {
-
-        }
-        #yes {
-          background-color : red;
-        }
-        #cancel {
-          background-color: rgb(0,50,255);
         }
       `
     }
