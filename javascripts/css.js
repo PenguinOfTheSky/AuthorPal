@@ -1,6 +1,9 @@
-{
+Book.css = function() {
+  let preferences = Book.data.local.preferences
+  
+  console.log(preferences)
   let superManColor = "blue"; //use by typing ${superManColor}
-  Book.css = {
+  return {
     glass : `
       box-sizing:border-box;
       background:linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
@@ -22,13 +25,12 @@
     green: `
       background: linear-gradient(0deg, rgb(0,200,0), rgb(0,255,55) 40%, rgb(40,240,40));
     `,
-    body: function() {
-      let str = `
+    body: function() { //this doesn't appear to be used anywhere.
+      return `
         #root {
           background:blue;
         }
       `
-      return str
     },
     topLeftNav: function() {
       let str = `
@@ -46,7 +48,8 @@
           box-shadow: 0px 0px .1rem .2rem rgba(255, 255, 255, .1) inset;
         }
         #topDiv {
-          display:flex;
+          display:block;
+          flex-wrap:wrap;
         }
         #collapseNav {
           font-weight:900;
@@ -62,7 +65,11 @@
           box-shadow: 0px 0px .1rem .2rem rgba(100,255,188,.6) inset;
         }
         #left {
-          display: inline-flex;
+          display: inline-block;
+          margin-right:.1rem;
+        }
+        #left :last-child {
+          border-top-right-radius: .7rem;
         }
         #left select option{
           max-width: 2rem;
@@ -82,8 +89,9 @@
         }
         #left > * {
           color: white;
+          border: none;
           font-size: 1rem;
-          background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 80%, rgb(40, 40, 40));
+          background: linear-gradient(0deg, rgb(30, 0, 0), rgb(60, 10, 5) 80%, rgb(40, 5, 0));
         }
         #left > *:hover {
           background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
@@ -94,10 +102,11 @@
     mainButtons: function() {
       let str = `
       :host {
-        display:inline-block;
         box-sizing: border-box;
+        display:inline;
         background-color:#111;
         width: 100%;
+        clear: left;
       }
       .navButton {
         border-radius: 5px;
@@ -277,13 +286,25 @@
     confirmationDelete : function() {
       return `
         :host {
+          text-align:center;
         }
         input {
-          ${Book.css.gold};
+          border-radius: .4rem;
+          margin: .2rem;
           font-size: 1rem;
+          color: white;
         }
         input:hover {
           box-shadow: 0px 0px .1rem .2rem rgba(235,255,255,.5) inset;
+        }
+        h2 {
+
+        }
+        #yes {
+          background-color : red;
+        }
+        #cancel {
+          background-color: rgb(0,50,255);
         }
       `
     }

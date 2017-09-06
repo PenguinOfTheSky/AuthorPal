@@ -355,11 +355,15 @@ Book.html = {
         innerHTML :`<a href='http://www.lycelia.com'><i>Lycelia</i></a>`,
         id: 'LyceliaButton'
       })
+      let devMode = Book.lib.createNode('button', {
+        innerHTML : 'devMode',
+        onclick: function() {window.open('index2.html')}
+      })
       buttons = Book.html._navBars.mainButtons()
       let left = Object.assign(document.createElement('div'), {
         id: 'left'
       })
-      let leftItems = [file, Lycelia, faq]
+      let leftItems = [file, Lycelia, faq, devMode]
       leftItems.forEach((ele) => left.appendChild(ele))
       topDiv.appendChild(left)
       root.appendChild(topDiv)
@@ -445,8 +449,8 @@ Book.html = {
           }
         }
       })
-      let options = ['file', 'open', 'create', 'save', 'upload'/*, 'preferences'*/]
-      let values = ['File', 'Open', 'New File', 'Download', 'Upload'/*, 'Preferences'*/]
+      let options = ['file', 'open', 'create', 'save', 'upload', 'preferences']
+      let values = ['File', 'Open', 'New File', 'Download', 'Upload', 'Preferences']
       for (var j = 0; j < options.length; j++) {
         let option = Object.assign(document.createElement('option'), {
           'value': options[j],
@@ -467,22 +471,35 @@ Book.html = {
           let root = box.createShadowRoot();
           let div = Object.assign(document.createElement('div'), {
             innerHTML : `
-              <b>Edit Preferences (Not currently functional, coming soon!)</b>
+              <b>Edit Preferences </b>
               <button id='exit' style='float:right;${Book.css.gold}'>X</button>
               <br>
-              <div>
+              <form id = 'prefForm'>
                 <label>Choose navbar alignment</label>
                 <select id='navbarSelect'>
                   <option value='top'>Top</option>
                   <option value='left'>Left</option>
+                </select><br>
+                <label>Choose dark/light color scheme</label>
+                <select id='colorSelect'>
+                  <option value='dark'>Dark</option>
+                  <option value='light'>Light</option>
                 </select>
-              </div>
-              <input type = 'submit' id='submit'>
+                <input type = 'submit' id='submit'>
+              </form>
             `,
             style: 'text-align: center;'
           })
-
           root.appendChild(div)
+          div.querySelector('#prefForm').onsubmit = function(event) {
+            event.preventDefault()
+            let changes = {}
+            changes.color = div.querySelector('#colorSelect').value
+            changes.alignment = div.querySelector('#navbarSelect').value
+            Object.assign(Book.data.local.preferences, changes)
+            box.remove();
+            return 0;
+          }
           div.querySelector('#exit').onclick = function() {
             box.remove();
           }
@@ -627,17 +644,19 @@ Book.html = {
       })
       let root = box.createShadowRoot();
       let style = document.createElement('style')
-      style.innerText = Book.css.add()
+      style.innerText = Book.css.add() + `
+        button, input, select {
+          font-size:1rem;
+        }
+        :host {
+          text-align:center;
+        }
+      `
       root.appendChild(style)
       let form = Object.assign(document.createElement('form'), {
         style: `width: 100%;height:100%;font-align: center;`,
         innerHTML :
           `
-          <style>
-            button, input, select {
-              font-size:1rem;
-            }
-          </style>
           <legend>Create New Project</legend>
           <button id='exit' style='float:right;${Book.css.gold}'>X</button>
           <br>
@@ -722,7 +741,7 @@ Book.html = {
           this.remove()
         },
         style: "background-color: rgba(0,0,0,.4);"
-          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 4;top:0;height:100%; width:100%;'
+          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: fixed; z-index: 4;top:0;height:100%; width:100%;'
 
       })
       let box = Object.assign(document.createElement('div'), {
