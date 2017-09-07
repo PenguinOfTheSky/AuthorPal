@@ -1,8 +1,18 @@
 Book.css = function() {
   let preferences = Book.data.local.preferences
-  
   console.log(preferences)
-  let superManColor = "blue"; //use by typing ${superManColor}
+  preferences.color = preferences.color || 'dark'
+  preferences.alignment = preferences.alignment || 'top'
+  let schema = {
+    light: {
+      textColor1: `rgb(5,5,5)`,
+      background1: `linear-gradient(0deg, rgb(255,255,255), rgb(255,55,55) 40%, rgb(250,40,40))`
+    },
+    dark: {
+      textColor1: `rgb(253,255,255)`,
+      background1: `linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40))`
+    }
+  }
   return {
     glass : `
       box-sizing:border-box;
@@ -16,8 +26,8 @@ Book.css = function() {
       border: 1px solid rgb(155,160,170);
     `,
     black : `
-      color: rgb(253,255,255);
-      background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));
+      color: ${schema[preferences.color].textColor1};
+      background: ${schema[preferences.color].background1};;
     `,
     gold : `
       background: linear-gradient(0deg, #efd100, #e2a233 38%, #f0c328 60%, #fff1a3 86%, #ffe13e 100%);
@@ -262,11 +272,14 @@ Book.css = function() {
     },
     add : function() {
       let str =  `
+        button, input, select {
+          font-size:1rem;
+        }
         :host {
           color: rgb(253,255,255);
           background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));
           padding:5px;
-          position: absolute;
+          position: fixed;
           z-index: 5;
           top:10%;
           min-height:20%;
