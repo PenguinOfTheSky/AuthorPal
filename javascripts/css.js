@@ -1,6 +1,6 @@
 Book.css = function() {
   let preferences = Book.data.local.preferences
-  
+
   console.log(preferences)
   let superManColor = "blue"; //use by typing ${superManColor}
   return {
@@ -109,13 +109,18 @@ Book.css = function() {
         clear: left;
       }
       .navButton {
-        border-radius: 5px;
+        border-top: 0.1rem solid white;
+        border-left: 0.1rem solid #add;
+        border-right: 0.1rem solid grey;
+        border-bottom: 0.1rem solid grey;
         font-size: 1rem;
-        ${Book.css.black};
+        margin: 0.2rem;
+        color: rgb(253,255,255);
+        background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));
       }
       .navButton:hover {
         box-shadow: 0px 1px 1px 2px rgb(0,0,20);
-        background: linear-gradient(0deg, rgb(10,10,10), rgb(55,105,55) 40%, rgb(40,80,40));
+        background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
       }
       .chosen {
         background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40));
