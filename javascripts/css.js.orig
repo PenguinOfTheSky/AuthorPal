@@ -1,6 +1,9 @@
 Book.css = function() {
   let preferences = Book.data.local.preferences
-  
+<<<<<<< HEAD
+=======
+
+>>>>>>> b08dbfa290bdd5fb07b2fc4de6465608fe73cb80
   console.log(preferences)
   preferences.color = preferences.color || 'dark'
   preferences.alignment = preferences.alignment || 'top'
@@ -99,7 +102,6 @@ Book.css = function() {
           color: white;
         }
         #left > * {
-          height: 2rem;
           color: white;
           border: none;
           font-size: 1rem;

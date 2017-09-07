@@ -517,11 +517,6 @@ Book.html = {
         style: `width: 100%;height:100%;font-align: center;`,
         innerHTML :
           `
-          <style>
-            button, input, select {
-              font-size:1rem;
-            }
-          </style>
           <legend>Create New Line</legend>
           <button id='exit' style='float:right;${Book.css.gold}'>X</button>
           <br>
