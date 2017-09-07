@@ -88,6 +88,7 @@ Book.css = function() {
           color: white;
         }
         #left > * {
+          height: 2rem;
           color: white;
           border: none;
           font-size: 1rem;
