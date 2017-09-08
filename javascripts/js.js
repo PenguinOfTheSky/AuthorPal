@@ -53,5 +53,14 @@ Book.js = {
       }
       return obj;
     }
+  },
+  baseModal : function(box, root) {
+    box.onclick = function() {
+      box.remove();
+    }
+    root.querySelector('#centerModal').onclick = function(event) {
+      event.stopPropagation()
+    }
+    root.querySelector('#exit').onclick = function() { box.remove() }
   }
 }

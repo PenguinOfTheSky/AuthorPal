@@ -1,20 +1,16 @@
   /*
   If using css to affect all divs, make sure to exclude .component class if desired
   */
-Book.html = {
+Book.html = function() {
+  let CSS = Book.css,
+  Lib = Book.lib,
+  _; //Book.html, defined below.
+  let obj = {
   display: {
     splash : function() {
       return Book.lib.createComponent({
-      ref: 'Book.html.display.splash',
-      id: 'splashPage',
-      css: `
-        #splashPage {
-          padding: 3%;
-        }
-        h1 {
-          text-align:center;
-        }
-      `,
+      id: 'Book.html.display.splash',
+      css: CSS.boxes.splash(),
       js: function({style, box, parent}) {
       },
       html: `
@@ -97,7 +93,7 @@ Book.html = {
       })
       let root = box.createShadowRoot()
       let style = document.createElement('style');
-      style.innerText = Book.css.display()
+      style.innerText = CSS.boxes.display()
       root.appendChild(style)
       let determine = function(item, itemName, path, {maxDepth, depth}) {
         if (depth == undefined) depth = 0;
@@ -257,7 +253,7 @@ Book.html = {
       let root = box.attachShadow({ mode: 'open' });
       let render = function() {
         let style = document.createElement('style')
-        style.innerText = Book.css.mainButtons()
+        style.innerText = CSS.boxes.mainButtons()
         root.innerHTML = ``;
         root.appendChild(style)
         if (Book.data.chosenFile !== undefined) {
@@ -300,7 +296,7 @@ Book.html = {
       })
       let root = box.createShadowRoot();
       let style = document.createElement('style')
-      style.innerHTML = Book.css.topLeftNav()
+      style.innerHTML = CSS.boxes.topLeftNav()
       root.appendChild(style)
       let buttons
       let chosenButton
@@ -348,7 +344,6 @@ Book.html = {
           Book.refs.topNavFiller.style.height = Book.refs.topNav.clientHeight + 'px'
         }
       })
-
       let file = Book.html._navBars.file(commands.file)
       let faq = Book.html._navBars.faqButton()
       let Lycelia = Object.assign(document.createElement('button'), {
@@ -376,7 +371,7 @@ Book.html = {
       })
       let root = doc.createShadowRoot();
       let style = Object.assign(document.createElement('style'), {
-        innerHTML: Book.css.displayUI
+        innerHTML: Book.css.boxes.displayUI()
       })
       root.appendChild(style)
       let baseButtons = Object.assign(document.createElement('div'), {
@@ -463,120 +458,102 @@ Book.html = {
   },
   modals : {
     preferencesFile : function() {
-          let box = Object.assign(document.createElement('div'), {
-            id: 'Book.html.modals.saveFile',
-            style: Book.css.black
-              + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 5;top:10%;min-height:20%; width:80%;left:0;right:0;margin: 0 auto;'
-          })
-          let root = box.createShadowRoot();
-          let div = Object.assign(document.createElement('div'), {
-            innerHTML : `
-              <b>Edit Preferences </b>
-              <button id='exit' style='float:right;${Book.css.gold}'>X</button>
-              <br>
-              <form id = 'prefForm'>
-                <label>Choose navbar alignment</label>
-                <select id='navbarSelect'>
-                  <option value='top'>Top</option>
-                  <option value='left'>Left</option>
-                </select><br>
-                <label>Choose dark/light color scheme</label>
-                <select id='colorSelect'>
-                  <option value='dark'>Dark</option>
-                  <option value='light'>Light</option>
-                </select>
-                <input type = 'submit' id='submit'>
-              </form>
-            `,
-            style: 'text-align: center;'
-          })
-          root.appendChild(div)
-          div.querySelector('#prefForm').onsubmit = function(event) {
+      let item =  Book.lib.createComponent({
+        id: 'Book.html.modals.preferencesFile',
+        css: CSS.modals.preferencesFile(),
+        html: `
+          <div id='centerModal'>
+          <button id='exit'>X</button>
+          <b>Edit Preferences </b>
+          <br>
+          <form id = 'prefForm'>
+            <label>Choose navbar alignment</label>
+            <select id='navbarSelect'>
+              <option value='top'>Top</option>
+              <option value='left'>Left</option>
+            </select><br>
+            <label>Choose dark/light color scheme</label>
+            <select id='colorSelect'>
+              <option value='dark'>Dark</option>
+              <option value='light'>Light</option>
+            </select>
+            <input type = 'submit' class='btnSubmit'>
+          </form>
+          </div>
+        `,
+        js: function({style, box, parent, root}) {
+          Book.js.baseModal(box, root)
+          root.querySelector('#prefForm').onsubmit = function(event) {
             event.preventDefault()
             let changes = {}
-            changes.color = div.querySelector('#colorSelect').value
-            changes.alignment = div.querySelector('#navbarSelect').value
+            changes.color = root.querySelector('#colorSelect').value
+            changes.alignment = root.querySelector('#navbarSelect').value
             Object.assign(Book.data.local.preferences, changes)
             box.remove();
             return 0;
           }
-          div.querySelector('#exit').onclick = function() {
-            box.remove();
-          }
-          return box
-        },
-    addLine : function(path, focused) {
-      let box = Object.assign(document.createElement('div'), {
-        id: 'Book.html.modals.addLine'
-      })
-      let root = box.createShadowRoot();
-      let style = document.createElement('style')
-      style.innerText = Book.css.add()
-      root.appendChild(style)
-      let form = Object.assign(document.createElement('form'), {
-        style: `width: 100%;height:100%;font-align: center;`,
-        innerHTML :
-          `
-          <legend>Create New Line</legend>
-          <button id='exit' style='float:right;${Book.css.gold}'>X</button>
-          <br>
-          <label>line name</label> <input required id ='name' type='text' placeholder='name'><br>
-          <label>Select Template</label> <select id='selectTemplate' style="${Book.css.gold}">
-            <option value='textblock'>Text block</option>
-            <option value='container'>Container</option>
-            <option value='character'>new character</option>
-            <option value='chapter'>new chapter</option>
-          </select><br>
-          <input type='submit' value='Submit' style="${Book.css.gold}">
-          <div id='status'></div>`,
-        onsubmit: function(event) {
-          event.preventDefault();
-          let name = this.querySelector('#name').value
-          let template = this.querySelector('#selectTemplate').value
-          if (name != '' && path[name] === undefined) {
-            path[name] = Book.js.templates[template]()
-            console.log(focused)
-            Book.events.bodyChange(focused)
-          }
-          box.remove();
-          return false;
         }
       })
-
-
-      root.appendChild(form)
-      form.querySelector('#exit').onclick = function() {
-        box.remove();
-      }
-      return box;
+      return item.box;
+    },
+    addLine : function(path, focused) {
+      let item =  Book.lib.createComponent({
+        id: 'Book.html.modals.addLine',
+        css: CSS.modals.addLine(),
+        html: `
+          <div id='centerModal'>
+           <form id='addLineForm'>
+            <b>Create New Line</b>
+            <button id='exit'>X</button>
+            <br>
+            <label>line name</label> <input required id ='name' type='text' placeholder='name'><br>
+            <label>Select Template</label> <select id='selectTemplate'>
+              <option value='textblock'>Text block</option>
+              <option value='container'>Container</option>
+              <option value='character'>new character</option>
+              <option value='chapter'>new chapter</option>
+            </select><br>
+            <input type='submit' value='Submit' class='btnSubmit'>
+            <div id='status'></div>
+           </form>
+          </div>
+        `,
+        js: function({style, box, parent, root}) {
+          Book.js.baseModal(box, root);
+          root.querySelector('#addLineForm').onsubmit = function(event) {
+            event.preventDefault();
+            let name = this.querySelector('#name').value
+            let template = this.querySelector('#selectTemplate').value
+            if (name != '' && path[name] === undefined) {
+              path[name] = Book.js.templates[template]()
+              console.log(focused)
+              Book.events.bodyChange(focused)
+            }
+            box.remove();
+            return false;
+          }
+        }
+      })
+      return item.box;
     },
     uploadFile : function() {
-          let box = Object.assign(document.createElement('div'), {
-            id: 'Book.html.modals.saveFile',
-            style: Book.css.black
-              + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 5;top:10%;min-height:20%; width:80%;left:0;right:0;margin: 0 auto;'
-          })
-          let root = box.createShadowRoot();
-          let div = Object.assign(document.createElement('div'), {
-            innerHTML : `
-              <style>
-                button, input, select {
-                  font-size:1rem;
-                }
-              </style>
-              <b>Upload backup</b>
-              <button id='exit' style='float:right;${Book.css.gold}'>X</button>
-              <br>
-              Warning, may overwrite projects already in your localStorage<br>
-              <input id='fileUpload' type='file' value='Upload'>
-              <input type = 'submit' id='submit'>
-            `,
-            style: 'text-align: center;'
-          })
-          div.querySelector('#submit').onclick=function() {
-            var input = div.querySelector('#fileUpload')
-
-            // Create a reader object
+      let item =  Book.lib.createComponent({
+        id: 'Book.html.modals.uploadFile',
+        css: CSS.modals.uploadFile(),
+        html: `
+          <div id='centerModal'>
+            <b>Upload backup</b>
+            <button id='exit' style='float:right;${Book.css.gold}'>X</button>
+            <br>
+            Warning, may overwrite projects already in your localStorage<br>
+            <input id='fileUpload' type='file' value='Upload'>
+            <input type = 'submit' id='submit' class='btnSubmit'>
+          </div>
+        `,
+        js: function({style, box, parent, root}) {
+          Book.js.baseModal(box, root)
+          root.querySelector('#submit').onclick = function() {
+            var input = root.querySelector('#fileUpload')
             var reader = new FileReader();
             if (input.files.length) {
                 var textFile = input.files[0];
@@ -587,21 +564,12 @@ Book.html = {
             } else {
                 alert('Please upload a file before continuing')
             }
-
           }
-          root.appendChild(div)
-          div.querySelector('#exit').onclick = function() {
-            box.remove();
-          }
-          return box
-        },
-    saveFile : function() {
-      let box = Object.assign(document.createElement('div'), {
-        id: 'Book.html.modals.saveFile',
-        style: Book.css.black
-          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 5;top:10%;min-height:20%; width:80%;left:0;right:0;margin: 0 auto;'
+        }
       })
-      let root = box.createShadowRoot();
+      return item.box;
+    },
+    saveFile : function() {
       let textarea = Object.assign(document.createElement('textarea'), {
         innerText: JSON.stringify(Book.data.local.files,0,2)
       })
@@ -610,175 +578,117 @@ Book.html = {
       });
       let url = URL.createObjectURL(myblob);
       let date = new Date()
-      let div = Object.assign(document.createElement('div'), {
-        innerHTML : `
-          <style>
-            button, input, select {
-              font-size:1rem;
-            }
-          </style>
-          <b>Save a Backup</b>
-          <button id='exit' style='float:right;${Book.css.gold}'>X</button>
-          <br>
-          Your files are saved automatically to your localStorage every fifteen seconds but if you wipe your cookies you could lose them.
-          To avoid that, save a backup copy to your computer using the button below.
-          Left-click to save to downloads folder or right-click to choose location on harddrive to save to.
-          <a href="${url}" download="AuthorPal-${date.toDateString()}">Download</a>
+      let item =  Book.lib.createComponent({
+        id: 'Book.html.modals.saveFile',
+        css: CSS.modals.saveFile(),
+        html: `
+          <div id='centerModal'>
+            <b>Save a Backup</b>
+            <button id='exit'>X</button>
+            <br>
+            Your files are saved automatically to your localStorage every fifteen seconds but if you wipe your cookies you could lose them.
+            To avoid that, save a backup copy to your computer using the button below.
+            Left-click to save to downloads folder or right-click to choose location on harddrive to save to.
+            <a href="${url}" download="AuthorPal-${date.toDateString()}">Download</a>
+          </div>
         `,
-        style: 'text-align: center;'
+        js: function({style, box, parent, root}) {
+          Book.js.baseModal(box, root)
+        }
       })
-      root.appendChild(div)
-      div.querySelector('#exit').onclick = function() {
-        box.remove();
-      }
-      return box
+      return item.box;
     },
-    createFile : function({commands}) {
-      let box = Object.assign(document.createElement('div'), {
-        id: 'Book.html.modals.createFile'
-      })
-      let root = box.createShadowRoot();
-      let style = document.createElement('style')
-      style.innerText = Book.css.add() + `
-        button, input, select {
-          font-size:1rem;
-        }
-        :host {
-          text-align:center;
-        }
-      `
-      root.appendChild(style)
-      let form = Object.assign(document.createElement('form'), {
-        style: `width: 100%;height:100%;font-align: center;`,
-        innerHTML :
-          `
-          <legend>Create New Project</legend>
-          <button id='exit' style='float:right;${Book.css.gold}'>X</button>
-          <br>
-          <label>Project name</label> <input required id ='name' type='text' placeholder='name'><br>
-          <label>Select Template</label> <select id='selectTemplate' style="${Book.css.gold}">
-            <option value='standard'>standard</option>
-          </select><br>
-          <input type='submit' value='Submit' style="${Book.css.gold}">
-          <div id='status'></div>`,
-        onsubmit: function(event) {
-          event.preventDefault();
-          let name = this.querySelector('#name').value
-          let template = this.querySelector('#selectTemplate').value
-          if (name != '' && Book.data.local.files[name] === undefined) {
-            Book.data.local.files[name] = Book.js.templates.standard()
-            box.remove()
-            Book.data.chosenFile = Book.data.local.files[name]
-            commands.open()
-          } else {
-            let msg = Object.assign(document.createElement('b'), {
-              innerText: ' | Name is already taken! | ',
-              style: 'color: blue;'
-            })
-            root.appendChild(msg)
+    createFile: function({commands}) {
+      let item =  Book.lib.createComponent({
+        id: 'Book.html.modals.createFile',
+        css: CSS.modals.createFile(),
+        html: `
+          <div id='centerModal'>
+           <form id = 'createForm'>
+            <button id='exit'>X</button>
+            <b>Create New Project</b>
+            <br>
+            <label>Project name</label> <input required id ='name' type='text' placeholder='name'><br>
+            <label>Select Template</label> <select id='selectTemplate'>
+              <option value='standard'>standard</option>
+            </select><br>
+            <input type='submit' value='Submit' class='btnSubmit'>
+            <div id='status'></div>
+           </form>
+          </div>
+        `,
+        js: function({style, box, parent, root}) {
+          Book.js.baseModal(box, root)
+          root.querySelector('#createForm').onsubmit = function(event) {
+            event.preventDefault();
+            let name = this.querySelector('#name').value
+            let template = this.querySelector('#selectTemplate').value
+            if (name != '' && Book.data.local.files[name] === undefined) {
+              Book.data.local.files[name] = Book.js.templates.standard()
+              box.remove()
+              Book.data.chosenFile = Book.data.local.files[name]
+              commands.open()
+            } else {
+              let msg = Object.assign(document.createElement('b'), {
+                innerText: ' | Name is already taken! | ',
+                style: 'color: blue;'
+              })
+              root.appendChild(msg)
+            }
+            return false;
           }
-          return false;
         }
       })
-      root.appendChild(form)
-      form.querySelector('#exit').onclick = function() {
-        box.remove();
-      }
-      return box;
+      return item.box;
     },
     openFile: function({commands}) {
-      let background = Object.assign(document.createElement('div'), {
-        id: 'Book.html.modals.openFile',
-        onclick: function() {
-          this.remove()
-        },
-        style: "background-color: rgba(0,0,0,.4);"
-          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 4;top:0;height:100%; width:100%;'
-
-      })
-      let box = Object.assign(document.createElement('div'), {
-        id: 'Book.html.modals.openFile',
-        onclick: function(event) {
-          event.stopPropagation()
-        },
-        style: Book.css.black
-          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 5;top:10%;min-height:20%; width:80%;left:0;right:0;margin: 0 auto;'
-
-      })
-      let root = box.createShadowRoot();
-      let exit =  Object.assign(document.createElement('button'), {
-        style: Book.css.gold + 'border: 2px solid red;float:right;font-size:1rem;',
-        innerText:'X',
-        onclick: function() {
-          background.remove()
-        }
-      })
-      root.appendChild(exit)
-      for (let x in Book.data.local.files) {
-        let file = Object.assign(document.createElement('button'), {
-          style: Book.css.gold + 'font-size:1rem;margin:1px;',
-          innerText: x,
-          onclick: function() {
-            Book.data.chosenFile = Book.data.local.files[x]
-            commands.open()
-            background.remove()
+        let item =  Book.lib.createComponent({
+          id: 'Book.html.modals.openFile',
+          css: CSS.modals.openFile(),
+          html: `
+            <div id='centerModal'>
+              <button id='exit'>X</button>
+            </div>
+          `,
+          js: function({style, box, parent, root}) {
+            Book.js.baseModal(box, root)
+            for (let x in Book.data.local.files) {
+              let file = Object.assign(document.createElement('button'), {
+                className:'fileBtn',
+                innerText: x,
+                onclick: function() {
+                  Book.data.chosenFile = Book.data.local.files[x]
+                  commands.open()
+                  box.remove()
+                }
+              })
+              root.querySelector('#centerModal').appendChild(file)
+            }
           }
         })
-        root.appendChild(file)
-      }
-      background.appendChild(box)
-      return background;
-    },
+        return item.box;
+      },
     confirmationDelete : function(name, callback) {
-      let background = Object.assign(document.createElement('div'), {
-        loc: 'Book.html.modals.confirmationDelete',
-        onclick: function() {
-          this.remove()
-        },
-        style: "background-color: rgba(0,0,0,.4);"
-          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: fixed; z-index: 4;top:0;height:100%; width:100%;'
-
-      })
-      let box = Object.assign(document.createElement('div'), {
-        id: 'centerModal',
-        onclick: function(event) {
-          event.stopPropagation()
-        },
-        style: Book.css.black
-          + 'box-shadow: 1px 1px 3px 4px black; padding:5px;position: absolute; z-index: 5;top:10%;min-height:20%; width:80%;left:0;right:0;margin: 0 auto;'
-
-      })
-      let root = box.createShadowRoot();
-      let exit =  Object.assign(document.createElement('button'), {
-        style: Book.css.gold + 'border: 2px solid red;float:right;font-size:1rem;',
-        innerText:'X',
-        onclick: function() {
-          background.remove()
-        }
-      })
-      let style = Object.assign(document.createElement('style'), {
-        innerHTML: Book.css.confirmationDelete()
-      })
-      let title = Object.assign(document.createElement('h2'), {
-        innerHTML : `Are you sure you would like to delete "${name}"?
-        `
-      })
-      let yes = Object.assign(document.createElement('input'), {
-        onclick: function() {callback(); background.remove()},
-        value: 'Yes',
-        type: 'button',
-        id: 'yes'
-      })
-      let no = Object.assign(document.createElement('input'), {
-        onclick: function() {background.remove()},
-        value: 'Cancel',
-        type: 'button',
-        id: 'cancel'
-      })
-      let items = [style,exit,title,yes,no]
-      items.forEach(ele => root.appendChild(ele))
-      background.appendChild(box)
-      return background;
-    }
+        let item =  Book.lib.createComponent({
+          id: 'Book.html.modals.confirmationDelete',
+          css: CSS.modals.confirmationDelete(),
+          html: `
+            <div id='centerModal'>
+              <button id='exit'>X</button>
+              <h2>Are you sure you would like to delete "${name}"?</h2>
+              <button id='yes' class='btnWarn'>Yes</button><button id='cancel'>Cancel</button>
+            </div>
+          `,
+          js: function({style, box, parent, root}) {
+            Book.js.baseModal(box, root)
+            root.querySelector('#yes').onclick = function() {callback(); box.remove();}
+            root.querySelector('#cancel').onclick = function() {box.remove();}
+          }
+        })
+        return item.box;
+      }
   }
+}
+_ = obj;
+return obj
 }

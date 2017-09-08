@@ -5,24 +5,21 @@ Book.lib = {
   appendChildren : function(parent, arr) {
     arr.forEach(ele => parent.appendChild(ele))
   },
-  createComponent : function({reference, css, parent,id, html, js, devMode}) {
+  createComponent : function({ css, parent,id, html, js, devMode}) {
     if (devMode) {
       console.log(argumenBook[0])
     }
     let box = Book.lib.createNode('div', {
-      "id" : reference,
+      "id" : id,
       "class": 'component'
     })
     let root = box.attachShadow({mode: 'open'})
     let style = Book.lib.createNode('style', {
       innerHTML : css})
-    let main = Book.lib.createNode('div', {
-      id: id,
-      innerHTML : html})
     root.appendChild(style)
-    root.appendChild(main)
-    let opBook = {}
-    js({box, style, parent, opBook})
-    return {box: box, opBook: opBook}
+    root.innerHTML += html
+    let opts = {}
+    js({box, root, style, parent, opts})
+    return {box: box, opts: opts}
   }
 }
