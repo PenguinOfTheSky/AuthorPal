@@ -10,12 +10,12 @@ Book.html = function() {
     splash : function() {
       return Book.lib.createComponent({
       id: 'Book.html.display.splash',
-      css: CSS.boxes.splash(),
+      css: Book.css.boxes.splash(),
       js: function({style, box, parent}) {
       },
       html: `
         <h1>Lycelia's <i>AuthorPal</i>
-        <span style="color:#DFD">v1.07</span> <br></h1>
+        <span style="color:#DFD">v1.10</span></h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more click FAQ above.
@@ -59,20 +59,17 @@ Book.html = function() {
     sort: function(id) {
       let box = document.createElement('div')
       Object.assign(box, {
-        style: Book.css.air,
         id: 'Book.html.display.sort'
       })
       let root = box.createShadowRoot()
-
       let mainDisplay = Book.html.display.renderedList(id)
-
       let topUI = Book.html._navBars.displayTopUI({mainDisplay: mainDisplay.opts, id : id})
       if (typeof(Book.data.chosenFile[id]) == 'object' ) {
         for (let item in Book.data.chosenFile[id]) {
-          topUI.options.newButton(item)
+          topUI.opts.newButton(item)
         }
       }
-      root.appendChild(topUI.main)
+      root.appendChild(topUI.box)
       let navFiller = document.createElement('div')
       let script = document.createElement('script')
       script.innerHTML = `document.currentScript.parentNode.style.height = document.currentScript.parentNode.parentNode.firstChild.clientHeight + 3 + 'px';`
@@ -93,7 +90,7 @@ Book.html = function() {
       })
       let root = box.createShadowRoot()
       let style = document.createElement('style');
-      style.innerText = CSS.boxes.display()
+      style.innerText = Book.css.boxes.display()
       root.appendChild(style)
       let determine = function(item, itemName, path, {maxDepth, depth}) {
         if (depth == undefined) depth = 0;
@@ -108,7 +105,6 @@ Book.html = function() {
         })
         let titleContent = Object.assign(document.createElement('span'), {
           className: 'titleContent',
-          style: "color:black;margin: auto;padding:.5rem;",
           innerHTML: itemName,
           contentEditable: true,
           onblur: function() {
@@ -253,7 +249,7 @@ Book.html = function() {
       let root = box.attachShadow({ mode: 'open' });
       let render = function() {
         let style = document.createElement('style')
-        style.innerText = CSS.boxes.mainButtons()
+        style.innerText = Book.css.boxes.mainButtons()
         root.innerHTML = ``;
         root.appendChild(style)
         if (Book.data.chosenFile !== undefined) {
@@ -296,7 +292,7 @@ Book.html = function() {
       })
       let root = box.createShadowRoot();
       let style = document.createElement('style')
-      style.innerHTML = CSS.boxes.topLeftNav()
+      style.innerHTML = Book.css.boxes.topLeftNav()
       root.appendChild(style)
       let buttons
       let chosenButton
@@ -328,8 +324,7 @@ Book.html = function() {
       topDiv.id = 'topDiv'
       let collapsed = false;
       let bottomDiv = Object.assign(document.createElement('div'), {
-        innerHTML: `<button id='collapseNav'>^</button>
-        `,
+        innerHTML: `<button id='collapseNav'>^</button>`,
         style: `height: .4rem;text-align:center;`,
         onclick: function() {
           collapsed = !collapsed;
@@ -365,66 +360,41 @@ Book.html = function() {
       root.appendChild(bottomDiv)
       return box;
     },
-    displayTopUI : function({mainDisplay, id}) {
-      let doc = Object.assign(document.createElement('div'), {
-      style :  `background-color: #DFD; min-height:1.5rem;display:flex;position:fixed;width:100%;`
-      })
-      let root = doc.createShadowRoot();
-      let style = Object.assign(document.createElement('style'), {
-        innerHTML: Book.css.boxes.displayUI()
-      })
-      root.appendChild(style)
-      let baseButtons = Object.assign(document.createElement('div'), {
-        id: 'baseButtonsDiv'
-      })
-      let showAll = Object.assign(document.createElement('button'), {
-        innerHTML : 'Show all',
-        className: 'leftButtons',
-        style: `background-color: rgba(255,205,200,.6); `,
-        onclick : function () {
-          mainDisplay.showAll()
-        }
-      })
-      let fold1 =Object.assign(document.createElement('button'), {
-        innerHTML : 'Fold > 1',
-        className: 'leftButtons',
-        style: `background-color: rgba(200,205,255,.6);`,
-        onclick : function () {
-          mainDisplay.fold(1)
-        }
-      })
-      let fold2 = Object.assign(document.createElement('button'), {
-        innerHTML : 'Fold > 2',
-        className: 'leftButtons',
-        style: `background-color: rgba(170,185,255,.8);`,
-        onclick : function () {
-          mainDisplay.fold(2)
-        }
-      })
-      baseButtons.appendChild(showAll)
-      baseButtons.appendChild(fold1)
-      baseButtons.appendChild(fold2)
-      root.appendChild(baseButtons)
-      let rightButtons = Object.assign(document.createElement('div'), {
-        style: 'display:inline-block;'
-      })
-      root.appendChild(rightButtons)
-      let options = {
-        newButton : function(str) {
-          let button = Object.assign(document.createElement('button'), {
-            'innerHTML': str,
-            className : 'rightButtons',
-            onclick : function () {
-              mainDisplay.swapDisplayObject(str)
+    displayTopUI : function ({mainDisplay, id}) {
+      let item =  Book.lib.createComponent({
+        id: 'Book.html._navBars.displayTopUI',
+        css: Book.css.boxes.displayTopUI(),
+        html: `
+          <div id='left'>
+            <button class='baseButtons2' id = 'show'>Show All</button>
+            <button class='baseButtons2' id='fold1'>Fold >1</button>
+            <button class='baseButtons2' id='fold2'>Fold >2</button>
+          </div>
+          <div id='right'></div>
+        `,
+        js: function({style, box, parent, root, opts}) {
+          root.querySelector('#show').onclick = function() {mainDisplay.showAll()}
+          root.querySelector('#fold1').onclick = function() {mainDisplay.fold(1)}
+          root.querySelector('#fold2').onclick = function() {mainDisplay.fold(2)}
+          let rightButtons = root.querySelector('#right')
+          Object.assign(opts, {
+            newButton : function(str) {
+              let button = Object.assign(document.createElement('button'), {
+                'innerHTML': str,
+                className : 'rightButtons',
+                onclick : function () {
+                  mainDisplay.swapDisplayObject(str)
+                }
+              })
+              rightButtons.appendChild(button)
+            },
+            clear : function() {
+              rightButtons.innerHTML = ''
             }
           })
-          rightButtons.appendChild(button)
-        },
-        clear : function() {
-          rightButtons.innerHTML = ''
         }
-      }
-      return {options: options, main: doc}
+      })
+      return item;
     },
     faqButton: function() {
       let button = Object.assign(document.createElement('button'), {
@@ -460,22 +430,16 @@ Book.html = function() {
     preferencesFile : function() {
       let item =  Book.lib.createComponent({
         id: 'Book.html.modals.preferencesFile',
-        css: CSS.modals.preferencesFile(),
+        css: Book.css.modals.preferencesFile(),
         html: `
           <div id='centerModal'>
           <button id='exit'>X</button>
           <b>Edit Preferences </b>
           <br>
           <form id = 'prefForm'>
-            <label>Choose navbar alignment</label>
-            <select id='navbarSelect'>
-              <option value='top'>Top</option>
-              <option value='left'>Left</option>
-            </select><br>
-            <label>Choose dark/light color scheme</label>
-            <select id='colorSelect'>
-              <option value='dark'>Dark</option>
-              <option value='light'>Light</option>
+            <b>Choose a style theme</b>
+            <select id='themeSelect'>
+              <option value='default'>default</option>
             </select>
             <input type = 'submit' class='btnSubmit'>
           </form>
@@ -485,10 +449,7 @@ Book.html = function() {
           Book.js.baseModal(box, root)
           root.querySelector('#prefForm').onsubmit = function(event) {
             event.preventDefault()
-            let changes = {}
-            changes.color = root.querySelector('#colorSelect').value
-            changes.alignment = root.querySelector('#navbarSelect').value
-            Object.assign(Book.data.local.preferences, changes)
+            Book.data.local.preferences.theme = root.querySelector('#themeSelect').value
             box.remove();
             return 0;
           }
@@ -499,7 +460,7 @@ Book.html = function() {
     addLine : function(path, focused) {
       let item =  Book.lib.createComponent({
         id: 'Book.html.modals.addLine',
-        css: CSS.modals.addLine(),
+        css: Book.css.modals.addLine(),
         html: `
           <div id='centerModal'>
            <form id='addLineForm'>
@@ -539,7 +500,7 @@ Book.html = function() {
     uploadFile : function() {
       let item =  Book.lib.createComponent({
         id: 'Book.html.modals.uploadFile',
-        css: CSS.modals.uploadFile(),
+        css: Book.css.modals.uploadFile(),
         html: `
           <div id='centerModal'>
             <b>Upload backup</b>
@@ -580,7 +541,7 @@ Book.html = function() {
       let date = new Date()
       let item =  Book.lib.createComponent({
         id: 'Book.html.modals.saveFile',
-        css: CSS.modals.saveFile(),
+        css: Book.css.modals.saveFile(),
         html: `
           <div id='centerModal'>
             <b>Save a Backup</b>
@@ -601,7 +562,7 @@ Book.html = function() {
     createFile: function({commands}) {
       let item =  Book.lib.createComponent({
         id: 'Book.html.modals.createFile',
-        css: CSS.modals.createFile(),
+        css: Book.css.modals.createFile(),
         html: `
           <div id='centerModal'>
            <form id = 'createForm'>
@@ -644,7 +605,7 @@ Book.html = function() {
     openFile: function({commands}) {
         let item =  Book.lib.createComponent({
           id: 'Book.html.modals.openFile',
-          css: CSS.modals.openFile(),
+          css: Book.css.modals.openFile(),
           html: `
             <div id='centerModal'>
               <button id='exit'>X</button>
@@ -671,7 +632,7 @@ Book.html = function() {
     confirmationDelete : function(name, callback) {
         let item =  Book.lib.createComponent({
           id: 'Book.html.modals.confirmationDelete',
-          css: CSS.modals.confirmationDelete(),
+          css: Book.css.modals.confirmationDelete(),
           html: `
             <div id='centerModal'>
               <button id='exit'>X</button>

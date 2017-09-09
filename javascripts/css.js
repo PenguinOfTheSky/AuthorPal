@@ -1,21 +1,10 @@
 Book.css = function() {
 let preferences = Book.data.local.preferences
-let _ = Book.cssTemplates.default; //Book.css, defined at bottom of file;
-preferences.color = preferences.color || 'dark'
-preferences.alignment = preferences.alignment || 'top'
-Book.css
+theme = preferences.theme || 'default'
+let _ = Book.cssTemplates[theme];
 Book.events.updatePreferences = function() {
   preferences = Book.data.local.preferences
-}
-let schema = {
-  light: {
-    textColor1: `rgb(5,5,5)`,
-    background1: `linear-gradient(0deg, rgb(255,255,255), rgb(255,55,55) 40%, rgb(250,40,40))`
-  },
-  dark: {
-    textColor1: `rgb(253,255,255)`,
-    background1: `linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40))`
-  }
+  _ = Book.cssTemplates[theme];
 }
 return {
   modal: `
@@ -33,37 +22,11 @@ return {
     ${_.btn}
     ${_.btnExit}
   `,
-  glass : `
-    box-sizing:border-box;
-    background:linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
-    box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
-    border: 1px solid black;
-  `,
-  air: `
-    background-color: rgba(245, 250, 255, .1);
-    box-shadow: 1px 2px 2px 3px rgba(50, 140, 195, .1) inset;
-    border: 1px solid rgb(155,160,170);
-  `,
-  black : `
-    color: ${schema[preferences.color].textColor1};
-    background: ${schema[preferences.color].background1};
-  `,
   gold : `
-    background: linear-gradient(0deg, #efd100, #e2a233 38%, #f0c328 60%, #fff1a3 86%, #ffe13e 100%);
-  `,
-  green: `
-    background: linear-gradient(0deg, rgb(0,200,0), rgb(0,255,55) 40%, rgb(40,240,40));
-  `,
-  body: function() { //this doesn't appear to be used anywhere.
-    return `
-      #root {
-        background:blue;
-      }
-    `
-  },
+    background: linear-gradient(0deg, #efd100, #e2a233 38%, #f0c328 60%, #fff1a3 86%, #ffe13e 100%);`,
   boxes: {
     topLeftNav: function() {
-      let str = `
+      return `
         :host {
           padding-top:.3rem;
           width:100%;
@@ -95,16 +58,6 @@ return {
           display: inline-block;
           margin-right:.1rem;
         }
-        #left :last-child {
-          border-top-right-radius: .7rem;
-        }
-        #left select option{
-          max-width: 2rem;
-          color: white;
-          background-color: rgb(0,0,0);
-          border: none;
-          font-size: 1rem;
-        }
         #LyceliaButton {
           font-family:cursive;
           font-size:1rem;
@@ -114,87 +67,61 @@ return {
           text-decoration: none;
           color: white;
         }
-        #left > * {
-          color: white;
-          border: none;
-          font-size: 1rem;
-          background: linear-gradient(0deg, rgb(30, 0, 0), rgb(60, 10, 5) 80%, rgb(40, 5, 0));
-        }
-        #left > *:hover {
-          background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
-        }
-      `
-      return str
+        ${_.btnBase1}`
     },
     mainButtons: function() {
-      let str = `
+      return `
       :host {
         box-sizing: border-box;
         display:inline;
-        background-color:#111;
+        ${_.backgroundNav1}
         width: 100%;
         clear: left;
       }
-      .navButton {
-        border-top: 0.1rem solid white;
-        border-left: 0.1rem solid #add;
-        border-right: 0.1rem solid grey;
-        border-bottom: 0.1rem solid grey;
-        font-size: 1rem;
-        margin: 0.2rem;
-        color: rgb(253,255,255);
-        background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));
-      }
-      .navButton:hover {
-        box-shadow: 0px 1px 1px 2px rgb(0,0,20);
-        background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
-      }
-      .chosen {
-        background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40));
-      }
+      ${_.btn}
+      ${_.btnNav1}
       #addColumn {
         border-radius: 5px;
         font-size: 1rem;
-        ${Book.css.green};
+        background: linear-gradient(0deg, rgb(0,200,0), rgb(0,255,55) 40%, rgb(40,240,40));
       }
       #addColumn:hover {
           background: linear-gradient(0deg, rgb(0,220,0), rgb(20,255,75) 40%, rgb(60,250,60));
           box-shadow: 0px 1px 1px 2px blue;
-      }
-      `
-      return str
+      }`
     },
-    displayUI: function() {
+    displayTopUI: function() {
       return `
         :host {
-          background-color: blue;
+          ${_.backgroundNav2}
+          min-height:1.5rem;
+          display:flex;
+          position:fixed;
+          width:100%;
         }
-        #baseButtonsDiv {
+        #left {
           display:inline-flex;
           margin-right:.5rem;
         }
-        #baseButtonsDiv button:first-child {
+        ${_.btn}
+        ${_.btnBase2}
+        #right: {
+          display: inline
+        }
+        #left button:first-child {
           border-top-left-radius: .4rem;
           border-bottom-left-radius: .4rem;
         }
-        #baseButtonsDiv button:last-child {
+        #left button:last-child {
           border-top-right-radius: .4rem;
           border-bottom-right-radius: .4rem;
         }
-        button {
-          font-size: 1rem;
-          box-shadow: 0px 1px 1px 2px rgb(20, 20, 20, .5);
-          margin:0px;
-        }
-        button:hover {
-          box-shadow: 0px 0px .1rem .2rem rgba(255,185,0,.8) inset;
-        }
         .rightButtons {
-          background-color: rgba(20,255,20,.5);
+          ${_.btnNav2}
         }`
     },
     display : function() {
-      let str = `
+      return `
         .lineContainer {
           background: linear-gradient(30deg, rgb(0, 0, 0), rgb(33, 155, 55) 40%, rgb(40, 40, 40));
           box-sizing:border-box;
@@ -214,6 +141,11 @@ return {
           font-weight: bold;
           padding: .15rem;
           border-radius: .2rem;
+        }
+        .titleContent {
+          color:black;
+          margin: auto;
+          padding:.5rem;
         }
         .lineBody {
           margin-left:.5rem;
@@ -288,9 +220,7 @@ return {
         .buttonGroup button:last-child {
           border-top-right-radius: .4rem;
           border-bottom-right-radius: .4rem;
-        }
-        `
-      return str
+        }`
     },
     splash: function() {
       return `
@@ -299,8 +229,7 @@ return {
         }
         h1 {
           text-align:center;
-        }
-      `
+        }`
     }
   },
   modals : {
@@ -312,8 +241,7 @@ return {
         ${_.btn}
         ${Book.css.modal}
         ${_.btnExit}
-        ${_.btnSubmit}
-      `
+        ${_.btnSubmit}`
     },
     addLine : function() {
       let str =  `
@@ -333,32 +261,27 @@ return {
         ${_.btnWarn}
         #cancel {
           background-color: rgb(0,50,255);
-        }
-      `
+        }`
     },
     preferencesFile : function() {
       return `
         ${Book.css.modal}
-        ${_.btnSubmit}
-      `
+        ${_.btnSubmit}`
     },
     saveFile : function() {
       return `
-        ${Book.css.modal}
-      `
+        ${Book.css.modal}`
     },
     uploadFile : function() {
       return `${Book.css.modal}
-      ${_.btnSubmit}
-      `
+      ${_.btnSubmit}`
     },
     openFile: function() {
       return `
         ${Book.css.modal}
         .fileBtn {
           ${Book.css.gold}
-        }
-      `
+        }`
     }
 
   }
