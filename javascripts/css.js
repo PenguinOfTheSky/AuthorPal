@@ -25,6 +25,13 @@ return {
   gold : `
     background: linear-gradient(0deg, #efd100, #e2a233 38%, #f0c328 60%, #fff1a3 86%, #ffe13e 100%);`,
   boxes: {
+    root: function() {
+      return `
+        #root {
+          min-height:100%;
+          ${_.backgroundMain}
+        }`
+    },
     topLeftNav: function() {
       return `
         :host {

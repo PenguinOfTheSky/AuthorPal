@@ -440,6 +440,7 @@ Book.html = function() {
             <b>Choose a style theme</b>
             <select id='themeSelect'>
               <option value='default'>default</option>
+              <option value='Sparky'>Sparky</option>
             </select>
             <input type = 'submit' class='btnSubmit'>
           </form>

@@ -19,12 +19,7 @@ Book.start = function(parent) {
   Book.css = Book.css()
   Book.html = Book.html()
   let parentStyle = Book.lib.createNode('style', {
-    innerHTML : `
-      #root {
-        min-height:100%;
-        background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
-      }
-    `
+    innerHTML : Book.css.boxes.root()
   })
   document.body.appendChild(parentStyle)
   let display = Book.html.display.start();
