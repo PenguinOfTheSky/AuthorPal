@@ -2,6 +2,7 @@ Book.css = function() {
 let theme = Book.data.local.preferences.theme
 if (theme == undefined) {
   console.log('theme undefined')
+  Book.data.local.preferences.theme = 'default'
   theme = 'default'
 }
 let _ = Book.cssTemplates[theme];
