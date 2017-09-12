@@ -1,16 +1,19 @@
 Book.css = function() {
-let preferences = Book.data.local.preferences
-theme = preferences.theme || 'default'
+let theme = Book.data.local.preferences.theme
+if (theme == undefined) {
+  console.log('theme undefined')
+  theme = 'default'
+}
 let _ = Book.cssTemplates[theme];
-Book.events.updatePreferences = function() {
-  preferences = Book.data.local.preferences
-  _ = Book.cssTemplates[theme];
+Book.events.updatePreferences = function(newTheme) {
+  localforage.setItem('Book', JSON.stringify(Book.data.local), function(err){})
+  _ = Book.cssTemplates[newTheme];
 }
 return {
   modal: `
     :host {
       background-color:rgba(150,150,150,.3);
-      padding:5px;position: fixed; z-index: 4;top:10%;height:100%; width:100%;
+      padding:5px;position: fixed; z-index: 4;top:0;height:100%; width:100%;
     }
     #centerModal {
       text-align:center;
@@ -37,7 +40,6 @@ return {
         :host {
           padding-top:.3rem;
           width:100%;
-          position: fixed;
           ${_.border1}
           ${_.backgroundNav1}
         }
@@ -98,23 +100,43 @@ return {
       }`
     },
     displayTopUI: function() {
-      return `
+      let str =``
+      if (_.alignment == 'top') {
+        str += `
         :host {
           ${_.backgroundNav2}
           min-height:1.5rem;
-          display:flex;
-          position:fixed;
+          display:block;
           width:100%;
         }
         #left {
-          display:inline-flex;
+          display:inline-block;
           margin-right:.5rem;
         }
+        #right {
+          display: inline;
+        }
+        `}
+        else {
+          str += `
+          :host {
+            ${_.backgroundNav2}
+            min-height:1.5rem;
+            max-width:20%;
+            display:inline-block;
+          }
+          #left {
+            display:inline-block;
+            margin-right:.5rem;
+          }
+          #right {
+            display: inline;
+          }
+          `
+        }
+        str += `
         ${_.btn}
         ${_.btnBase2}
-        #right: {
-          display: inline
-        }
         #left button:first-child {
           border-top-left-radius: .4rem;
           border-bottom-left-radius: .4rem;
@@ -126,9 +148,33 @@ return {
         .rightButtons {
           ${_.btnNav2}
         }`
+        return str;
+    },
+    wholeDisplayContainer : function() {
+      if (_.alignment !='top') {
+        return `display:flex;`
+      } else return ``;
     },
     display : function() {
-      return `
+      let str = ``;
+      if (_.alignment !='top') {
+        let maxHeight = document.body.clientHeight - Book.refs.mainNavBar.clientHeight;
+        str += `
+        :host {
+            display: inline-block;
+            max-height: ${maxHeight}px;
+            overflow-y: scroll;
+            flex-grow:1;
+          }`
+      } else {
+        let maxHeight = document.body.clientHeight - Book.refs.mainNavBar.clientHeight;
+        str += `
+        :host {
+            max-height: ${maxHeight}px;
+            overflow-y: scroll;
+          }`
+      }
+      str += `
         .lineContainer {
           background: linear-gradient(30deg, rgb(0, 0, 0), rgb(33, 155, 55) 40%, rgb(40, 40, 40));
           box-sizing:border-box;
@@ -228,6 +274,7 @@ return {
           border-top-right-radius: .4rem;
           border-bottom-right-radius: .4rem;
         }`
+      return str;
     },
     splash: function() {
       return `
@@ -285,10 +332,7 @@ return {
     },
     openFile: function() {
       return `
-        ${Book.css.modal}
-        .fileBtn {
-          ${Book.css.gold}
-        }`
+        ${Book.css.modal}`
     }
 
   }

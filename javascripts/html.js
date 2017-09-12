@@ -61,6 +61,7 @@ Book.html = function() {
       Object.assign(box, {
         id: 'Book.html.display.sort'
       })
+      box.style = Book.css.boxes.wholeDisplayContainer()
       let root = box.createShadowRoot()
       let mainDisplay = Book.html.display.renderedList(id)
       let topUI = Book.html._navBars.displayTopUI({mainDisplay: mainDisplay.opts, id : id})
@@ -70,11 +71,6 @@ Book.html = function() {
         }
       }
       root.appendChild(topUI.box)
-      let navFiller = document.createElement('div')
-      let script = document.createElement('script')
-      script.innerHTML = `document.currentScript.parentNode.style.height = document.currentScript.parentNode.parentNode.firstChild.clientHeight + 3 + 'px';`
-      navFiller.appendChild(script)
-      root.appendChild(navFiller)
       root.appendChild(mainDisplay.element)
       let opts = {
         update: mainDisplay.opts.update
@@ -85,12 +81,12 @@ Book.html = function() {
       let focused = []
       let currentID = id;
       let box = Object.assign(document.createElement('div'), {
-        style: "overflow-x: scroll;border: 1px solid blue;",
-        name: 'mainDisplayView'
+        name: 'mainDisplayView',
+        id: 'Book.html.display.renderedList'
       })
       let root = box.createShadowRoot()
       let style = document.createElement('style');
-      style.innerText = Book.css.boxes.display()
+      style.innerHTML = Book.css.boxes.display()
       root.appendChild(style)
       let determine = function(item, itemName, path, {maxDepth, depth}) {
         if (depth == undefined) depth = 0;
@@ -274,10 +270,6 @@ Book.html = function() {
           }
         })
         root.appendChild(addColumn)
-        setTimeout(function() {
-          window.x = box
-            Book.refs.topNavFiller.style.height = Book.refs.topNav.clientHeight + 'px';
-        }, 40) //find a better way to do this.
       }
       render()
       Book.events.columnChange = function() {
@@ -290,6 +282,7 @@ Book.html = function() {
       Object.assign(box, {
         id: 'Book.html._navBars.mainNavBar'
       })
+      Book.refs.mainNavBar = box;
       let root = box.createShadowRoot();
       let style = document.createElement('style')
       style.innerHTML = Book.css.boxes.topLeftNav()
@@ -336,7 +329,6 @@ Book.html = function() {
             topDiv.style.display = 'flex';
             this.style = 'height: .4rem;text-align:center;margin-top: 0rem;'
           }
-          Book.refs.topNavFiller.style.height = Book.refs.topNav.clientHeight + 'px'
         }
       })
       let file = Book.html._navBars.file(commands.file)
@@ -394,6 +386,7 @@ Book.html = function() {
           })
         }
       })
+      Book.refs.secondaryNavBar = item.box;
       return item;
     },
     faqButton: function() {
@@ -440,10 +433,11 @@ Book.html = function() {
             <b>Choose a style theme</b>
             <select id='themeSelect'>
               <option value='default'>default</option>
-              <option value='Sparky'>Sparky</option>
+              <option value='sparky'>Sparky</option>
             </select>
             <input type = 'submit' class='btnSubmit'>
           </form>
+          (Must refresh afterwards to see new style theme)
           </div>
         `,
         js: function({style, box, parent, root}) {
@@ -451,6 +445,7 @@ Book.html = function() {
           root.querySelector('#prefForm').onsubmit = function(event) {
             event.preventDefault()
             Book.data.local.preferences.theme = root.querySelector('#themeSelect').value
+            Book.events.updatePreferences(root.querySelector('#themeSelect').value);
             box.remove();
             return 0;
           }
@@ -505,7 +500,7 @@ Book.html = function() {
         html: `
           <div id='centerModal'>
             <b>Upload backup</b>
-            <button id='exit' style='float:right;${Book.css.gold}'>X</button>
+            <button id='exit' >X</button>
             <br>
             Warning, may overwrite projects already in your localStorage<br>
             <input id='fileUpload' type='file' value='Upload'>

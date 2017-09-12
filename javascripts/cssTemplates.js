@@ -1,11 +1,12 @@
 Book.cssTemplates = {
   default: {
+    alignment: 'top',
     btn: `
-      button {
+      input[type=button], button {
         border-radius: .4rem;
         margin: .2rem;
         font-size: 1rem;
-        background-color: rgb(200,100,200);
+        background-color: gold;
       }
       button:hover {
         box-shadow: 0px 0px .1rem .2rem rgba(235,255,255,.5) inset;
@@ -107,7 +108,8 @@ Book.cssTemplates = {
       }`
   }
   ,
-  Sparky: {
+  sparky: {
+    alignment: 'left',
     btn: `
       button {
         border-radius: .4rem;
