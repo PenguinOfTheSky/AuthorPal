@@ -15,8 +15,13 @@ Book.start = function(parent) {
   setInterval(function() {
     localStorage.Book = JSON.stringify(Book.data.local)
   }, 15000)
-  console.log(Book.data)
-  Book.css = Book.css() //initialize css.
+  //initialize objects.
+  Book.css = Book.css()
+  Book.html = Book.html()
+  let parentStyle = Book.lib.createNode('style', {
+    innerHTML : Book.css.boxes.root()
+  })
+  document.body.appendChild(parentStyle)
   let display = Book.html.display.start();
   let navBar = Book.html._navBars.mainNavBar(display)
   parent.appendChild(navBar)
