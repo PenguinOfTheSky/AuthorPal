@@ -5,9 +5,12 @@ if (theme == undefined) {
   theme = 'default'
 }
 let _ = Book.cssTemplates[theme];
+console.log(typeof(_))
+if (typeof(_) == 'function') _ = _()
 Book.events.updatePreferences = function(newTheme) {
   localforage.setItem('Book', JSON.stringify(Book.data.local), function(err){})
   _ = Book.cssTemplates[newTheme];
+  if (typeof(_) == 'function') _ = theme()
 }
 return {
   modal: `
