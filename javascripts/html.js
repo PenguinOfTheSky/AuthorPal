@@ -19,7 +19,7 @@ Book.html = function() {
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more click FAQ above.
-          Bug reports and feature requests can be filed at <a id='link' href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a></p>
+          Bug reports and feature requests can be filed at <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a></p>
         </div>
       `
     })},
@@ -71,6 +71,7 @@ Book.html = function() {
         }
       }
       root.appendChild(topUI.box)
+
       root.appendChild(mainDisplay.element)
       let opts = {
         update: mainDisplay.opts.update
@@ -433,12 +434,8 @@ Book.html = function() {
             <b>Choose a style theme</b>
             <select id='themeSelect'>
               <option value='default'>default</option>
-<<<<<<< HEAD
               <option value='sparky'>Sparky</option>
-=======
-              <option value='Sparky'>Sparky</option>
               <option value='Theme1'>Theme1</option>
->>>>>>> f6ca575d82af30f20c6ffbdb0ec66a4250a70d1b
             </select>
             <input type = 'submit' class='btnSubmit'>
           </form>
