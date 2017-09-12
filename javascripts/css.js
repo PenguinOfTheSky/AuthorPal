@@ -1,23 +1,23 @@
 Book.css = function() {
   let preferences = Book.data.local.preferences
-
+  
   console.log(preferences)
   preferences.color = preferences.color || 'dark'
   preferences.alignment = preferences.alignment || 'top'
   let schema = {
     light: {
-      textColor1: `white`,
-      background1: `black`
+      textColor1: `rgb(5,5,5)`,
+      background1: `linear-gradient(0deg, rgb(255,255,255), rgb(255,55,55) 40%, rgb(250,40,40))`
     },
     dark: {
-      textColor1: `black`,
-      background1: `white`
+      textColor1: `rgb(253,255,255)`,
+      background1: `linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40))`
     }
   }
   return {
     glass : `
       box-sizing:border-box;
-      background:background1;
+      background:linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
       box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
       border: 1px solid black;
     `,
@@ -53,7 +53,7 @@ Book.css = function() {
           border: 1px solid black;
           width:100%;
           position: fixed;
-          background:background1;
+          background:linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
         }
         :host(:hover) {
           box-shadow: 0px 0px .1rem .2rem rgba(255, 255, 255, .1) inset;
@@ -99,7 +99,6 @@ Book.css = function() {
           color: white;
         }
         #left > * {
-          height: 2rem;
           color: white;
           border: none;
           font-size: 1rem;
@@ -179,7 +178,7 @@ Book.css = function() {
     display : function() {
       let str = `
         .lineContainer {
-          background: background1;
+          background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 55, 55) 40%, rgb(40, 40, 40));
           box-sizing:border-box;
         }
         .stringContainer {
