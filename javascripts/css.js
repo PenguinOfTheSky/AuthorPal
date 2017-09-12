@@ -318,7 +318,6 @@ Book.css = function() {
           box-shadow: 0px 0px .1rem .2rem rgba(235,255,255,.5) inset;
         }
         h2 {
-
         }
         #yes {
           background-color : red;
