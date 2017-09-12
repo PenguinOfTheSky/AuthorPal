@@ -19,7 +19,7 @@ Book.html = function() {
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more click FAQ above.
-          Bug reports and feature requests can be filed at <a id='link' href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a></p>
+          Bug reports and feature requests can be filed at <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a></p>
         </div>
       `
     })},
@@ -441,7 +441,6 @@ Book.html = function() {
             <select id='themeSelect'>
               <option value='default'>default</option>
               <option value='Sparky'>Sparky</option>
-              <option value='Theme1'>Theme1</option>
             </select>
             <input type = 'submit' class='btnSubmit'>
           </form>
