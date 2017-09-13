@@ -213,6 +213,7 @@ return {
         .textField {
           color: black;
           cursor: text;
+          padding: .1rem;
           background-color: rgb(240,245,240);
           min-height:.5rem;
         }

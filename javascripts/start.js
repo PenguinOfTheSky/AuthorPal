@@ -1,6 +1,4 @@
 Book.start = function(parent) {
-  var indexedDB = window.indexedDB
-  var open = indexedDB.open("MyBooks", 1);
   Object.assign(Book, {
     events: {},
     data : {},
