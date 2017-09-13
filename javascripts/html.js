@@ -14,8 +14,7 @@ Book.html = function() {
       js: function({style, box, parent}) {
       },
       html: `
-        <h1>Lycelia's <i>AuthorPal</i>
-        <span style="color:#DFD">v1.10</span></h1>
+        <h1>Lycelia's <i>AuthorPal</i> v1.20</h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more click FAQ above.
@@ -149,31 +148,16 @@ Book.html = function() {
         if (typeof(item) == 'string') {
           let textField = Object.assign(document.createElement('div'), {
             className: 'textField',
-            innerHTML: item,
-            isRaw: "false",
+            innerHTML: marked(item),
             contentEditable: true,
+            onfocus: function() {
+              this.innerHTML = path[itemName]
+            },
             onblur: function() {
-              if (this.getAttribute('isRaw') == "false")
-              path[itemName] = this.innerHTML
-              else {
-                path[itemName] = this.innerText
-                this.innerHTML = this.innerText;
-                this.setAttribute('isRaw', 'false')
-                this.className = 'textField'
-              }
+              path[itemName] = this.innerText
+              this.innerHTML = marked(this.innerText);
             }
           })
-          let htmlEdit = Object.assign(document.createElement('button'), {
-            innerText: 'editHTML',
-            className: 'editHTML',
-            onclick: function() {
-              textField.setAttribute('isRaw', 'true');
-              textField.className = 'textField isRaw'
-              textField.innerText = path[itemName];
-            },
-            contentEditable: false
-          })
-          buttonGroup.appendChild(htmlEdit)
           lineBody.appendChild(textField)
         }
         else if (typeof(item) == 'object') {

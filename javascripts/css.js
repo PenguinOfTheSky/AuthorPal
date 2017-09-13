@@ -210,13 +210,16 @@ return {
           display: block;
         }
         .textField {
-          white-space: pre-line;
+          white-space: pre-wrap;
           color: black;
-          text-indent: .5rem;
           cursor: text;
           padding: .1rem;
           background-color: rgb(240,245,240);
           min-height:.5rem;
+        }
+        .textField > p {
+          margin: 0;
+          margin-bottom: -1rem;
         }
         .textField:focus {
           background-color: rgb(255,255,255);
