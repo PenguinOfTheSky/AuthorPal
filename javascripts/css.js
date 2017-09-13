@@ -210,7 +210,7 @@ return {
           display: block;
         }
         .textField {
-          white-space: pre;
+          white-space: pre-line;
           color: black;
           cursor: text;
           padding: .1rem;
