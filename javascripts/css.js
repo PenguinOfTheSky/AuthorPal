@@ -212,6 +212,7 @@ return {
         .textField {
           white-space: pre-line;
           color: black;
+          text-indent: .5rem;
           cursor: text;
           padding: .1rem;
           background-color: rgb(240,245,240);
