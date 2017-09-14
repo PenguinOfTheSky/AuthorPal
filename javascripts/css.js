@@ -221,6 +221,10 @@ return {
           margin: 0;
           margin-bottom: -1rem;
         }
+        .textField ul, .textField ol, .textField li {
+          margin: .1rem;
+          padding: 0px;
+        }
         .textField:focus {
           background-color: rgb(255,255,255);
           box-shadow:0px 0px 1px 1px black ;
