@@ -221,9 +221,13 @@ return {
           margin: 0;
           margin-bottom: -1rem;
         }
-        .textField ul, .textField ol, .textField li {
+        .textField ul, .textField ol {
+          display:flex;
+          flex-direction: column;
           margin: .1rem;
           padding: 0px;
+          padding-left: 1rem;
+          margin-bottom: -1rem;
         }
         .textField:focus {
           background-color: rgb(255,255,255);
