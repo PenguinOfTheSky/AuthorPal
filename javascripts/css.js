@@ -193,13 +193,13 @@ return {
         }
         .title {
           line-height: 1.1rem;
-          background: linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140));
+          background: ${_.backgroundTitle || `linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140))`};
           font-weight: bold;
           padding: .15rem;
           border-radius: .2rem;
         }
         .titleContent {
-          color:black;
+          color: ${_.titleColor || 'black'};
           margin: auto;
           padding:.5rem;
         }
@@ -322,9 +322,7 @@ return {
       return `
         ${Book.css.modal}
         ${_.btnWarn}
-        #cancel {
-          background-color: rgb(0,50,255);
-        }`
+        `
     },
     preferencesFile : function() {
       return `
