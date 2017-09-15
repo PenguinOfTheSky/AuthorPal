@@ -104,9 +104,12 @@ Book.html = function() {
           innerHTML: itemName,
           contentEditable: true,
           onblur: function() {
-            if (path[this.innerHTML] === undefined) {
-              path[this.innerHTML] = item
-              delete path[itemName];
+            if (path[this.innerText] === undefined) {
+              let oldItemName = itemName
+              item = path[itemName]
+              itemName = this.innerText;
+              path[itemName] = item
+              delete path[oldItemName];
               Book.events.columnChange()
             } else {
               console.log('name taken')
