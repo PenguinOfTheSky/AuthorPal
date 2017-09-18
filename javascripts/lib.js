@@ -1,4 +1,4 @@
-Book.lib = {
+TS.lib = {
   createNode : function(type, obj) {
     return Object.assign(document.createElement(type), obj)
   },
@@ -7,14 +7,14 @@ Book.lib = {
   },
   createComponent : function({ css, parent,id, html, js, devMode}) {
     if (devMode) {
-      console.log(argumenBook[0])
+      console.log(arguments[0])
     }
-    let box = Book.lib.createNode('div', {
+    let box = TS.lib.createNode('div', {
       "id" : id,
       "class": 'component'
     })
     let root = box.attachShadow({mode: 'open'})
-    let style = Book.lib.createNode('style', {
+    let style = TS.lib.createNode('style', {
       innerHTML : css})
     root.appendChild(style)
     root.innerHTML += html

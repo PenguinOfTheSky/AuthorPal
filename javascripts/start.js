@@ -1,40 +1,40 @@
-Book.start = function(parent) {
-  Object.assign(Book, {
+TS.start = function(parent) {
+  Object.assign(TS, {
     events: {},
     data : {},
     refs : {}
   })
-  Book.refs.container = parent
-  localforage.getItem('Book', function(err, value) {
+  TS.refs.container = parent
+  localforage.getItem('TS', function(err, value) {
     if (value == undefined) {
       value = JSON.stringify({
         files: {},
         preferences: {}
       })
-      localforage.setItem('Book', value, function(err) {})
+      localforage.setItem('TS', value, function(err) {})
     }
-    Book.data.local = JSON.parse(value)
-    if (Book.data.local.preferences.theme == 'Sparky') {
+    TS.data.local = JSON.parse(value)
+    if (TS.data.local.preferences.theme == 'Sparky') {
       console.log('wtfinhellfire')
-      Book.data.local.preferences.theme = 'default'
+      TS.data.local.preferences.theme = 'default'
     }
     begin()
   })
   setInterval(function() {
-    localforage.setItem('Book', JSON.stringify(Book.data.local), function(err){})
+    localforage.setItem('TS', JSON.stringify(TS.data.local), function(err){})
   }, 15000)
   //initialize objects.
   let begin = function() {
-    Book.css = Book.css()
-    Book.html = Book.html()
-    let parentStyle = Book.lib.createNode('style', {
-      innerHTML : Book.css.boxes.root()
+    TS.css = TS.css()
+    TS.html = TS.html()
+    let parentStyle = TS.lib.createNode('style', {
+      innerHTML : TS.css.boxes.root()
     })
     document.body.appendChild(parentStyle)
-    let display = Book.html.display.start();
-    let navBar = Book.html._navBars.mainNavBar(display)
+    let display = TS.html.display.start();
+    let navBar = TS.html._navBars.mainNavBar(display)
     parent.appendChild(navBar)
-    Book.refs.topNav = navBar
+    TS.refs.topNav = navBar
     parent.appendChild(display.element)
   }
 }

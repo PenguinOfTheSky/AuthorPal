@@ -1,16 +1,16 @@
   /*
   If using css to affect all divs, make sure to exclude .component class if desired
   */
-Book.html = function() {
-  let CSS = Book.css,
-  Lib = Book.lib,
-  _; //Book.html, defined below.
+TS.html = function() {
+  let CSS = TS.css,
+  Lib = TS.lib,
+  _; //TS.html, defined below.
   let obj = {
   display: {
     splash : function() {
-      return Book.lib.createComponent({
-      id: 'Book.html.display.splash',
-      css: Book.css.boxes.splash(),
+      return TS.lib.createComponent({
+      id: 'TS.html.display.splash',
+      css: TS.css.boxes.splash(),
       js: function({style, box, parent}) {
       },
       html: `
@@ -26,29 +26,29 @@ Book.html = function() {
       let box = document.createElement('div')
       Object.assign(box, {
         style: '',
-        id: 'Book.html.display'
+        id: 'TS.html.display'
       })
       let root = box.createShadowRoot()
       let currentID = ''
       let sorted = ''
-      root.appendChild(Book.html.display.splash().box)
+      root.appendChild(TS.html.display.splash().box)
       let opts = {
         element : box,
         render : function(id) {
           currentID = id
           root.innerHTML = ''
-          sorted = Book.html.display.sort(id)
+          sorted = TS.html.display.sort(id)
           root.appendChild(sorted.element)
         }
       }
-      Book.events.bodyChange = function(focused) {
+      TS.events.bodyChange = function(focused) {
         if (focused.length == 0) {
           root.innerHTML = ''
-          sorted = Book.html.display.sort(currentID)
+          sorted = TS.html.display.sort(currentID)
           root.appendChild(sorted.element)
         } else {
           root.innerHTML = ''
-          sorted = Book.html.display.sort(currentID)
+          sorted = TS.html.display.sort(currentID)
           root.appendChild(sorted.element)
           sorted.opts.update(focused)
         }
@@ -58,14 +58,14 @@ Book.html = function() {
     sort: function(id) {
       let box = document.createElement('div')
       Object.assign(box, {
-        id: 'Book.html.display.sort'
+        id: 'TS.html.display.sort'
       })
-      box.style = Book.css.boxes.wholeDisplayContainer()
+      box.style = TS.css.boxes.wholeDisplayContainer()
       let root = box.createShadowRoot()
-      let mainDisplay = Book.html.display.renderedList(id)
-      let topUI = Book.html._navBars.displayTopUI({mainDisplay: mainDisplay.opts, id : id})
-      if (typeof(Book.data.chosenFile[id]) == 'object' ) {
-        for (let item in Book.data.chosenFile[id]) {
+      let mainDisplay = TS.html.display.renderedList(id)
+      let topUI = TS.html._navBars.displayTopUI({mainDisplay: mainDisplay.opts, id : id})
+      if (typeof(TS.data.chosenFile[id]) == 'object' ) {
+        for (let item in TS.data.chosenFile[id]) {
           topUI.opts.newButton(item)
         }
       }
@@ -82,11 +82,11 @@ Book.html = function() {
       let currentID = id;
       let box = Object.assign(document.createElement('div'), {
         name: 'mainDisplayView',
-        id: 'Book.html.display.renderedList'
+        id: 'TS.html.display.renderedList'
       })
       let root = box.createShadowRoot()
       let style = document.createElement('style');
-      style.innerHTML = Book.css.boxes.display()
+      style.innerHTML = TS.css.boxes.display()
       root.appendChild(style)
       let determine = function(item, itemName, path, {maxDepth, depth}) {
         if (depth == undefined) depth = 0;
@@ -110,7 +110,7 @@ Book.html = function() {
               itemName = this.innerText;
               path[itemName] = item
               delete path[oldItemName];
-              Book.events.columnChange()
+              TS.events.columnChange()
             } else {
               console.log('name taken')
             }
@@ -125,11 +125,11 @@ Book.html = function() {
           onclick: function() {
             callback = function() {
               delete path[itemName]
-              Book.events.columnChange()
-              if (focused.length > 0 && focused[1] !== itemName) {Book.events.bodyChange(focused)}
-              else Book.events.bodyChange([])
+              TS.events.columnChange()
+              if (focused.length > 0 && focused[1] !== itemName) {TS.events.bodyChange(focused)}
+              else TS.events.bodyChange([])
             }
-            document.body.appendChild(Book.html.modals.confirmationDelete(itemName, callback))
+            document.body.appendChild(TS.html.modals.confirmationDelete(itemName, callback))
           },
           contentEditable: false
         })
@@ -167,7 +167,7 @@ Book.html = function() {
           let add = Object.assign(document.createElement('button'), {
             className: 'addLine',
             onclick : function() {
-              Book.refs.container.appendChild(Book.html.modals.addLine(path[itemName], focused))
+              TS.refs.container.appendChild(TS.html.modals.addLine(path[itemName], focused))
             },
             innerHTML: '+New Line'
           })
@@ -183,19 +183,19 @@ Book.html = function() {
         else line.appendChild(lineBody)
         return line
       }
-      root.appendChild(determine(Book.data.chosenFile[id], id, Book.data.chosenFile, {}))
+      root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}))
       let opts = {
         showAll: function() {
           focused = []
           root.innerHTML = '';
           root.appendChild(style)
-          root.appendChild(determine(Book.data.chosenFile[id], id, Book.data.chosenFile, {}))
+          root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}))
         },
         fold: function(n) {
           root.innerHTML = '';
           root.appendChild(style)
           if (focused.length == 0)
-            root.appendChild(determine(Book.data.chosenFile[id], id, Book.data.chosenFile, {maxDepth:n}))
+            root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {maxDepth:n}))
           else {
             root.appendChild(determine(focused[0], focused[1], focused[2], {maxDepth:n}))
           }
@@ -209,15 +209,15 @@ Book.html = function() {
         swapDisplayObject: function(key) {
           root.innerHTML = '';
           root.appendChild(style)
-          root.appendChild(determine(Book.data.chosenFile[id][key], key, Book.data.chosenFile[id], {}))
-          focused = [Book.data.chosenFile[id][key], key, Book.data.chosenFile[id], {}]
+          root.appendChild(determine(TS.data.chosenFile[id][key], key, TS.data.chosenFile[id], {}))
+          focused = [TS.data.chosenFile[id][key], key, TS.data.chosenFile[id], {}]
         },
         update : function(item) {
           focused = item;
           root.innerHTML = '';
           root.appendChild(style)
           if (focused.length>0) root.appendChild(determine(...item))
-          else root.appendChild(determine(Book.data.chosenFile[id], id, Book.data.chosenFile, {}))
+          else root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}))
         }
       }
       return {element: box, opts: opts};
@@ -228,16 +228,16 @@ Book.html = function() {
     mainButtons : function(changeTab) {
       let box = document.createElement('div')
       Object.assign(box, {
-        id: 'Book.html._navBars.mainButtons'
+        id: 'TS.html._navBars.mainButtons'
       })
       let root = box.attachShadow({ mode: 'open' });
       let render = function() {
         let style = document.createElement('style')
-        style.innerText = Book.css.boxes.mainButtons()
+        style.innerText = TS.css.boxes.mainButtons()
         root.innerHTML = ``;
         root.appendChild(style)
-        if (Book.data.chosenFile !== undefined) {
-          for (let ele in Book.data.chosenFile) {
+        if (TS.data.chosenFile !== undefined) {
+          for (let ele in TS.data.chosenFile) {
             let button = document.createElement('button')
             Object.assign(button, {
               className: 'navButton',
@@ -253,14 +253,14 @@ Book.html = function() {
           innerText : '+new column',
           id : 'addColumn',
           onclick: function() {
-            Book.data.chosenFile["EditThisName"] = {};
+            TS.data.chosenFile["EditThisName"] = {};
             render()
           }
         })
         root.appendChild(addColumn)
       }
       render()
-      Book.events.columnChange = function() {
+      TS.events.columnChange = function() {
         render();
       }
       return box;
@@ -268,19 +268,19 @@ Book.html = function() {
     mainNavBar: function(display) {
       let box = document.createElement('div')
       Object.assign(box, {
-        id: 'Book.html._navBars.mainNavBar'
+        id: 'TS.html._navBars.mainNavBar'
       })
-      Book.refs.mainNavBar = box;
+      TS.refs.mainNavBar = box;
       let root = box.createShadowRoot();
       let style = document.createElement('style')
-      style.innerHTML = Book.css.boxes.topLeftNav()
+      style.innerHTML = TS.css.boxes.topLeftNav()
       root.appendChild(style)
       let buttons
       let chosenButton
       let commands = {
         file : function(choice) {
-          let modal = Book.html.modals[choice + 'File']({commands: commands})
-          Book.refs.container.appendChild(modal)
+          let modal = TS.html.modals[choice + 'File']({commands: commands})
+          TS.refs.container.appendChild(modal)
         },
         changeTab : function(choice, ele) {
           try {
@@ -295,9 +295,9 @@ Book.html = function() {
         },
         open : function() {
           buttons.remove();
-          buttons = Book.html._navBars.mainButtons(commands.changeTab)
+          buttons = TS.html._navBars.mainButtons(commands.changeTab)
           topDiv.appendChild(buttons)
-          let firstItem = Object.keys(Book.data.chosenFile)[0]
+          let firstItem = Object.keys(TS.data.chosenFile)[0]
           display.render(firstItem)
         }
       }
@@ -319,17 +319,17 @@ Book.html = function() {
           }
         }
       })
-      let file = Book.html._navBars.file(commands.file)
-      let faq = Book.html._navBars.faqButton()
+      let file = TS.html._navBars.file(commands.file)
+      let faq = TS.html._navBars.faqButton()
       let Lycelia = Object.assign(document.createElement('button'), {
         innerHTML :`<a href='http://www.lycelia.com'><i>Lycelia</i></a>`,
         id: 'LyceliaButton'
       })
-      let devMode = Book.lib.createNode('button', {
+      let devMode = TS.lib.createNode('button', {
         innerHTML : 'devMode',
         onclick: function() {window.open('index2.html')}
       })
-      buttons = Book.html._navBars.mainButtons()
+      buttons = TS.html._navBars.mainButtons()
       let left = Object.assign(document.createElement('div'), {
         id: 'left'
       })
@@ -341,9 +341,9 @@ Book.html = function() {
       return box;
     },
     displayTopUI : function ({mainDisplay, id}) {
-      let item =  Book.lib.createComponent({
-        id: 'Book.html._navBars.displayTopUI',
-        css: Book.css.boxes.displayTopUI(),
+      let item =  TS.lib.createComponent({
+        id: 'TS.html._navBars.displayTopUI',
+        css: TS.css.boxes.displayTopUI(),
         html: `
           <div id='left'>
             <button class='baseButtons2' id = 'show'>Show All</button>
@@ -374,7 +374,7 @@ Book.html = function() {
           })
         }
       })
-      Book.refs.secondaryNavBar = item.box;
+      TS.refs.secondaryNavBar = item.box;
       return item;
     },
     faqButton: function() {
@@ -409,9 +409,9 @@ Book.html = function() {
   },
   modals : {
     preferencesFile : function() {
-      let item =  Book.lib.createComponent({
-        id: 'Book.html.modals.preferencesFile',
-        css: Book.css.modals.preferencesFile(),
+      let item =  TS.lib.createComponent({
+        id: 'TS.html.modals.preferencesFile',
+        css: TS.css.modals.preferencesFile(),
         html: `
           <div id='centerModal'>
           <button id='exit'>X</button>
@@ -430,11 +430,11 @@ Book.html = function() {
           </div>
         `,
         js: function({style, box, parent, root}) {
-          Book.js.baseModal(box, root)
+          TS.js.baseModal(box, root)
           root.querySelector('#prefForm').onsubmit = function(event) {
             event.preventDefault()
-            Book.data.local.preferences.theme = root.querySelector('#themeSelect').value
-            Book.events.updatePreferences(root.querySelector('#themeSelect').value);
+            TS.data.local.preferences.theme = root.querySelector('#themeSelect').value
+            TS.events.updatePreferences(root.querySelector('#themeSelect').value);
             box.remove();
             return 0;
           }
@@ -443,9 +443,9 @@ Book.html = function() {
       return item.box;
     },
     addLine : function(path, focused) {
-      let item =  Book.lib.createComponent({
-        id: 'Book.html.modals.addLine',
-        css: Book.css.modals.addLine(),
+      let item =  TS.lib.createComponent({
+        id: 'TS.html.modals.addLine',
+        css: TS.css.modals.addLine(),
         html: `
           <div id='centerModal'>
            <form id='addLineForm'>
@@ -465,15 +465,15 @@ Book.html = function() {
           </div>
         `,
         js: function({style, box, parent, root}) {
-          Book.js.baseModal(box, root);
+          TS.js.baseModal(box, root);
           root.querySelector('#addLineForm').onsubmit = function(event) {
             event.preventDefault();
             let name = this.querySelector('#name').value
             let template = this.querySelector('#selectTemplate').value
             if (name != '' && path[name] === undefined) {
-              path[name] = Book.js.templates[template]()
+              path[name] = TS.js.templates[template]()
               console.log(focused)
-              Book.events.bodyChange(focused)
+              TS.events.bodyChange(focused)
             }
             box.remove();
             return false;
@@ -483,9 +483,9 @@ Book.html = function() {
       return item.box;
     },
     uploadFile : function() {
-      let item =  Book.lib.createComponent({
-        id: 'Book.html.modals.uploadFile',
-        css: Book.css.modals.uploadFile(),
+      let item =  TS.lib.createComponent({
+        id: 'TS.html.modals.uploadFile',
+        css: TS.css.modals.uploadFile(),
         html: `
           <div id='centerModal'>
             <b>Upload backup</b>
@@ -497,14 +497,14 @@ Book.html = function() {
           </div>
         `,
         js: function({style, box, parent, root}) {
-          Book.js.baseModal(box, root)
+          TS.js.baseModal(box, root)
           root.querySelector('#submit').onclick = function() {
             var input = root.querySelector('#fileUpload')
             var reader = new FileReader();
             if (input.files.length) {
                 var textFile = input.files[0];
                 reader.onload = function(e) {
-                  Object.assign(Book.data.local.files, JSON.parse(e.target.result))
+                  Object.assign(TS.data.local.files, JSON.parse(e.target.result))
                 };
                 reader.readAsText(textFile)
             } else {
@@ -517,16 +517,16 @@ Book.html = function() {
     },
     saveFile : function() {
       let textarea = Object.assign(document.createElement('textarea'), {
-        innerText: JSON.stringify(Book.data.local.files,0,2)
+        innerText: JSON.stringify(TS.data.local.files,0,2)
       })
       var myblob = new Blob([textarea.innerText], {
         type: 'text/plain'
       });
       let url = URL.createObjectURL(myblob);
       let date = new Date()
-      let item =  Book.lib.createComponent({
-        id: 'Book.html.modals.saveFile',
-        css: Book.css.modals.saveFile(),
+      let item =  TS.lib.createComponent({
+        id: 'TS.html.modals.saveFile',
+        css: TS.css.modals.saveFile(),
         html: `
           <div id='centerModal'>
             <b>Save a Backup</b>
@@ -539,15 +539,15 @@ Book.html = function() {
           </div>
         `,
         js: function({style, box, parent, root}) {
-          Book.js.baseModal(box, root)
+          TS.js.baseModal(box, root)
         }
       })
       return item.box;
     },
     createFile: function({commands}) {
-      let item =  Book.lib.createComponent({
-        id: 'Book.html.modals.createFile',
-        css: Book.css.modals.createFile(),
+      let item =  TS.lib.createComponent({
+        id: 'TS.html.modals.createFile',
+        css: TS.css.modals.createFile(),
         html: `
           <div id='centerModal'>
            <form id = 'createForm'>
@@ -564,15 +564,15 @@ Book.html = function() {
           </div>
         `,
         js: function({style, box, parent, root}) {
-          Book.js.baseModal(box, root)
+          TS.js.baseModal(box, root)
           root.querySelector('#createForm').onsubmit = function(event) {
             event.preventDefault();
             let name = this.querySelector('#name').value
             let template = this.querySelector('#selectTemplate').value
-            if (name != '' && Book.data.local.files[name] === undefined) {
-              Book.data.local.files[name] = Book.js.templates.standard()
+            if (name != '' && TS.data.local.files[name] === undefined) {
+              TS.data.local.files[name] = TS.js.templates.standard()
               box.remove()
-              Book.data.chosenFile = Book.data.local.files[name]
+              TS.data.chosenFile = TS.data.local.files[name]
               commands.open()
             } else {
               let msg = Object.assign(document.createElement('b'), {
@@ -588,22 +588,22 @@ Book.html = function() {
       return item.box;
     },
     openFile: function({commands}) {
-        let item =  Book.lib.createComponent({
-          id: 'Book.html.modals.openFile',
-          css: Book.css.modals.openFile(),
+        let item =  TS.lib.createComponent({
+          id: 'TS.html.modals.openFile',
+          css: TS.css.modals.openFile(),
           html: `
             <div id='centerModal'>
               <button id='exit'>X</button>
             </div>
           `,
           js: function({style, box, parent, root}) {
-            Book.js.baseModal(box, root)
-            for (let x in Book.data.local.files) {
+            TS.js.baseModal(box, root)
+            for (let x in TS.data.local.files) {
               let file = Object.assign(document.createElement('button'), {
                 className:'fileBtn',
                 innerText: x,
                 onclick: function() {
-                  Book.data.chosenFile = Book.data.local.files[x]
+                  TS.data.chosenFile = TS.data.local.files[x]
                   commands.open()
                   box.remove()
                 }
@@ -615,9 +615,9 @@ Book.html = function() {
         return item.box;
       },
     confirmationDelete : function(name, callback) {
-        let item =  Book.lib.createComponent({
-          id: 'Book.html.modals.confirmationDelete',
-          css: Book.css.modals.confirmationDelete(),
+        let item =  TS.lib.createComponent({
+          id: 'TS.html.modals.confirmationDelete',
+          css: TS.css.modals.confirmationDelete(),
           html: `
             <div id='centerModal'>
               <button id='exit'>X</button>
@@ -626,7 +626,7 @@ Book.html = function() {
             </div>
           `,
           js: function({style, box, parent, root}) {
-            Book.js.baseModal(box, root)
+            TS.js.baseModal(box, root)
             root.querySelector('#yes').onclick = function() {callback(); box.remove();}
             root.querySelector('#cancel').onclick = function() {box.remove();}
           }

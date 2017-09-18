@@ -1,4 +1,4 @@
-Book.js = {
+TS.js = {
   templates: {
     textblock: function() {
       let obj = ``
@@ -8,48 +8,35 @@ Book.js = {
       let obj = {}
       return obj
     },
-    character: function() {
-      let obj = {
-        "blurb": ``,
-        "bio": {
-          "timeline": ``,
-          "appearance": ``,
-          "personality": ``
-        }
-      }
-      return obj
-    },
-    chapter: function() {
-      let obj ={
-        "blurb": ``,
-        "locations": ``,
-        "characters": ``,
-        "atmosphere": ``,
-        "list main points": ``,
-        "deeper runthrough": {
-
-        }
-      }
-      return obj
-    },
-    standard: function() {
+    website: function() {
       let obj = {
         "general": {
           "title": ``,
-          "premise": ``,
-          "genre(s)": ``,
-          "zeitgeist": ``,
+          "blurb": ``,
+          "license": ``,
+          "Contributors": ``,
           "Random Notes": ``
         },
-        "characters":{
-          "main": {
-          },
-          "supporting": {},
-          "minor": {}
+        "start": function() {
+
         },
-        "locations":{},
-        "chapters" : {},
-        "timeline(s)": {}
+        "outside dependencies": {
+          js : ``,
+          css : ``,
+          html : ``
+        },
+        "html":{
+          "local vars" : `
+            //test
+          `
+        },
+        "text":{},
+        "css" : {
+          "local vars" : ``
+        },
+        "js": {
+          "local vars" : ``
+        }
       }
       return obj;
     }
