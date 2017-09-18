@@ -1,15 +1,15 @@
-Book.css = function() {
-let theme = Book.data.local.preferences.theme
+TS.css = function() {
+let theme = TS.data.local.preferences.theme
 if (theme == undefined) {
   console.log('theme undefined')
-  Book.data.local.preferences.theme = 'default'
+  TS.data.local.preferences.theme = 'default'
   theme = 'default'
 }
-let _ = Book.cssTemplates[theme];
+let _ = TS.cssTemplates[theme];
 if (typeof(_) == 'function') _ = _()
-Book.events.updatePreferences = function(newTheme) {
-  localforage.setItem('Book', JSON.stringify(Book.data.local), function(err){})
-  _ = Book.cssTemplates[newTheme];
+TS.events.updatePreferences = function(newTheme) {
+  localforage.setItem('TS', JSON.stringify(TS.data.local), function(err){})
+  _ = TS.cssTemplates[newTheme];
   if (typeof(_) == 'function') _ = _()
 }
 return {
@@ -161,7 +161,7 @@ return {
     display : function() {
       let str = ``;
       if (_.alignment !='top') {
-        let maxHeight = document.body.clientHeight - Book.refs.mainNavBar.clientHeight;
+        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
         str += `
         :host {
             display: inline-block;
@@ -170,7 +170,7 @@ return {
             flex-grow:1;
           }`
       } else {
-        let maxHeight = document.body.clientHeight - Book.refs.mainNavBar.clientHeight;
+        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
         str += `
         :host {
             max-height: ${maxHeight}px;
@@ -310,13 +310,13 @@ return {
           font-size:1rem;
         }
         ${_.btn}
-        ${Book.css.modal}
+        ${TS.css.modal}
         ${_.btnExit}
         ${_.btnSubmit}`
     },
     addLine : function() {
       let str =  `
-        ${Book.css.modal}
+        ${TS.css.modal}
         ${_.btnSubmit}
         select:active, select:hover {
           outline-color: red
@@ -328,26 +328,26 @@ return {
     },
     confirmationDelete : function() {
       return `
-        ${Book.css.modal}
+        ${TS.css.modal}
         ${_.btnWarn}
         `
     },
     preferencesFile : function() {
       return `
-        ${Book.css.modal}
+        ${TS.css.modal}
         ${_.btnSubmit}`
     },
     saveFile : function() {
       return `
-        ${Book.css.modal}`
+        ${TS.css.modal}`
     },
     uploadFile : function() {
-      return `${Book.css.modal}
+      return `${TS.css.modal}
       ${_.btnSubmit}`
     },
     openFile: function() {
       return `
-        ${Book.css.modal}`
+        ${TS.css.modal}`
     }
 
   }

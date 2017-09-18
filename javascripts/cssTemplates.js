@@ -1,4 +1,4 @@
-Book.cssTemplates = {
+TS.cssTemplates = {
   default: {
     alignment: 'top',
     btn: `
