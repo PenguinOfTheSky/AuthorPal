@@ -1,4 +1,3 @@
-# TrueScript-V3
+# TrueScript-V4
 Try it out at:
-https://penguinofthesky.github.io/TrueScript-V3/
-
+https://penguinofthesky.github.io/TrueScript.js-v4/
