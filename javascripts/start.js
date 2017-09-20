@@ -26,7 +26,6 @@ TS.start = function(parent) {
   //initialize objects.
   let begin = function() {
     TS.css = TS.css()
-    TS.html = TS.html()
     let parentStyle = TS.lib.createNode('style', {
       innerHTML : TS.css.boxes.root()
     })

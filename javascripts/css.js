@@ -28,8 +28,6 @@ return {
     ${_.btn}
     ${_.btnExit}
   `,
-  gold : `
-    background: linear-gradient(0deg, #efd100, #e2a233 38%, #f0c328 60%, #fff1a3 86%, #ffe13e 100%);`,
   boxes: {
     root: function() {
       return `
@@ -304,6 +302,15 @@ return {
     }
   },
   modals : {
+    exportFile: function() {
+      return `
+        button, input, select {
+          font-size:1rem;
+        }
+        ${_.btn}
+        ${TS.css.modal}
+        ${_.btnExit}`
+    },
     createFile : function() {
       return `
         button, input, select {

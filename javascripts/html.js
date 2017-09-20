@@ -1,11 +1,8 @@
   /*
   If using css to affect all divs, make sure to exclude .component class if desired
   */
-TS.html = function() {
-  let CSS = TS.css,
-  Lib = TS.lib,
-  _; //TS.html, defined below.
-  let obj = {
+Object.assign(TS.html,
+{
   display: {
     splash : function() {
       return TS.lib.createComponent({
@@ -14,7 +11,7 @@ TS.html = function() {
       js: function({style, box, parent}) {
       },
       html: `
-        <h1>Lycelia's <i>AuthorPal</i> v1.20</h1>
+        <h1>Lycelia's <i>AuthorPal</i> v2.0.1</h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more click FAQ above.
@@ -275,8 +272,7 @@ TS.html = function() {
       let style = document.createElement('style')
       style.innerHTML = TS.css.boxes.topLeftNav()
       root.appendChild(style)
-      let buttons
-      let chosenButton
+      let buttons, chosenButton;
       let commands = {
         file : function(choice) {
           let modal = TS.html.modals[choice + 'File']({commands: commands})
@@ -395,8 +391,8 @@ TS.html = function() {
           }
         }
       })
-      let options = ['file', 'open', 'create', 'save', 'upload', 'preferences']
-      let values = ['File', 'Open', 'New File', 'Download', 'Upload', 'Preferences']
+      let options = ['file', 'open', 'create', 'save', 'upload', 'preferences', 'export']
+      let values = ['File', 'Open', 'New File', 'Download', 'Upload', 'Preferences', 'Export']
       for (var j = 0; j < options.length; j++) {
         let option = Object.assign(document.createElement('option'), {
           'value': options[j],
@@ -406,235 +402,6 @@ TS.html = function() {
       }
       return select;
     }
-  },
-  modals : {
-    preferencesFile : function() {
-      let item =  TS.lib.createComponent({
-        id: 'TS.html.modals.preferencesFile',
-        css: TS.css.modals.preferencesFile(),
-        html: `
-          <div id='centerModal'>
-          <button id='exit'>X</button>
-          <b>Edit Preferences </b>
-          <br>
-          <form id = 'prefForm'>
-            <b>Choose a style theme</b>
-            <select id='themeSelect'>
-              <option value='default'>default</option>
-              <option value='sparky'>Sparky</option>
-              <option value='Theme1'>Theme1</option>
-            </select>
-            <input type = 'submit' class='btnSubmit'>
-          </form>
-          (Must refresh afterwards to see new style theme)
-          </div>
-        `,
-        js: function({style, box, parent, root}) {
-          TS.js.baseModal(box, root)
-          root.querySelector('#prefForm').onsubmit = function(event) {
-            event.preventDefault()
-            TS.data.local.preferences.theme = root.querySelector('#themeSelect').value
-            TS.events.updatePreferences(root.querySelector('#themeSelect').value);
-            box.remove();
-            return 0;
-          }
-        }
-      })
-      return item.box;
-    },
-    addLine : function(path, focused) {
-      let item =  TS.lib.createComponent({
-        id: 'TS.html.modals.addLine',
-        css: TS.css.modals.addLine(),
-        html: `
-          <div id='centerModal'>
-           <form id='addLineForm'>
-            <b>Create New Line</b>
-            <button id='exit'>X</button>
-            <br>
-            <label>line name</label> <input required id ='name' type='text' placeholder='name'><br>
-            <label>Select Template</label> <select id='selectTemplate'>
-              <option value='textblock'>Text block</option>
-              <option value='container'>Container</option>
-              <option value='character'>new character</option>
-              <option value='chapter'>new chapter</option>
-            </select><br>
-            <input type='submit' value='Submit' class='btnSubmit'>
-            <div id='status'></div>
-           </form>
-          </div>
-        `,
-        js: function({style, box, parent, root}) {
-          TS.js.baseModal(box, root);
-          root.querySelector('#addLineForm').onsubmit = function(event) {
-            event.preventDefault();
-            let name = this.querySelector('#name').value
-            let template = this.querySelector('#selectTemplate').value
-            if (name != '' && path[name] === undefined) {
-              path[name] = TS.js.templates[template]()
-              console.log(focused)
-              TS.events.bodyChange(focused)
-            }
-            box.remove();
-            return false;
-          }
-        }
-      })
-      return item.box;
-    },
-    uploadFile : function() {
-      let item =  TS.lib.createComponent({
-        id: 'TS.html.modals.uploadFile',
-        css: TS.css.modals.uploadFile(),
-        html: `
-          <div id='centerModal'>
-            <b>Upload backup</b>
-            <button id='exit' >X</button>
-            <br>
-            Warning, may overwrite projects already in your localStorage<br>
-            <input id='fileUpload' type='file' value='Upload'>
-            <input type = 'submit' id='submit' class='btnSubmit'>
-          </div>
-        `,
-        js: function({style, box, parent, root}) {
-          TS.js.baseModal(box, root)
-          root.querySelector('#submit').onclick = function() {
-            var input = root.querySelector('#fileUpload')
-            var reader = new FileReader();
-            if (input.files.length) {
-                var textFile = input.files[0];
-                reader.onload = function(e) {
-                  Object.assign(TS.data.local.files, JSON.parse(e.target.result))
-                };
-                reader.readAsText(textFile)
-            } else {
-                alert('Please upload a file before continuing')
-            }
-          }
-        }
-      })
-      return item.box;
-    },
-    saveFile : function() {
-      let textarea = Object.assign(document.createElement('textarea'), {
-        innerText: JSON.stringify(TS.data.local.files,0,2)
-      })
-      var myblob = new Blob([textarea.innerText], {
-        type: 'text/plain'
-      });
-      let url = URL.createObjectURL(myblob);
-      let date = new Date()
-      let item =  TS.lib.createComponent({
-        id: 'TS.html.modals.saveFile',
-        css: TS.css.modals.saveFile(),
-        html: `
-          <div id='centerModal'>
-            <b>Save a Backup</b>
-            <button id='exit'>X</button>
-            <br>
-            Your files are saved automatically to your localStorage every fifteen seconds but if you wipe your cookies you could lose them.
-            To avoid that, save a backup copy to your computer using the button below.
-            Left-click to save to downloads folder or right-click to choose location on harddrive to save to.
-            <a href="${url}" download="AuthorPal-${date.toDateString()}">Download</a>
-          </div>
-        `,
-        js: function({style, box, parent, root}) {
-          TS.js.baseModal(box, root)
-        }
-      })
-      return item.box;
-    },
-    createFile: function({commands}) {
-      let item =  TS.lib.createComponent({
-        id: 'TS.html.modals.createFile',
-        css: TS.css.modals.createFile(),
-        html: `
-          <div id='centerModal'>
-           <form id = 'createForm'>
-            <button id='exit'>X</button>
-            <b>Create New Project</b>
-            <br>
-            <label>Project name</label> <input required id ='name' type='text' placeholder='name'><br>
-            <label>Select Template</label> <select id='selectTemplate'>
-              <option value='standard'>standard</option>
-            </select><br>
-            <input type='submit' value='Submit' class='btnSubmit'>
-            <div id='status'></div>
-           </form>
-          </div>
-        `,
-        js: function({style, box, parent, root}) {
-          TS.js.baseModal(box, root)
-          root.querySelector('#createForm').onsubmit = function(event) {
-            event.preventDefault();
-            let name = this.querySelector('#name').value
-            let template = this.querySelector('#selectTemplate').value
-            if (name != '' && TS.data.local.files[name] === undefined) {
-              TS.data.local.files[name] = TS.js.templates.standard()
-              box.remove()
-              TS.data.chosenFile = TS.data.local.files[name]
-              commands.open()
-            } else {
-              let msg = Object.assign(document.createElement('b'), {
-                innerText: ' | Name is already taken! | ',
-                style: 'color: blue;'
-              })
-              root.appendChild(msg)
-            }
-            return false;
-          }
-        }
-      })
-      return item.box;
-    },
-    openFile: function({commands}) {
-        let item =  TS.lib.createComponent({
-          id: 'TS.html.modals.openFile',
-          css: TS.css.modals.openFile(),
-          html: `
-            <div id='centerModal'>
-              <button id='exit'>X</button>
-            </div>
-          `,
-          js: function({style, box, parent, root}) {
-            TS.js.baseModal(box, root)
-            for (let x in TS.data.local.files) {
-              let file = Object.assign(document.createElement('button'), {
-                className:'fileBtn',
-                innerText: x,
-                onclick: function() {
-                  TS.data.chosenFile = TS.data.local.files[x]
-                  commands.open()
-                  box.remove()
-                }
-              })
-              root.querySelector('#centerModal').appendChild(file)
-            }
-          }
-        })
-        return item.box;
-      },
-    confirmationDelete : function(name, callback) {
-        let item =  TS.lib.createComponent({
-          id: 'TS.html.modals.confirmationDelete',
-          css: TS.css.modals.confirmationDelete(),
-          html: `
-            <div id='centerModal'>
-              <button id='exit'>X</button>
-              <h2>Are you sure you would like to delete "${name}"?</h2>
-              <button id='yes' class='btnWarn'>Yes</button><button id='cancel'>Cancel</button>
-            </div>
-          `,
-          js: function({style, box, parent, root}) {
-            TS.js.baseModal(box, root)
-            root.querySelector('#yes').onclick = function() {callback(); box.remove();}
-            root.querySelector('#cancel').onclick = function() {box.remove();}
-          }
-        })
-        return item.box;
-      }
   }
 }
-_ = obj;
-return obj
-}
+)
