@@ -16,7 +16,7 @@ return {
   modal: `
     :host {
       background-color:rgba(150,150,150,.3);
-      padding:5px;position: fixed; z-index: 4;top:0;height:100%; width:100%;
+      padding:5px;position: fixed; z-index: 4;top:20%;height:100%; width:100%;
     }
     #centerModal {
       text-align:center;
@@ -67,15 +67,6 @@ return {
         #left {
           display: inline-block;
           margin-right:.1rem;
-        }
-        #LyceliaButton {
-          font-family:cursive;
-          font-size:1rem;
-          text-shadow:1px 1px white;
-        }
-        #LyceliaButton a {
-          text-decoration: none;
-          color: white;
         }
         ${_.btnBase1}`
     },
@@ -168,7 +159,7 @@ return {
             flex-grow:1;
           }`
       } else {
-        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
+        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight - TS.refs.secondaryNavBar.clientHeight;
         str += `
         :host {
             max-height: ${maxHeight}px;
@@ -293,8 +284,9 @@ return {
     },
     splash: function() {
       return `
+        ${_.link}
         :host {
-          padding: 3%;
+          padding: 5%;
         }
         h1 {
           text-align:center;

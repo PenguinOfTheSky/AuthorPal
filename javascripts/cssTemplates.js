@@ -1,6 +1,7 @@
 TS.cssTemplates = {
   default: {
     alignment: 'top',
+    link: ``,
     btn: `
       input[type=button], button {
         border-radius: .4rem;
@@ -109,6 +110,11 @@ TS.cssTemplates = {
   }
   ,
   sparky: {
+    link: `
+      a {
+        color: rgb(0,0,50);
+      }
+    `,
     alignment: 'left',
     btn: `
       button {
@@ -222,6 +228,7 @@ TS.cssTemplates = {
     let clouds = "#ecf0f1"
     let silver = "#bdc3c7"
     let obj = {
+    link: ``,
     btn: `
       button {
         border-radius: .4rem;

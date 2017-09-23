@@ -11,7 +11,7 @@ Object.assign(TS.html,
       js: function({style, box, parent}) {
       },
       html: `
-        <h1>Lycelia's <i>AuthorPal</i> v2.0.1</h1>
+        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.0.1</h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more click FAQ above.
@@ -235,6 +235,7 @@ Object.assign(TS.html,
         root.appendChild(style)
         if (TS.data.chosenFile !== undefined) {
           for (let ele in TS.data.chosenFile) {
+            if (ele == 'master_99') continue;
             let button = document.createElement('button')
             Object.assign(button, {
               className: 'navButton',
@@ -287,7 +288,6 @@ Object.assign(TS.html,
           display.render(choice)
         },
         preferences : function() {
-          console.log('preferences')
         },
         open : function() {
           buttons.remove();
@@ -295,6 +295,7 @@ Object.assign(TS.html,
           topDiv.appendChild(buttons)
           let firstItem = Object.keys(TS.data.chosenFile)[0]
           display.render(firstItem)
+          console.log(left)
         }
       }
       let topDiv = document.createElement('div');
@@ -317,19 +318,11 @@ Object.assign(TS.html,
       })
       let file = TS.html._navBars.file(commands.file)
       let faq = TS.html._navBars.faqButton()
-      let Lycelia = Object.assign(document.createElement('button'), {
-        innerHTML :`<a href='http://www.lycelia.com'><i>Lycelia</i></a>`,
-        id: 'LyceliaButton'
-      })
-      let devMode = TS.lib.createNode('button', {
-        innerHTML : 'devMode',
-        onclick: function() {window.open('index2.html')}
-      })
       buttons = TS.html._navBars.mainButtons()
       let left = Object.assign(document.createElement('div'), {
         id: 'left'
       })
-      let leftItems = [file, Lycelia, faq, devMode]
+      let leftItems = [file, faq]
       leftItems.forEach((ele) => left.appendChild(ele))
       topDiv.appendChild(left)
       root.appendChild(topDiv)
@@ -386,13 +379,18 @@ Object.assign(TS.html,
       let select = Object.assign(document.createElement('select'), {
         onclick: function() {
           if (this.selectedIndex > 0) {
-            callback(this.value)
+            switch (this.value) {
+              case "devMode":
+                window.open('devMode.html');break;
+              default:
+                callback(this.value)
+            }
             this.selectedIndex = 0;
           }
         }
       })
-      let options = ['file', 'open', 'create', 'save', 'upload', 'preferences', 'export']
-      let values = ['File', 'Open', 'New File', 'Download', 'Upload', 'Preferences', 'Export']
+      let options = ['menu', 'open', 'create', 'save', 'upload', 'preferences', 'export', 'settings', 'devMode']
+      let values = ['Menu', 'Open File', 'New File', 'Download', 'Upload', 'Themes', 'Export File', "Settings", "Dev. Mode"]
       for (var j = 0; j < options.length; j++) {
         let option = Object.assign(document.createElement('option'), {
           'value': options[j],
