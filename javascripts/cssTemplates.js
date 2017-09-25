@@ -112,7 +112,7 @@ TS.cssTemplates = {
   sparky: {
     link: `
       a {
-        color: rgb(0,0,50);
+        color: rgb(190,190,255);
       }
     `,
     alignment: 'left',
@@ -138,7 +138,7 @@ TS.cssTemplates = {
       background: linear-gradient(0deg, rgb(0,0,0), rgb(220,10,10) 40%, rgb(0,0,0));`,
     backgroundNav2 : `background-color: #DFD;`,
     backgroundModals : `
-      background: linear-gradient(45deg, rgb(0,230,0), rgb(0,55,55) 40%, rgb(140,80,60));`,
+      background : radial-gradient(circle at 2.01% 21.96%, #c21500, transparent 100%),radial-gradient(circle at 81.61% 78.78%, #ffc500, transparent 100%),radial-gradient(circle at 85.27% 6.83%, #b8faff, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%)`,
     backgroundMain: `
       color: rgb(253,255,255);
       background : radial-gradient(circle at 2.01% 21.96%, #c21500, transparent 100%),radial-gradient(circle at 81.61% 78.78%, #ffc500, transparent 100%),radial-gradient(circle at 85.27% 6.83%, #b8faff, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%)`,

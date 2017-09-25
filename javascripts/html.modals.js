@@ -35,7 +35,7 @@ TS.html.modals = {
   },
   addLine : function(path, focused) {
     let options = ``
-    let x = eval(TS.data.local.preferences.templates)
+    let x = eval(TS.data.chosenFile.master_root.templates)
     Object.keys(x).forEach(function(ele) {
       options +=`<option value='${ele}'>${ele}</option>`
     })
@@ -149,7 +149,7 @@ TS.html.modals = {
           <label>Project name</label> <input required id ='name' type='text' placeholder='name'><br>
           <label>Select Template</label> <select id='selectTemplate'>
             <option value='book outline'>Book/creative work Outline</option>
-            <option value='Static Blog'>Static Markdown Blog</option>
+            <option value='Markdown Blog'>Markdown Blog</option>
           </select><br>
           <input type='submit' value='Submit' class='btnSubmit'>
           <div id='status'></div>
@@ -228,17 +228,34 @@ TS.html.modals = {
     return item.box;
   },
   exportFile : function(name, callback) {
-    let fileExport;
-    if (TS.data.chosenFile && TS.data.local.preferences.exportFormat) {
-      let textarea = Object.assign(document.createElement('textarea'), {
-        innerText: TS.js.fileFormat[TS.data.local.preferences.exportFormat](TS.data.chosenFile)
+    let fileDownload =``,
+    filePreview =``,
+    text;
+    let styleChoice;
+    let style;
+    if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
+      let formatted = TS.js.fileFormat[TS.data.chosenFile.master_root.exportFormat](TS.data.chosenFile)
+      text = formatted
+      let keys = Object.keys(formatted)
+      try {
+        styleChoice = TS.data.chosenFile['#advanced'].styles['*chosenStyle']
+        style = TS.data.chosenFile['#advanced'].styles[styleChoice]
+      } catch(err) {
+        console.log('style incompatible')
+        return 0;
+      }
+      keys.forEach(function(ele) {
+        let textarea = Object.assign(document.createElement('textarea'), {
+          innerText: `<head><title>${formatted[ele].head.title}</title>${style} </head>` +  formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
+        })
+        var myblob = new Blob([textarea.innerText], {
+          type: 'text/html'
+        });
+        let url = URL.createObjectURL(myblob);
+        let date = new Date()
+        fileDownload += `<a href="${url}" download="AuthorPal-${date.toDateString()}-style:${ele}">Download style: ${ele}</a>`
+        filePreview += `<a href="#" id='preview_${ele}'>Preview style:${ele} </a>`
       })
-      console.log(textarea.innerText)
-      var myblob = new Blob([textarea.innerText], {
-        type: 'text/plain'
-      });
-      let url = URL.createObjectURL(myblob);
-      let date = new Date()
     }
     let item =  TS.lib.createComponent({
       id: 'TS.html.modals.exportFile',
@@ -248,10 +265,28 @@ TS.html.modals = {
           <button id='exit'>X</button>
           <h2>Export File</h2>
           <p>Unlike the download option that saves all your work in json format, this allows the selected file to be downloaded in a rendered format if compatible.</p>
+          ${fileDownload || ""}<br>
+          ${filePreview || ""}
         </div>
       `,
       js: function({style, box, parent, root}) {
         TS.js.baseModal(box, root)
+        if (!fileDownload) {
+          let i = document.createElement('i')
+          i.innerText = "Either you haven't opened a file or your file is incompatible for export."
+          root.querySelector('#centerModal').appendChild(i)
+        } else {
+          Object.keys(text).forEach(function(ele) {
+            root.querySelector('#preview_'+ele).onclick = function() {
+              let x = window.open()
+              x.document.body.innerHTML = style + text[ele].main
+              x.document.title = text[ele].head.title
+              let script = document.createElement('script')
+              script.innerHTML = text[ele].script
+              x.document.body.appendChild(script)
+            }
+          })
+        }
       }
     })
     return item.box;

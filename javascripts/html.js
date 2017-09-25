@@ -86,7 +86,15 @@ Object.assign(TS.html,
       style.innerHTML = TS.css.boxes.display()
       root.appendChild(style)
       let determine = function(item, itemName, path, {maxDepth, depth}) {
+        let formatType
         if (depth == undefined) depth = 0;
+        if (itemName[0] === '*') {
+          formatType = function(a) {return a}
+        } else if (itemName[0] === '_') {
+          formatType = function(a) {return a}
+        }else {
+          formatType = function(a) {return marked(a)}
+        }
         let line = Object.assign(document.createElement('div'), {
           className: 'lineContainer '
         })
@@ -110,6 +118,7 @@ Object.assign(TS.html,
               TS.events.columnChange()
             } else {
               console.log('name taken')
+              this.innerText = oldItemName
             }
           }
         })
@@ -148,16 +157,21 @@ Object.assign(TS.html,
         if (typeof(item) == 'string') {
           let textField = Object.assign(document.createElement('div'), {
             className: 'textField',
-            innerHTML: marked(item),
             contentEditable: true,
             onfocus: function() {
-              this.innerHTML = path[itemName]
+              this.innerText = path[itemName]
             },
             onblur: function() {
               path[itemName] = this.innerText
-              this.innerHTML = marked(this.innerText);
+              if (itemName[0] === '*') {}
+              else {this.innerHTML = formatType(this.innerText);}
             }
           })
+          if (itemName[0]==='*') {
+            textField.innerText = item
+          } else {
+            textField.innerHTML = formatType(item)
+          }
           lineBody.appendChild(textField)
         }
         else if (typeof(item) == 'object') {
@@ -235,7 +249,7 @@ Object.assign(TS.html,
         root.appendChild(style)
         if (TS.data.chosenFile !== undefined) {
           for (let ele in TS.data.chosenFile) {
-            if (ele == 'master_99') continue;
+            if (ele == 'master_root') continue;
             let button = document.createElement('button')
             Object.assign(button, {
               className: 'navButton',
@@ -294,8 +308,8 @@ Object.assign(TS.html,
           buttons = TS.html._navBars.mainButtons(commands.changeTab)
           topDiv.appendChild(buttons)
           let firstItem = Object.keys(TS.data.chosenFile)[0]
+          if (firstItem ==='master_root') firstItem = Object.keys(TS.data.chosenFile)[1]
           display.render(firstItem)
-          console.log(left)
         }
       }
       let topDiv = document.createElement('div');
