@@ -16,21 +16,41 @@ fileFormat: {
     try {
       title = file["#general"].title
     }catch(err) {}
-    let style1 = ``
     let body1 = ``
     let navbar1 = `<div class='topNavbar'>`
+    let templates = {};
     { //populate navbar
       let keys = Object.keys(file);
       for (let i = 0; i < keys.length; i++) {
-        if (keys[i] != '#general' && keys[i] != '#advanced') {
+        if (keys[i] != '#general' && keys[i] != '#advanced' && keys[i] !== 'master_root') {
+          { //populate templates
+            let str = `<div id = '_Template_${keys[i]}'>`
+            if (keys[i] != '#general' && keys[i] != '#advanced' && keys[i] !== 'master_root') {
+              //skip
+            } else if (keys[i] === 'homepage') {
+              templates.homepage = marked(file[keys[i]].main)
+            } else if (keys[i] === '') {
+
+            } else {
+
+            }
+            str += `</div>`
+          }
           navbar1 += `<button class='navButton'>${keys[i]}</button>`
         }
       }
       navbar1 += '</div>'
+      body1 += navbar1 + '<div id="main">' + templates.homepage + '</div>'
     }
-    let script1 = ``
+    let script1 = `
+      document.querySelectorAll('.navButton').forEach(function(ele) {
+        ele.onclick=function() {
+          document.querySelector('#main').innerHTML =''
+          document.querySelector(#'main').innerHTML = templates[this.innerText]
+        }
+      })`
     return {default:
-      {style: style1, head: {
+      { head: {
         title: title
       }, main: body1, script: script1}
     }

@@ -21,6 +21,7 @@ TS.js.templates = {
         date: date.toLocaleString(),
         title: ``,
         keywords: ``,
+        category: ``,
         text: ``
       }
       return obj;
@@ -67,27 +68,13 @@ TS.js.templates = {
                 cursor: pointer;
                 text-decoration: underline;
               }
-              p {
-                text-indent: 1rem;
-              }
-              h1 {
-                text-align: center;
-              }
-              ._2 {
-                margin-left: 3%;
-              }
-              ._3 {
-                margin-left: 6%;
-              }
-              ._4 {
-                margin-left: 9%;
-              }
-              ._5 {
-                margin-left: 12%;
-              }
-              ._6 {
-                margin-left: 15%;
-              }
+              p { text-indent: 1rem; }
+              h1 { text-align: center; }
+              ._2 {margin-left: 3%;}
+              ._3 { margin-left: 6%; }
+              ._4 { margin-left: 9%; }
+              ._5 { margin-left: 12%; }
+              ._6 { margin-left: 15%; }
               </style>`
           }
         },
@@ -160,17 +147,32 @@ TS.js.templates = {
         "#advanced": {
           imports : `<!--import scripts like jquery if required -->
           <script src="#"></script>`,
-          styleTag : `<!--blog comes pre-styled, but you can override styles if necessary --> <style></style>`,
+          styles : {
+            "*chosenStyle": '*default',
+            "*default": `<style></style>`
+          },
           html : `<!--things like <title> are set from general-> title, but you can override here.-->`,
           script: `/* for general js scripting. Scripts can also be written by adding the '*' prefix (see faq)*/
           `
         },
-        "text":{
+        "archive":{
+          "#master_settings": {
+            id: ``,
+            index: `1`
+          },
           "January 20XX" : {
-            "Went shopping": {
-              date: 1,
-              text: "Was super fun"
-            }
+          }
+        },
+        "homepage": {
+          "#master_settings": {
+            id: ``,
+            index: `0`
+          }
+        },
+        "about": {
+          "#master_settings": {
+            id: ``,
+            index: `2`
           }
         }
       }

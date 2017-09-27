@@ -403,8 +403,8 @@ Object.assign(TS.html,
           }
         }
       })
-      let options = ['menu', 'open', 'create', 'save', 'upload', 'preferences', 'export', 'settings', 'devMode']
-      let values = ['Menu', 'Open File', 'New File', 'Download', 'Upload', 'Themes', 'Export File', "Settings", "Dev. Mode"]
+      let options = ['menu', 'open', 'create', 'save', 'upload', 'preferences', 'export', 'devMode']
+      let values = ['Menu', 'Open File', 'New File', 'Download', 'Upload', 'Themes', 'Export File', "Dev. Mode"]
       for (var j = 0; j < options.length; j++) {
         let option = Object.assign(document.createElement('option'), {
           'value': options[j],
