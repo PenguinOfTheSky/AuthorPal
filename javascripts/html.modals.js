@@ -37,6 +37,7 @@ TS.html.modals = {
     let options = ``
     try {
       if (TS.data.chosenFile.master_root.templates == undefined) {
+        TS.data.chosenFile.master_root = {};
         TS.data.chosenFile.master_root.templates = TS.js.templates["novel outline"]
       }
     }  catch (err) {}
