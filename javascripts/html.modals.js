@@ -35,12 +35,10 @@ TS.html.modals = {
   },
   addLine : function(path, focused) {
     let options = ``
-    try {
-      if (TS.data.chosenFile.master_root.templates == undefined) {
-        TS.data.chosenFile.master_root = {};
-        TS.data.chosenFile.master_root.templates = TS.js.templates["novel outline"]
-      }
-    }  catch (err) {}
+    if (TS.data.chosenFile.master_root == undefined) {
+      TS.data.chosenFile.master_root = {};
+      TS.data.chosenFile.master_root.templates = TS.js.templates["novel outline"]
+    }
     let x = eval(TS.data.chosenFile.master_root.templates)
     Object.keys(x).forEach(function(ele) {
       options +=`<option value='${ele}'>${ele}</option>`
