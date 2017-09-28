@@ -5,13 +5,13 @@ TS.start = function(parent) {
     refs : {}
   })
   TS.refs.container = parent
-  localforage.getItem('TS', function(err, value) {
+  localforage.getItem('Book', function(err, value) {
     if (value == undefined) {
       value = JSON.stringify({
         files: {},
         preferences: {}
       })
-      localforage.setItem('TS', value, function(err) {})
+      localforage.setItem('Book', value, function(err) {})
     }
     TS.data.local = JSON.parse(value)
     if (TS.data.local.preferences.theme == 'Sparky') {
@@ -21,7 +21,7 @@ TS.start = function(parent) {
     begin()
   })
   setInterval(function() {
-    localforage.setItem('TS', JSON.stringify(TS.data.local), function(err){})
+    localforage.setItem('Book', JSON.stringify(TS.data.local), function(err){})
   }, 15000)
   //initialize objects.
   let begin = function() {
