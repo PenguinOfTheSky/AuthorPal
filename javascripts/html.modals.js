@@ -203,7 +203,7 @@ TS.html.modals = {
           })
           root.querySelector('#centerModal').appendChild(file)
         }
-        if (Object.keys(TS.data.local.files).length == 0) root.querySelector('#centerModal').appendChild(Book.lib.createNode('h2', {innerHTML: 'no files found'}))
+        if (Object.keys(TS.data.local.files).length == 0) root.querySelector('#centerModal').appendChild(TS.lib.createNode('h2', {innerHTML: 'no files found'}))
       }
     })
     return item.box;
