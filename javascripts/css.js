@@ -8,7 +8,7 @@ if (theme == undefined) {
 let _ = TS.cssTemplates[theme];
 if (typeof(_) == 'function') _ = _()
 TS.events.updatePreferences = function(newTheme) {
-  localforage.setItem('TS', JSON.stringify(TS.data.local), function(err){})
+  localforage.setItem('Book', JSON.stringify(TS.data.local), function(err){})
   _ = TS.cssTemplates[newTheme];
   if (typeof(_) == 'function') _ = _()
 }
@@ -159,7 +159,7 @@ return {
             flex-grow:1;
           }`
       } else {
-        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight - TS.refs.secondaryNavBar.clientHeight;
+        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight //- TS.refs.secondaryNavBar.clientHeight; error, undefined at point of call (find a fix!)
         str += `
         :host {
             max-height: ${maxHeight}px;

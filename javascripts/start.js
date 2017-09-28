@@ -15,7 +15,6 @@ TS.start = function(parent) {
     }
     TS.data.local = JSON.parse(value)
     if (TS.data.local.preferences.theme == 'Sparky') {
-      console.log('wtfinhellfire')
       TS.data.local.preferences.theme = 'default'
     }
     begin()
