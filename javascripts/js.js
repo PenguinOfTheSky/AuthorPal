@@ -19,34 +19,66 @@ fileFormat: {
     let body1 = ``
     let navbar1 = `<div class='topNavbar'>`
     let templates = {};
+    let recent = ``;
     { //populate navbar
       let keys = Object.keys(file);
       for (let i = 0; i < keys.length; i++) {
         if (keys[i] != '#general' && keys[i] != '#advanced' && keys[i] !== 'master_root') {
           { //populate templates
-            let str = `<div id = '_Template_${keys[i]}'>`
-            if (keys[i] != '#general' && keys[i] != '#advanced' && keys[i] !== 'master_root') {
+            let str = `<template id = '_Template_${keys[i]}'>`
+            if (keys[i] == '#general' && keys[i] == '#advanced' && keys[i] == 'master_root') {
               //skip
-            } else if (keys[i] === 'homepage') {
-              templates.homepage = marked(file[keys[i]].main)
-            } else if (keys[i] === '') {
+            } else if (keys[i] === 'archive') {
+              let articles = []
+              Object.keys(file.archive).forEach(function(ele){
+                if (file.archive[ele]["#type"] && file.archive[ele]["#type"] == 'blog entry') {
+                  articles.push(file.archive[ele])
+                }
+              })
+              articles.sort(function(a, b) {
 
+                return a.date.getTime() - b.date.getTime()
+              })
+              articles.forEach(function(ele, i) {
+                str += `<div class='blogPost'>
+                  <h2 class='blogPostTitle'>${ele.title}</h2>
+                  <p class='blogPostContent'>${marked(ele.text)}</p>
+                </div>`
+                if (i < 5) {
+                  recent += `<div class='blogPost'>
+                    <h2 class='blogPostTitle'>${ele.title}</h2>
+                    <p class='blogPostContent'>${marked(ele.text)}</p>
+                  </div>`
+                }
+              })
             } else {
-
+              for (let x in file[keys[i]]) {
+                console.log(x)
+                if (x[0] === '*') {
+                  str += file[keys[i]][x]
+                } else {
+                  str += marked(file[keys[i]][x])
+                }
+              }
             }
-            str += `</div>`
+            str += `</template>`
+            templates[keys[i]] = str;
           }
           navbar1 += `<button class='navButton'>${keys[i]}</button>`
         }
       }
       navbar1 += '</div>'
-      body1 += navbar1 + '<div id="main">' + templates.homepage + '</div>'
+      body1 += navbar1 + '<div id="main"></div>'
+      for (let x in templates) {
+        body1 += templates[x]
+      }
     }
     let script1 = `
+      document.querySelector('#main').appendChild(document.querySelector("#_Template_homepage").cloneNode(1).content)
       document.querySelectorAll('.navButton').forEach(function(ele) {
         ele.onclick=function() {
           document.querySelector('#main').innerHTML =''
-          document.querySelector(#'main').innerHTML = templates[this.innerText]
+          document.querySelector('#main').appendChild(document.querySelector("#_Template_" + this.innerText).cloneNode(1).content)
         }
       })`
     return {default:

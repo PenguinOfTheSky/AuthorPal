@@ -18,6 +18,7 @@ TS.js.templates = {
     "blog entry": function() {
       date = new Date()
       let obj = {
+        "#type": 'blog entry',
         date: date.toLocaleString(),
         title: ``,
         keywords: ``,
@@ -37,11 +38,28 @@ TS.js.templates = {
   },
   "novel outline": {
     textblock: function() {
-      let obj = ``
-      return obj
+      return ``
     },
     container: function() {
-      let obj = {}
+      return {}
+    },
+    character: function() {
+      return `**blurb:**
+**appearance:**
+**personality:**
+**brief timeline:**`
+    },
+    chapter: function() {
+      let obj ={
+        "blurb": ``,
+        "locations": ``,
+        "characters": ``,
+        "atmosphere": ``,
+        "list main points": ``,
+        "deeper runthrough": {
+
+        }
+      }
       return obj
     }
   },
@@ -75,6 +93,7 @@ TS.js.templates = {
               ._4 { margin-left: 9%; }
               ._5 { margin-left: 12%; }
               ._6 { margin-left: 15%; }
+              ._7 { margin-left: 18%; }
               </style>`
           }
         },
@@ -156,24 +175,22 @@ TS.js.templates = {
           `
         },
         "archive":{
-          "#master_settings": {
-            id: ``,
-            index: `1`
-          },
           "January 20XX" : {
           }
         },
         "homepage": {
-          "#master_settings": {
-            id: ``,
-            index: `0`
-          }
+          "*style": `<style>
+          #main h1 {}
+          /* optional. prefix styles with #main (the containing div)*/</style>`,
+          "content": `Change this to "*content" instead of "content" if you don't want to use markdown formatting`,
+          "*javascript" : `<script>/* optional */</script>`
         },
         "about": {
-          "#master_settings": {
-            id: ``,
-            index: `2`
-          }
+          "*style": `<style>
+          #main h1 {}
+          /* optional style override/additions. prefix styles with #main (the containing div)*/</style>`,
+          "content": ``,
+          "*javascript" : `<script>/* optional */</script>`
         }
       }
       return obj;

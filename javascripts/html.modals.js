@@ -232,21 +232,20 @@ TS.html.modals = {
     filePreview =``,
     text;
     let styleChoice;
-    let style;
     if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
       let formatted = TS.js.fileFormat[TS.data.chosenFile.master_root.exportFormat](TS.data.chosenFile)
       text = formatted
       let keys = Object.keys(formatted)
       try {
         styleChoice = TS.data.chosenFile['#advanced'].styles['*chosenStyle']
-        style = TS.data.chosenFile['#advanced'].styles[styleChoice]
+        styleChoice = TS.data.chosenFile['#advanced'].styles[styleChoice]
       } catch(err) {
         console.log('style incompatible')
         return 0;
       }
       keys.forEach(function(ele) {
         let textarea = Object.assign(document.createElement('textarea'), {
-          innerText: `<head><title>${formatted[ele].head.title}</title>${style} </head>` +  formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
+          innerText: `<head><title>${formatted[ele].head.title}</title>${styleChoice} </head>` +  formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
         })
         var myblob = new Blob([textarea.innerText], {
           type: 'text/html'
@@ -279,7 +278,9 @@ TS.html.modals = {
           Object.keys(text).forEach(function(ele) {
             root.querySelector('#preview_'+ele).onclick = function() {
               let x = window.open()
-              x.document.body.innerHTML = style + text[ele].main
+              x.document.head.innerHTML += styleChoice
+              console.log(styleChoice)
+              x.document.body.innerHTML = text[ele].main
               x.document.title = text[ele].head.title
               let script = document.createElement('script')
               script.innerHTML = text[ele].script
