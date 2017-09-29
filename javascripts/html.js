@@ -11,7 +11,7 @@ Object.assign(TS.html,
       js: function({style, box, parent}) {
       },
       html: `
-        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.0.0</h1>
+        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.0.5</h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more click FAQ above.
@@ -49,6 +49,7 @@ Object.assign(TS.html,
           root.appendChild(sorted.element)
           sorted.opts.update(focused)
         }
+
       }
       return opts;
     },
@@ -81,6 +82,7 @@ Object.assign(TS.html,
         name: 'mainDisplayView',
         id: 'TS.html.display.renderedList'
       })
+      TS.refs.display = box;
       let root = box.createShadowRoot()
       let style = document.createElement('style');
       style.innerHTML = TS.css.boxes.display()
@@ -192,6 +194,15 @@ Object.assign(TS.html,
         }
         if (typeof(item) == 'object' && Object.keys(item).length == 0) {}
         else line.appendChild(lineBody)
+        if (itemName === TS.data.addedLine) {
+          delete TS.data.addedLine
+          TS.data.scrollToLine = line;
+          setTimeout(function(){
+            let height = TS.data.scrollToLine.getBoundingClientRect().top - TS.refs.mainNavBar.clientHeight
+            if (TS.data.alignment == 'top') {height -= TS.refs.secondaryNavBar.clientHeight}
+            TS.refs.display.scrollTop = height;
+          }, 20)
+        }
         return line
       }
       root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}))
@@ -231,6 +242,12 @@ Object.assign(TS.html,
           else root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}))
         }
       }
+      let x = this
+      setTimeout(function() {
+        let height = window.innerHeight - TS.refs.mainNavBar.clientHeight
+        if (TS.data.alignment == 'top') {height -= TS.refs.secondaryNavBar.clientHeight}
+        TS.refs.display.style["max-height"] = height + 'px'
+      },20)
       return {element: box, opts: opts};
     }
   },

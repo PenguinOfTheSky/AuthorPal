@@ -6,6 +6,7 @@ if (theme == undefined) {
   theme = 'default'
 }
 let _ = TS.cssTemplates[theme];
+TS.data.alignment = _.alignment
 if (typeof(_) == 'function') _ = _()
 TS.events.updatePreferences = function(newTheme) {
   localforage.setItem('Book', JSON.stringify(TS.data.local), function(err){})
@@ -159,10 +160,10 @@ return {
             flex-grow:1;
           }`
       } else {
-        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight //- TS.refs.secondaryNavBar.clientHeight; error, undefined at point of call (find a fix!)
+
         str += `
         :host {
-            max-height: ${maxHeight}px;
+            /*max-height set elsewhere*/
             overflow-y: scroll;
           }`
       }

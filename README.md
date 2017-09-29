@@ -10,6 +10,7 @@ Product is built to be Chrome compatible.  Should work in safari/opera as well b
 FAQ is included in product.
 
 ## Patch notes:
-v2.0 added preliminary blog creation support. Also file exporting to .html format for both outlines/blogs.
+v2.0.5 various bug fixes, backward-compatibility, auto-scrolls to new element after adding a line. CSS overflow-height changed.  
+v2.0 added preliminary blog creation support. Also file exporting to .html format for both outlines/blogs.  
 v1.2 added Markdown support, removed offline support (likely temporarily)  
 v1.1 added css themes

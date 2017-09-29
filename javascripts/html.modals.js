@@ -37,7 +37,7 @@ TS.html.modals = {
     let options = ``
     if (TS.data.chosenFile.master_root == undefined) {
       TS.data.chosenFile.master_root = {};
-      TS.data.chosenFile.master_root.templates = TS.js.templates["novel outline"]
+      TS.data.chosenFile.master_root.templates = 'TS.js.templates["novel outline"]'
     }
     let x = eval(TS.data.chosenFile.master_root.templates)
     Object.keys(x).forEach(function(ele) {
@@ -69,6 +69,7 @@ TS.html.modals = {
           let template = this.querySelector('#selectTemplate').value
           if (name != '' && path[name] === undefined) {
             path[name] = x[template]()
+            TS.data.addedLine = name
             TS.events.bodyChange(focused)
           }
           box.remove();
