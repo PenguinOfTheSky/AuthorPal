@@ -128,7 +128,7 @@ Object.assign(TS.html,
           className: 'buttonGroup'
         })
         let keyDelete = Object.assign(document.createElement('button'), {
-          innerText: 'Delete',
+          innerHTML: '<b>-</b>',
           className: 'deleteLine',
           onclick: function() {
             callback = function() {

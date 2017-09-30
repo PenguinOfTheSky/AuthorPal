@@ -168,6 +168,7 @@ return {
           }`
       }
       str += `
+        ${_.btn}
         .lineContainer {
           background: linear-gradient(30deg, rgb(0, 0, 0), rgb(33, 155, 55) 40%, rgb(40, 40, 40));
           box-sizing:border-box;
@@ -185,7 +186,7 @@ return {
           line-height: 1.1rem;
           background: ${_.backgroundTitle || `linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140))`};
           font-weight: bold;
-          padding: .15rem;
+          padding: .25rem;
           border-radius: .2rem;
         }
         .titleContent {
@@ -260,14 +261,12 @@ return {
         }
         .buttonGroup {
           margin-left: .4rem;
-          line-height: 1.1rem;
           vertical-align: middle;
-          display:inline-flex;
+          display:inline-block;
         }
         .buttonGroup button {
-          font-weight: bold;
+          border-radius: 0px;
           color: white;
-          padding: .15rem;
           margin: auto;
         }
         .buttonGroup button:hover {
