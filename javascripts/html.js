@@ -152,11 +152,12 @@ Object.assign(TS.html,
         title.appendChild(titleContent)
         title.appendChild(buttonGroup)
         buttonGroup.appendChild(keyDelete)
+        buttonGroup.appendChild(focusMe)
         line.appendChild(title)
         lineBody = Object.assign(document.createElement('div'), {
           className: 'lineBody'
         })
-        if (typeof(item) == 'string') {
+        if (typeof(item) == 'string' && maxDepth == undefined) {
           let textField = Object.assign(document.createElement('div'), {
             className: 'textField',
             contentEditable: true,
@@ -185,7 +186,6 @@ Object.assign(TS.html,
             innerHTML: '+New Line'
           })
           buttonGroup.appendChild(add)
-          buttonGroup.appendChild(focusMe)
           if (maxDepth === undefined || depth < maxDepth) {
             for (let x in item) {
               lineBody.appendChild(determine(item[x], x, item, {maxDepth: maxDepth, depth: 1+depth}))
