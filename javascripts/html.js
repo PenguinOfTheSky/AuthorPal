@@ -335,15 +335,17 @@ Object.assign(TS.html,
       let bottomDiv = Object.assign(document.createElement('div'), {
         innerHTML: `<button id='collapseNav'>^</button>`,
         style: `height: .4rem;text-align:center;`,
-        onclick: function() {
+        onclick: function(event) {
+          if(event.target.id !== "collapseNav")
+            return;
           collapsed = !collapsed;
           if (collapsed) {
             topDiv.style.display = 'none';
-            this.style = 'height: .4rem;text-align:center;margin-top: .2rem;'
+            this.children[0].style = 'height: .4rem;text-align:center;margin-top: .2rem;'
           }
           else {
             topDiv.style.display = 'flex';
-            this.style = 'height: .4rem;text-align:center;margin-top: 0rem;'
+            this.children[0].style = 'height: .4rem;text-align:center;margin-top: 0rem;'
           }
         }
       })
