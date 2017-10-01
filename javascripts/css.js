@@ -205,6 +205,8 @@ return {
           color: black;
           cursor: text;
           padding: .1rem;
+          padding-left: .2rem;
+          padding-right: .2rem;
           background-color: rgb(240,245,240);
           min-height:.5rem;
         }
