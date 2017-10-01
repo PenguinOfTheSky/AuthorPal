@@ -5,12 +5,19 @@
   let clouds = "#ecf0f1"
   let silver = "#bdc3c7"
   TS.cssTemplates.Theme1 = {
-    link: ``,
+    link: `
+    a:-webkit-any-link {
+      color: ${wisteria};
+    }`,
     btn: `
+    #addColumn {
+      background: ${wisteria} !important;
+    }
       button {
         border-radius: .4rem;
         margin: .2rem;
         font-size: 1rem;
+        height:2rem;
       }
       button:hover {
         box-shadow: 0px 0px .1rem .2rem ${clouds} inset;
@@ -26,7 +33,7 @@
     titleColor: ``,
     backgroundNav1 : `
       background: ${silver};`,
-    backgroundNav2 : `background-color: ${clouds};`,
+    backgroundNav2 : `background-color: ${silver};`,
     backgroundModals : `
       background: ${wisteria};
       border-radius:5px;
@@ -47,7 +54,12 @@
       }`,
     btnSubmit: `
       .btnSubmit {
-        background-color: orange;
+        background-color: ${amethyst};
+        border: 2px solid ${clouds};
+        color:${clouds};
+        border-radius: .4rem;
+        height:2rem;
+        margin: .4rem;
       }`,
     btnBase1: `
       #left > * {
@@ -55,6 +67,7 @@
         border: 3px groove ${silver};
         font-size: 1rem;
         background: ${amethyst};
+        height:2rem;
       }
       #left > *:hover {
         background: ${wisteria};
@@ -97,23 +110,27 @@
         background: ${amethyst};
       }`,
     btnNav2: `
-    background-color: ${amethyst};`,
+    background-color: ${amethyst};
+    margin: 0.2rem 4rem;
+    padding: .2rem;`,
     select: `
-      select {
-        color: white;
-        border: none;
-        font-size: 1rem;
-        background: linear-gradient(0deg, rgb(30, 0, 0), rgb(60, 10, 5) 80%, rgb(40, 5, 0));
-      }
-      select option {
-        color: white;
-        background-color: rgb(0,0,0);
-        border: none;
-        font-size: 1rem;
-      }
+    select {
+      color: ${clouds};
+      border: none;
+      font-size: 1rem;
+      background: ${amethyst};
+      margin: .4rem;
+    }
+    label, b {
+      color:${clouds};
+    }
+    select option {
+      background: ${amethyst};
+      border: none;
+      font-size: 1rem;
+    }
       select option:checked {
-        color: white;
-        background-color: rgb(0,33,0);
+        background-color: ${amethyst};
       }`
     }
 }
