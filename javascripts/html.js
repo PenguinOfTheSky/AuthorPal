@@ -335,7 +335,9 @@ Object.assign(TS.html,
       let bottomDiv = Object.assign(document.createElement('div'), {
         innerHTML: `<button id='collapseNav'>^</button>`,
         style: `height: .4rem;text-align:center;`,
-        onclick: function() {
+        onclick: function(event) {
+          if(event.target.id !== "collapseNav")
+            return;
           collapsed = !collapsed;
           if (collapsed) {
             topDiv.style.display = 'none';
