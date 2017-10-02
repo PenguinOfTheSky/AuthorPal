@@ -341,11 +341,11 @@ Object.assign(TS.html,
           collapsed = !collapsed;
           if (collapsed) {
             topDiv.style.display = 'none';
-            this.children[0].style = 'height: .4rem;text-align:center;margin-top: .2rem;'
+            this.style = 'height: .4rem;text-align:center;margin-top: .2rem;'
           }
           else {
             topDiv.style.display = 'flex';
-            this.children[0].style = 'height: .4rem;text-align:center;margin-top: 0rem;'
+            this.style = 'height: .4rem;text-align:center;margin-top: 0rem;'
           }
         }
       })
