@@ -9,7 +9,7 @@ TS.html.modals = {
         <b>Edit Preferences </b>
         <br>
         <form id = 'prefForm'>
-          <b>Choose a style theme</b>
+          <label for='themeSelect'><b>Choose a style theme below</b></label>
           <select id='themeSelect'>
             <option value='default'>default</option>
             <option value='sparky'>Sparky</option>
@@ -17,11 +17,11 @@ TS.html.modals = {
           </select>
           <input type = 'submit' class='btnSubmit'>
         </form>
-        (Must refresh afterwards to see new style theme)
         </div>
       `,
       js: function({style, box, parent, root}) {
         TS.js.baseModal(box, root)
+        root.querySelector('#themeSelect').value = TS.data.local.preferences.theme;
         root.querySelector('#prefForm').onsubmit = function(event) {
           event.preventDefault()
           TS.data.local.preferences.theme = root.querySelector('#themeSelect').value

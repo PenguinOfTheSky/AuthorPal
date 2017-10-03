@@ -8,16 +8,35 @@ Object.assign(TS.html,
       return TS.lib.createComponent({
       id: 'TS.html.display.splash',
       css: TS.css.boxes.splash(),
-      js: function({style, box, parent}) {
-      },
       html: `
-        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.0.5</h1>
+        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.1.0</h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
-          <p>To learn more click FAQ above.
+          <p>To learn more see our <a href ='FAQ.html'>FAQ</a>.
           Bug reports and feature requests can be filed at <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a></p>
         </div>
-      `
+        <div id='filesListContainer' style='display:none;'>
+          <h2>Your projects</h2>
+          <ul id='filesList'>
+        </div>
+      `,
+      js: function({style, box, parent, root}) {
+        let files = TS.data.local.files
+        if (files) {
+          let list = ``
+          for (let x in files) {
+            list += `<li>${x}</li>`
+          }
+          list += '</ul>'
+          root.querySelector('#filesListContainer').style.display =''
+          root.querySelector('#filesList').innerHTML = list;
+          root.querySelector('#filesList').onclick = function(event) {
+            console.log(event.target.innerText)
+            TS.data.chosenFile = TS.data.local.files[event.target.innerText]
+            TS.events.openFile()
+          }
+        }
+      }
     })},
     start: function() {
       let box = document.createElement('div')
@@ -329,6 +348,7 @@ Object.assign(TS.html,
           display.render(firstItem)
         }
       }
+      TS.events.openFile = commands.open
       let topDiv = document.createElement('div');
       topDiv.id = 'topDiv'
       let collapsed = false;

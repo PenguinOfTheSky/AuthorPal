@@ -9,15 +9,15 @@ let _ = TS.cssTemplates[theme];
 TS.data.alignment = _.alignment
 if (typeof(_) == 'function') _ = _()
 TS.events.updatePreferences = function(newTheme) {
+  //css.js
   TS.events.save(location.reload())
-  _ = TS.cssTemplates[newTheme];
-  if (typeof(_) == 'function') _ = _()
 }
 return {
   modal: `
     :host {
       background-color:rgba(150,150,150,.3);
-      padding:5px;position: fixed; z-index: 4;top:20%;height:100%; width:100%;
+      padding:5px;position: fixed; z-index: 4;top:0%;height:100%; width:100%;
+      padding-top: 25%;
     }
     #centerModal {
       text-align:center;
@@ -290,8 +290,18 @@ return {
         :host {
           padding: 5%;
         }
-        h1 {
+        h1,h2 {
           text-align:center;
+        }
+        @media screen and (min-width: 550px) {
+          #filesList {
+            list-style-position: inside;
+            column-count: 3;
+          }
+        }
+        #filesList li:hover{
+          cursor: pointer;
+          text-decoration: underline;
         }`
     }
   },

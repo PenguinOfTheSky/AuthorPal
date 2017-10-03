@@ -112,7 +112,7 @@ TS.cssTemplates.default = {
 TS.cssTemplates.sparky = {
     link: `
       a {
-        color: rgb(190,190,255);
+        color: blue;
       }
     `,
     alignment: 'left',
