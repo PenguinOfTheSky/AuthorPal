@@ -19,9 +19,13 @@ TS.start = function(parent) {
     }
     begin()
   })
-  setInterval(function() {
-    localforage.setItem('Book', JSON.stringify(TS.data.local), function(err){})
-  }, 15000)
+  TS.events.save = function(callback) {
+    localforage.setItem('Book', JSON.stringify(TS.data.local), function(err){
+      if (err) console.log(err)
+      if (callback) callback()
+    })
+  }
+  setInterval(function() {TS.events.save()}, 15000)
   //initialize objects.
   let begin = function() {
     TS.css = TS.css()
