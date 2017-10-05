@@ -20,6 +20,7 @@ TS.start = function(parent) {
     begin()
   })
   TS.events.save = function(callback) {
+    //TS.start
     localforage.setItem('Book', JSON.stringify(TS.data.local), function(err){
       if (err) console.log(err)
       if (callback) callback()

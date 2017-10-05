@@ -9,7 +9,7 @@ Object.assign(TS.html,
       id: 'TS.html.display.splash',
       css: TS.css.boxes.splash(),
       html: `
-        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.1.0</h1>
+        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.2.0</h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more see our <a href ='FAQ.html'>FAQ</a>.
@@ -31,7 +31,6 @@ Object.assign(TS.html,
           root.querySelector('#filesListContainer').style.display =''
           root.querySelector('#filesList').innerHTML = list;
           root.querySelector('#filesList').onclick = function(event) {
-            console.log(event.target.innerText)
             TS.data.chosenFile = TS.data.local.files[event.target.innerText]
             TS.events.openFile()
           }
@@ -55,6 +54,13 @@ Object.assign(TS.html,
           root.innerHTML = ''
           sorted = TS.html.display.sort(id)
           root.appendChild(sorted.element)
+        },
+        swapTab : function(id) {
+          currentID = id
+          sorted.opts.swapTab(id)
+        },
+        swapFocus: function(obj, target) {
+          sorted.opts.focus(obj, target)
         }
       }
       TS.events.bodyChange = function(focused) {
@@ -82,15 +88,23 @@ Object.assign(TS.html,
       let mainDisplay = TS.html.display.renderedList(id)
       let topUI = TS.html._navBars.displayTopUI({mainDisplay: mainDisplay.opts, id : id})
       if (typeof(TS.data.chosenFile[id]) == 'object' ) {
-        for (let item in TS.data.chosenFile[id]) {
-          topUI.opts.newButton(item)
-        }
+        topUI.opts.init()
       }
       root.appendChild(topUI.box)
 
       root.appendChild(mainDisplay.element)
       let opts = {
-        update: mainDisplay.opts.update
+        update: mainDisplay.opts.update,
+        swapTab: function(id) {
+          mainDisplay.element.remove()
+          mainDisplay.element = TS.html.display.renderedList(id).element
+          root.appendChild(mainDisplay.element)
+        },
+        focus: function(obj, pathName) {
+          mainDisplay.element.remove()
+          mainDisplay.element = mainDisplay.opts.focus(obj, pathName)
+          root.appendChild(mainDisplay.element)
+        }
       }
       return {element: box, opts: opts};
     },
@@ -136,7 +150,7 @@ Object.assign(TS.html,
               itemName = this.innerText;
               path[itemName] = item
               delete path[oldItemName];
-              TS.events.columnChange()
+              TS.events.columnChange(itemName)
             } else {
               console.log('name taken')
               this.innerText = oldItemName
@@ -152,7 +166,15 @@ Object.assign(TS.html,
           onclick: function() {
             callback = function() {
               delete path[itemName]
-              TS.events.columnChange()
+              if (path == TS.data.chosenFile) {
+                let x;
+                for (let i in TS.data.chosenFile) {
+                  if (x != 'master_root') {
+                    x = i; break;
+                  }
+                }
+                TS.events.columnChange(x)
+              }
               if (focused.length > 0 && focused[1] !== itemName) {TS.events.bodyChange(focused)}
               else TS.events.bodyChange([])
             }
@@ -164,6 +186,8 @@ Object.assign(TS.html,
           innerText: 'Focus',
           className: 'focusMe',
           onclick: function() {
+            TS.data.currentView;
+            console.log(path)
             opts.focus(path, itemName)
           },
           contentEditable: false
@@ -171,7 +195,7 @@ Object.assign(TS.html,
         title.appendChild(titleContent)
         title.appendChild(buttonGroup)
         buttonGroup.appendChild(keyDelete)
-        buttonGroup.appendChild(focusMe)
+        // buttonGroup.appendChild(focusMe)
         line.appendChild(title)
         lineBody = Object.assign(document.createElement('div'), {
           className: 'lineBody'
@@ -244,8 +268,10 @@ Object.assign(TS.html,
         focus: function(path, itemName) {
           root.innerHTML = '';
           root.appendChild(style)
-          root.appendChild(determine(path[itemName], itemName, path, {}))
+          window.x = root;
           focused = [path[itemName], itemName, path, {}]
+          root.appendChild(determine(path[itemName], itemName, path, {}))
+          return box;
         },
         swapDisplayObject: function(key) {
           root.innerHTML = '';
@@ -268,190 +294,6 @@ Object.assign(TS.html,
         TS.refs.display.style["max-height"] = height + 'px'
       },20)
       return {element: box, opts: opts};
-    }
-  },
-
-  _navBars : {
-    mainButtons : function(changeTab) {
-      let box = document.createElement('div')
-      Object.assign(box, {
-        id: 'TS.html._navBars.mainButtons'
-      })
-      let root = box.attachShadow({ mode: 'open' });
-      let render = function() {
-        let style = document.createElement('style')
-        style.innerText = TS.css.boxes.mainButtons()
-        root.innerHTML = ``;
-        root.appendChild(style)
-        if (TS.data.chosenFile !== undefined) {
-          for (let ele in TS.data.chosenFile) {
-            if (ele == 'master_root') continue;
-            let button = document.createElement('button')
-            Object.assign(button, {
-              className: 'navButton',
-              innerText: ele,
-              onclick: function() {
-                changeTab(ele, this)
-              }
-            })
-            root.appendChild(button)
-          }
-        }
-        let addColumn = Object.assign(document.createElement('button'), {
-          innerText : '+new column',
-          id : 'addColumn',
-          onclick: function() {
-            TS.data.chosenFile["EditThisName"] = {};
-            render()
-          }
-        })
-        root.appendChild(addColumn)
-      }
-      render()
-      TS.events.columnChange = function() {
-        render();
-      }
-      return box;
-    },
-    mainNavBar: function(display) {
-      let box = document.createElement('div')
-      Object.assign(box, {
-        id: 'TS.html._navBars.mainNavBar'
-      })
-      TS.refs.mainNavBar = box;
-      let root = box.createShadowRoot();
-      let style = document.createElement('style')
-      style.innerHTML = TS.css.boxes.topLeftNav()
-      root.appendChild(style)
-      let buttons, chosenButton;
-      let commands = {
-        file : function(choice) {
-          let modal = TS.html.modals[choice + 'File']({commands: commands})
-          TS.refs.container.appendChild(modal)
-        },
-        changeTab : function(choice, ele) {
-          try {
-            chosenButton.className = 'navButton'
-          } catch(err) {}
-          chosenButton = ele
-          ele.className = 'navButton chosen'
-          display.render(choice)
-        },
-        preferences : function() {
-        },
-        open : function() {
-          buttons.remove();
-          buttons = TS.html._navBars.mainButtons(commands.changeTab)
-          topDiv.appendChild(buttons)
-          let firstItem = Object.keys(TS.data.chosenFile)[0]
-          if (firstItem ==='master_root') firstItem = Object.keys(TS.data.chosenFile)[1]
-          display.render(firstItem)
-        }
-      }
-      TS.events.openFile = commands.open
-      let topDiv = document.createElement('div');
-      topDiv.id = 'topDiv'
-      let collapsed = false;
-      let bottomDiv = Object.assign(document.createElement('div'), {
-        innerHTML: `<button id='collapseNav'>^</button>`,
-        style: `height: .4rem;text-align:center;`,
-        onclick: function(event) {
-          if(event.target.id !== "collapseNav")
-            return;
-          collapsed = !collapsed;
-          if (collapsed) {
-            topDiv.style.display = 'none';
-            this.style = 'height: .4rem;text-align:center;margin-top: .2rem;'
-          }
-          else {
-            topDiv.style.display = 'flex';
-            this.style = 'height: .4rem;text-align:center;margin-top: 0rem;'
-          }
-        }
-      })
-      let file = TS.html._navBars.file(commands.file)
-      let faq = TS.html._navBars.faqButton()
-      buttons = TS.html._navBars.mainButtons()
-      let left = Object.assign(document.createElement('div'), {
-        id: 'left'
-      })
-      let leftItems = [file, faq]
-      leftItems.forEach((ele) => left.appendChild(ele))
-      topDiv.appendChild(left)
-      root.appendChild(topDiv)
-      root.appendChild(bottomDiv)
-      return box;
-    },
-    displayTopUI : function ({mainDisplay, id}) {
-      let item =  TS.lib.createComponent({
-        id: 'TS.html._navBars.displayTopUI',
-        css: TS.css.boxes.displayTopUI(),
-        html: `
-          <div id='left'>
-            <button class='baseButtons2' id = 'show'>Show All</button>
-            <button class='baseButtons2' id='fold1'>Fold >1</button>
-            <button class='baseButtons2' id='fold2'>Fold >2</button>
-          </div>
-          <div id='right'></div>
-        `,
-        js: function({style, box, parent, root, opts}) {
-          root.querySelector('#show').onclick = function() {mainDisplay.showAll()}
-          root.querySelector('#fold1').onclick = function() {mainDisplay.fold(1)}
-          root.querySelector('#fold2').onclick = function() {mainDisplay.fold(2)}
-          let rightButtons = root.querySelector('#right')
-          Object.assign(opts, {
-            newButton : function(str) {
-              let button = Object.assign(document.createElement('button'), {
-                'innerHTML': str,
-                className : 'rightButtons',
-                onclick : function () {
-                  mainDisplay.swapDisplayObject(str)
-                }
-              })
-              rightButtons.appendChild(button)
-            },
-            clear : function() {
-              rightButtons.innerHTML = ''
-            }
-          })
-        }
-      })
-      TS.refs.secondaryNavBar = item.box;
-      return item;
-    },
-    faqButton: function() {
-      let button = Object.assign(document.createElement('button'), {
-        onclick: function() {
-          window.open('FAQ.html', '_blank')
-        },
-        innerText: 'FAQ'
-      })
-      return button;
-    },
-    file: function(callback) {
-      let select = Object.assign(document.createElement('select'), {
-        onclick: function() {
-          if (this.selectedIndex > 0) {
-            switch (this.value) {
-              case "devMode":
-                window.open('devMode.html');break;
-              default:
-                callback(this.value)
-            }
-            this.selectedIndex = 0;
-          }
-        }
-      })
-      let options = ['menu', 'open', 'create', 'save', 'upload', 'preferences', 'export', 'devMode']
-      let values = ['Menu', 'Open File', 'New File', 'Download', 'Upload', 'Themes', 'Export File', "Dev. Mode"]
-      for (var j = 0; j < options.length; j++) {
-        let option = Object.assign(document.createElement('option'), {
-          'value': options[j],
-          'innerText': values[j]
-        })
-       select.appendChild(option);
-      }
-      return select;
     }
   }
 }

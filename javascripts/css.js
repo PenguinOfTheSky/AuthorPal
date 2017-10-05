@@ -130,13 +130,13 @@ return {
         str += `
         ${_.btn}
         ${_.btnBase2}
-        #left button:first-child {
-          border-top-left-radius: .4rem;
-          border-bottom-left-radius: .4rem;
+        ul {
+          padding-left: 1rem;
         }
-        #left button:last-child {
-          border-top-right-radius: .4rem;
-          border-bottom-right-radius: .4rem;
+        .ul_0 {
+          list-style-type:none;
+          padding:0;
+          margin-left: .2rem;
         }
         .rightButtons {
           ${_.btnNav2}

@@ -34,6 +34,8 @@ TS.html.modals = {
     return item.box;
   },
   addLine : function(path, focused) {
+
+    console.log(path)
     let options = ``
     if (TS.data.chosenFile.master_root == undefined) {
       TS.data.chosenFile.master_root = {};
@@ -70,7 +72,11 @@ TS.html.modals = {
           if (name != '' && path[name] === undefined) {
             path[name] = x[template]()
             TS.data.addedLine = name
-            TS.events.bodyChange(focused)
+            let i = TS.data.chosenFile;
+            TS.data.currentView.forEach(function(ele, n) {
+              if (n < TS.data.currentView.length-1) i = i[ele]
+            })
+            TS.refs.displayOpts.swapFocus(i, TS.data.currentView[TS.data.currentView.length-1])
           }
           box.remove();
           return false;
