@@ -9,7 +9,7 @@ Object.assign(TS.html,
       id: 'TS.html.display.splash',
       css: TS.css.boxes.splash(),
       html: `
-        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.2.0</h1>
+        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.2.5</h1>
         <div style = 'text-indent:1rem;'>
           <h2>To get started click File (top left) and create a new project </h2>
           <p>To learn more see our <a href ='FAQ.html'>FAQ</a>.
@@ -88,7 +88,7 @@ Object.assign(TS.html,
       let mainDisplay = TS.html.display.renderedList(id)
       let topUI = TS.html._navBars.displayTopUI({mainDisplay: mainDisplay.opts, id : id})
       if (typeof(TS.data.chosenFile[id]) == 'object' ) {
-        topUI.opts.init()
+        topUI.opts.makeList([])
       }
       root.appendChild(topUI.box)
 
@@ -183,11 +183,9 @@ Object.assign(TS.html,
           contentEditable: false
         })
         let focusMe = Object.assign(document.createElement('button'), {
-          innerText: 'Focus',
+          innerHTML: `&nbsp;&nbsp;`,
           className: 'focusMe',
           onclick: function() {
-            TS.data.currentView;
-            console.log(path)
             opts.focus(path, itemName)
           },
           contentEditable: false
@@ -195,7 +193,7 @@ Object.assign(TS.html,
         title.appendChild(titleContent)
         title.appendChild(buttonGroup)
         buttonGroup.appendChild(keyDelete)
-        // buttonGroup.appendChild(focusMe)
+        buttonGroup.appendChild(focusMe)
         line.appendChild(title)
         lineBody = Object.assign(document.createElement('div'), {
           className: 'lineBody'
@@ -226,7 +224,7 @@ Object.assign(TS.html,
             onclick : function() {
               TS.refs.container.appendChild(TS.html.modals.addLine(path[itemName], focused))
             },
-            innerHTML: '+New Line'
+            innerHTML: '+'
           })
           buttonGroup.appendChild(add)
           if (maxDepth === undefined || depth < maxDepth) {
@@ -251,10 +249,11 @@ Object.assign(TS.html,
       root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}))
       let opts = {
         showAll: function() {
-          focused = []
+          let curr = TS.data.currentView[0]
+          focused = [TS.data.chosenFile[curr], curr, TS.data.chosenFile, {}]
           root.innerHTML = '';
           root.appendChild(style)
-          root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}))
+          root.appendChild(determine(TS.data.chosenFile[curr], curr, TS.data.chosenFile, {}))
         },
         fold: function(n) {
           root.innerHTML = '';

@@ -89,8 +89,7 @@ TS.cssTemplates.default = {
         box-shadow: 0px 1px 1px 2px rgb(0,0,20);
         background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
       }`,
-    btnNav2: `
-    background-color: rgba(20,255,20,.8);`,
+    btnNav2: ``,
     select: `
       select {
         color: white;
@@ -204,9 +203,7 @@ TS.cssTemplates.sparky = {
         box-shadow: 0px 1px 1px 2px rgb(0,0,20);
         background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
       }`,
-    btnNav2: `
-    background-color: rgba(20,255,20,.1);
-    color:black;`,
+    btnNav2: ` color:black;`,
     select: `
       select {
         color: white;

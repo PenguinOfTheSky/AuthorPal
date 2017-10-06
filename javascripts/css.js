@@ -197,7 +197,6 @@ return {
         .lineBody {
           margin-left:.5rem;
           min-height:.5rem;
-          background-color: rgb(230,230,0);
           display: block;
         }
         .textField {
@@ -244,6 +243,8 @@ return {
         }
         .focusMe {
           background-color: #337ab7;
+          background-image: url("icons/iconmonstr-crosshair-8-240.png");
+          background-size: cover;
           border-color: #2e6da4;
         }
         .focusMe:hover {
@@ -289,9 +290,15 @@ return {
         ${_.link}
         :host {
           padding: 5%;
+          padding-top:1%;
+          padding-bottom: 1%;
+          display:flex;
+          flex-direction: column;
+          flex-wrap:wrap;
         }
         h1,h2 {
           text-align:center;
+          margin: 0px;
         }
         @media screen and (min-width: 550px) {
           #filesList {

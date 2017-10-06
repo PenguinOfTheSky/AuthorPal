@@ -132,12 +132,14 @@ TS.html._navBars = {
               target = target[path[i]]
             }
             let subUL = opts.subInit(target, path.length, path)
-            list.push(subUL)
-            list[list.length-2].insertBefore(subUL, V_target.nextSibling)
+            if (path.length>0) {
+              list.push(subUL)
+              list[list.length-2].insertBefore(subUL, V_target.nextSibling)
+            } else {
+              treeButtons.replaceChild(subUL, list[0])
+              list[0] = subUL;
+            }
             return subUL
-          },
-          focus: function() {
-
           },
           subInit: function(obj, depth, path) {
             let subUL = TS.lib.createNode('ul', {
