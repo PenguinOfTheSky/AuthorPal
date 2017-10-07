@@ -89,7 +89,14 @@ TS.cssTemplates.default = {
         box-shadow: 0px 1px 1px 2px rgb(0,0,20);
         background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
       }`,
-    btnNav2: ``,
+    treeNav: `
+      li {
+        color: black;
+      }
+      li:hover {
+        box-shadow: 0px 0px .1rem .2rem blue;
+      }
+    `,
     select: `
       select {
         color: white;
@@ -203,7 +210,14 @@ TS.cssTemplates.sparky = {
         box-shadow: 0px 1px 1px 2px rgb(0,0,20);
         background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
       }`,
-    btnNav2: ` color:black;`,
+    treeNav: `
+      li {
+        color: black;
+      }
+      li:hover {
+        background-color: rgba(0,50,255,.7);
+      }
+    `,
     select: `
       select {
         color: white;

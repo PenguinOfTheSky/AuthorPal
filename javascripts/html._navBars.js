@@ -10,15 +10,6 @@ TS.html._navBars = {
       style.innerText = TS.css.boxes.mainButtons()
       root.innerHTML = ``;
       root.appendChild(style)
-      let addColumn = Object.assign(document.createElement('button'), {
-        innerText : '+new column',
-        id : 'addColumn',
-        onclick: function() {
-          TS.data.chosenFile["EditThisName"] = {};
-          TS.refs.displayOpts.render('EditThisName')
-        }
-      })
-      root.appendChild(addColumn)
     }
     render()
     TS.events.columnChange = function(name) {
@@ -54,6 +45,7 @@ TS.html._navBars = {
         let firstItem = Object.keys(TS.data.chosenFile)[0]
         if (firstItem ==='master_root') firstItem = Object.keys(TS.data.chosenFile)[1]
         display.render(firstItem)
+        TS.refs.treeNav[firstItem].click()
       }
     }
     TS.refs.displayOpts = display;
@@ -110,20 +102,12 @@ TS.html._navBars = {
         let treeButtons = root.querySelector('#tree')
         let ul = document.createElement('ul')
         ul.className = 'ul_0'
+        TS.data.currentView = []
         let V_ul = {}
         let list = [ul]
+        TS.refs.treeNav = V_ul
         treeButtons.appendChild(ul)
         Object.assign(opts, {
-          newButton : function(str) {
-            let button = Object.assign(document.createElement('li'), {
-              'innerHTML': str,
-              className : 'rightButtons',
-              onclick : function () {
-                mainDisplay.swapDisplayObject(str)
-              }
-            })
-            ul.appendChild(button)
-          },
           makeList: function(path) {
             let V_target = V_ul;
             let target = TS.data.chosenFile;
@@ -150,12 +134,14 @@ TS.html._navBars = {
               V_target = V_target[ele]
             })
             for (let str in obj) {
+              if (str === "master_root") continue;
               let targ = path.concat([str])
               let li =  Object.assign(document.createElement('li'), {
                 'innerHTML': str,
                 className : `rightButtons li_${depth}`,
                 onclick : function () {
                   TS.data.currentView = targ
+                  console.log(TS.data.currentView)
                   TS.refs.displayOpts.swapFocus(obj, str)
                   let discard = list.slice(depth+1)
                   list = list.slice(0,depth+1)
@@ -167,32 +153,18 @@ TS.html._navBars = {
               subUL.appendChild(li)
             }
             return subUL
-          },
-          init: function() {
-            let obj = TS.data.chosenFile
-            let focused;
-            for (let str in obj) {
-              let focus = this.makeList
-              let li =  Object.assign(document.createElement('li'), {
-                'innerHTML': str,
-                className : 'rightButtons li_0',
-                onclick : function () {
-                  TS.data.currentView = [str]
-                  TS.refs.displayOpts.swapTab(str, this)
-                  //mainDisplay.swapDisplayObject(str)
-                  list = [ul]
-                  if (focused) focused.remove();
-                  focused = focus([str])
-                }
-              })
-              V_ul[str] = li;
-              ul.appendChild(li)
-            }
-          },
-          clear : function() {
-            ul.innerHTML = ''
           }
         })
+        let addColumn = Object.assign(document.createElement('button'), {
+          innerText : '+new column',
+          id : 'addColumn',
+          onclick: function() {
+            TS.data.chosenFile["EditThisName"] = {};
+            TS.refs.displayOpts.render('EditThisName')
+            TS.refs.treeNav["EditThisName"].click()
+          }
+        })
+        root.appendChild(addColumn)
       }
     })
     TS.refs.secondaryNavBar = item.box;

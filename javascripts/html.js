@@ -69,6 +69,7 @@ Object.assign(TS.html,
           sorted = TS.html.display.sort(currentID)
           root.appendChild(sorted.element)
         } else {
+          currentID = focused[1]
           root.innerHTML = ''
           sorted = TS.html.display.sort(currentID)
           root.appendChild(sorted.element)
@@ -123,6 +124,8 @@ Object.assign(TS.html,
       let determine = function(item, itemName, path, {maxDepth, depth}) {
         let formatType
         if (depth == undefined) depth = 0;
+        //something funky here
+        if (path == TS.data.chosenFile && itemName === 'master_root') return 0;
         if (itemName[0] === '*') {
           formatType = function(a) {return a}
         } else if (itemName[0] === '_') {
@@ -150,7 +153,7 @@ Object.assign(TS.html,
               itemName = this.innerText;
               path[itemName] = item
               delete path[oldItemName];
-              TS.events.columnChange(itemName)
+              if (path == TS.data.chosenFile) {TS.events.columnChange(itemName)}
             } else {
               console.log('name taken')
               this.innerText = oldItemName
@@ -169,14 +172,17 @@ Object.assign(TS.html,
               if (path == TS.data.chosenFile) {
                 let x;
                 for (let i in TS.data.chosenFile) {
-                  if (x != 'master_root') {
+                  if (i != 'master_root') {
                     x = i; break;
                   }
                 }
-                TS.events.columnChange(x)
+                focused = [TS.data.chosenFile[x], x, TS.data.chosenFile,{}]
               }
-              if (focused.length > 0 && focused[1] !== itemName) {TS.events.bodyChange(focused)}
+              if (focused.length > 0 && focused[1] !== itemName) {
+                TS.events.bodyChange(focused)}
               else TS.events.bodyChange([])
+              TS.data.currentView = [focused[1]]
+              TS.refs.treeNav[TS.data.currentView[0]].click()
             }
             document.body.appendChild(TS.html.modals.confirmationDelete(itemName, callback))
           },
@@ -193,7 +199,7 @@ Object.assign(TS.html,
         title.appendChild(titleContent)
         title.appendChild(buttonGroup)
         buttonGroup.appendChild(keyDelete)
-        buttonGroup.appendChild(focusMe)
+        if (depth > 0) buttonGroup.appendChild(focusMe)
         line.appendChild(title)
         lineBody = Object.assign(document.createElement('div'), {
           className: 'lineBody'
@@ -271,12 +277,6 @@ Object.assign(TS.html,
           focused = [path[itemName], itemName, path, {}]
           root.appendChild(determine(path[itemName], itemName, path, {}))
           return box;
-        },
-        swapDisplayObject: function(key) {
-          root.innerHTML = '';
-          root.appendChild(style)
-          root.appendChild(determine(TS.data.chosenFile[id][key], key, TS.data.chosenFile[id], {}))
-          focused = [TS.data.chosenFile[id][key], key, TS.data.chosenFile[id], {}]
         },
         update : function(item) {
           focused = item;

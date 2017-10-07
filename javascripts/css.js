@@ -133,14 +133,16 @@ return {
         ul {
           padding-left: 1rem;
         }
+        ul li {
+          cursor: pointer;
+        }
         .ul_0 {
           list-style-type:none;
           padding:0;
           margin-left: .2rem;
         }
-        .rightButtons {
-          ${_.btnNav2}
-        }`
+        ${_.treeNav || ''}
+        `
         return str;
     },
     wholeDisplayContainer : function() {
