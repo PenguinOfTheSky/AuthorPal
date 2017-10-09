@@ -12,10 +12,10 @@ TS.html._navBars = {
       root.appendChild(style)
     }
     render()
-    TS.events.columnChange = function(name) {
-      TS.refs.displayOpts.render(name)
+    let opts = {
+
     }
-    return box;
+    return {element: box, opts: opts};
   },
   mainNavBar: function(display) {
     let box = document.createElement('div')
@@ -39,9 +39,6 @@ TS.html._navBars = {
       preferences : function() {
       },
       open : function() {
-        buttons.remove();
-        buttons = TS.html._navBars.mainButtons(commands.changeTab)
-        topDiv.appendChild(buttons)
         let firstItem = Object.keys(TS.data.chosenFile)[0]
         if (firstItem ==='master_root') firstItem = Object.keys(TS.data.chosenFile)[1]
         display.render(firstItem)
@@ -52,6 +49,8 @@ TS.html._navBars = {
     TS.events.openFile = commands.open
     let topDiv = document.createElement('div');
     topDiv.id = 'topDiv'
+    buttons = TS.html._navBars.mainButtons(commands.changeTab)
+    topDiv.appendChild(buttons.element)
     let collapsed = false;
     let bottomDiv = Object.assign(document.createElement('div'), {
       innerHTML: `<button id='collapseNav'>^</button>`,
@@ -70,13 +69,19 @@ TS.html._navBars = {
         }
       }
     })
+    let menu = TS.lib.createNode('button', {
+      innerHTML: '<b>|||</b>',
+      onclick: function() {
+        console.log('test')
+      }
+    })
     let file = TS.html._navBars.file(commands.file)
     let faq = TS.html._navBars.faqButton()
     buttons = TS.html._navBars.mainButtons()
     let left = Object.assign(document.createElement('div'), {
       id: 'left'
     })
-    let leftItems = [file, faq]
+    let leftItems = [menu, file, faq]
     leftItems.forEach((ele) => left.appendChild(ele))
     topDiv.appendChild(left)
     root.appendChild(topDiv)
@@ -141,7 +146,6 @@ TS.html._navBars = {
                 className : `rightButtons li_${depth}`,
                 onclick : function () {
                   TS.data.currentView = targ
-                  console.log(TS.data.currentView)
                   TS.refs.displayOpts.swapFocus(obj, str)
                   let discard = list.slice(depth+1)
                   list = list.slice(0,depth+1)

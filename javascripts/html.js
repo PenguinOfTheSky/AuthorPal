@@ -153,10 +153,13 @@ Object.assign(TS.html,
               itemName = this.innerText;
               path[itemName] = item
               delete path[oldItemName];
-              if (path == TS.data.chosenFile) {TS.events.columnChange(itemName)}
+              if (path == TS.data.chosenFile) {TS.refs.displayOpts.render(itemName)}
             } else {
-              console.log('name taken')
-              this.innerText = oldItemName
+              if (itemName === this.innerText) {}
+              else {
+                console.log('name taken')
+                this.innerText = itemName
+              }
             }
           }
         })
