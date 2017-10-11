@@ -206,13 +206,15 @@ return {
         }
         .textField {
           white-space: pre-wrap;
-          color: black;
           cursor: text;
           padding: .1rem;
           padding-left: .2rem;
           padding-right: .2rem;
-          background-color: rgb(240,245,240);
           min-height:.5rem;
+          ${_.textField || `
+            color: black;
+            background-color: rgb(240,245,240);
+            `}
         }
         .textField > p {
           margin: 0;
@@ -225,10 +227,6 @@ return {
           padding: 0px;
           padding-left: 1rem;
           margin-bottom: -1rem;
-        }
-        .textField:focus {
-          background-color: rgb(255,255,255);
-          box-shadow:0px 0px 1px 1px black ;
         }
         .addLine {
           background-color: #5cb85c;

@@ -1,4 +1,10 @@
-TS.cssTemplates.dark = {
+{
+  'use strict'
+  let font = `
+    color: rgb(240,240,240);
+  `
+  let hover = `background-color: rgba(0,30,155,.7);`
+  TS.cssTemplates.dark = {
     link: `
       a {
         cursor: pointer;
@@ -8,57 +14,71 @@ TS.cssTemplates.dark = {
     alignment: 'left',
     btn: `
       button {
+        border: none;
         border-radius: .4rem;
-        margin: .2rem;
+        ${font}
         font-size: 1rem;
-        background-color: rgb(200,100,200);
+        background-color: #333;
       }
       button:hover {
-        box-shadow: 0px 0px .1rem .2rem rgba(235,255,255,.5) inset;
+        ${hover}
       }`,
     border1 : `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
       box-sizing:border-box;`,
     border2: `
-      border: 2px solid orange;
-      border-radius:10px;
+      border: .1rem solid rgba(250,250,250,.7);
+      border-radius:.1rem;
       box-shadow: 0px 0px 1px 2px black inset;`,
-    border3: ``,
-    backgroundTitle: ``,
-    titleColor: ``,
+    backgroundTitle: `#000`,
+    titleColor: `
+      ${font}
+    `,
     backgroundNav1 : `
       color: rgb(255,255,255);
-      background: linear-gradient(0deg, rgb(0,0,0), rgb(220,10,10) 40%, rgb(0,0,0));`,
-    backgroundNav2 : `background-color: purple;`,
+      background-color: #111;`,
+    backgroundNav2 : `background-color: #111;`,
     backgroundModals : `
-      background : radial-gradient(circle at 2.01% 21.96%, #c21500, transparent 100%),radial-gradient(circle at 81.61% 78.78%, #ffc500, transparent 100%),radial-gradient(circle at 85.27% 6.83%, #b8faff, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%)`,
+      padding: 1rem;
+      border-radius: 1rem;
+      background : #222`,
     backgroundMain: `
-      color: rgb(253,255,255);
-      background : radial-gradient(circle at 2.01% 21.96%, #c21500, transparent 100%),radial-gradient(circle at 81.61% 78.78%, #ffc500, transparent 100%),radial-gradient(circle at 85.27% 6.83%, #b8faff, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%)`,
+      ${font}
+      background-color: #222`,
     btnWarn: `
       .btnWarn {
-        background-color : red;
+        background-color : rgb(230,0,0);
       }`,
     btnExit: `
       #exit {
         border: 2px solid black;float:right;
-        background-color: red;
+        background-color : rgb(230,0,0);
       }`,
     btnSubmit: `
       .btnSubmit {
-        background-color: orange;
-      }`,
+        border: none;
+        ${font}
+        background-color: #e62e00;
+      }
+      .btnSubmit:hover {
+        background-color: #ff3300;
+      }
+      `,
     btnBase1: `
       .menuOptions:hover {
-        box-shadow: 0px 0px .2rem .3rem rgba(255,230,230,.4) inset;
+        ${hover}
+      }
+      #menu {
+        cursor: default;
       }
       #left > * {
-        color: white;
-        border: 3px groove #DDD;
+        border: none;
+        ${font}
         font-size: 1rem;
-        background: linear-gradient(0deg, rgb(30, 0, 120), rgb(60, 10, 145) 80%, rgb(40, 5, 120));
+        background: none;
+        padding: .25rem;
       }
       #left > *:hover {
-        background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
+        ${hover}
       }
       #left select option{
         max-width: 2rem;
@@ -72,15 +92,13 @@ TS.cssTemplates.dark = {
       }
     `,
     btnBase2: `
-      #show {
-        background-color: rgba(255,205,200,.6);
+      .baseButtons2 {
+        background: none;
       }
-      #fold1 {
-        background-color: rgba(200,205,255,.6);
+      .baseButtons2:hover {
+        ${hover}
       }
-      #fold2 {
-        background-color: rgba(170,185,255,.8);
-      }`,
+      `,
     btnNav1: `
       .chosen {
         background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40));
@@ -99,11 +117,15 @@ TS.cssTemplates.dark = {
       }`,
     treeNav: `
       li {
-        color: white;
+        ${font}
       }
       li:hover {
-        background-color: rgba(0,50,255,.7);
+        ${hover}
       }
+    `,
+    textField: `
+      ${font}
+      background-color: #111;
     `,
     select: `
       select {
@@ -122,4 +144,5 @@ TS.cssTemplates.dark = {
         color: white;
         background-color: rgb(0,33,0);
       }`
+  }
 }

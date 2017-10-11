@@ -16,7 +16,7 @@ TS.html.modals = {
             <option value='Theme1'>Theme1</option>
             <option value='dark'>Dark</option>
           </select>
-          <input type = 'submit' class='btnSubmit'>
+          <button type = 'submit' class='btnSubmit'>Submit</button>
         </form>
         </div>
       `,
