@@ -1,4 +1,4 @@
-TS.cssTemplates.sparky = {
+TS.cssTemplates.dark = {
     link: `
       a {
         cursor: pointer;
