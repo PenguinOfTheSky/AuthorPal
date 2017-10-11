@@ -1,19 +1,19 @@
-TS.css = function() {
-let theme = TS.data.local.preferences.theme
-if (theme == undefined) {
-  console.log('theme undefined')
-  TS.data.local.preferences.theme = 'default'
-  theme = 'default'
-}
-let _ = TS.cssTemplates[theme];
-TS.data.alignment = _.alignment
-if (typeof(_) == 'function') _ = _()
-TS.events.updatePreferences = function(newTheme) {
-  //css.js
-  TS.events.save(location.reload())
-}
-return {
-  modal: `
+/* global TS*/
+TS.css = function () {
+  let theme = TS.data.local.preferences.theme;
+  if (theme === undefined) {
+    TS.data.local.preferences.theme = "default";
+    theme = "default";
+  }
+  let _ = TS.cssTemplates[theme];
+  TS.data.alignment = _.alignment;
+  if (typeof (_) === "function") _ = _();
+  TS.events.updatePreferences = function () {
+    //css.js
+    TS.events.save(location.reload());
+  };
+  return {
+    modal: `
     :host {
       background-color:rgba(150,150,150,.3);
       padding:5px;position: fixed; z-index: 4;top:0%;height:100%; width:100%;
@@ -29,16 +29,16 @@ return {
     ${_.btn}
     ${_.btnExit}
   `,
-  boxes: {
-    root: function() {
-      return `
+    boxes: {
+      root: function () {
+        return `
         #root {
           min-height:100%;
           ${_.backgroundMain}
-        }`
-    },
-    topLeftNav: function() {
-      return `
+        }`;
+      },
+      topLeftNav: function () {
+        return `
         :host {
           padding-top:.3rem;
           width:100%;
@@ -69,10 +69,10 @@ return {
           display: inline-block;
           margin-right:.1rem;
         }
-        ${_.btnBase1}`
-    },
-    mainButtons: function() {
-      return `
+        ${_.btnBase1}`;
+      },
+      mainButtons: function () {
+        return `
       :host {
         box-sizing: border-box;
         display:inline;
@@ -90,12 +90,12 @@ return {
       #addColumn:hover {
           background: linear-gradient(0deg, rgb(0,220,0), rgb(20,255,75) 40%, rgb(60,250,60));
           box-shadow: 0px 1px 1px 2px blue;
-      }`
-    },
-    displayTopUI: function() {
-      let str =``
-      if (_.alignment == 'top') {
-        str += `
+      }`;
+      },
+      displayTopUI: function () {
+        let str = "";
+        if (_.alignment === "top") {
+          str += `
         :host {
           ${_.backgroundNav2}
           min-height:1.5rem;
@@ -109,8 +109,8 @@ return {
         #right {
           display: inline;
         }
-        `}
-        else {
+        `;
+        } else {
           str += `
           :host {
             ${_.backgroundNav2}
@@ -125,7 +125,7 @@ return {
           #right {
             display: inline;
           }
-          `
+          `;
         }
         str += `
         ${_.btn}
@@ -140,34 +140,34 @@ return {
         }
         .rightButtons {
           ${_.btnNav2}
-        }`
+        }`;
         return str;
-    },
-    wholeDisplayContainer : function() {
-      if (_.alignment !='top') {
-        return `display:flex;`
-      } else return ``;
-    },
-    display : function() {
-      let str = ``;
-      if (_.alignment !='top') {
-        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
-        str += `
+      },
+      wholeDisplayContainer: function () {
+        if (_.alignment !== "top") {
+          return `display:flex;`;
+        } else return ``;
+      },
+      display: function () {
+        let str = ``;
+        if (_.alignment !== "top") {
+          let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
+          str += `
         :host {
             display: inline-block;
             max-height: ${maxHeight}px;
             overflow-y: scroll;
             flex-grow:1;
-          }`
-      } else {
+          }`;
+        } else {
 
-        str += `
+          str += `
         :host {
             /*max-height set elsewhere*/
             overflow-y: scroll;
-          }`
-      }
-      str += `
+          }`;
+        }
+        str += `
         ${_.btn}
         .lineContainer {
           background: linear-gradient(30deg, rgb(0, 0, 0), rgb(33, 155, 55) 40%, rgb(40, 40, 40));
@@ -190,7 +190,7 @@ return {
           border-radius: .2rem;
         }
         .titleContent {
-          color: ${_.titleColor || 'black'};
+          color: ${_.titleColor || "black"};
           margin: auto;
           padding:.5rem;
         }
@@ -281,11 +281,11 @@ return {
         .buttonGroup button:last-child {
           border-top-right-radius: .4rem;
           border-bottom-right-radius: .4rem;
-        }`
-      return str;
-    },
-    splash: function() {
-      return `
+        }`;
+        return str;
+      },
+      splash: function () {
+        return `
         ${_.link}
         :host {
           padding: 5%;
@@ -302,31 +302,31 @@ return {
         #filesList li:hover{
           cursor: pointer;
           text-decoration: underline;
-        }`
-    }
-  },
-  modals : {
-    exportFile: function() {
-      return `
+        }`;
+      }
+    },
+    modals: {
+      exportFile: function () {
+        return `
         button, input, select {
           font-size:1rem;
         }
         ${_.btn}
         ${TS.css.modal}
-        ${_.btnExit}`
-    },
-    createFile : function() {
-      return `
+        ${_.btnExit}`;
+      },
+      createFile: function () {
+        return `
         button, input, select {
           font-size:1rem;
         }
         ${_.btn}
         ${TS.css.modal}
         ${_.btnExit}
-        ${_.btnSubmit}`
-    },
-    addLine : function() {
-      let str =  `
+        ${_.btnSubmit}`;
+      },
+      addLine: function () {
+        let str = `
         ${TS.css.modal}
         ${_.btnSubmit}
         select:active, select:hover {
@@ -334,33 +334,32 @@ return {
         }
         option:active, option:hover {
           color: red
-        }`
-      return str
-    },
-    confirmationDelete : function() {
-      return `
+        }`;
+        return str;
+      },
+      confirmationDelete: function () {
+        return `
         ${TS.css.modal}
         ${_.btnWarn}
-        `
-    },
-    preferencesFile : function() {
-      return `
+        `;
+      },
+      preferencesFile: function () {
+        return `
         ${TS.css.modal}
-        ${_.btnSubmit}`
-    },
-    saveFile : function() {
-      return `
-        ${TS.css.modal}`
-    },
-    uploadFile : function() {
-      return `${TS.css.modal}
-      ${_.btnSubmit}`
-    },
-    openFile: function() {
-      return `
-        ${TS.css.modal}`
+        ${_.btnSubmit}`;
+      },
+      saveFile: function () {
+        return `
+        ${TS.css.modal}`;
+      },
+      uploadFile: function () {
+        return `${TS.css.modal}
+      ${_.btnSubmit}`;
+      },
+      openFile: function () {
+        return `
+        ${TS.css.modal}`;
+      }
     }
-
-  }
-}
-}
+  };
+};
