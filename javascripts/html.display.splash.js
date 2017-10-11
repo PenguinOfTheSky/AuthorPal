@@ -4,7 +4,7 @@ TS.html.display.splash = function() {
   css: TS.css.boxes.splash(),
   html: `
     <div id='about'>
-      <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.3.0</h1>
+      <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.3.2</h1>
       <div style = 'text-indent:1rem;'>
         <b>To get started click Menu (top left) and create a new project </b>
         <p>To learn more see our <a href ='FAQ.html'>FAQ</a>.
