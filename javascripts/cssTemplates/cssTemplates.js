@@ -1,6 +1,11 @@
 TS.cssTemplates.default = {
     alignment: 'left',
-    link: ``,
+    link: `
+      a {
+        cursor: pointer;
+        color: blue;
+      }
+    `,
     btn: `
       input[type=button], button {
         border-radius: .4rem;
@@ -43,6 +48,9 @@ TS.cssTemplates.default = {
         background-color: orange;
       }`,
     btnBase1: `
+      .menuOptions:hover {
+        box-shadow: 0px 0px .2rem .3rem rgba(255,230,230,.4) inset;
+      }
       #left > * {
         color: white;
         border: 3px groove #DDD;
@@ -118,6 +126,7 @@ TS.cssTemplates.default = {
 TS.cssTemplates.sparky = {
     link: `
       a {
+        cursor: pointer;
         color: blue;
       }
     `,
@@ -144,7 +153,7 @@ TS.cssTemplates.sparky = {
     backgroundNav1 : `
       color: rgb(255,255,255);
       background: linear-gradient(0deg, rgb(0,0,0), rgb(220,10,10) 40%, rgb(0,0,0));`,
-    backgroundNav2 : `background-color: #DFD;`,
+    backgroundNav2 : `background-color: purple;`,
     backgroundModals : `
       background : radial-gradient(circle at 2.01% 21.96%, #c21500, transparent 100%),radial-gradient(circle at 81.61% 78.78%, #ffc500, transparent 100%),radial-gradient(circle at 85.27% 6.83%, #b8faff, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%)`,
     backgroundMain: `
@@ -164,6 +173,9 @@ TS.cssTemplates.sparky = {
         background-color: orange;
       }`,
     btnBase1: `
+      .menuOptions:hover {
+        box-shadow: 0px 0px .2rem .3rem rgba(255,230,230,.4) inset;
+      }
       #left > * {
         color: white;
         border: 3px groove #DDD;
@@ -212,7 +224,7 @@ TS.cssTemplates.sparky = {
       }`,
     treeNav: `
       li {
-        color: black;
+        color: white;
       }
       li:hover {
         background-color: rgba(0,50,255,.7);

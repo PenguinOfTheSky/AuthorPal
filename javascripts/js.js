@@ -10,6 +10,11 @@ baseModal : function(box, root) {
   root.querySelector('#exit').onclick = function() {
     box.remove() }
 },
+events: {
+  dragTitle: function(event) {
+    console.log(event)
+  }
+},
 fileFormat: {
   markdownBlog: function(file) {
     let title;

@@ -5,15 +5,29 @@ TS.html._navBars = {
       id: 'TS.html._navBars.mainButtons'
     })
     let root = box.attachShadow({ mode: 'open' });
-    let render = function() {
+
       let style = document.createElement('style')
       style.innerText = TS.css.boxes.mainButtons()
-      root.innerHTML = ``;
+      let openedFiles = TS.lib.createNode('div', {
+        id: 'openedFiles'
+      })
+      root.appendChild(openedFiles);
       root.appendChild(style)
-    }
-    render()
+    let openFiles = {}
     let opts = {
-
+      add: function(name) {
+        if (openFiles[name] != undefined) return 0;
+        openFiles[name] = true;
+        let btn = TS.lib.createNode('button', {
+          innerText: name,
+          onclick: function() {
+            console.log('test')
+            TS.events.openFile(name, true)
+          }
+        })
+        root.querySelector('#openedFiles').appendChild(btn)
+        return root;
+      }
     }
     return {element: box, opts: opts};
   },
@@ -38,11 +52,13 @@ TS.html._navBars = {
       },
       preferences : function() {
       },
-      open : function() {
+      open : function(name, repeat) {
+        TS.data.chosenFile = TS.data.local.files[name]
         let firstItem = Object.keys(TS.data.chosenFile)[0]
-        if (firstItem ==='master_root') firstItem = Object.keys(TS.data.chosenFile)[1]
+        if (firstItem ==='master_root') {firstItem = Object.keys(TS.data.chosenFile)[1]}
         display.render(firstItem)
         TS.refs.treeNav[firstItem].click()
+        buttons.opts.add(name)
       }
     }
     TS.refs.displayOpts = display;
@@ -50,7 +66,6 @@ TS.html._navBars = {
     let topDiv = document.createElement('div');
     topDiv.id = 'topDiv'
     buttons = TS.html._navBars.mainButtons(commands.changeTab)
-    topDiv.appendChild(buttons.element)
     let collapsed = false;
     let bottomDiv = Object.assign(document.createElement('div'), {
       innerHTML: `<button id='collapseNav'>^</button>`,
@@ -69,21 +84,15 @@ TS.html._navBars = {
         }
       }
     })
-    let menu = TS.lib.createNode('button', {
-      innerHTML: '<b>|||</b>',
-      onclick: function() {
-        console.log('test')
-      }
-    })
-    let file = TS.html._navBars.file(commands.file)
+    let file = TS.html._navBars.file(commands.file, display)
     let faq = TS.html._navBars.faqButton()
-    buttons = TS.html._navBars.mainButtons()
     let left = Object.assign(document.createElement('div'), {
       id: 'left'
     })
-    let leftItems = [menu, file, faq]
+    let leftItems = [file, faq]
     leftItems.forEach((ele) => left.appendChild(ele))
     topDiv.appendChild(left)
+    topDiv.appendChild(buttons.element)
     root.appendChild(topDiv)
     root.appendChild(bottomDiv)
     return box;
@@ -183,28 +192,40 @@ TS.html._navBars = {
     })
     return button;
   },
-  file: function(callback) {
-    let select = Object.assign(document.createElement('select'), {
-      onclick: function() {
-        if (this.selectedIndex > 0) {
+  file: function(callback, display) {
+    let addOptions;
+    let select = Object.assign(document.createElement('div'), {
+      id: "menu",
+      innerHTML: `Menu
+      <div id='hiddenOptions' class='hidden'></div>`
+    })
+    let options = ['home', 'open', 'create', 'save', 'upload', 'preferences', 'export','faq', 'devMode']
+    let values = ["Home", 'Open File', 'New File', 'Download', 'Upload', 'Themes', 'Export File', 'FAQ', "Dev. Mode"]
+    for (var j = 0; j < options.length; j++) {
+      let option = Object.assign(document.createElement('div'), {
+        className: "menuOptions",
+        'value': options[j],
+        'innerText': values[j],
+        onclick: function() {
           switch (this.value) {
             case "devMode":
-              window.open('devMode.html');break;
+              window.open('devMode.html', '_blank');
+              break;
+            case "faq":
+              window.open('FAQ.html', '_blank')
+              break;
+            case "home":
+              display.splash();
+              break;
             default:
               callback(this.value)
           }
-          this.selectedIndex = 0;
+          this.parentNode.style.display = 'none'
+          let vis = this.parentNode
+          setTimeout(function(){vis.style.display=''},134)
         }
-      }
-    })
-    let options = ['menu', 'open', 'create', 'save', 'upload', 'preferences', 'export', 'devMode']
-    let values = ['Menu', 'Open File', 'New File', 'Download', 'Upload', 'Themes', 'Export File', "Dev. Mode"]
-    for (var j = 0; j < options.length; j++) {
-      let option = Object.assign(document.createElement('option'), {
-        'value': options[j],
-        'innerText': values[j]
       })
-     select.appendChild(option);
+      select.querySelector('#hiddenOptions').appendChild(option);
     }
     return select;
   }

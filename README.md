@@ -10,6 +10,7 @@ Product is built to be Chrome compatible.  Should work in safari/opera as well b
 FAQ is included in product.
 
 ## Patch notes:
+v2.3.0 Allows for multiple open files, altered Menu dropdown.
 v2.2.0 switched to tree-view.
 v2.1.0 automatic css refresh on theme change, assorted bug fixes, displays files on load  
 v2.0.5 various bug fixes, backward-compatibility, auto-scrolls to new element after adding a line. CSS overflow-height changed.  

@@ -207,8 +207,7 @@ TS.html.modals = {
             className:'fileBtn',
             innerText: x,
             onclick: function() {
-              TS.data.chosenFile = TS.data.local.files[x]
-              commands.open()
+              commands.open(x)
               box.remove()
             }
           })

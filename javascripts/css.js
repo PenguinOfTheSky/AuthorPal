@@ -30,6 +30,9 @@ return {
     ${_.btnExit}
   `,
   boxes: {
+    menu: function() {
+      return ``
+    },
     root: function() {
       return `
         #root {
@@ -69,28 +72,34 @@ return {
           display: inline-block;
           margin-right:.1rem;
         }
+        #left > * {
+          display: inline-block;
+        }
+        #hiddenOptions {
+          padding-top:.3rem;
+          visibility: hidden;
+          position: absolute;
+          z-index: 6;
+          ${_.backgroundNav1}
+        }
+        .menuOptions {
+          cursor: pointer;
+          padding: .2rem;
+        }
+        #menu:hover #hiddenOptions {
+          visibility: visible;
+        }
         ${_.btnBase1}`
     },
     mainButtons: function() {
       return `
       :host {
-        box-sizing: border-box;
-        display:inline;
+        display:inline-block;
         ${_.backgroundNav1}
-        width: 100%;
-        clear: left;
       }
       ${_.btn}
       ${_.btnNav1}
-      #addColumn {
-        border-radius: 5px;
-        font-size: 1rem;
-        background: linear-gradient(0deg, rgb(0,200,0), rgb(0,255,55) 40%, rgb(40,240,40));
-      }
-      #addColumn:hover {
-          background: linear-gradient(0deg, rgb(0,220,0), rgb(20,255,75) 40%, rgb(60,250,60));
-          box-shadow: 0px 1px 1px 2px blue;
-      }`
+      `
     },
     displayTopUI: function() {
       let str =``
@@ -146,29 +155,23 @@ return {
         return str;
     },
     wholeDisplayContainer : function() {
-      if (_.alignment !='top') {
-        return `display:flex;`
-      } else return ``;
+        let str = `
+            display: flex;
+            max-width:100%;
+            flex-grow:1;
+          `
+        return str;
     },
     display : function() {
       let str = ``;
-      if (_.alignment !='top') {
         let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
         str += `
-        :host {
+          :host {
             display: inline-block;
             max-height: ${maxHeight}px;
             overflow-y: scroll;
             flex-grow:1;
           }`
-      } else {
-
-        str += `
-        :host {
-            /*max-height set elsewhere*/
-            overflow-y: scroll;
-          }`
-      }
       str += `
         ${_.btn}
         .lineContainer {
@@ -291,16 +294,21 @@ return {
       return `
         ${_.link}
         :host {
-          padding: 5%;
-          padding-top:1%;
-          padding-bottom: 1%;
-          display:flex;
-          flex-direction: column;
-          flex-wrap:wrap;
+          box-sizing:border-box;
+          padding: 1%;
+        }
+        hr {
+          width: 100%;
         }
         h1,h2 {
           text-align:center;
-          margin: 0px;
+          margin: .15rem;
+        }
+        h1 {
+          font-size: 1.6rem;
+        }
+        h2 {
+          font-size: 1.3rem;
         }
         @media screen and (min-width: 550px) {
           #filesList {
