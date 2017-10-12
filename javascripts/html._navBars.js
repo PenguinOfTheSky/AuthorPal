@@ -37,7 +37,7 @@ TS.html._navBars = {
       id: 'TS.html._navBars.mainNavBar'
     })
     TS.refs.mainNavBar = box;
-    let root = box.createShadowRoot();
+    let root = box.attachShadow({ mode: 'open' });
     let style = document.createElement('style')
     style.innerHTML = TS.css.boxes.topLeftNav()
     root.appendChild(style)
@@ -199,8 +199,8 @@ TS.html._navBars = {
       innerHTML: `Menu
       <div id='hiddenOptions' class='hidden'></div>`
     })
-    let options = ['home', 'open', 'create', 'save', 'upload', 'preferences', 'export','faq', 'devMode']
-    let values = ["Home", 'Open File', 'New File', 'Download', 'Upload', 'Themes', 'Export File', 'FAQ', "Dev. Mode"]
+    let options = ['home', 'open', 'create','delete', 'save', 'upload', 'preferences', 'export','faq', 'devMode']
+    let values = ["Home", 'Open File', 'New File', 'Delete File', 'Download', 'Upload', 'Themes', 'Export File', 'FAQ', "Dev. Mode"]
     for (var j = 0; j < options.length; j++) {
       let option = Object.assign(document.createElement('div'), {
         className: "menuOptions",

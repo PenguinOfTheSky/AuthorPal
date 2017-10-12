@@ -192,6 +192,39 @@ TS.html.modals = {
     })
     return item.box;
   },
+  deleteFile: function({commands}) {
+    let item =  TS.lib.createComponent({
+      id: 'TS.html.modals.deleteFile',
+      css: TS.css.modals.openFile(),
+      html: `
+        <div id='centerModal'>
+          <button id='exit'>X</button>
+          <h2> Choose the file you wish to delete </h2>
+        </div>
+      `,
+      js: function({style, box, parent, root}) {
+        TS.js.baseModal(box, root)
+        for (let x in TS.data.local.files) {
+          let file = Object.assign(document.createElement('button'), {
+            className:'fileBtn',
+            innerText: x,
+            onclick: function() {
+              TS.refs.container.appendChild(TS.html.modals.confirmationDelete(x, function() {
+                delete TS.data.local.files[x]
+                TS.events.save(function() {
+                  location.reload()
+                });
+              }))
+              box.remove()
+            }
+          })
+          root.querySelector('#centerModal').appendChild(file)
+        }
+        if (Object.keys(TS.data.local.files).length == 0) root.querySelector('#centerModal').appendChild(TS.lib.createNode('h2', {innerHTML: 'no files found'}))
+      }
+    })
+    return item.box;
+  },
   openFile: function({commands}) {
     let item =  TS.lib.createComponent({
       id: 'TS.html.modals.openFile',
@@ -199,6 +232,7 @@ TS.html.modals = {
       html: `
         <div id='centerModal'>
           <button id='exit'>X</button>
+          <h2> Choose file you wish to open </h2>
         </div>
       `,
       js: function({style, box, parent, root}) {

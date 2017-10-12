@@ -9,7 +9,7 @@ Object.assign(TS.html.display,
       style: TS.css.boxes.wholeDisplayContainer(),
       id: 'TS.html.display'
     })
-    let root = box.createShadowRoot()
+    let root = box.attachShadow({ mode: 'open' })
     let currentID = ''
     let sorted = ''
     root.appendChild(TS.html.display.splash().box)
@@ -55,7 +55,7 @@ Object.assign(TS.html.display,
       id: 'TS.html.display.sort'
     })
     box.style = TS.css.boxes.wholeDisplayContainer()
-    let root = box.createShadowRoot()
+    let root = box.attachShadow({ mode: 'open' })
     let mainDisplay = TS.html.display.renderedList(id)
     let topUI = TS.html._navBars.displayTopUI({mainDisplay: mainDisplay.opts, id : id})
     if (typeof(TS.data.chosenFile[id]) == 'object' ) {
@@ -87,7 +87,7 @@ Object.assign(TS.html.display,
       id: 'TS.html.display.renderedList'
     })
     TS.refs.display = box;
-    let root = box.createShadowRoot()
+    let root = box.attachShadow({ mode: 'open' })
     let style = document.createElement('style');
     style.innerHTML = TS.css.boxes.display()
     root.appendChild(style)
