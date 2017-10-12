@@ -1,9 +1,10 @@
+/* global TS */
 {
-  'use strict'
-  let amethyst = "#96c" //use by typing ${amethyst};
-  let wisteria = "#C9A0DC"
-  let clouds = "#ecf0f1"
-  let silver = "#bdc3c7"
+  "use strict";
+  let amethyst = "#96c"; //use by typing ${amethyst};
+  let wisteria = "#C9A0DC";
+  let clouds = "#ecf0f1";
+  let silver = "#bdc3c7";
   TS.cssTemplates.Theme1 = {
     link: `
     a:-webkit-any-link {
@@ -22,7 +23,7 @@
       button:hover {
         box-shadow: 0px 0px .1rem .2rem ${clouds} inset;
       }`,
-    border1 : `box-shadow: 1px 2px 1px 2px ${silver};
+    border1: `box-shadow: 1px 2px 1px 2px ${silver};
       box-sizing:border-box;`,
     border2: `
       border: 2px solid ${amethyst};
@@ -31,10 +32,10 @@
     border3: ``,
     backgroundTitle: ``,
     titleColor: ``,
-    backgroundNav1 : `
+    backgroundNav1: `
       background: ${silver};`,
-    backgroundNav2 : `background-color: ${silver};`,
-    backgroundModals : `
+    backgroundNav2: `background-color: ${silver};`,
+    backgroundModals: `
       background: ${wisteria};
       border-radius:5px;
       border: 2px solid ${amethyst};`,
@@ -132,5 +133,5 @@
       select option:checked {
         background-color: ${amethyst};
       }`
-    }
+  };
 }

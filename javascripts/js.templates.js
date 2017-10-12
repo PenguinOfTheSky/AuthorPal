@@ -1,56 +1,56 @@
-
+/* global TS */
 TS.js.templates = {
   default: {
-    textblock: function() {
-      return ``
+    textblock: function () {
+      return ``;
     },
-    object: function() {
-      return {}
+    object: function () {
+      return {};
     },
-    array: function() {
-      return []
+    array: function () {
+      return [];
     }
   },
   website: {
 
   },
   staticWebsite: {
-    "blog entry": function() {
-      date = new Date()
+    "blog entry": function () {
+      let date = new Date();
       let obj = {
-        "#type": 'blog entry',
+        "#type": "blog entry",
         date: date.toLocaleString(),
         title: ``,
         keywords: ``,
         category: ``,
         text: ``
-      }
+      };
       return obj;
     },
-    textblock: function() {
-      let obj = ``
-      return obj
+    textblock: function () {
+      let obj = ``;
+      return obj;
     },
-    container: function() {
-      let obj = {}
-      return obj
+    container: function () {
+      let obj = {};
+      return obj;
     }
   },
   "novel outline": {
-    textblock: function() {
-      return ``
+    textblock: function () {
+      return ``;
     },
-    container: function() {
-      return {}
+    container: function () {
+      return {};
     },
-    character: function() {
+    character: function () {
       return `**blurb:**
 **appearance:**
 **personality:**
-**brief timeline:**`
+**brief timeline:**`;
     },
-    chapter: function() {
-      let obj ={
+    chapter: function () {
+      let obj = {
         "blurb": ``,
         "locations": ``,
         "characters": ``,
@@ -59,17 +59,17 @@ TS.js.templates = {
         "deeper runthrough": {
 
         }
-      }
-      return obj
+      };
+      return obj;
     }
   },
   topNavbar: {
-    "book outline": function() {
+    "book outline": function () {
       let obj = {
         "master_root": {
           templates: 'TS.js.templates["novel outline"]',
           exportFormat: "outlineMarkdown",
-          type: 'book outline'
+          type: "book outline"
         },
         "#general": {
           "title": ``,
@@ -80,7 +80,7 @@ TS.js.templates = {
         },
         "#advanced": {
           styles: {
-            "*chosenStyle": '*default',
+            "*chosenStyle": "*default",
             "*default": `<style>
               .headers {
                 cursor: pointer;
@@ -97,24 +97,23 @@ TS.js.templates = {
               </style>`
           }
         },
-        "characters":{
-          "main": {
-          },
+        "characters": {
+          "main": {},
           "supporting": {},
           "minor": {}
         },
-        "locations":{},
-        "chapters" : {},
+        "locations": {},
+        "chapters": {},
         "timeline(s)": {}
-      }
+      };
       return obj;
     },
-    website: function() {
+    website: function () {
       let obj = {
         "master_root": {
           templates: 'TS.js.templates["default"]',
           exportFormat: "", //fixthis
-          type: 'website'
+          type: "website"
         },
         "general": {
           "title": ``,
@@ -125,36 +124,35 @@ TS.js.templates = {
           "Random Notes": ``
         },
         main: {
-          "start": function() {
-          }
+          "start": function () {}
         },
         "head": {
-          imports : ``,
-          styleTag : ``,
-          html : ``
+          imports: ``,
+          styleTag: ``,
+          html: ``
         },
-        "html":{
-          "local vars" : `
+        "html": {
+          "local vars": `
             //test
           `
         },
-        "text":{},
-        "css" : {
-          "local vars" : ``
+        "text": {},
+        "css": {
+          "local vars": ``
         },
         "js": {
-          "local vars" : ``
+          "local vars": ``
         }
-      }
+      };
       return obj;
     },
-    "Markdown Blog" : function() {
+    "Markdown Blog": function () {
       //Comes with __ available themes, creates a blog site with little fuss.
       let obj = {
         "master_root": {
           templates: 'TS.js.templates["staticWebsite"]',
           exportFormat: "markdownBlog",
-          type: 'markdown blog'
+          type: "markdown blog"
         },
         "#general": {
           "title": ``,
@@ -164,36 +162,35 @@ TS.js.templates = {
           "Random Notes": ``
         },
         "#advanced": {
-          imports : `<!--import scripts like jquery if required -->
+          imports: `<!--import scripts like jquery if required -->
           <script src="#"></script>`,
-          styles : {
-            "*chosenStyle": '*default',
+          styles: {
+            "*chosenStyle": "*default",
             "*default": `<style></style>`
           },
-          html : `<!--things like <title> are set from general-> title, but you can override here.-->`,
+          html: `<!--things like <title> are set from general-> title, but you can override here.-->`,
           script: `/* for general js scripting. Scripts can also be written by adding the '*' prefix (see faq)*/
           `
         },
-        "archive":{
-          "January 20XX" : {
-          }
+        "archive": {
+          "January 20XX": {}
         },
         "homepage": {
           "*style": `<style>
           #main h1 {}
           /* optional. prefix styles with #main (the containing div)*/</style>`,
           "content": `Change this to "*content" instead of "content" if you don't want to use markdown formatting`,
-          "*javascript" : `<script>/* optional */</script>`
+          "*javascript": `<script>/* optional */</script>`
         },
         "about": {
           "*style": `<style>
           #main h1 {}
           /* optional style override/additions. prefix styles with #main (the containing div)*/</style>`,
           "content": ``,
-          "*javascript" : `<script>/* optional */</script>`
+          "*javascript": `<script>/* optional */</script>`
         }
-      }
+      };
       return obj;
     }
   }
-}
+};
