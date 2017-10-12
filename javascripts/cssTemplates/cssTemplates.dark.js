@@ -1,9 +1,10 @@
+/* global TS */
 {
-  'use strict'
+  "use strict";
   let font = `
     color: rgb(240,240,240);
-  `
-  let hover = `background-color: rgba(0,30,155,.7);`
+  `;
+  let hover = `background-color: rgba(0,30,155,.7);`;
   TS.cssTemplates.dark = {
     link: `
       a {
@@ -11,7 +12,7 @@
         color: blue;
       }
     `,
-    alignment: 'left',
+    alignment: "left",
     btn: `
       button {
         border: none;
@@ -23,7 +24,7 @@
       button:hover {
         ${hover}
       }`,
-    border1 : `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
+    border1: `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
       box-sizing:border-box;`,
     border2: `
       border: .1rem solid rgba(250,250,250,.7);
@@ -33,11 +34,11 @@
     titleColor: `
       ${font}
     `,
-    backgroundNav1 : `
+    backgroundNav1: `
       color: rgb(255,255,255);
       background-color: #111;`,
-    backgroundNav2 : `background-color: #111;`,
-    backgroundModals : `
+    backgroundNav2: `background-color: #111;`,
+    backgroundModals: `
       padding: 1rem;
       border-radius: 1rem;
       background : #222`,
@@ -144,5 +145,5 @@
         color: white;
         background-color: rgb(0,33,0);
       }`
-  }
+  };
 }

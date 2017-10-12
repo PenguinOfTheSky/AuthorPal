@@ -1,8 +1,9 @@
-TS.html.display.splash = function() {
+/* global TS */
+TS.html.display.splash = function () {
   return TS.lib.createComponent({
-  id: 'TS.html.display.splash',
-  css: TS.css.boxes.splash(),
-  html: `
+    id: "TS.html.display.splash",
+    css: TS.css.boxes.splash(),
+    html: `
     <div id='about'>
       <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.4.0</h1>
       <div style = 'text-indent:1rem;'>
@@ -18,20 +19,25 @@ TS.html.display.splash = function() {
       <ul id='filesList'>
     </div><hr>
   `,
-  js: function({style, box, parent, root}) {
-    let files = TS.data.local.files
-    if (files) {
-      let list = ``
-      for (let x in files) {
-        list += `<li>${x}</li>`
-      }
-      list += '</ul>'
-      root.querySelector('#filesListContainer').style.display =''
-      root.querySelector('#filesList').innerHTML = list;
-      root.querySelector('#filesList').onclick = function(event) {
-        TS.data.chosenFile = TS.data.local.files[event.target.innerText]
-        TS.events.openFile(event.target.innerText)
+    js: function ({
+      root
+    }) {
+      let files = TS.data.local.files;
+      if (files) {
+        let list = ``;
+        for (let x in files) {
+          if (files.hasOwnProperty(x)) {
+            list += `<li>${x}</li>`;
+          }
+        }
+        list += "</ul>";
+        root.querySelector("#filesListContainer").style.display = "";
+        root.querySelector("#filesList").innerHTML = list;
+        root.querySelector("#filesList").onclick = function (event) {
+          TS.data.chosenFile = TS.data.local.files[event.target.innerText];
+          TS.events.openFile(event.target.innerText);
+        };
       }
     }
-  }
-})}
+  });
+};
