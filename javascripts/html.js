@@ -61,7 +61,7 @@ Object.assign(TS.html.display, {
       mode: "open"
     });
     let mainDisplay = TS.html.display.renderedList(id);
-    let topUI = TS.html._navBars.displayTopUI({
+    let topUI = TS.html._navBars.displayLeftNav({
       mainDisplay: mainDisplay.opts,
       id: id
     });
@@ -102,10 +102,7 @@ Object.assign(TS.html.display, {
     let style = document.createElement("style");
     style.innerHTML = TS.css.boxes.display();
     root.appendChild(style);
-    let determine = function (item, itemName, path, {
-      maxDepth,
-      depth
-    }) {
+    let determine = function (item, itemName, path, {maxDepth, depth, unfocus}) {
       let formatType;
       if (depth === undefined) depth = 0;
       //something funky here
@@ -186,17 +183,29 @@ Object.assign(TS.html.display, {
         },
         contentEditable: false
       });
+      let unfocusBtn = Object.assign(document.createElement("button"), {
+        innerHTML: "Go Back",
+        className: "unfocusMe",
+        onclick: function() {
+          let targ = TS.data.chosenFile
+          TS.data.currentView.forEach(function(ele, i) {
+            if (i < TS.data.currentView.length -1) targ = targ[ele]
+          })
+          opts.focus(targ, TS.data.currentView[TS.data.currentView.length-1]);
+        }
+      });
       let focusMe = Object.assign(document.createElement("button"), {
         innerHTML: `&nbsp;&nbsp;`,
         className: "focusMe",
         onclick: function () {
-          opts.focus(path, itemName);
+          opts.focus(path, itemName, true);
         },
         contentEditable: false
       });
       title.appendChild(titleContent);
       title.appendChild(buttonGroup);
       buttonGroup.appendChild(keyDelete);
+      if (depth === 0 && unfocus) buttonGroup.appendChild(unfocusBtn);
       if (depth > 0) buttonGroup.appendChild(focusMe);
       line.appendChild(title);
       lineBody = Object.assign(document.createElement("div"), {
@@ -222,6 +231,7 @@ Object.assign(TS.html.display, {
           textField.innerHTML = formatType(item);
         }
         lineBody.appendChild(textField);
+        line.appendChild(lineBody);
       } else if (typeof (item) === "object") {
         let add = Object.assign(document.createElement("button"), {
           className: "addLine",
@@ -280,12 +290,13 @@ Object.assign(TS.html.display, {
           }));
         }
       },
-      focus: function (path, itemName) {
+      focus: function (path, itemName, clickedFocus) {
         root.innerHTML = "";
         root.appendChild(style);
-        window.x = root;
+        let obj = {};
+        if (clickedFocus) obj.unfocus = true;
         focused = [path[itemName], itemName, path, {}];
-        root.appendChild(determine(path[itemName], itemName, path, {}));
+        root.appendChild(determine(path[itemName], itemName, path, obj));
         return box;
       },
       update: function (item) {

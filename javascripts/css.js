@@ -100,7 +100,7 @@ TS.css = function () {
       ${_.btnNav1}
       `;
       },
-      displayTopUI: function () {
+      displayLeftNav: function () {
         let str = ``;
         if (_.alignment === "top") {
           str += `

@@ -106,12 +106,12 @@ TS.html._navBars = {
     root.appendChild(bottomDiv);
     return box;
   },
-  displayTopUI: function ({
+  displayLeftNav: function ({
     mainDisplay
   }) {
     let item = TS.lib.createComponent({
-      id: "TS.html._navBars.displayTopUI",
-      css: TS.css.boxes.displayTopUI(),
+      id: "TS.html._navBars.displayLeftNav",
+      css: TS.css.boxes.displayLeftNav(),
       html: `
         <div id='left'>
           <button class='baseButtons2' id = 'show'>Show All</button>
