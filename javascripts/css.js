@@ -167,38 +167,31 @@ TS.css = function () {
       },
       display: function () {
         let str = ``;
-        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
         str += `
           :host {
             display: inline-block;
-            max-height: ${maxHeight}px;
-            overflow-y: scroll;
+            overflow-y: auto;
+            padding: 1rem;
             flex-grow:1;
           }`;
         str += `
         ${_.btn}
         .lineContainer {
-          background: linear-gradient(30deg, rgb(0, 0, 0), rgb(33, 155, 55) 40%, rgb(40, 40, 40));
           box-sizing:border-box;
         }
         .stringContainer {
-        }
-        .objectContainer {
-          ${_.border2}
-          padding:1px;
         }
         .objectContainer > .title > .titleContent {
           text-decoration: underline;
         }
         .title {
           line-height: 1.1rem;
-          background: ${_.backgroundTitle || `linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140))`};
+          background-color: #333;
           font-weight: bold;
           padding: .25rem;
-          border-radius: .2rem;
+          border-bottom: 1px solid #666;
         }
         .titleContent {
-          color: ${_.titleColor || "black"};
           margin: auto;
           padding:.5rem;
         }
@@ -214,10 +207,7 @@ TS.css = function () {
           padding-left: .2rem;
           padding-right: .2rem;
           min-height:.5rem;
-          ${_.textField || `
-            color: black;
-            background-color: rgb(240,245,240);
-            `}
+          background-color: #444;
         }
         .textField > p {
           margin: 0;
