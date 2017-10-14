@@ -10,6 +10,7 @@ Product is built to be Chrome compatible.  Should work in safari/opera as well b
 FAQ is included in product.
 
 ## Patch notes:
+v2.5.0 Unfocus (return) button added when element is focused. Code base cleaned up with esLint for ease of contribution.  
 v2.4.0 New css theme 'Dark'. Can now delete files.
 v2.3.0 Allows for multiple open files, altered Menu dropdown.
 v2.2.0 switched to tree-view.

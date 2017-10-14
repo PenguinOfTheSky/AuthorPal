@@ -91,6 +91,7 @@ Object.assign(TS.html.display, {
   },
   renderedList: function (id) {
     let focused = [];
+    let opts = {}
     let box = Object.assign(document.createElement("div"), {
       name: "mainDisplayView",
       id: "TS.html.display.renderedList"
@@ -126,87 +127,7 @@ Object.assign(TS.html.display, {
       if (typeof (item) === "object") line.className += " objectContainer";
       else line.className += " stringContainer";
       let lineBody;
-      let title = TS.lib.createNode("div", {
-        className: "title",
-        draggable: "true",
-        ondragstart: function (event) {
-          TS.js.events.dragTitle(event);
-        }
-      });
-      let titleContent = Object.assign(document.createElement("span"), {
-        className: "titleContent",
-        innerHTML: itemName,
-        contentEditable: true,
-        onblur: function () {
-          if (path[this.innerText] === undefined) {
-            let oldItemName = itemName;
-            item = path[itemName];
-            itemName = this.innerText;
-            path[itemName] = item;
-            delete path[oldItemName];
-            if (path === TS.data.chosenFile) {
-              TS.refs.displayOpts.render(itemName);
-            }
-          }
-          if (itemName !== this.innerText)
-            this.innerText = itemName;
-        }
-      });
-      let buttonGroup = Object.assign(document.createElement("div"), {
-        className: "buttonGroup"
-      });
-      let keyDelete = Object.assign(document.createElement("button"), {
-        innerHTML: "<b>-</b>",
-        className: "deleteLine",
-        onclick: function () {
-          let callback = function () {
-            delete path[itemName];
-            if (path === TS.data.chosenFile) {
-              let x;
-              for (let i in TS.data.chosenFile) {
-                if (i !== "master_root") {
-                  x = i;
-                  break;
-                }
-              }
-              focused = [TS.data.chosenFile[x], x, TS.data.chosenFile, {}];
-            }
-            if (focused.length > 0 && focused[1] !== itemName) {
-              TS.events.bodyChange(focused);
-            } else {
-              TS.events.bodyChange([]);
-            }
-            TS.data.currentView = [focused[1]];
-            TS.refs.treeNav[TS.data.currentView[0]].click();
-          };
-          document.body.appendChild(TS.html.modals.confirmationDelete(itemName, callback));
-        },
-        contentEditable: false
-      });
-      let unfocusBtn = Object.assign(document.createElement("button"), {
-        innerHTML: "Go Back",
-        className: "unfocusMe",
-        onclick: function() {
-          let targ = TS.data.chosenFile
-          TS.data.currentView.forEach(function(ele, i) {
-            if (i < TS.data.currentView.length -1) targ = targ[ele]
-          })
-          opts.focus(targ, TS.data.currentView[TS.data.currentView.length-1]);
-        }
-      });
-      let focusMe = Object.assign(document.createElement("button"), {
-        innerHTML: `&nbsp;&nbsp;`,
-        className: "focusMe",
-        onclick: function () {
-          opts.focus(path, itemName, true);
-        },
-        contentEditable: false
-      });
-      title.appendChild(titleContent);
-      title.appendChild(buttonGroup);
-      buttonGroup.appendChild(keyDelete);
-      if (depth === 0 && unfocus) buttonGroup.appendChild(unfocusBtn);
-      if (depth > 0) buttonGroup.appendChild(focusMe);
+      let title = TS.html.display.titleBar({path: path, itemName: itemName, depth: depth, unfocus: unfocus, item: item, opts: opts, focused: focused})
       line.appendChild(title);
       lineBody = Object.assign(document.createElement("div"), {
         className: "lineBody"
@@ -233,14 +154,6 @@ Object.assign(TS.html.display, {
         lineBody.appendChild(textField);
         line.appendChild(lineBody);
       } else if (typeof (item) === "object") {
-        let add = Object.assign(document.createElement("button"), {
-          className: "addLine",
-          onclick: function () {
-            TS.refs.container.appendChild(TS.html.modals.addLine(path[itemName], focused));
-          },
-          innerHTML: "+"
-        });
-        buttonGroup.appendChild(add);
         if (maxDepth === undefined || depth < maxDepth) {
           for (let x in item) {
             if (item.hasOwnProperty(x)) {
@@ -269,7 +182,7 @@ Object.assign(TS.html.display, {
       return line;
     };
     root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}));
-    let opts = {
+    Object.assign(opts, {
       showAll: function () {
         let curr = TS.data.currentView[0];
         focused = [TS.data.chosenFile[curr], curr, TS.data.chosenFile, {}];
@@ -306,7 +219,7 @@ Object.assign(TS.html.display, {
         if (focused.length > 0) root.appendChild(determine(...item));
         else root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}));
       }
-    };
+    });
     setTimeout(function () {
       let height = window.innerHeight - TS.refs.mainNavBar.clientHeight;
       if (TS.data.alignment === "top") {
@@ -318,5 +231,101 @@ Object.assign(TS.html.display, {
       element: box,
       opts: opts
     };
+  },
+  titleBar : function({itemName, unfocus, path, item, depth, opts, focused}) {
+    let title = TS.lib.createNode("div", {
+      className: "title",
+      draggable: "true",
+      ondragstart: function (event) {
+        TS.js.events.dragTitle(event);
+      }
+    });
+    let titleContent = Object.assign(document.createElement("span"), {
+      className: "titleContent",
+      innerHTML: itemName,
+      contentEditable: true,
+      onblur: function () {
+        if (path[this.innerText] === undefined) {
+          let oldItemName = itemName;
+          item = path[itemName];
+          itemName = this.innerText;
+          path[itemName] = item;
+          delete path[oldItemName];
+          if (path === TS.data.chosenFile) {
+            TS.refs.displayOpts.render(itemName);
+          }
+        }
+        if (itemName !== this.innerText)
+          this.innerText = itemName;
+      }
+    });
+    let buttonGroup = Object.assign(document.createElement("div"), {
+      className: "buttonGroup"
+    });
+    let keyDelete = Object.assign(document.createElement("button"), {
+      innerHTML: "<b>-</b>",
+      className: "deleteLine",
+      onclick: function () {
+        let callback = function () {
+          delete path[itemName];
+          if (path === TS.data.chosenFile) {
+            let x;
+            for (let i in TS.data.chosenFile) {
+              if (i !== "master_root") {
+                x = i;
+                break;
+              }
+            }
+            focused = [TS.data.chosenFile[x], x, TS.data.chosenFile, {}];
+          }
+          if (focused.length > 0 && focused[1] !== itemName) {
+            TS.events.bodyChange(focused);
+          } else {
+            TS.events.bodyChange([]);
+          }
+          TS.data.currentView = [focused[1]];
+          TS.refs.treeNav[TS.data.currentView[0]].click();
+        };
+        document.body.appendChild(TS.html.modals.confirmationDelete(itemName, callback));
+      },
+      contentEditable: false
+    });
+    let unfocusBtn = Object.assign(document.createElement("button"), {
+      innerHTML: "&nbsp;&nbsp;",
+      title: `unfocus element`,
+      className: "unfocusMe",
+      onclick: function() {
+        let targ = TS.data.chosenFile
+        TS.data.currentView.forEach(function(ele, i) {
+          if (i < TS.data.currentView.length -1) targ = targ[ele]
+        })
+        opts.focus(targ, TS.data.currentView[TS.data.currentView.length-1]);
+      }
+    });
+    let focusMe = Object.assign(document.createElement("button"), {
+      innerHTML: `&nbsp;&nbsp;`,
+      title: `focus this element`,
+      className: "focusMe",
+      onclick: function () {
+        opts.focus(path, itemName, true);
+      },
+      contentEditable: false
+    });
+    if (typeof(item) === "object") {
+      let add = Object.assign(document.createElement("button"), {
+        className: "addLine",
+        onclick: function () {
+          TS.refs.container.appendChild(TS.html.modals.addLine(path[itemName], focused));
+        },
+        innerHTML: "+"
+      });
+      buttonGroup.appendChild(add);
+    }
+    title.appendChild(titleContent);
+    title.appendChild(buttonGroup);
+    buttonGroup.appendChild(keyDelete);
+    if (depth === 0 && unfocus) buttonGroup.appendChild(unfocusBtn);
+    if (depth > 0) buttonGroup.appendChild(focusMe);
+    return title;
   }
 });
