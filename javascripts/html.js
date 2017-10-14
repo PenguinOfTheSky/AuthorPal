@@ -102,7 +102,11 @@ Object.assign(TS.html.display, {
     let style = document.createElement("style");
     style.innerHTML = TS.css.boxes.display();
     root.appendChild(style);
-    let determine = function (item, itemName, path, {maxDepth, depth, unfocus}) {
+    let determine = function (item, itemName, path, {
+      maxDepth,
+      depth,
+      unfocus
+    }) {
       let formatType;
       if (depth === undefined) depth = 0;
       //something funky here
