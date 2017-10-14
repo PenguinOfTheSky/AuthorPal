@@ -36,6 +36,8 @@ TS.css = function () {
         return `
         #root {
           min-height:100%;
+          display: flex;
+          flex-direction: column;
           ${_.backgroundMain}
         }`;
       },
