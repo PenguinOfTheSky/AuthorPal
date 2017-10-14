@@ -311,13 +311,6 @@ Object.assign(TS.html.display, {
         else root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}));
       }
     };
-    setTimeout(function () {
-      let height = window.innerHeight - TS.refs.mainNavBar.clientHeight;
-      if (TS.data.alignment === "top") {
-        height -= TS.refs.secondaryNavBar.clientHeight;
-      }
-      TS.refs.display.style["max-height"] = height + "px";
-    }, 20);
     return {
       element: box,
       opts: opts
