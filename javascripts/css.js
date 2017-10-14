@@ -46,7 +46,7 @@ TS.css = function () {
         :host {
           padding-top:.3rem;
           width:100%;
-          ${_.border1}
+          border-bottom: 1px solid #666;
           ${_.backgroundNav1}
         }
         :host(:hover) {
@@ -123,9 +123,11 @@ TS.css = function () {
         } else {
           str += `
           :host {
-            ${_.backgroundNav2}
+            background-color: #222;
             min-height:1.5rem;
             max-width:20%;
+            padding: 1rem;
+            border-right: 3px double #666;
             display:inline-block;
           }
           #left {
