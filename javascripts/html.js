@@ -190,12 +190,12 @@ Object.assign(TS.html.display, {
       let unfocusBtn = Object.assign(document.createElement("button"), {
         innerHTML: "Go Back",
         className: "unfocusMe",
-        onclick: function() {
-          let targ = TS.data.chosenFile
-          TS.data.currentView.forEach(function(ele, i) {
-            if (i < TS.data.currentView.length -1) targ = targ[ele]
-          })
-          opts.focus(targ, TS.data.currentView[TS.data.currentView.length-1]);
+        onclick: function () {
+          let targ = TS.data.chosenFile;
+          TS.data.currentView.forEach(function (ele, i) {
+            if (i < TS.data.currentView.length - 1) targ = targ[ele];
+          });
+          opts.focus(targ, TS.data.currentView[TS.data.currentView.length - 1]);
         }
       });
       let focusMe = Object.assign(document.createElement("button"), {
