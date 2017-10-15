@@ -31,7 +31,7 @@
       border-radius:.1rem;
       box-shadow: 0px 0px 1px 2px black inset;`,
     backgroundTitle: `#000`,
-    titleColor: `
+    titleFont: `
       ${font}
     `,
     backgroundNav1: `
@@ -105,12 +105,14 @@
         background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40));
       }
       .navButton {
+        color: white;
+        background-color: #040404;
         border-top: 0.1rem solid white;
         border-left: 0.1rem solid #add;
         border-right: 0.1rem solid grey;
         border-bottom: 0.1rem solid grey;
+        border-radius: 20% 20% 1% 1%;
         margin: 0.1rem;
-        background: linear-gradient(0deg, rgb(0,0,0), rgb(0,255,55) 40%, rgb(40,40,40));
       }
       .navButton:hover {
         box-shadow: 0px 1px 1px 2px rgb(0,0,20);

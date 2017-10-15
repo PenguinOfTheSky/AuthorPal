@@ -31,7 +31,7 @@
       box-shadow: 0px 0px 1px 2px ${silver} inset;`,
     border3: ``,
     backgroundTitle: ``,
-    titleColor: ``,
+    titleFont: ``,
     backgroundNav1: `
       background: ${silver};`,
     backgroundNav2: `background-color: ${silver};`,

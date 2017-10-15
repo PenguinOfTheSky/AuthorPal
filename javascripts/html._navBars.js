@@ -21,12 +21,22 @@ TS.html._navBars = {
       add: function (name) {
         if (openFiles[name] !== undefined) return 0;
         openFiles[name] = true;
+        if (TS.data.chosenFileButton) {
+          TS.data.chosenFileButton.className = 'navButton'
+        }
         let btn = TS.lib.createNode("button", {
+          className: 'navButton chosen',
           innerText: name,
           onclick: function () {
             TS.events.openFile(name, true);
+            if (TS.data.chosenFileButton) {
+              TS.data.chosenFileButton.className = 'navButton'
+            }
+            this.className = 'navButton chosen'
+            TS.data.chosenFileButton = this
           }
         });
+        TS.data.chosenFileButton = btn;
         root.querySelector("#openedFiles").appendChild(btn);
         return root;
       }
@@ -221,7 +231,7 @@ TS.html._navBars = {
       <div id='hiddenOptions' class='hidden'></div>`
     });
     let options = ["home", "open", "create", "delete", "save", "upload", "preferences", "export", "faq", "devMode"];
-    let values = ["Home", "Open File", "New File", "Delete File", "Download", "Upload", "Themes", "Export File", "FAQ", "Dev. Mode"];
+    let values = ["Home", "Open File", "New File", "Delete File", "Download", "Upload", "Preferences", "Export File", "FAQ", "Dev. Mode"];
     for (var j = 0; j < options.length; j++) {
       let option = Object.assign(document.createElement("div"), {
         className: "menuOptions",

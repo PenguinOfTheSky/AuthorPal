@@ -36,6 +36,8 @@ return {
       return `
       #root {
         min-height:100%;
+        display: flex;
+        flex-direction: column;
         ${_.backgroundMain}
       }`;
     },
@@ -102,13 +104,12 @@ return {
     },
     displayLeftNav: function () {
       let str = ``;
-      if (_.alignment === "top") {
-        str += `
+      str += `
       :host {
         ${_.backgroundNav2}
         min-height:1.5rem;
-        display:block;
-        width:100%;
+        max-width:20%;
+        display:inline-block;
       }
       #left {
         display:inline-block;
@@ -118,23 +119,6 @@ return {
         display: inline;
       }
       `;
-      } else {
-        str += `
-        :host {
-          ${_.backgroundNav2}
-          min-height:1.5rem;
-          max-width:20%;
-          display:inline-block;
-        }
-        #left {
-          display:inline-block;
-          margin-right:.5rem;
-        }
-        #right {
-          display: inline;
-        }
-        `;
-      }
       str += `
       ${_.btn}
       ${_.btnBase2}
@@ -174,7 +158,7 @@ return {
       str += `
       ${_.btn}
       .lineContainer {
-        background: linear-gradient(30deg, rgb(0, 0, 0), rgb(33, 155, 55) 40%, rgb(40, 40, 40));
+        /*add background for margins?*/
         box-sizing:border-box;
       }
       .stringContainer {
@@ -194,7 +178,7 @@ return {
         border-radius: .2rem;
       }
       .titleContent {
-        color: ${_.titleColor || "black"};
+        ${_.titleFont || "color: black"};
         margin: auto;
         padding:.5rem;
       }
