@@ -7,7 +7,6 @@ if (theme === undefined) {
 }
 let _ = TS.cssTemplates[theme];
 TS.data.alignment = _.alignment;
-if (typeof (_) === "function") _ = _();
 TS.events.updatePreferences = function () {
   TS.events.save(location.reload());
 };
