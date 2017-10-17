@@ -8,13 +8,14 @@ TS.start = function (parent) {
   });
   TS.refs.container = parent;
   localforage.getItem("Book", function (err, value) {
-    if (value === undefined) {
+    if (value == "null") {
       value = JSON.stringify({
         files: {},
         preferences: {}
       });
       localforage.setItem("Book", value, function () {});
     }
+    console.log(value)
     TS.data.local = JSON.parse(value);
     if (TS.data.local.preferences.theme === "Sparky") {
       TS.data.local.preferences.theme = "default";
