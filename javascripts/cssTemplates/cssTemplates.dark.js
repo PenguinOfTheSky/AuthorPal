@@ -29,6 +29,7 @@
       border-bottom: 1px solid #888;
       box-sizing:border-box;`,
     border2: ``,
+    border3: `border-bottom: 1px solid #888;`,
     backgroundTitle: `#444`,
     titleFont: `
       ${font}

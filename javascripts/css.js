@@ -176,7 +176,7 @@ TS.css = function () {
         font-weight: bold;
         padding: 0.3rem;
         border-bottom-left-radius: 0.5rem;
-        border-bottom: 1px solid #888;
+        ${_.border3}
       }
       .titleContent {
         ${_.titleFont || "color: black"};
