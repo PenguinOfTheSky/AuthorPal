@@ -1,17 +1,17 @@
 /* global TS */
 TS.css = function () {
-let theme = TS.data.local.preferences.theme;
-if (theme === undefined) {
-  TS.data.local.preferences.theme = "default";
-  theme = "default";
-}
-let _ = TS.cssTemplates[theme];
-TS.data.alignment = _.alignment;
-TS.events.updatePreferences = function () {
-  TS.events.save(location.reload());
-};
-return {
-  modal: `
+  let theme = TS.data.local.preferences.theme;
+  if (theme === undefined) {
+    TS.data.local.preferences.theme = "default";
+    theme = "default";
+  }
+  let _ = TS.cssTemplates[theme];
+  TS.data.alignment = _.alignment;
+  TS.events.updatePreferences = function () {
+    TS.events.save(location.reload());
+  };
+  return {
+    modal: `
   :host {
     background-color:rgba(150,150,150,.3);
     padding:5px;position: fixed; z-index: 4;top:0%;height:100%; width:100%;
@@ -27,21 +27,21 @@ return {
   ${_.btn}
   ${_.btnExit}
 `,
-  boxes: {
-    menu: function () {
-      return ``;
-    },
-    root: function () {
-      return `
+    boxes: {
+      menu: function () {
+        return ``;
+      },
+      root: function () {
+        return `
       #root {
         min-height:100%;
         display: flex;
         flex-direction: column;
         ${_.backgroundMain}
       }`;
-    },
-    topLeftNav: function () {
-      return `
+      },
+      topLeftNav: function () {
+        return `
       :host {
         padding-top:.3rem;
         width:100%;
@@ -90,9 +90,9 @@ return {
         visibility: visible;
       }
       ${_.btnBase1}`;
-    },
-    mainButtons: function () {
-      return `
+      },
+      mainButtons: function () {
+        return `
     :host {
       display:inline-block;
       ${_.backgroundNav1}
@@ -100,14 +100,15 @@ return {
     ${_.btn}
     ${_.btnNav1}
     `;
-    },
-    displayLeftNav: function () {
-      let str = ``;
-      str += `
+      },
+      displayLeftNav: function () {
+        let str = ``;
+        str += `
       :host {
         ${_.backgroundNav2}
         min-height:1.5rem;
         max-width:20%;
+        padding: 1rem;
         display:inline-block;
       }
       #left {
@@ -118,7 +119,7 @@ return {
         display: inline;
       }
       `;
-      str += `
+        str += `
       ${_.btn}
       ${_.btnBase2}
       ul {
@@ -134,27 +135,27 @@ return {
       }
       ${_.treeNav || ""}
       `;
-      return str;
-    },
-    wholeDisplayContainer: function () {
-      let str = `
+        return str;
+      },
+      wholeDisplayContainer: function () {
+        let str = `
           display: flex;
           max-width:100%;
           flex-grow:1;
         `;
-      return str;
-    },
-    display: function () {
-      let str = ``;
-      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
-      str += `
+        return str;
+      },
+      display: function () {
+        let str = ``;
+        let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
+        str += `
         :host {
           display: inline-block;
           max-height: ${maxHeight}px;
           overflow-y: scroll;
           flex-grow:1;
         }`;
-      str += `
+        str += `
       ${_.btn}
       .lineContainer {
         /*add background for margins?*/
@@ -164,7 +165,7 @@ return {
       }
       .objectContainer {
         ${_.border2}
-        padding:1px;
+        padding:1rem;
       }
       .objectContainer > .title > .titleContent {
         text-decoration: underline;
@@ -173,8 +174,9 @@ return {
         line-height: 1.1rem;
         background: ${_.backgroundTitle || `linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140))`};
         font-weight: bold;
-        padding: .25rem;
-        border-radius: .2rem;
+        padding: 0.3rem;
+        border-bottom-left-radius: 0.5rem;
+        ${_.border3}
       }
       .titleContent {
         ${_.titleFont || "color: black"};
@@ -189,9 +191,7 @@ return {
       .textField {
         white-space: pre-wrap;
         cursor: text;
-        padding: .1rem;
-        padding-left: .2rem;
-        padding-right: .2rem;
+        padding: 0.1rem 0.8rem;
         min-height:.5rem;
         ${_.textField || `
           color: black;
@@ -277,10 +277,10 @@ return {
         border-top-right-radius: .4rem;
         border-bottom-right-radius: .4rem;
       }`;
-      return str;
-    },
-    splash: function () {
-      return `
+        return str;
+      },
+      splash: function () {
+        return `
       ${_.link}
       :host {
         box-sizing:border-box;
@@ -309,20 +309,20 @@ return {
         cursor: pointer;
         text-decoration: underline;
       }`;
-    }
-  },
-  modals: {
-    exportFile: function () {
-      return `
+      }
+    },
+    modals: {
+      exportFile: function () {
+        return `
       button, input, select {
         font-size:1rem;
       }
       ${_.btn}
       ${TS.css.modal}
       ${_.btnExit}`;
-    },
-    createFile: function () {
-      return `
+      },
+      createFile: function () {
+        return `
       button, input, select {
         font-size:1rem;
       }
@@ -330,9 +330,9 @@ return {
       ${TS.css.modal}
       ${_.btnExit}
       ${_.btnSubmit}`;
-    },
-    addLine: function () {
-      let str = `
+      },
+      addLine: function () {
+        let str = `
       ${TS.css.modal}
       ${_.btnSubmit}
       select:active, select:hover {
@@ -341,32 +341,31 @@ return {
       option:active, option:hover {
         color: red
       }`;
-      return str;
-    },
-    confirmationDelete: function () {
-      return `
+        return str;
+      },
+      confirmationDelete: function () {
+        return `
       ${TS.css.modal}
       ${_.btnWarn}
       `;
-    },
-    preferencesFile: function () {
-      return `
+      },
+      preferencesFile: function () {
+        return `
       ${TS.css.modal}
       ${_.btnSubmit}`;
-    },
-    saveFile: function () {
-      return `
+      },
+      saveFile: function () {
+        return `
       ${TS.css.modal}`;
-    },
-    uploadFile: function () {
-      return `${TS.css.modal}
+      },
+      uploadFile: function () {
+        return `${TS.css.modal}
     ${_.btnSubmit}`;
-    },
-    openFile: function () {
-      return `
+      },
+      openFile: function () {
+        return `
       ${TS.css.modal}`;
+      }
     }
-
-  }
-};
+  };
 };
