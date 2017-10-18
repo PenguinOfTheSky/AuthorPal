@@ -159,9 +159,7 @@ TS.html.modals = {
     });
     return item.box;
   },
-  createFile: function ({
-    commands
-  }) {
+  createFile: function ({commands}) {
     let item = TS.lib.createComponent({
       id: "TS.html.modals.createFile",
       css: TS.css.modals.createFile(),
@@ -181,10 +179,7 @@ TS.html.modals = {
          </form>
         </div>
       `,
-      js: function ({
-        box,
-        root
-      }) {
+      js: function ({box,root}) {
         TS.js.baseModal(box, root);
         root.querySelector("#createForm").onsubmit = function (event) {
           event.preventDefault();
@@ -193,8 +188,7 @@ TS.html.modals = {
           if (name !== "" && TS.data.local.files[name] === undefined) {
             TS.data.local.files[name] = TS.js.templates.topNavbar[template]();
             box.remove();
-            TS.data.chosenFile = TS.data.local.files[name];
-            commands.open();
+            commands.open(name);
           } else {
             let msg = Object.assign(document.createElement("b"), {
               innerText: " | Name is already taken! | ",
@@ -218,10 +212,7 @@ TS.html.modals = {
           <h2> Choose the file you wish to delete </h2>
         </div>
       `,
-      js: function ({
-        box,
-        root
-      }) {
+      js: function ({box,root}) {
         TS.js.baseModal(box, root);
         for (let x in TS.data.local.files) {
           if (TS.data.local.files.hasOwnProperty(x)) {
@@ -248,9 +239,7 @@ TS.html.modals = {
     });
     return item.box;
   },
-  openFile: function ({
-    commands
-  }) {
+  openFile: function ({commands}) {
     let item = TS.lib.createComponent({
       id: "TS.html.modals.openFile",
       css: TS.css.modals.openFile(),
@@ -260,10 +249,7 @@ TS.html.modals = {
           <h2> Choose file you wish to open </h2>
         </div>
       `,
-      js: function ({
-        box,
-        root
-      }) {
+      js: function ({box,root}) {
         TS.js.baseModal(box, root);
         for (let x in TS.data.local.files) {
           if (TS.data.local.files.hasOwnProperty(x)) {
@@ -296,10 +282,7 @@ TS.html.modals = {
           <button id='yes' class='btnWarn'>Yes</button><button id='cancel'>Cancel</button>
         </div>
       `,
-      js: function ({
-        box,
-        root
-      }) {
+      js: function ({box,root}) {
         TS.js.baseModal(box, root);
         root.querySelector("#yes").onclick = function () {
           callback();
@@ -329,7 +312,9 @@ TS.html.modals = {
       }
       keys.forEach(function (ele) {
         let textarea = Object.assign(document.createElement("textarea"), {
-          innerText: `<head><title>${formatted[ele].head.title}</title>${styleChoice} </head>` + formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
+          innerText: `<head> ${TS.data.chosenFile["#advanced"]["*head"]}
+          <script>${TS.data.chosenFile["#advanced"]["*script"]} </script>
+           ${styleChoice} </head>` + formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
         });
         var myblob = new Blob([textarea.innerText], {
           type: "text/html"
@@ -337,7 +322,7 @@ TS.html.modals = {
         let url = URL.createObjectURL(myblob);
         let date = new Date();
         fileDownload += `<a href="${url}" download="AuthorPal-${date.toDateString()}-style:${ele}">Download style: ${ele}</a>`;
-        filePreview += `<a href="#" id='preview_${ele}'>Preview style:${ele} </a>`;
+        filePreview += `<a href="${url}" target='_blank' id='preview_${ele}'>Preview style:${ele} </a>`;
       });
     }
     let item = TS.lib.createComponent({
@@ -352,27 +337,12 @@ TS.html.modals = {
           ${filePreview || ""}
         </div>
       `,
-      js: function ({
-        box,
-        root
-      }) {
+      js: function ({box, root}) {
         TS.js.baseModal(box, root);
         if (!fileDownload) {
           let i = document.createElement("i");
           i.innerText = "Either you haven't opened a file or your file is incompatible for export.";
           root.querySelector("#centerModal").appendChild(i);
-        } else {
-          Object.keys(text).forEach(function (ele) {
-            root.querySelector("#preview_" + ele).onclick = function () {
-              let x = window.open();
-              x.document.head.innerHTML += styleChoice;
-              x.document.body.innerHTML = text[ele].main;
-              x.document.title = text[ele].head.title;
-              let script = document.createElement("script");
-              script.innerHTML = text[ele].script;
-              x.document.body.appendChild(script);
-            };
-          });
         }
       }
     });

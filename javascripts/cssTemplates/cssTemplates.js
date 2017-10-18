@@ -61,16 +61,6 @@ TS.cssTemplates.default = {
       #left > *:hover {
         background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
       }
-      #left select option{
-        max-width: 2rem;
-        color: white;
-        background-color: rgb(0,0,0);
-        border: none;
-        font-size: 1rem;
-      }
-      #left :last-child {
-        border-top-right-radius: .7rem;
-      }
     `,
   btnBase2: `
       #show {
@@ -187,13 +177,6 @@ TS.cssTemplates.sparky = {
       }
       #left > *:hover {
         background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
-      }
-      #left select option{
-        max-width: 2rem;
-        color: white;
-        background-color: rgb(0,0,0);
-        border: none;
-        font-size: 1rem;
       }
       #left :last-child {
         border-top-right-radius: .7rem;

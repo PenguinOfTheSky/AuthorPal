@@ -81,16 +81,6 @@
       #left > *:hover {
         ${hover}
       }
-      #left select option{
-        max-width: 2rem;
-        color: white;
-        background-color: rgb(0,0,0);
-        border: none;
-        font-size: 1rem;
-      }
-      #left :last-child {
-        border-top-right-radius: .7rem;
-      }
     `,
     btnBase2: `
       .baseButtons2 {

@@ -14,8 +14,7 @@ TS.html._navBars = {
     let openedFiles = TS.lib.createNode("div", {
       id: "openedFiles"
     });
-    root.appendChild(openedFiles);
-    root.appendChild(style);
+    root.append(openedFiles, style);
     let openFiles = {};
     let opts = {
       add: function (name) {
@@ -37,7 +36,7 @@ TS.html._navBars = {
           }
         });
         TS.data.chosenFileButton = btn;
-        root.querySelector("#openedFiles").appendChild(btn);
+        root.querySelector("#openedFiles").append(btn);
         return root;
       }
     };
@@ -57,14 +56,14 @@ TS.html._navBars = {
     });
     let style = document.createElement("style");
     style.innerHTML = TS.css.boxes.topLeftNav();
-    root.appendChild(style);
+    root.append(style);
     let buttons;
     let commands = {
       file: function (choice) {
         let modal = TS.html.modals[choice + "File"]({
           commands: commands
         });
-        TS.refs.container.appendChild(modal);
+        TS.refs.container.append(modal);
       },
       changeTab: function (choice) {
         display.render(choice);
@@ -104,16 +103,12 @@ TS.html._navBars = {
       }
     });
     let file = TS.html._navBars.file(commands.file, display);
-    let faq = TS.html._navBars.faqButton();
     let left = Object.assign(document.createElement("div"), {
       id: "left"
     });
-    let leftItems = [file, faq];
-    leftItems.forEach((ele) => left.appendChild(ele));
-    topDiv.appendChild(left);
-    topDiv.appendChild(buttons.element);
-    root.appendChild(topDiv);
-    root.appendChild(bottomDiv);
+    left.append(file)
+    topDiv.append(left, buttons.element);
+    root.append(topDiv, bottomDiv)
     return box;
   },
   displayLeftNav: function ({
@@ -150,7 +145,7 @@ TS.html._navBars = {
         let vUl = {};
         let list = [ul];
         TS.refs.treeNav = vUl;
-        treeButtons.appendChild(ul);
+        treeButtons.append(ul);
         Object.assign(opts, {
           makeList: function (path) {
             let vTarget = vUl;
@@ -195,7 +190,7 @@ TS.html._navBars = {
                 }
               });
               vTarget[str] = li;
-              subUL.appendChild(li);
+              subUL.append(li);
             }
             return subUL;
           }
@@ -209,20 +204,11 @@ TS.html._navBars = {
             TS.refs.treeNav["EditThisName"].click();
           }
         });
-        root.appendChild(addColumn);
+        root.append(addColumn);
       }
     });
     TS.refs.secondaryNavBar = item.box;
     return item;
-  },
-  faqButton: function () {
-    let button = Object.assign(document.createElement("button"), {
-      onclick: function () {
-        window.open("FAQ.html", "_blank");
-      },
-      innerText: "FAQ"
-    });
-    return button;
   },
   file: function (callback, display) {
     let select = Object.assign(document.createElement("div"), {
@@ -258,7 +244,7 @@ TS.html._navBars = {
           }, 134);
         }
       });
-      select.querySelector("#hiddenOptions").appendChild(option);
+      select.querySelector("#hiddenOptions").append(option);
     }
     return select;
   }

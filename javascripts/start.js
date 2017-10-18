@@ -36,11 +36,10 @@ TS.start = function (parent) {
     let parentStyle = TS.lib.createNode("style", {
       innerHTML: TS.css.boxes.root()
     });
-    document.body.appendChild(parentStyle);
+    document.body.append(parentStyle);
     let display = TS.html.display.start();
     let navBar = TS.html._navBars.mainNavBar(display);
-    parent.appendChild(navBar);
+    parent.append(navBar, display.element);
     TS.refs.topNav = navBar;
-    parent.appendChild(display.element);
   };
 };

@@ -15,18 +15,18 @@ Object.assign(TS.html.display, {
     });
     let currentID = "";
     let sorted = "";
-    root.appendChild(TS.html.display.splash().box);
+    root.append(TS.html.display.splash().box);
     let opts = {
       element: box,
       splash: function () {
         root.innerHTML = "";
-        root.appendChild(TS.html.display.splash().box);
+        root.append(TS.html.display.splash().box);
       },
       render: function (id) {
         currentID = id;
         root.innerHTML = "";
         sorted = TS.html.display.sort(id);
-        root.appendChild(sorted.element);
+        root.append(sorted.element);
       },
       swapTab: function (id) {
         currentID = id;
@@ -40,12 +40,12 @@ Object.assign(TS.html.display, {
       if (focused.length === 0) {
         root.innerHTML = "";
         sorted = TS.html.display.sort(currentID);
-        root.appendChild(sorted.element);
+        root.append(sorted.element);
       } else {
         currentID = focused[1];
         root.innerHTML = "";
         sorted = TS.html.display.sort(currentID);
-        root.appendChild(sorted.element);
+        root.append(sorted.element);
         sorted.opts.update(focused);
       }
     };
@@ -68,20 +68,18 @@ Object.assign(TS.html.display, {
     if (typeof (TS.data.chosenFile[id]) === "object") {
       topUI.opts.makeList([]);
     }
-    root.appendChild(topUI.box);
-
-    root.appendChild(mainDisplay.element);
+    root.append(topUI.box, mainDisplay.element);
     let opts = {
       update: mainDisplay.opts.update,
       swapTab: function (id) {
         mainDisplay.element.remove();
         mainDisplay.element = TS.html.display.renderedList(id).element;
-        root.appendChild(mainDisplay.element);
+        root.append(mainDisplay.element);
       },
       focus: function (obj, pathName) {
         mainDisplay.element.remove();
         mainDisplay.element = mainDisplay.opts.focus(obj, pathName);
-        root.appendChild(mainDisplay.element);
+        root.append(mainDisplay.element);
       }
     };
     return {
@@ -102,7 +100,7 @@ Object.assign(TS.html.display, {
     });
     let style = document.createElement("style");
     style.innerHTML = TS.css.boxes.display();
-    root.appendChild(style);
+    root.append(style);
     let determine = function (item, itemName, path, {maxDepth, depth, unfocus}) {
       let formatType;
       if (depth === undefined) depth = 0;
@@ -128,7 +126,7 @@ Object.assign(TS.html.display, {
       else line.className += " stringContainer";
       let lineBody;
       let title = TS.html.display.titleBar({path: path, itemName: itemName, depth: depth, unfocus: unfocus, item: item, opts: opts, focused: focused})
-      line.appendChild(title);
+      line.append(title);
       lineBody = Object.assign(document.createElement("div"), {
         className: "lineBody"
       });
@@ -151,13 +149,13 @@ Object.assign(TS.html.display, {
         } else {
           textField.innerHTML = formatType(item);
         }
-        lineBody.appendChild(textField);
-        line.appendChild(lineBody);
+        lineBody.append(textField);
+        line.append(lineBody);
       } else if (typeof (item) === "object") {
         if (maxDepth === undefined || depth < maxDepth) {
           for (let x in item) {
             if (item.hasOwnProperty(x)) {
-              lineBody.appendChild(determine(item[x], x, item, {
+              lineBody.append(determine(item[x], x, item, {
                 maxDepth: maxDepth,
                 depth: 1 + depth
               }));
@@ -166,7 +164,7 @@ Object.assign(TS.html.display, {
         }
       }
       if (typeof (item) === "object" && Object.keys(item).length !== 0) {
-        line.appendChild(lineBody);
+        line.append(lineBody);
       }
       if (itemName === TS.data.addedLine) {
         delete TS.data.addedLine;
@@ -181,43 +179,39 @@ Object.assign(TS.html.display, {
       }
       return line;
     };
-    root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}));
+    root.append(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}));
     Object.assign(opts, {
       showAll: function () {
         let curr = TS.data.currentView[0];
         focused = [TS.data.chosenFile[curr], curr, TS.data.chosenFile, {}];
         root.innerHTML = "";
-        root.appendChild(style);
-        root.appendChild(determine(TS.data.chosenFile[curr], curr, TS.data.chosenFile, {}));
+        root.append(style, determine(TS.data.chosenFile[curr], curr, TS.data.chosenFile, {}));
       },
       fold: function (n) {
         root.innerHTML = "";
-        root.appendChild(style);
+        root.append(style);
         if (focused.length === 0)
-          root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {
+          root.append(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {
             maxDepth: n
           }));
         else {
-          root.appendChild(determine(focused[0], focused[1], focused[2], {
+          root.append(determine(focused[0], focused[1], focused[2], {
             maxDepth: n
           }));
         }
       },
       focus: function (path, itemName, clickedFocus) {
         root.innerHTML = "";
-        root.appendChild(style);
         let obj = {};
         if (clickedFocus) obj.unfocus = true;
         focused = [path[itemName], itemName, path, {}];
-        root.appendChild(determine(path[itemName], itemName, path, obj));
+        root.append(style, determine(path[itemName], itemName, path, obj));
         return box;
       },
       update: function (item) {
         focused = item;
         root.innerHTML = "";
-        root.appendChild(style);
-        if (focused.length > 0) root.appendChild(determine(...item));
-        else root.appendChild(determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {}));
+        root.append(style, (focused.length > 0 ? determine(...item) : determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {})));
       }
     });
     setTimeout(function () {
@@ -286,7 +280,7 @@ Object.assign(TS.html.display, {
           TS.data.currentView = [focused[1]];
           TS.refs.treeNav[TS.data.currentView[0]].click();
         };
-        document.body.appendChild(TS.html.modals.confirmationDelete(itemName, callback));
+        document.body.append(TS.html.modals.confirmationDelete(itemName, callback));
       },
       contentEditable: false
     });
@@ -315,17 +309,16 @@ Object.assign(TS.html.display, {
       let add = Object.assign(document.createElement("button"), {
         className: "addLine",
         onclick: function () {
-          TS.refs.container.appendChild(TS.html.modals.addLine(path[itemName], focused));
+          TS.refs.container.append(TS.html.modals.addLine(path[itemName], focused));
         },
         innerHTML: "+"
       });
-      buttonGroup.appendChild(add);
+      buttonGroup.append(add);
     }
-    title.appendChild(titleContent);
-    title.appendChild(buttonGroup);
-    buttonGroup.appendChild(keyDelete);
-    if (depth === 0 && unfocus) buttonGroup.appendChild(unfocusBtn);
-    if (depth > 0) buttonGroup.appendChild(focusMe);
+    title.append(titleContent, buttonGroup);
+    buttonGroup.append(keyDelete);
+    if (depth === 0 && unfocus) buttonGroup.append(unfocusBtn);
+    if (depth > 0) buttonGroup.append(focusMe);
     return title;
   }
 });

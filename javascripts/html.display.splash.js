@@ -15,7 +15,6 @@ TS.html.display.splash = function () {
     <hr>
     <div id='filesListContainer' style='display:none;'>
       <h2>Your projects</h2>
-      <div style='text-align:center;'>(click to open)</div>
       <ul id='filesList'>
     </div><hr>
   `,

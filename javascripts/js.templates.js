@@ -71,7 +71,7 @@ TS.js.templates = {
           exportFormat: "outlineMarkdown",
           type: "book outline"
         },
-        "#general": {
+        "general": {
           "title": ``,
           "premise": ``,
           "genre(s)": ``,
@@ -79,6 +79,10 @@ TS.js.templates = {
           "Random Notes": ``
         },
         "#advanced": {
+          "*head": `
+            <title></title>
+            <script src=''></script>
+          `,
           styles: {
             "*chosenStyle": "*default",
             "*default": `<style>
@@ -95,7 +99,8 @@ TS.js.templates = {
               ._6 { margin-left: 15%; }
               ._7 { margin-left: 18%; }
               </style>`
-          }
+          },
+          "*script": `` 
         },
         "characters": {
           "main": {},
@@ -162,15 +167,17 @@ TS.js.templates = {
           "Random Notes": ``
         },
         "#advanced": {
-          imports: `<!--import scripts like jquery if required -->
-          <script src="#"></script>`,
           styles: {
             "*chosenStyle": "*default",
             "*default": `<style></style>`
           },
-          html: `<!--things like <title> are set from general-> title, but you can override here.-->`,
-          script: `/* for general js scripting. Scripts can also be written by adding the '*' prefix (see faq)*/
-          `
+          "*head": `
+            <title></title>
+            <script src=''></script>
+            <script> console.log('hello') </script>
+          `,
+          "*script": ``
+
         },
         "archive": {
           "January 20XX": {}

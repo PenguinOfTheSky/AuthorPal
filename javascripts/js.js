@@ -1,5 +1,6 @@
 /* global TS */
 /* global marked */
+//write .append function
 Object.assign(TS.js, {
   baseModal: function (box, root) {
     box.onclick = function () {
@@ -20,12 +21,6 @@ Object.assign(TS.js, {
   },
   fileFormat: {
     markdownBlog: function (file) {
-      let title;
-      try {
-        title = file["#general"].title;
-      } catch (err) {
-        // Todo: no empty function bodies
-      }
       let body1 = ``;
       let navbar1 = `<div class='topNavbar'>`;
       let templates = {};
@@ -55,11 +50,10 @@ Object.assign(TS.js, {
                   <p class='blogPostContent'>${marked(ele.text)}</p>
                 </div>`;
                   if (i < 5) {
-                    // Todo: recent is defined but never used?
-                    //   recent += `<div class='blogPost'>
-                    //   <h2 class='blogPostTitle'>${ele.title}</h2>
-                    //   <p class='blogPostContent'>${marked(ele.text)}</p>
-                    // </div>`;
+                    recent += `<div class='blogPost'>
+                    <h2 class='blogPostTitle'>${ele.title}</h2>
+                    <p class='blogPostContent'>${marked(ele.text)}</p>
+                    </div>`;
                   }
                 });
               } else {
@@ -98,7 +92,6 @@ Object.assign(TS.js, {
       return {
         default: {
           head: {
-            title: title
           },
           main: body1,
           script: script1
@@ -116,8 +109,7 @@ Object.assign(TS.js, {
       if (title) {
         str += `<h1>${title}</h1>`;
       }
-      let tableOfContents = `
-    <h2 id='tableOfContents'>Table of Contents</h2>`;
+      let tableOfContents = `<h2 id='tableOfContents'>Table of Contents</h2>`;
       let format = function (obj, depth, path, parent) {
         if (typeof (obj) !== "object") {
           str += `<div class='content _${depth}'>`;
@@ -144,7 +136,6 @@ Object.assign(TS.js, {
       return {
         default: {
           head: {
-            title: title
           },
           main: tableOfContents + str,
           script: script
