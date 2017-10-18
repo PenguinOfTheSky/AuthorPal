@@ -69,7 +69,9 @@ TS.js.templates = {
         "master_root": {
           templates: 'TS.js.templates["novel outline"]',
           exportFormat: "outlineMarkdown",
-          type: "book outline"
+          type: "book outline",
+          version: "2.6",
+          shadowTree: {}
         },
         "general": {
           "title": ``,
@@ -100,7 +102,7 @@ TS.js.templates = {
               ._7 { margin-left: 18%; }
               </style>`
           },
-          "*script": `` 
+          "*script": ``
         },
         "characters": {
           "main": {},
@@ -111,6 +113,22 @@ TS.js.templates = {
         "chapters": {},
         "timeline(s)": {}
       };
+      let sort = function(obj) {
+        let output = {}
+        let i = 0;
+        for (let x in obj) {
+          output[x] = {name: x, index: i}
+          if (typeof(obj[x]) == 'object') {
+            output[x].children = sort(obj[x])
+          } else if (typeof(obj[x]) == 'string') {
+            if (obj[x][0] == '*') output[x].editor = 'text'
+            else output[x].editor = 'md'
+          }
+          i++
+        }
+        return output
+      }
+      obj.master_root.shadowTree = sort(obj)
       return obj;
     },
     website: function () {
@@ -157,7 +175,9 @@ TS.js.templates = {
         "master_root": {
           templates: 'TS.js.templates["staticWebsite"]',
           exportFormat: "markdownBlog",
-          type: "markdown blog"
+          type: "markdown blog",
+          version: "2.6",
+          shadowTree: {}
         },
         "#general": {
           "title": ``,
