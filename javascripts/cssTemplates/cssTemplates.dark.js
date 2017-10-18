@@ -19,18 +19,17 @@
         border-radius: .4rem;
         ${font}
         font-size: 1rem;
-        background-color: #333;
+        padding: 0.3rem 0.6rem;
+        background-color: #444;
       }
       button:hover {
         ${hover}
       }`,
-    border1: `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
+    border1: `
+      border-bottom: 1px solid #888;
       box-sizing:border-box;`,
-    border2: `
-      border: .1rem solid rgba(250,250,250,.7);
-      border-radius:.1rem;
-      box-shadow: 0px 0px 1px 2px black inset;`,
-    backgroundTitle: `#000`,
+    border2: ``,
+    backgroundTitle: `#444`,
     titleFont: `
       ${font}
     `,
@@ -84,7 +83,7 @@
     `,
     btnBase2: `
       .baseButtons2 {
-        background: none;
+        background: #444;
       }
       .baseButtons2:hover {
         ${hover}
@@ -92,21 +91,13 @@
       `,
     btnNav1: `
       .chosen {
-        background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40));
+        background-color: purple;
+        font-weight: 500;
       }
       .navButton {
         color: white;
-        background-color: #040404;
-        border-top: 0.1rem solid white;
-        border-left: 0.1rem solid #add;
-        border-right: 0.1rem solid grey;
-        border-bottom: 0.1rem solid grey;
-        border-radius: 20% 20% 1% 1%;
-        margin: 0.1rem;
       }
       .navButton:hover {
-        box-shadow: 0px 1px 1px 2px rgb(0,0,20);
-        background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
       }`,
     treeNav: `
       li {
@@ -118,7 +109,7 @@
     `,
     textField: `
       ${font}
-      background-color: #111;
+      background-color: #666;
     `,
     select: `
       select {

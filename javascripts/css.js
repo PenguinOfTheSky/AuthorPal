@@ -108,6 +108,7 @@ TS.css = function () {
         ${_.backgroundNav2}
         min-height:1.5rem;
         max-width:20%;
+        padding: 1rem;
         display:inline-block;
       }
       #left {
@@ -164,7 +165,7 @@ TS.css = function () {
       }
       .objectContainer {
         ${_.border2}
-        padding:1px;
+        padding:1rem;
       }
       .objectContainer > .title > .titleContent {
         text-decoration: underline;
@@ -173,8 +174,9 @@ TS.css = function () {
         line-height: 1.1rem;
         background: ${_.backgroundTitle || `linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140))`};
         font-weight: bold;
-        padding: .25rem;
-        border-radius: .2rem;
+        padding: 0.3rem;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom: 1px solid #888;
       }
       .titleContent {
         ${_.titleFont || "color: black"};
@@ -189,9 +191,7 @@ TS.css = function () {
       .textField {
         white-space: pre-wrap;
         cursor: text;
-        padding: .1rem;
-        padding-left: .2rem;
-        padding-right: .2rem;
+        padding: 0.1rem 0.8rem;
         min-height:.5rem;
         ${_.textField || `
           color: black;
