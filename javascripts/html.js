@@ -125,11 +125,11 @@ Object.assign(TS.html.display, {
       if (typeof (item) === "object") line.className += " objectContainer";
       else line.className += " stringContainer";
       let lineBody;
-      let title = TS.html.display.titleBar({path: path, itemName: itemName, depth: depth, unfocus: unfocus, item: item, opts: opts, focused: focused})
-      line.append(title);
       lineBody = Object.assign(document.createElement("div"), {
         className: "lineBody"
       });
+      let title = TS.html.display.titleBar({path: path, itemName: itemName, depth: depth, unfocus: unfocus, item: item, opts: opts, focused: focused, lineBody: lineBody})
+      line.append(title);
       if (typeof (item) === "string" && maxDepth === undefined) {
         let textField = Object.assign(document.createElement("div"), {
           className: "textField",
@@ -226,7 +226,7 @@ Object.assign(TS.html.display, {
       opts: opts
     };
   },
-  titleBar : function({itemName, unfocus, path, item, depth, opts, focused}) {
+  titleBar : function({itemName, unfocus, path, item, depth, opts, focused, lineBody}) {
     let title = TS.lib.createNode("div", {
       className: "title",
       draggable: "true",
@@ -296,21 +296,87 @@ Object.assign(TS.html.display, {
         opts.focus(targ, TS.data.currentView[TS.data.currentView.length-1]);
       }
     });
+    let openEditorChoices;
     let editorChoices = function(name) {
-      let str = ``;
+      let buttons = [];
+      let addEditor = function(type) {
+        document.body.append(TS.lib.createNode('div', {
+          id: 'editor',
+          style: `width: ${TS.refs.display.clientWidth}px; height: ${TS.refs.display.clientHeight}px; position: absolute; z-index: 1; top: ${TS.refs.topNav.clientHeight}px; left: ${TS.refs.secondaryNavBar.clientWidth}px`
+        }))
+        let aceEditor;
+        switch (type) {
+          case 'rich text':
+            $(document).ready(function() {
+              $('#editor').summernote();
+              $('#editor').summernote({
+                focus: true
+              });
+              document.querySelector('.note-editor').style = `
+                width: ${TS.refs.display.clientWidth}px; height: ${TS.refs.display.clientHeight}px; position: absolute; z-index: 1; top: ${TS.refs.topNav.clientHeight}px; left: ${TS.refs.secondaryNavBar.clientWidth}px
+              `
+              $('#editor').summernote('code', lineBody.querySelector('.textField').innerHTML);
+              aceEditor = {
+                getValue: function() {
+                  let text = $('#editor').summernote('code')
+                  $('#editor').summernote('destroy');
+
+                  return text;
+                },
+                setValue: function() {// code insertion todo?
+                }
+              }
+            });
+            break;
+          default:
+            aceEditor = ace.edit("editor");
+            aceEditor.setTheme("ace/theme/monokai");
+            aceEditor.getSession().setMode("ace/mode/" + type);
+            aceEditor.setValue(item);
+        }
+        let exitEditor = TS.lib.createNode('button', {
+          innerText: 'Exit Editor',
+          className: 'baseButtons2',
+          onclick: function() {
+            item = aceEditor.getValue();
+            path[itemName] = item;
+            if (itemName[0] == '*') {
+              lineBody.querySelector('.textField').innerText = item;
+            } else {
+              lineBody.querySelector('.textField').innerHTML = marked(item);
+            }
+            document.querySelector('#editor').remove();
+            this.remove()
+          }
+        })
+        TS.refs.secondaryNavBar.shadowRoot.querySelector('#left').append(exitEditor)
+      }
       if (name[0] == '*') {
-        str += `<button>js</button><button>css</button>
-        <button>html</button><button>json</button><button>html</button>`
+        let opts = ['javascript', 'css', 'json', 'html']
+        opts.forEach(ele => {
+          let aBtn = TS.lib.createNode('button', {
+            innerText: ele,
+            onclick: function() {addEditor(ele)}
+          })
+          buttons.push(aBtn)
+        })
       } else {
-        str += `<button>markdown</button><button>text</button>`
+        let opts = ['rich text', 'markdown', 'html']
+        opts.forEach(ele => buttons.push(
+          TS.lib.createNode('button', {
+            innerText: ele,
+            onclick: function() {
+              addEditor(ele)
+            }
+          })
+        ))
       }
       let div = TS.lib.createNode('div', {
-        innerHTML: str,
         className: 'editorTooltip'
       })
+      div.append(...buttons)
       return div
     }
-    let openEditorChoices;
     let editor = TS.lib.createNode('div', {
       innerHTML: `editor`,
       className: "editor",
@@ -318,8 +384,8 @@ Object.assign(TS.html.display, {
         openEditorChoices = editorChoices(titleContent.innerHTML)
         this.append(openEditorChoices)
       },
-      onmouseout: function() {
-        openEditorChoices.remove()
+      onmouseleave: function() {
+          openEditorChoices.remove()
       }
     })
 
@@ -346,7 +412,9 @@ Object.assign(TS.html.display, {
     buttonGroup.append(keyDelete);
     if (depth === 0 && unfocus) buttonGroup.append(unfocusBtn);
     if (depth > 0) buttonGroup.append(focusMe);
-    buttonGroup.append(editor)
+    if (typeof(item) ==='string') {
+      buttonGroup.append(editor)
+    }
     return title;
   }
 });

@@ -5,7 +5,7 @@
     color: rgb(240,240,240);
   `;
   let hover = `background-color: rgba(0,30,155,.7);`;
-  TS.cssTemplates.dark = {
+  TS.cssTemplates.midnight = {
     link: `
       a {
         cursor: pointer;

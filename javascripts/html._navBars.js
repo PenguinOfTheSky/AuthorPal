@@ -111,9 +111,7 @@ TS.html._navBars = {
     root.append(topDiv, bottomDiv)
     return box;
   },
-  displayLeftNav: function ({
-    mainDisplay
-  }) {
+  displayLeftNav: function ({mainDisplay}) {
     let item = TS.lib.createComponent({
       id: "TS.html._navBars.displayLeftNav",
       css: TS.css.boxes.displayLeftNav(),
@@ -125,10 +123,7 @@ TS.html._navBars = {
         </div>
         <div id='tree'></div>
       `,
-      js: function ({
-        root,
-        opts
-      }) {
+      js: function ({root, opts}) {
         root.querySelector("#show").onclick = function () {
           mainDisplay.showAll();
         };

@@ -20,7 +20,7 @@ Object.assign(TS.js, {
     for (let x in obj) {
       output[x] = {name: x, index: i}
       if (typeof(obj[x]) == 'object') {
-        output[x].children = sort(obj[x])
+        output[x].children = TS.js.sortShadowTree(obj[x])
       } else if (typeof(obj[x]) == 'string') {
         if (obj[x][0] == '*') output[x].editor = 'text'
         else output[x].editor = 'md'

@@ -83,7 +83,7 @@ TS.js.templates = {
         "#advanced": {
           "*head": `
             <title></title>
-            <script src=''></script>
+            <script src=""></script>
           `,
           styles: {
             "*chosenStyle": "*default",
@@ -113,8 +113,7 @@ TS.js.templates = {
         "chapters": {},
         "timeline(s)": {}
       };
-      js.sortShadowTree(obj)
-      obj.master_root.shadowTree = sort(obj)
+      obj.master_root.shadowTree = TS.js.sortShadowTree(obj)
       return obj;
     },
     website: function () {
