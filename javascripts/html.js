@@ -296,6 +296,33 @@ Object.assign(TS.html.display, {
         opts.focus(targ, TS.data.currentView[TS.data.currentView.length-1]);
       }
     });
+    let editorChoices = function(name) {
+      let str = ``;
+      if (name[0] == '*') {
+        str += `<button>js</button><button>css</button>
+        <button>html</button><button>json</button><button>html</button>`
+      } else {
+        str += `<button>markdown</button><button>text</button>`
+      }
+      let div = TS.lib.createNode('div', {
+        innerHTML: str,
+        className: 'editorTooltip'
+      })
+      return div
+    }
+    let openEditorChoices;
+    let editor = TS.lib.createNode('div', {
+      innerHTML: `editor`,
+      className: "editor",
+      onmouseenter: function() {
+        openEditorChoices = editorChoices(titleContent.innerHTML)
+        this.append(openEditorChoices)
+      },
+      onmouseout: function() {
+        openEditorChoices.remove()
+      }
+    })
+
     let focusMe = Object.assign(document.createElement("button"), {
       innerHTML: `&nbsp;&nbsp;`,
       title: `focus this element`,
@@ -319,6 +346,7 @@ Object.assign(TS.html.display, {
     buttonGroup.append(keyDelete);
     if (depth === 0 && unfocus) buttonGroup.append(unfocusBtn);
     if (depth > 0) buttonGroup.append(focusMe);
+    buttonGroup.append(editor)
     return title;
   }
 });

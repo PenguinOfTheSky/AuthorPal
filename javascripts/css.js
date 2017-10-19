@@ -146,7 +146,7 @@ return {
     },
     display: function () {
       let str = ``;
-      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight;
+      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight -1;
       str += `
         :host {
           display: inline-block;
@@ -168,6 +168,13 @@ return {
       }
       .objectContainer > .title > .titleContent {
         text-decoration: underline;
+      }
+      .editor {
+        display: inline-block;
+      }
+      .editorTooltip {
+        position: absolute;
+        z-index: 1;
       }
       .title {
         line-height: 1.1rem;

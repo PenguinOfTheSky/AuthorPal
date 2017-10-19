@@ -14,10 +14,25 @@ Object.assign(TS.js, {
       box.remove();
     };
   },
+  sortShadowTree: function(obj) {
+    let output = {}
+    let i = 0;
+    for (let x in obj) {
+      output[x] = {name: x, index: i}
+      if (typeof(obj[x]) == 'object') {
+        output[x].children = sort(obj[x])
+      } else if (typeof(obj[x]) == 'string') {
+        if (obj[x][0] == '*') output[x].editor = 'text'
+        else output[x].editor = 'md'
+      }
+      i++
+    }
+    return output
+  },
   events: {
-    // dragTitle: function (event) {
-    //   console.log(event)
-    // }
+    dragTitle: function (event) {
+      console.log(event)
+    }
   },
   fileFormat: {
     markdownBlog: function (file) {
