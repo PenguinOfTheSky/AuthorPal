@@ -203,6 +203,9 @@ return {
           background-color: rgb(240,245,240);
           `}
       }
+      .ace_editor {
+        font-size: 1rem ;
+      }
       .textField > p {
         margin: 0;
         /* margin-bottom: -1rem; */

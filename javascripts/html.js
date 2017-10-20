@@ -332,6 +332,10 @@ Object.assign(TS.html.display, {
             aceEditor = ace.edit("editor");
             aceEditor.setTheme("ace/theme/monokai");
             aceEditor.getSession().setMode("ace/mode/" + type);
+            aceEditor.setOptions({
+              wrap: true,
+              fontSize: "1rem"
+            });
             aceEditor.setValue(item);
         }
         let exitEditor = TS.lib.createNode('button', {
