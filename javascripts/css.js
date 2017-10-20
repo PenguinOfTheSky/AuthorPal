@@ -194,7 +194,6 @@ return {
         display: block;
       }
       .textField {
-        white-space: pre-wrap;
         cursor: text;
         padding: 0.1rem 0.3rem;
         min-height:.5rem;
