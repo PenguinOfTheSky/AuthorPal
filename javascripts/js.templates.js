@@ -44,10 +44,13 @@ TS.js.templates = {
       return {};
     },
     character: function () {
-      return `**blurb:**
-**appearance:**
-**personality:**
-**brief timeline:**`;
+      return `**blurb:**  
+      ***
+**appearance:**  
+***
+**personality:**  
+***
+**brief timeline:** `;
     },
     chapter: function () {
       let obj = {

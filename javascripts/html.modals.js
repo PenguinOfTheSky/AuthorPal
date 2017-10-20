@@ -67,11 +67,17 @@ TS.html.modals = {
          </form>
         </div>
       `,
-      js: function ({
-        box,
-        root
-      }) {
+      js: function ({box,root}) {
         TS.js.baseModal(box, root);
+        root.querySelector('#addLineForm').onkeypress = function(event) {
+          if(event.charCode == 13){
+            event.preventDefault();
+            root.querySelector("#addLineForm").querySelector('.btnSubmit').click();
+            return false; // returning false will prevent the event from bubbling up.
+          } else {
+              return true;
+          }
+        }
         root.querySelector("#addLineForm").onsubmit = function (event) {
           event.preventDefault();
           let name = this.querySelector("#name").value;
