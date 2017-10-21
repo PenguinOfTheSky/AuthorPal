@@ -207,7 +207,8 @@ return {
       }
       .textField > p {
         margin: 0;
-        /* margin-bottom: -1rem; */
+        margin-bottom: .2rem;
+        line-height: 1.15;
       }
       .textField ul, .textField ol {
         display:flex;
@@ -215,7 +216,6 @@ return {
         margin: .1rem;
         padding: 0px;
         padding-left: 1rem;
-        margin-bottom: -1rem;
       }
       .addLine {
         background-color: #5cb85c;

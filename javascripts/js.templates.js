@@ -43,14 +43,20 @@ TS.js.templates = {
     container: function () {
       return {};
     },
-    character: function () {
+    character_Short: function () {
       return `**blurb:**  
-      ***
 **appearance:**  
-***
 **personality:**  
-***
 **brief timeline:** `;
+    },
+    character_Long: function() {
+      return {
+        blurb: ``,
+        appearance: ``,
+        personality: ``,
+        motivations: ``,
+        timeline: {}
+      }
     },
     chapter: function () {
       let obj = {
