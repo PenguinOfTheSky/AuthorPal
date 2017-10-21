@@ -27,7 +27,7 @@ Object.assign(TS.html.display, {
         root.innerHTML = "";
         sorted = TS.html.display.sort(id);
         root.append(sorted.element);
-      },
+      }, 
       swapTab: function (id) {
         currentID = id;
         sorted.opts.swapTab(id);
@@ -214,13 +214,6 @@ Object.assign(TS.html.display, {
         root.append(style, (focused.length > 0 ? determine(...item) : determine(TS.data.chosenFile[id], id, TS.data.chosenFile, {})));
       }
     });
-    setTimeout(function () {
-      let height = window.innerHeight - TS.refs.mainNavBar.clientHeight;
-      if (TS.data.alignment === "top") {
-        height -= TS.refs.secondaryNavBar.clientHeight;
-      }
-      TS.refs.display.style["max-height"] = height + "px";
-    }, 20);
     return {
       element: box,
       opts: opts
@@ -245,8 +238,15 @@ Object.assign(TS.html.display, {
           itemName = this.innerText;
           path[itemName] = item;
           delete path[oldItemName];
+          let targPath = TS.data.currentView
+          let obj = TS.data.chosenFile
+          for (let i = 0; i < targPath.length-1; i++) {
+            obj = obj[targPath[i]]
+          }
           if (path === TS.data.chosenFile) {
             TS.refs.displayOpts.render(itemName);
+          } else {
+            TS.refs.displayOpts.swapFocus(obj, targPath[targPath.length-1]);
           }
         }
         if (itemName !== this.innerText)

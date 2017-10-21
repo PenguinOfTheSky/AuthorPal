@@ -103,11 +103,14 @@ return {
     },
     displayLeftNav: function () {
       let str = ``;
+      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight -1;
       str += `
       :host {
         padding: .15rem;
         ${_.backgroundNav2}
-        min-height:1.5rem;
+        max-height: ${maxHeight}px;
+        overflow-y: scroll;
+        overflow-x: hidden;
         max-width:20%;
         display:inline-block;
       }
@@ -147,7 +150,7 @@ return {
     },
     display: function () {
       let str = ``;
-      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight -2;
+      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight -1;
       str += `
         :host {
           display: inline-block;
