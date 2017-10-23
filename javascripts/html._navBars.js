@@ -117,7 +117,7 @@ TS.html._navBars = {
       css: TS.css.boxes.displayLeftNav(),
       html: `
         <div id='left'>
-          <button class='baseButtons2' id = 'show'>Show All</button>
+          <button class='baseButtons2' id = 'show'>Unfold</button>
           <button class='baseButtons2' id='fold1'>Fold >1</button>
           <button class='baseButtons2' id='fold2'>Fold >2</button>
         </div>

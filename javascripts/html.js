@@ -225,6 +225,9 @@ Object.assign(TS.html.display, {
       draggable: "true",
       ondragstart: function (event) {
         TS.js.events.dragTitle(event);
+      },
+      ondragend: function(event) {
+        TS.js.events.dragTitle(event)
       }
     });
     let titleContent = Object.assign(document.createElement("span"), {

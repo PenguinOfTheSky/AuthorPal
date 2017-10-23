@@ -103,7 +103,7 @@ return {
     },
     displayLeftNav: function () {
       let str = ``;
-      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight -1;
+      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight -4;
       str += `
       :host {
         padding: .15rem;
@@ -111,7 +111,7 @@ return {
         max-height: ${maxHeight}px;
         overflow-y: scroll;
         overflow-x: hidden;
-        max-width:20%;
+        width:20%;
         display:inline-block;
       }
       #left {
@@ -157,6 +157,7 @@ return {
           max-height: ${maxHeight}px;
           overflow-y: scroll;
           flex-grow:1;
+          width: 80%;
         }`;
       str += `
       ${_.btn}
