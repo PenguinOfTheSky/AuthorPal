@@ -23,6 +23,12 @@ TS.start = function (parent) {
   });
   TS.events.save = function (callback) {
     //TS.start
+    TS.js.indexedDB(function(cb) {
+      db.put({all: TS.data.local})
+    }, function() {
+      console.log(store)
+      console.log('fish')
+    })
     localforage.setItem("Book", JSON.stringify(TS.data.local), function () {
       if (callback) callback();
     });
