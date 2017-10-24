@@ -77,34 +77,30 @@ Now that you have a copy of your fork, there is work you will need to do to keep
 
 Do this prior to every time you create a branch for a pull request:
 
-1. Make sure you are on the `master` branch
+Make sure you are on the `master` branch
 
   > ```shell
   > $ git status
   > On branch master
   > Your branch is up-to-date with 'origin/master'.
   > ```
-
   > If your aren't on `master`, resolve outstanding files / commits and checkout the `master` branch
-
   > ```shell
-  > $ git checkout master
+  > git checkout master
   > ```
 
-2. Do a pull with rebase against `upstream`
+Do a pull with rebase against `upstream`
 
   > ```shell
-  > $ git pull --rebase upstream master
+  > git pull --rebase upstream master
   > ```
-
   > This will pull down all of the changes to the original master branch, without making an additional commit in your local repo.
 
-3. (_Optional_) Force push your updated master branch to your GitHub fork
+(_Optional_) Force push your updated master branch to your GitHub fork
 
   > ```shell
-  > $ git push origin master --force
+  > git push origin master --force
   > ```
-
   > This will overwrite the master branch of your fork.
 
 ### Setup AuthorPal
@@ -124,23 +120,24 @@ Name the branch something like `fix/xxx` or `feature/xxx` where `xxx` is a short
 To create a git branch on your local machine (and switch to this branch):
 
 ```shell
-$ git checkout -b [name_of_your_new_branch]
+git checkout -b [name_of_your_new_branch]
 ```
 
 and to push to GitHub:
 
 ```shell
-$ git push origin [name_of_your_new_branch]
+git push origin [name_of_your_new_branch]
 ```
 
-##### If you need more help with branching, take a look at [this](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches).
+##### If you need more help with branching, take a look at [this](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)
 
 ### Make Changes
+
 This bit is up to you!
 
 ### Creating a Pull Request
 
-#### What is a Pull Request?
+#### Pull Request
 
 A pull request (PR) is a method of submitting proposed changes to a GitHub repository. You will make changes to copies of the files which make up AuthorPal in a personal fork, then apply to have them accepted by AuthorPal proper.
 
@@ -152,8 +149,8 @@ files. This is critical, because if your PR is not accepted, your copy of
 master will be forever sullied and the only way to fix it is to delete your
 fork and re-fork.
 
-1.  Perform the maintenance step of rebasing `master`.
-2.  Ensure you are on the `master` branch using `git status`:
+1. Perform the maintenance step of rebasing `master`.
+2. Ensure you are on the `master` branch using `git status`:
 
 ```bash
 $ git status
@@ -163,47 +160,47 @@ Your branch is up-to-date with 'origin/master'.
 nothing to commit, working directory clean
 ```
 
-1.  If you are not on master or your working directory is not clean, resolve
+1. If you are not on master or your working directory is not clean, resolve
     any outstanding files/commits and checkout staging `git checkout master`
 
-2.  Create a branch off of `master` with git: `git checkout -B
+2. Create a branch off of `master` with git: `git checkout -B
     branch/name-here` **Note:** Branch naming is important. Use a name like
     `fix/short-fix-description` or `feature/short-feature-description`.
 
-3.  Edit your file(s) locally with the editor of your choice
+3. Edit your file(s) locally with the editor of your choice
 
-4.  Check your `git status` to see unstaged files.
+4. Check your `git status` to see unstaged files.
 
-5.  Add your edited files: `git add path/to/filename.ext` You can also do: `git
+5. Add your edited files: `git add path/to/filename.ext` You can also do: `git
     add .` to add all unstaged files. Take care, though, because you can
     accidentally add files you don't want added. Review your `git status` first.
 
-6.  Commit your edits: `git commit -m "Brief Description of Commit"`. Do not add the issue number in the commit message.
+6. Commit your edits: `git commit -m "Brief Description of Commit"`. Do not add the issue number in the commit message.
 
-7.  Preferably squash your commits, if there are more than one.
+7. Preferably squash your commits, if there are more than one.
 
-8.  Push your commits to your GitHub Fork: `git push -u origin your-branch-name`
+8. Push your commits to your GitHub Fork: `git push -u origin your-branch-name`
 
-9.  Submit a Pull Request
+9. Submit a Pull Request
 
 ### Submitting a Pull Request
 
-1.  Once the edits have been committed, you will be prompted to create a pull
+1. Once the edits have been committed, you will be prompted to create a pull
     request on your fork's GitHub Page.
 
-2.  Submit a pull request from your branch to AuthorPal `master` branch.
+2. Submit a pull request from your branch to AuthorPal `master` branch.
 
-3.  The title (also called the subject) of your PR should be descriptive of your
+3. The title (also called the subject) of your PR should be descriptive of your
     changes and succinctly indicates what is being fixed.
 
-    -   **Do not add the issue number in the PR title or commit message.**
+    - **Do not add the issue number in the PR title or commit message.**
 
-    -   Examples: `Add Contribution text` `Correct typo in Contribution.md`
+    - Examples: `Add Contribution text` `Correct typo in Contribution.md`
 
-4.  In the body of your PR include a more detailed summary of the changes you
+4. In the body of your PR include a more detailed summary of the changes you
     made and why.
 
-    -   If the PR is meant to fix an existing bug/issue, then, at the end of
+    - If the PR is meant to fix an existing bug/issue, then, at the end of
         your PR's description, append the keyword `closes` and #xxxx (where xxxx
         is the issue number). Example: `closes #1337`. This tells GitHub to
         close the existing issue, if the PR is merged.
