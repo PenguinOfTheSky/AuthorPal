@@ -1,6 +1,6 @@
 TS.js.indexedDB = function(fn) {
   var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
-  var open = indexedDB.open("test", 1);
+  var open = indexedDB.open("Lycelia", 1);
   // Create the schema
   open.onupgradeneeded = function() {
       var db = open.result;
