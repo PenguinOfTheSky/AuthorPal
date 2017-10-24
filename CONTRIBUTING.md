@@ -14,7 +14,8 @@ If you find a bug that is not listed as an issue, feel free to add a new issue.
 ---
 
 ## Contribution Guidelines
-- [Code Style](#code-style)
+
+- [ESLint Setup](#code-style)
 - [Forking the Project](#forking-the-project)
 - [Create a Branch](#create-a-branch)
 - [Make Changes](#make-changes)
@@ -22,10 +23,21 @@ If you find a bug that is not listed as an issue, feel free to add a new issue.
 - [Submitting a Pull Request](#submitting-a-pull-request)
 - [Next Steps](#next-steps)
 
-### Code Style
-Indentation is of paramount importance.
-Are you having trouble parsing the file to edit?
-Try Atom's fold-navigator by turgeza.
+### ESLint Setup
+
+#### ESLint in VSCode
+
+1. Download the ESLint extension
+2. Install ESLint globally via npm using the following command `npm install -g eslint`
+3. Add the path to the eslint config file to your user settings.
+
+Just add the following option to your user settings.
+
+```javascript
+"eslint.options": {
+  "configFile": "./.eslintrc.json"
+}
+```
 
 ### Forking the Project
 
