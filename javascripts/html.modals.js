@@ -151,8 +151,8 @@ TS.html.modals = {
           <b>Save a Backup</b>
           <button id='exit'>X</button>
           <br>
-          Your files are saved automatically to your localStorage every fifteen seconds but if you wipe your cookies you could lose them.
-          To avoid that, save a backup copy to your computer using the button below.
+          Your files are saved automatically to your browser cache every time you offclick a text field but if you wipe your cookies you could lose them.
+          To avoid that, save a backup copy to your computer using the button below. (upload it back to project to recover lost data)
           Left-click to save to downloads folder or right-click to choose location on harddrive to save to.
           <a href="${url}" download="AuthorPal-${date.toDateString()}">Download</a>
         </div>

@@ -1,4 +1,4 @@
-TS.js.indexedDB = function(fn, callback) {
+TS.js.indexedDB = function(fn) {
   var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
   var open = indexedDB.open("test", 1);
   // Create the schema
@@ -15,10 +15,14 @@ TS.js.indexedDB = function(fn, callback) {
     var tx = db.transaction("AP", "readwrite");
     var store = tx.objectStore("AP");
     window.store = store
-    let x = store.getAll()
-    x.onsuccess = function() {console.log(x.result)}
     var index = store.index("idIndex");
-    if (fn) fn(callback);
+    let opts = {
+      index: index,
+      store: store,
+      db: db,
+      tx: tx
+    }
+    if (fn) fn(opts);
     tx.oncomplete = function() {
         db.close();
     };

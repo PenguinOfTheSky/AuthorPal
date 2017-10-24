@@ -142,6 +142,7 @@ Object.assign(TS.html.display, {
             if (itemName[0] !== "*") {
               this.innerHTML = formatType(this.innerText);
             }
+            TS.events.save();
           }
         });
         if (itemName[0] === "*") {
@@ -254,6 +255,7 @@ Object.assign(TS.html.display, {
         }
         if (itemName !== this.innerText)
           this.innerText = itemName;
+        TS.events.save();
       }
     });
     let buttonGroup = Object.assign(document.createElement("div"), {
