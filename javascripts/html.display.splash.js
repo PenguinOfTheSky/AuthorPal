@@ -12,7 +12,7 @@ TS.html.display.splash = function () {
     </div>
     <div id='right'>
       <div id='about'>
-        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.8.1</h1>
+        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.8.5</h1>
         <div style = 'text-indent:1rem;'>
           <b>To get started click Menu (top left) and create a new project by clicking "New File"</b>
           <p>To learn more see our <a href ='FAQ.html' target="_blank">FAQ</a>.
@@ -25,8 +25,6 @@ TS.html.display.splash = function () {
         <ul id='filesList'>
       </div><hr>
       <div id='admin'>
-      d
-      d<br>d<br>d<br>d<br>d<br>d<br>d<br>d<br>d<br>
       </div>
       <div id = 'help'>
       </div>
@@ -56,6 +54,10 @@ TS.html.display.splash = function () {
           TS.events.openFile(event.target.innerText);
         };
       }
+      root.querySelector('#filesList').addEventListener('contextmenu', function(event) {
+        event.preventDefault()
+        console.log(event)
+      })
     }
   });
 };
