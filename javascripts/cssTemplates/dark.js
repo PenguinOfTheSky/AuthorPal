@@ -33,6 +33,11 @@
       border-bottom-left-radius: 0.5rem;
       border-bottom: 1px solid #888;`,
     backgroundTitle: `#444`,
+    titleBar: `
+      .focusMe {
+        display: none; /*screws up last-child border-radius.*/
+      }
+    `,
     titleFont: `
       ${font}
     `,

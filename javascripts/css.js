@@ -34,7 +34,8 @@ return {
     root: function () {
       return `
       #root {
-        min-height:100%;
+        height: 100%;
+        max-height:100%;
         display: flex;
         flex-direction: column;
         ${_.backgroundMain}
@@ -103,12 +104,11 @@ return {
     },
     displayLeftNav: function () {
       let str = ``;
-      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight -4;
       str += `
       :host {
         padding: .15rem;
         ${_.backgroundNav2}
-        max-height: ${maxHeight}px;
+        max-height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
         width:20%;
@@ -144,17 +144,18 @@ return {
       let str = `
           display: flex;
           max-width:100%;
+          width: 100%;
+          max-height:100%;
           flex-grow:1;
         `;
       return str;
     },
     display: function () {
       let str = ``;
-      let maxHeight = document.body.clientHeight - TS.refs.mainNavBar.clientHeight -1;
       str += `
         :host {
           display: inline-block;
-          max-height: ${maxHeight}px;
+          max-height: 100%;
           overflow-y: scroll;
           flex-grow:1;
           width: 80%;
@@ -287,15 +288,35 @@ return {
       .buttonGroup button:last-child {
         border-top-right-radius: .4rem;
         border-bottom-right-radius: .4rem;
-      }`;
+      }
+      ${_.titleBar || ''}
+      `;
       return str;
     },
     splash: function () {
+      console.log(TS.refs.mainNavBar)
       return `
       ${_.link}
       :host {
         box-sizing:border-box;
+        width: 100%;
+        display: flex;
+        max-height:100%;
+      }
+      #left {
         padding: 1%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+      #right {
+        padding: 1%;
+        overflow-y: scroll;
+        max-height: 100%;
+      }
+      #left img {
+        width: 1.5rem;
+        height: 1.5rem;
       }
       hr {
         width: 100%;
@@ -319,7 +340,16 @@ return {
       #filesList li:hover{
         cursor: pointer;
         text-decoration: underline;
-      }`;
+      }
+      ${_.splash || `
+        #left {
+          background-color: #050505;
+        }
+        #left img:hover {
+          box-shadow: 0 0 .1rem .2rem white;
+        }
+        `}
+      `;
     }
   },
   modals: {
