@@ -16,40 +16,21 @@ TS.start = function (parent) {
         TS.data.local = y.result.data 
         begin()
       } else {
-        localforage.getItem("Book", function (err, value) {
-          if (value == null || value == 'null') {
-            value = JSON.stringify({
-              files: {},
-              preferences: {}
-            });
-            localforage.setItem("Book", value, function () {});
+        TS.data.local = {
+          files: {},
+          preferences: {
+            theme: 'default'
           }
-          TS.data.local = JSON.parse(value);
-          if (TS.data.local.preferences.theme === "Sparky") {
-            TS.data.local.preferences.theme = "default";
-          }
-          begin();
-        });
+        };
+        TS.events.save(begin())
       }
     }
   })
   TS.events.save = function (callback) {
-    //TS.start
-    TS.js.indexedDB(function(cb) {
+    TS.js.indexedDB(function(callback) {
       store.put({id: 'master_999', data: TS.data.local})
     })
-    /*
-    localforage.setItem("Book", JSON.stringify(TS.data.local), function () {
-      if (callback) callback();
-    });
-    */
   };
-  /*
-  setInterval(function () {
-    TS.events.save();
-  }, 15000);
-  */
-  //initialize objects.
   let begin = function () {
     TS.css = TS.css();
     let parentStyle = TS.lib.createNode("style", {

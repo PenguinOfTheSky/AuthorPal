@@ -12,7 +12,7 @@ TS.html.display.splash = function () {
     </div>
     <div id='right'>
       <div id='about'>
-        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.8.5</h1>
+        <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.8.7</h1>
         <div style = 'text-indent:1rem;'>
           <b>To get started click Menu (top left) and create a new project by clicking "New File"</b>
           <p>To learn more see our <a href ='FAQ.html' target="_blank">FAQ</a>.
@@ -43,7 +43,9 @@ TS.html.display.splash = function () {
         let list = ``;
         for (let x in files) {
           if (files.hasOwnProperty(x)) {
-            list += `<li>${x}</li>`;
+            let liClass = 'file'
+            if (files[x].master_root.type == 'folder') liClass = 'folder'
+            list += `<li data-origin = 'testing', class='${liClass}' title='${files[x].master_root.type || ''}'> ${x}</li>`;
           }
         }
         list += "</ul>";
@@ -56,7 +58,8 @@ TS.html.display.splash = function () {
       }
       root.querySelector('#filesList').addEventListener('contextmenu', function(event) {
         event.preventDefault()
-        console.log(event)
+        let loc = [event.clientX, event.clientY]
+        root.append(TS.html.modals.fileContextNav(loc, event.target.innerText, event.target.dataset.origin))
       })
     }
   });

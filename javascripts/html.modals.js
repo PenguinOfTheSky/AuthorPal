@@ -354,5 +354,12 @@ TS.html.modals = {
       }
     });
     return item.box;
+  },
+  fileContextNav: function(loc, name, origin) {
+    console.log(loc, name, origin)
+    let div = TS.lib.createNode('div', {
+      className: 'contextMenu'
+    })
+    return div;
   }
 };

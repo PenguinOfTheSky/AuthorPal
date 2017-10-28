@@ -294,7 +294,6 @@ return {
       return str;
     },
     splash: function () {
-      console.log(TS.refs.mainNavBar)
       return `
       ${_.link}
       :host {
@@ -324,6 +323,12 @@ return {
       h1,h2 {
         text-align:center;
         margin: .15rem;
+      }
+      .folder {
+        
+      }
+      .file {
+        list-style-image: url('icons/iconmonstr-note-7.svg');
       }
       h1 {
         font-size: 1.6rem;
