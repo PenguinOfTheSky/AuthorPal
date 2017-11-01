@@ -425,6 +425,15 @@ return {
         .contextMenu:hover {
           display: inline-block;
         }
+        .fileContextTitle {
+          cursor: default;
+        }
+        .fileContextOpts {
+          cursor: pointer;
+        }
+        .fileContextOpts:hover {
+          ${_.hoverable || "background-color: blue;"}
+        }
       `
     }
 

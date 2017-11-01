@@ -6,6 +6,9 @@
   `;
   let hover = `background-color: rgba(0,30,155,.7);`;
   TS.cssTemplates.midnight = {
+    hoverable: `
+      ${hover}
+    `,
     link: `
       a {
         cursor: pointer;
