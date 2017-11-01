@@ -10,6 +10,7 @@ Product is built to be Chrome compatible.  Should work in safari/opera as well b
 FAQ is included in product.
 
 ## Patch notes:
+v2.9.0 added context menu (right-click) for files on front page.
 v2.8.7 Removed localForage library dependency  
 v2.7.0 Added multiple editor support  
 v2.6.0 new theme added.  

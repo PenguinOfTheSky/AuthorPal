@@ -356,12 +356,11 @@ TS.html.modals = {
     return item.box;
   },
   fileContextNav: function(event) {
-    console.log(event.target)
+    let targ = event.target
     let loc = [event.clientX, event.clientY], 
     name = event.target.innerText,  
     origin = event.target.dataset.origin,
     type = event.target.classList;
-    console.log(type)
     let div = TS.lib.createNode('div', {
       className: 'contextMenu',
       style: `left: ${loc[0]-9}px; top: ${loc[1]-9}px;display: inline-block;`
@@ -376,7 +375,11 @@ TS.html.modals = {
       }),
       open: TS.lib.createNode('div', {
         className: 'fileContextOpts',
-        innerText: 'open'
+        innerText: 'open',
+        onclick: function(secEv) {
+          console.log(targ)
+          targ.click();
+        }
       }),
       rename: TS.lib.createNode('div', {
         className: 'fileContextOpts',
@@ -392,7 +395,17 @@ TS.html.modals = {
       }),
       delete: TS.lib.createNode('div', {
         className: 'fileContextOpts',
-        innerText: 'delete'
+        innerText: 'delete',
+        onclick: function() {
+          let callback = function() {
+            console.log(targ)
+            //add support for nested files
+            // innerHTML vs innerText, check safety
+            delete TS.data.local.files[targ.innerHTML]
+            TS.events.save()
+          }
+          document.body.append(TS.html.modals.confirmationDelete(targ.innerHTML, callback));
+        }
       })
     }
     div.append(style)
@@ -403,8 +416,10 @@ TS.html.modals = {
       case type.contains('folder'):
         div.append(btns.title, btns.rename, btns.open, btns.move, btns.delete)
         break;
-      default: 
-        div.append(btn.create)
+      case !targ.style["z-index"]: 
+        div.append(btns.create)
+        break;
+      
     }
     let undisplay = function() {
       div.style.display = ''
