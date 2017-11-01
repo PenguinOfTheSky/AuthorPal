@@ -411,6 +411,21 @@ return {
     openFile: function () {
       return `
       ${TS.css.modal}`;
+    },
+    fileContextNav: function() {
+      return `
+        .contextMenu {
+          position: absolute;
+          z-index: 1;
+          display: none;
+          ${_.backgroundModals}
+          padding: .5rem;
+          ${_.border1}
+        }
+        .contextMenu:hover {
+          display: inline-block;
+        }
+      `
     }
 
   }
