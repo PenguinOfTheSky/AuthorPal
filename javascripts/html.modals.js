@@ -358,8 +358,41 @@ TS.html.modals = {
   fileContextNav: function(loc, name, origin) {
     console.log(loc, name, origin)
     let div = TS.lib.createNode('div', {
-      className: 'contextMenu'
+      className: 'contextMenu',
+      style: `left: ${loc[0]-9}px; top: ${loc[1]-9}px;display: inline-block;`
     })
+    let style = TS.lib.createNode('style', {
+      innerHTML: TS.css.modals.fileContextNav()
+    })
+    let btns = {
+      open: TS.lib.createNode('div', {
+        className: 'fileContextOpts',
+        innerText: 'open'
+      }),
+      rename: TS.lib.createNode('div', {
+        className: 'fileContextOpts',
+        innerText: 'rename'
+      }),
+      move: TS.lib.createNode('div', {
+        className: 'fileContextOpts',
+        innerText: 'Move selected file'
+      }),
+      create: TS.lib.createNode('div', {
+        className: 'fileContextOpts',
+        innerText: 'Create new file'
+      }),
+      delete: TS.lib.createNode('div', {
+        className: 'fileContextOpts',
+        innerText: 'delete'
+      })
+    }
+    div.append(style, btns.open)
+    let undisplay = function() {
+      div.style.display = ''
+    }
+    setTimeout(function() {
+      undisplay()
+    }, 100)
     return div;
   }
 };
