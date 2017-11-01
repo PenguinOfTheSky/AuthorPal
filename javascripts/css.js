@@ -425,6 +425,9 @@ return {
         .contextMenu:hover {
           display: inline-block;
         }
+        .fileContextOpts:hover {
+          ${_.hoverable || "background-color: blue;"}
+        }
       `
     }
 

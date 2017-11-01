@@ -52,14 +52,15 @@ TS.html.display.splash = function () {
         root.querySelector("#filesListContainer").style.display = "";
         root.querySelector("#filesList").innerHTML = list;
         root.querySelector("#filesList").onclick = function (event) {
-          TS.data.chosenFile = TS.data.local.files[event.target.innerText];
-          TS.events.openFile(event.target.innerText);
+          if (event.target.classList.contains('file')) {
+            TS.data.chosenFile = TS.data.local.files[event.target.innerText];
+            TS.events.openFile(event.target.innerText);
+          }
         };
       }
-      root.querySelector('#filesList').addEventListener('contextmenu', function(event) {
+      root.querySelector('#filesListContainer').addEventListener('contextmenu', function(event) {
         event.preventDefault()
-        let loc = [event.clientX, event.clientY]
-        root.append(TS.html.modals.fileContextNav(loc, event.target.innerText, event.target.dataset.origin))
+        root.append(TS.html.modals.fileContextNav(event))
       })
     }
   });

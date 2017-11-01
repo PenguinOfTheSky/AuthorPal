@@ -355,8 +355,13 @@ TS.html.modals = {
     });
     return item.box;
   },
-  fileContextNav: function(loc, name, origin) {
-    console.log(loc, name, origin)
+  fileContextNav: function(event) {
+    console.log(event.target)
+    let loc = [event.clientX, event.clientY], 
+    name = event.target.innerText,  
+    origin = event.target.dataset.origin,
+    type = event.target.classList;
+    console.log(type)
     let div = TS.lib.createNode('div', {
       className: 'contextMenu',
       style: `left: ${loc[0]-9}px; top: ${loc[1]-9}px;display: inline-block;`
@@ -365,6 +370,10 @@ TS.html.modals = {
       innerHTML: TS.css.modals.fileContextNav()
     })
     let btns = {
+      title: TS.lib.createNode('div', {
+        className: 'fileContextTitle',
+        innerHTML: `<b>file: "${name}"</b><br><hr>`
+      }),
       open: TS.lib.createNode('div', {
         className: 'fileContextOpts',
         innerText: 'open'
@@ -379,14 +388,24 @@ TS.html.modals = {
       }),
       create: TS.lib.createNode('div', {
         className: 'fileContextOpts',
-        innerText: 'Create new file'
+        innerText: 'Create a new file'
       }),
       delete: TS.lib.createNode('div', {
         className: 'fileContextOpts',
         innerText: 'delete'
       })
     }
-    div.append(style, btns.open)
+    div.append(style)
+    switch(true) {
+      case type.contains('file'): 
+        div.append(btns.title, btns.open, btns.rename, btns.move, btns.delete)
+        break;
+      case type.contains('folder'):
+        div.append(btns.title, btns.rename, btns.open, btns.move, btns.delete)
+        break;
+      default: 
+        div.append(btn.create)
+    }
     let undisplay = function() {
       div.style.display = ''
     }
