@@ -10,13 +10,13 @@ Product is built to be Chrome compatible.  Should work in safari/opera as well b
 FAQ is included in product.
 
 ## Patch notes:
-v2.8.7 Removed localForage library dependency
+v2.8.7 Removed localForage library dependency  
 v2.7.0 Added multiple editor support  
-v2.6.0 new theme added.
+v2.6.0 new theme added.  
 v2.5.0 Unfocus (return) button added when element is focused. Code base cleaned up with esLint for ease of contribution.  
-v2.4.0 New css theme 'Dark'. Can now delete files.
-v2.3.0 Allows for multiple open files, altered Menu dropdown.
-v2.2.0 switched to tree-view.
+v2.4.0 New css theme 'Dark'. Can now delete files.  
+v2.3.0 Allows for multiple open files, altered Menu dropdown.  
+v2.2.0 switched to tree-view.  
 v2.1.0 automatic css refresh on theme change, assorted bug fixes, displays files on load  
 v2.0.5 various bug fixes, backward-compatibility, auto-scrolls to new element after adding a line. CSS overflow-height changed.  
 v2.0 added preliminary blog creation support. Also file exporting to .html format for both outlines/blogs.  

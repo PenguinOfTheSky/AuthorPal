@@ -325,7 +325,7 @@ return {
         margin: .15rem;
       }
       .folder {
-        
+        list-style-image: url('icons/iconmonstr-folder-19-240.png');
       }
       .file {
         list-style-image: url('icons/iconmonstr-note-7.svg');
