@@ -14,6 +14,9 @@
     `,
     alignment: "left",
     btn: `
+      button, input, select {
+        font-size:1rem;
+      }
       button {
         border: none;
         border-radius: .4rem;

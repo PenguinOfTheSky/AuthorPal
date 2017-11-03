@@ -73,7 +73,13 @@ return {
         display: inline-block;
         margin-right:.1rem;
       }
+      #left img {
+        vertical-align: middle;
+        width: 1.4rem;
+        height: 1.4rem;
+      }
       #left > * {
+        vertical-align: middle;
         display: inline-block;
       }
       #hiddenOptions {
@@ -295,7 +301,13 @@ return {
     },
     splash: function () {
       return `
+      ${_.btn + _.btnSubmit}
       ${_.link}
+      button {
+        position: relative;
+        float: right;
+        right: 9%;
+      }
       :host {
         box-sizing:border-box;
         width: 100%;
@@ -320,9 +332,14 @@ return {
       hr {
         width: 100%;
       }
+      h1,h2,h3,h4 {
+        margin: .15rem;
+      }
       h1,h2 {
         text-align:center;
-        margin: .15rem;
+      }
+      h3 {
+        text-indent: 24%;
       }
       .folder {
         list-style-image: url('icons/iconmonstr-folder-19-240.png');

@@ -20,7 +20,9 @@ Object.assign(TS.html.display, {
       element: box,
       splash: function () {
         root.innerHTML = "";
-        root.append(TS.html.display.splash().box);
+        let splash = TS.html.display.splash()
+        root.append(splash.box);
+        return splash
       },
       render: function (id) {
         currentID = id;

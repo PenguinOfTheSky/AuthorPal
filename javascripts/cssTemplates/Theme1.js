@@ -11,9 +11,12 @@
       color: ${wisteria};
     }`,
     btn: `
-    #addColumn {
-      background: ${wisteria} !important;
-    }
+      button, input, select {
+        font-size:1rem;
+      }
+      #addColumn {
+        background: ${wisteria} !important;
+      }
       button {
         border-radius: .4rem;
         margin: .2rem;
