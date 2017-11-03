@@ -8,10 +8,12 @@ TS.cssTemplates.default = {
       }
     `,
   btn: `
+    button, input, select {
+      font-size:1rem;
+    }
       input[type=button], button {
         border-radius: .4rem;
         margin: .2rem;
-        font-size: 1rem;
         background-color: gold;
       }
       button:hover {
@@ -125,10 +127,12 @@ TS.cssTemplates.sparky = {
     `,
   alignment: "left",
   btn: `
+    button, input, select {
+      font-size:1rem;
+    }
       button {
         border-radius: .4rem;
         margin: .2rem;
-        font-size: 1rem;
         background-color: rgb(200,100,200);
       }
       button:hover {

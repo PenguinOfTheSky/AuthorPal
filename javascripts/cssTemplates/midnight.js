@@ -4,7 +4,7 @@
   let font = `
     color: rgb(240,240,240);
   `;
-  let hover = `background-color: rgba(0,30,155,.7);`;
+  let hover = `box-shadow: 0px 0px .1rem .2rem rgba(0,30,155,.7);`;
   TS.cssTemplates.midnight = {
     hoverable: `
       ${hover}
@@ -17,14 +17,17 @@
     `,
     alignment: "left",
     btn: `
-      button {
+      button, input, select {
+        font-size:1rem;
+      }
+      button, input, select {
+        margin: .13rem;
         border: none;
         border-radius: .4rem;
         ${font}
-        font-size: 1rem;
-        background-color: #333;
+        background-color: #000;
       }
-      button:hover {
+      button:hover, select:hover {
         ${hover}
       }`,
     border1: `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
@@ -44,7 +47,7 @@
     backgroundModals: `
       padding: 1rem;
       border-radius: 1rem;
-      background : #222`,
+      background : #171717;`,
     backgroundMain: `
       ${font}
       background-color: #222`,
