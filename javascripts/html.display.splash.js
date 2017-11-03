@@ -12,7 +12,7 @@ TS.html.display.splash = function () {
       </div>
       <div id='right'>
         <div id='about'>
-          <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.9.3</h1>
+          <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.9.4</h1>
           
         </div>
         <hr>
