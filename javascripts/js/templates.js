@@ -16,10 +16,9 @@ TS.js.templates = {
   },
   staticWebsite: {
     "blog entry": function () {
-      let date = new Date();
       let obj = {
         "#type": "blog entry",
-        date: date.toLocaleString(),
+        date: (new Date()).toLocaleString(),
         title: ``,
         keywords: ``,
         category: ``,
@@ -79,7 +78,9 @@ TS.js.templates = {
           templates: 'TS.js.templates["novel outline"]',
           exportFormat: "outlineMarkdown",
           type: "book outline",
-          version: "2.6",
+          version: "2.9",
+          dateCreated: (new Date()).toLocaleString(),
+          dateModified: (new Date()).toLocaleString(),
           shadowTree: {}
         },
         "general": {
@@ -130,6 +131,8 @@ TS.js.templates = {
         "master_root": {
           templates: 'TS.js.templates["default"]',
           exportFormat: "", //fixthis
+          dateCreated: (new Date()).toLocaleString(),
+          dateModified: (new Date()).toLocaleString(),
           type: "website"
         },
         "general": {
@@ -170,7 +173,9 @@ TS.js.templates = {
           templates: 'TS.js.templates["staticWebsite"]',
           exportFormat: "markdownBlog",
           type: "markdown blog",
-          version: "2.6",
+          dateCreated: (new Date()).toLocaleString(),
+          dateModified: (new Date()).toLocaleString(),
+          version: "2.9",
           shadowTree: {}
         },
         "#general": {

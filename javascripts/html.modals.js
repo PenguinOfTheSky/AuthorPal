@@ -124,6 +124,7 @@ TS.html.modals = {
             var textFile = input.files[0];
             reader.onload = function (e) {
               Object.assign(TS.data.local.files, JSON.parse(e.target.result));
+              TS.events.save(location.reload())
             };
             reader.readAsText(textFile);
           } else {
@@ -166,7 +167,7 @@ TS.html.modals = {
     });
     return item.box;
   },
-  createFile: function ({commands}) {
+  createFile: function () {
     let item = TS.lib.createComponent({
       id: "TS.html.modals.createFile",
       css: TS.css.modals.createFile(),
@@ -195,7 +196,7 @@ TS.html.modals = {
           if (name !== "" && TS.data.local.files[name] === undefined) {
             TS.data.local.files[name] = TS.js.templates.topNavbar[template]();
             box.remove();
-            commands.open(name);
+            TS.events.openFile(name);
           } else {
             let msg = Object.assign(document.createElement("b"), {
               innerText: " | Name is already taken! | ",
@@ -376,18 +377,16 @@ TS.html.modals = {
       open: TS.lib.createNode('div', {
         className: 'fileContextOpts',
         innerText: 'open',
-        onclick: function(secEv) {
-          console.log(targ)
+        onclick: function() {
           targ.click();
         }
       }),
-      rename: TS.lib.createNode('div', {
-        className: 'fileContextOpts',
-        innerText: 'rename'
-      }),
       move: TS.lib.createNode('div', {
         className: 'fileContextOpts',
-        innerText: 'Move selected file'
+        innerText: 'Move/Rename selected file',
+        onclick: function() {
+          console.log('coming soon')
+        }
       }),
       create: TS.lib.createNode('div', {
         className: 'fileContextOpts',
@@ -411,7 +410,7 @@ TS.html.modals = {
     div.append(style)
     switch(true) {
       case type.contains('file'): 
-        div.append(btns.title, btns.open, btns.rename, btns.move, btns.delete)
+        div.append(btns.title, btns.open, btns.move, btns.delete)
         break;
       case type.contains('folder'):
         div.append(btns.title, btns.rename, btns.open, btns.move, btns.delete)
@@ -428,5 +427,38 @@ TS.html.modals = {
       undisplay()
     }, 100)
     return div;
+  },
+  trash: function() {
+    let item = TS.lib.createComponent({
+      id: "TS.html.modals.trash",
+      css: TS.css.modals.trash(),
+      html: `
+        <div id='centerModal'>
+          <div><b>Trash</b><button id='exit'>X</button></div><br>
+          <div id='list'></div>
+        </div>
+      `,
+      js: function ({box,root}) {
+        TS.js.baseModal(box, root);
+        let list = TS.lib.createNode('table', {
+          innerHTML: `
+          <tr><th>Name</th><th>Deleted</th><th>Modified</th><th>Restore</th><th>Delete</th></tr>`
+        })
+        TS.data.local.trash.forEach(ele => {
+          ele = ele.master_root
+          let line = TS.lib.createNode('tr', {
+            className: 'trashLine',
+            innerHTML: `<td>${ele.fileName}</td>
+              <td>${ele.dateDeleted}</td>
+              <td>${ele.dateModified || ''}</td>
+              <td><input type='checkbox' id='restore'></td>
+              <td><input type='checkbox' id='delete'></td>`
+          })
+          list.append(line)
+        })
+        root.querySelector('#list').append(list)
+      }
+    });
+    return item.box;
   }
 };

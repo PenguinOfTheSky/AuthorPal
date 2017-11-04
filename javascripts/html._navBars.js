@@ -1,16 +1,16 @@
 /* global TS */
 TS.html._navBars = {
-  mainButtons: function () {
+  topNavFileButtons: function () {
     let box = document.createElement("div");
     Object.assign(box, {
-      id: "TS.html._navBars.mainButtons"
+      id: "TS.html._navBars.topNavFileButtons"
     });
     let root = box.attachShadow({
       mode: "open"
     });
 
     let style = document.createElement("style");
-    style.innerText = TS.css.boxes.mainButtons();
+    style.innerText = TS.css.boxes.topNavFileButtons();
     let openedFiles = TS.lib.createNode("div", {
       id: "openedFiles"
     });
@@ -84,7 +84,7 @@ TS.html._navBars = {
     TS.events.openFile = commands.open;
     let topDiv = document.createElement("div");
     topDiv.id = "topDiv";
-    buttons = TS.html._navBars.mainButtons(commands.changeTab);
+    buttons = TS.html._navBars.topNavFileButtons(commands.changeTab);
     let collapsed = false;
     let bottomDiv = Object.assign(document.createElement("div"), {
       innerHTML: `<button id='collapseNav'>^</button>`,

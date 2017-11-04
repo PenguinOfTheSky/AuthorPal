@@ -53,7 +53,7 @@
     backgroundModals: `
       padding: 1rem;
       border-radius: 1rem;
-      background : #222`,
+      background : #222;`,
     backgroundMain: `
       ${font}
       background-color: #222`,

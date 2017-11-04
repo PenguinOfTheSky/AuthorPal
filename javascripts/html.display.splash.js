@@ -12,21 +12,25 @@ TS.html.display.splash = function () {
       </div>
       <div id='right'>
         <div id='about'>
-          <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.9.4</h1>
+          <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v2.10.0</h1>
           
         </div>
         <hr>
         <div id='filesListContainer' class='filesListContainer'>
           <h2>Your projects</h2>
-          <ul id='filesList'></ul>
-          <button id='createNewFile'> Create a new project </button>
+          <div id='filesList'></div>
+          <div style='text-align: center; '>
+            <button id='createNewFile'> Create a new project </button>
+            <img src='icons/iconmonstr-trash-can-15-240.png' style='vertical-align: middle;' class = 'dropzone' id='trash'>
+          </div>
         </div><hr>
         <div id='admin'>
         <h2>Admin</h2>
           <form id = 'prefForm' style='padding:5%;'>
             <fieldset>
               <h3>Edit Preferences </h3>
-              <label for='themeSelect'><b>Themes change what AuthorPal looks like </b></label>
+              Themes change what AuthorPal looks like <br>
+              <label for='themeSelect'>Chosen theme </label>
               <select id='themeSelect'>
                 <option value='default'>default</option>
                 <option value='sparky'>Sparky</option>
@@ -57,30 +61,99 @@ TS.html.display.splash = function () {
           root.querySelector('#' + event.target.getAttribute('targetName') ).scrollIntoView(1)
         }
       }
+      root.querySelector("#createNewFile").onclick = function() {
+        TS.refs.container.append(TS.html.modals.createFile())
+      }
       let files = TS.data.local.files;
       if (Object.keys(files).length > 0) {
-        let list = ``;
+        let list = document.createDocumentFragment();
         for (let x in files) {
           if (files.hasOwnProperty(x)) {
-            let liClass = 'file'
-            if (files[x].master_root.type == 'folder') liClass = 'folder'
-            list += `<li data-origin = 'testing', class='${liClass}' title='${files[x].master_root.type || ''}'>${x}</li>`;
+            let img = 'iconmonstr-note-20-240.png'
+            let divClass = 'file fileOrFolder'
+            if (files[x].master_root.type == 'folder') {
+              img = 'iconmonstr-folder-19-240.png'
+              divClass = 'folder fileOrFolder dropzone'
+            }
+            let helperContent = ``;
+            let thisRoot = files[x].master_root
+            if (thisRoot.type) helperContent += thisRoot.type
+            if (thisRoot.dateCreated) helperContent += '\ncreated: ' + thisRoot.dateCreated
+            if (thisRoot.dateModified) helperContent += '\nmodified: ' + thisRoot.dateCreated
+            let div = TS.lib.createNode('div', {
+              title: helperContent,
+              "data-origin": 'testing',
+              className: divClass,
+              draggable: true,
+              onclick: function(event) {
+                TS.data.chosenFile = TS.data.local.files[x];
+                TS.events.openFile(x);
+              },
+              oncontextmenu: function(e) {
+                e.preventDefault()
+                if (e.target !== this) e.target = this
+                root.append(TS.html.modals.fileContextNav(e))
+              }
+            })
+            div.append(TS.lib.createNode('img', {
+              draggable: false,
+              src: 'icons/' + img
+            }), TS.lib.createNode('span', {
+              contentEditable: true,
+              innerText: x,
+              onclick: function(e) {
+                e.stopPropagation()
+                e.preventDefault()
+              }
+            }))
+            list.append(div) 
           }
         }
-        list += "</ul>";
-        root.querySelector("#filesList").innerHTML = list;
-        root.querySelector("#filesList").onclick = function (event) {
-          if (event.target.classList.contains('file')) {
-            TS.data.chosenFile = TS.data.local.files[event.target.innerText];
-            TS.events.openFile(event.target.innerText);
+        root.querySelector("#filesList").append( list);
+        root.querySelectorAll('.fileOrFolder').forEach(ele => {
+          ele.ondragstart = function(e) {
+            TS.refs.draggedItem = this
           }
-        };
+          ele.ondrop = function(e) {
+            e.preventDefault()
+            console.log('pim')
+          }
+        })
       } else {
         root.querySelector("#filesList").innerHTML = "<i style='font-size: .9rem;'> No projects found </i>"
       }
-      root.querySelector('#filesListContainer').addEventListener('contextmenu', function(event) {
-        event.preventDefault()
-        root.append(TS.html.modals.fileContextNav(event))
+      Object.assign(root.querySelector('#trash'), {
+        onclick: function(e) {
+          TS.refs.container.appendChild(TS.html.modals.trash())
+        },
+        ondragenter: function(e) {
+          this.style.width = '2.5rem'
+          this.style.height = '2.5rem'
+        },
+        ondragleave: function(e) {
+          this.style.width = ''
+          this.style.height = ''
+        },
+        ondragover: function(e) {
+          e.preventDefault()
+        },
+        ondrop: function(e) {
+          let item = TS.refs.draggedItem
+          e.preventDefault()
+          this.style.width = ''
+          this.style.height = ''
+          item.style.display = 'none'
+          if (!TS.data.local.trash) TS.data.local.trash = []
+          let name = item.querySelector('span').innerText
+          if (!TS.data.local.files[name].master_root) {
+            TS.data.local.files[name].master_root = {}
+          }
+          TS.data.local.files[name].master_root.dateDeleted = (new Date()).toLocaleString()
+          TS.data.local.files[name].master_root.fileName = name
+          TS.data.local.trash.push(TS.data.local.files[name])
+          delete TS.data.local.files[name]
+          TS.events.save()
+        }
       })
       vars.opts.scroll = function(name) {
         root.querySelector('#' + name).scrollIntoView(1)

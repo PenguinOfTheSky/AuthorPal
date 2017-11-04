@@ -98,7 +98,7 @@ return {
       }
       ${_.btnBase1}`;
     },
-    mainButtons: function () {
+    topNavFileButtons: function () {
       return `
     :host {
       display:inline-block;
@@ -303,11 +303,6 @@ return {
       return `
       ${_.btn + _.btnSubmit}
       ${_.link}
-      button {
-        position: relative;
-        float: right;
-        right: 9%;
-      }
       :host {
         box-sizing:border-box;
         width: 100%;
@@ -324,6 +319,10 @@ return {
         padding: 1%;
         overflow-y: scroll;
         max-height: 100%;
+        text-align: center;
+      }
+      #trash:hover {
+        ${_.hoverable || "background-color: blue;"}
       }
       #left img {
         width: 1.5rem;
@@ -335,33 +334,47 @@ return {
       h1,h2,h3,h4 {
         margin: .15rem;
       }
-      h1,h2 {
+      h1,h2,h3,h4 {
         text-align:center;
       }
-      h3 {
-        text-indent: 24%;
-      }
       .folder {
-        list-style-image: url('icons/iconmonstr-folder-19-240.png');
+      }
+      #filesList {
+        display: flex;
+        flex-wrap: wrap;
+        margin: .5rem;
+        justify-content: space-around;
+      }
+      .fileOrFolder img{
+        align-self: center;
+      }
+      .fileOrFolder span {
+        width: 8rem;
+        white-space: nowrap;
+        height: 1.2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .fileOrFolder:hover {
+        ${_.hoverable}
+      }
+      #filesList > div {
+        display: flex;
+        flex-direction: column;
+        margin: .5rem;
+      }
+      #filesListContainer img{
+        width: 1.5rem;
+        height: 1.5rem;
       }
       .file {
-        list-style-image: url('icons/iconmonstr-note-7.svg');
+        
       }
       h1 {
         font-size: 1.6rem;
       }
       h2 {
         font-size: 1.3rem;
-      }
-      @media screen and (min-width: 550px) {
-        #filesList {
-          list-style-position: inside;
-          column-count: 3;
-        }
-      }
-      #filesList li:hover{
-        cursor: pointer;
-        text-decoration: underline;
       }
       ${_.splash || `
         #left {
@@ -428,6 +441,19 @@ return {
     openFile: function () {
       return `
       ${TS.css.modal}`;
+    },
+    trash: function() {
+      return `${TS.css.modal}
+        table, th, td {
+         border: 1px solid black;
+        }
+        table {
+          border-collapse: collapse;
+        }
+        td, th {
+          padding: .1rem;
+        }
+      `
     },
     fileContextNav: function() {
       return `
