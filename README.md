@@ -10,6 +10,7 @@ Product is built to be Chrome compatible. Not suggested for use with any other b
 FAQ is included in product.
 
 ## Patch notes:
+v3.0.0 can now rename files; bug fixes; begun working on webcomponent creation support  
 v2.10.0 added Trash bin, improved front page  
 v2.9.0 added context menu (right-click) for files on front page.
 v2.8.7 Removed localForage library dependency  

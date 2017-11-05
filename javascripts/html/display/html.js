@@ -104,10 +104,9 @@ Object.assign(TS.html.display, {
     style.innerHTML = TS.css.boxes.display();
     root.append(style);
     let determine = function (item, itemName, path, {maxDepth, depth, unfocus}) {
+      if (itemName == 'object_root' || itemName == 'master_root') return ''; //why is this being appended. Fixthis.
       let formatType;
       if (depth === undefined) depth = 0;
-      //something funky here
-      if (path === TS.data.chosenFile && itemName === "master_root") return 0;
       if (itemName[0] === "*") {
         formatType = function (a) {
           return a;
@@ -124,7 +123,13 @@ Object.assign(TS.html.display, {
       let line = Object.assign(document.createElement("div"), {
         className: "lineContainer "
       });
-      if (typeof (item) === "object") line.className += " objectContainer";
+      if (typeof (item) === "object") {
+        if (item.object_root && item.object_root.type == 'function') {
+          line.className += " functionContainer";
+        } else {
+          line.className += " objectContainer";
+        }
+      }
       else line.className += " stringContainer";
       let lineBody;
       lineBody = Object.assign(document.createElement("div"), {
@@ -222,6 +227,9 @@ Object.assign(TS.html.display, {
       opts: opts
     };
   },
+  textField : function({itemName, unfocus, path, item, depth, opts, focused, lineBody}) {
+    
+  },
   titleBar : function({itemName, unfocus, path, item, depth, opts, focused, lineBody}) {
     let title = TS.lib.createNode("div", {
       className: "title",
@@ -286,6 +294,7 @@ Object.assign(TS.html.display, {
           }
           TS.data.currentView = [focused[1]];
           TS.refs.treeNav[TS.data.currentView[0]].click();
+          TS.events.save();
         };
         document.body.append(TS.html.modals.confirmationDelete(itemName, callback));
       },
@@ -409,7 +418,17 @@ Object.assign(TS.html.display, {
       },
       contentEditable: false
     });
+    let objectType;
     if (typeof(item) === "object") {
+      if (item.object_root && item.object_root.type) {
+        let div = TS.lib.createNode('div', {
+          style: "text-align: center;display: inline-block; flex-grow: 1;"
+        })
+        div.append(TS.lib.createNode('button', {
+          innerHTML: '<b>' + item.object_root.type + '</b>'
+        }))
+        objectType = div;
+      }
       let add = Object.assign(document.createElement("button"), {
         className: "addLine",
         onclick: function () {
@@ -420,6 +439,7 @@ Object.assign(TS.html.display, {
       buttonGroup.append(add);
     }
     title.append(titleContent, buttonGroup);
+    if (objectType) {title.append(objectType)}
     buttonGroup.append(keyDelete);
     if (depth === 0 && unfocus) buttonGroup.append(unfocusBtn);
     if (depth > 0) buttonGroup.append(focusMe);

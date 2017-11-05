@@ -174,6 +174,9 @@ return {
       }
       .stringContainer {
       }
+      .functionContainer {
+        ${_.functionBorder || _.border2}
+      }
       .objectContainer {
         ${_.border2}
       }
@@ -191,12 +194,12 @@ return {
         line-height: 1.1rem;
         background: ${_.backgroundTitle || `linear-gradient(-2deg, rgb(120, 110, 110), rgb(160, 205, 205) 80%, rgb(140, 140, 140))`};
         font-weight: bold;
+        display: flex;
         padding: 0.2rem;
         ${_.border3}
       }
       .titleContent {
         ${_.titleFont || "color: black"};
-        margin: auto;
         padding:.35rem;
       }
       .lineBody {

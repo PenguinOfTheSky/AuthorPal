@@ -36,6 +36,10 @@
       border: .1rem solid rgba(250,250,250,.7);
       border-radius:.1rem;
       box-shadow: 0px 0px 1px 2px black inset;`,
+    functionBorder: `
+      margin: .4rem 0px;
+      box-shadow: 0px 0px .05rem .1rem orange;
+    `,
     backgroundTitle: `#000`,
     titleFont: `
       ${font}

@@ -14,6 +14,27 @@ TS.js.templates = {
   website: {
 
   },
+  "web component(js)": {
+    container: function () {
+      let obj = {};
+      return obj;
+    },
+    textblock: function() {
+      return ``;
+    },
+    function: function() {
+      let obj = {
+        object_root: {
+          type: 'function',
+          shadowTree: ['#inputs', "main"],
+          editor: 'js'
+        },
+        "#inputs": ``,
+        "main": `//test`
+      }
+      return obj
+    }
+  },
   staticWebsite: {
     "blog entry": function () {
       let obj = {
@@ -27,12 +48,10 @@ TS.js.templates = {
       return obj;
     },
     textblock: function () {
-      let obj = ``;
-      return obj;
+      return ``;
     },
     container: function () {
-      let obj = {};
-      return obj;
+      return {};
     }
   },
   "novel outline": {
@@ -214,6 +233,56 @@ TS.js.templates = {
           /* optional style override/additions. prefix styles with #main (the containing div)*/</style>`,
           "content": ``,
           "*javascript": `<script>/* optional */</script>`
+        }
+      };
+      return obj;
+    },
+    "web component(js)": function () {
+      //for production of js-packaged webcomponent.
+      let obj = {
+        "master_root": {
+          templates: 'TS.js.templates["web component(js)"]',
+          exportFormat: "web component(js)",
+          type: "web component(js)",
+          dateCreated: (new Date()).toLocaleString(),
+          dateModified: (new Date()).toLocaleString(),
+          version: "3.0.0",
+          shadowTree: {}
+        },
+        "#general": {
+          "title": `ex: navbar`,
+          "blurb": `makes a navbar`,
+          "inputs": "{color: somecolor} (inputs are required/not required)",
+          "license": ``,
+          "Contributors": ``,
+          "Random Notes": `For more information on how to use this AuthorPal project visit the FAQ`
+        },
+        "#css": {
+          
+        },
+        "#html": {
+          
+        },
+        "#javascript": {
+          start: {
+            object_root: {
+              type: 'function'
+            },
+            str: `function() {
+              //does * returns * requires input of *
+            }`
+          }
+        },
+        "#advanced": {
+          testScript: {
+            object_root: {
+              type: 'function',
+              editor: 'js'
+            },
+            str: `function(component) {
+              //for use in testing component.
+            }`
+          }
         }
       };
       return obj;

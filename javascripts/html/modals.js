@@ -90,6 +90,7 @@ TS.html.modals = {
               if (n < TS.data.currentView.length - 1) i = i[ele];
             });
             TS.refs.displayOpts.swapFocus(i, TS.data.currentView[TS.data.currentView.length - 1]);
+            TS.events.save();
           }
           box.remove();
           return false;
@@ -181,6 +182,7 @@ TS.html.modals = {
           <label>Select Template</label> <select id='selectTemplate'>
             <option value='book outline'>Book/creative work Outline</option>
             <option value='Markdown Blog'>Markdown Blog</option>
+            <option value='web component(js)'>Web Component (js-based html5)</option> 
           </select><br>
           <input type='submit' value='Submit' class='btnSubmit'>
           <div id='status'></div>
