@@ -7,7 +7,7 @@ Lycelia's AuthorPal can be used either online (https://penguinofthesky.github.io
 
 Product is built to be Chrome compatible. Not suggested for use with any other browser
 
-<a href='FAQ.html' target='_blank'>FAQ</a> is included in product.
+[FAQ](FAQ.html) is included in product.
 
 ## Patch notes:
 v3.0.0 can now rename files; bug fixes; begun working on webcomponent creation support  
