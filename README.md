@@ -1,15 +1,14 @@
-# AuthorPal
+# AuthorPal (https://penguinofthesky.github.io/AuthorPal/)
 ## Quick Overview
 Hate pencils? Desire Relief? Start planning your next novel/screenplay/etc digitally.
-### Update! Now supports (alpha) markdown blogs!
-
-Lycelia's AuthorPal can be used either online (https://penguinofthesky.github.io/AuthorPal/) or as a "desktop" app (simply download (button top-right) and double-click index.html to run program). Benefit of having a local copy is the ability to add images from your computer without using a hosting service (images must be in same or child folder).   
+### Update! Now supports creating Webcomponents!
 
 Product is built to be Chrome compatible. Not suggested for use with any other browser
 
 [FAQ](FAQ.html) is included in product.
 
 ## Patch notes:
+v3.1.0 quick-preview button added, devMode link removed (can still access manually), webcomponent creation to alpha stage.
 v3.0.0 can now rename files; bug fixes; begun working on webcomponent creation support  
 v2.10.0 added Trash bin, improved front page  
 v2.9.0 added context menu (right-click) for files on front page.

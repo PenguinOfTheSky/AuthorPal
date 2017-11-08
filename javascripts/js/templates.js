@@ -26,7 +26,6 @@ TS.js.templates = {
       let obj = {
         object_root: {
           type: 'function',
-          shadowTree: ['#inputs', "main"],
           editor: 'js'
         },
         "main": `function() {
@@ -286,7 +285,8 @@ TS.js.templates = {
               type: 'function',
               editor: 'js'
             },
-            "main": `function() {
+            "main": `function(parent) {
+              if (parent) parent.innerHTML = 'Hello World'
               console.log('hello world')
             }`
           }
@@ -297,9 +297,15 @@ TS.js.templates = {
               type: 'function',
               editor: 'js'
             },
-            str: `function(component) {
-              //for use in testing component.
-            }`
+            main: `function(component) {
+  //for use in testing component.
+  //for more information see the tutorial (pending)
+  console.log(component)
+  component = component(document.body)
+  console.log(component)
+  component["#javascript"]["#start"](document.body)
+
+}`
           }
         }
       };

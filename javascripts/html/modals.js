@@ -199,6 +199,7 @@ TS.html.modals = {
             TS.data.local.files[name] = TS.js.templates.topNavbar[template]();
             box.remove();
             TS.events.openFile(name);
+            TS.events.save()
           } else {
             let msg = Object.assign(document.createElement("b"), {
               innerText: " | Name is already taken! | ",

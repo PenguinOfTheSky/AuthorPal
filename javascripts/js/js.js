@@ -156,6 +156,12 @@ Object.assign(TS.js, {
           script: script
         }
       };
+    },
+    "web component(js)": function(file) {
+      
     }
+  },
+  objectToString: function(obj) {
+    
   }
 });
