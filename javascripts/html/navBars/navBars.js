@@ -102,14 +102,16 @@ TS.html._navBars = {
         }
       }
     });
-    let file = TS.html._navBars.file(commands.file, display);
+    let file = TS.html._navBars.file_button(commands.file, display);
+    let toggle = TS.html._navBars.toggleSite_button() 
     let left = Object.assign(document.createElement("div"), {
       id: "left",
       innerHTML: `
         <img src='icons/iconmonstr-home-7-240.png' title='home' targetName = 'about'>
         <img src='icons/iconmonstr-note-20-240.png' title='files' targetName = 'filesListContainer'>
         <img src='icons/iconmonstr-gear-11-240.png' title='admin' targetName = 'admin'>
-        <img src='icons/iconmonstr-help-3-240.png' title='help' targetName = 'help'> `,
+        <img src='icons/iconmonstr-help-3-240.png' title='help' targetName = 'help'>
+         `,
       onclick: function(e) {
         if (e.target.getAttribute('targetName')) {
           let d = display.splash();
@@ -117,7 +119,7 @@ TS.html._navBars = {
         }
       }
     });
-    left.append(file)
+    left.append(file, toggle)
     topDiv.append(left, buttons.element);
     root.append(topDiv, bottomDiv)
     return box;
@@ -215,43 +217,5 @@ TS.html._navBars = {
     });
     TS.refs.secondaryNavBar = item.box;
     return item;
-  },
-  file: function (callback, display) {
-    let select = Object.assign(document.createElement("div"), {
-      id: "menu",
-      innerHTML: `Menu
-      <div id='hiddenOptions' class='hidden'></div>`
-    });
-    let options = ["home", "open", "create", "delete", "save", "upload", "preferences", "export", "faq", "devMode"];
-    let values = ["Home", "Open File", "New File", "Delete File", "Download", "Upload", "Preferences", "Export File", "FAQ", "Dev. Mode"];
-    for (var j = 0; j < options.length; j++) {
-      let option = Object.assign(document.createElement("div"), {
-        className: "menuOptions",
-        "value": options[j],
-        "innerText": values[j],
-        onclick: function () {
-          switch (this.value) {
-            case "devMode":
-              window.open("devMode.html", "_blank");
-              break;
-            case "faq":
-              window.open("FAQ.html", "_blank");
-              break;
-            case "home":
-              display.splash();
-              break;
-            default:
-              callback(this.value);
-          }
-          this.parentNode.style.display = "none";
-          let vis = this.parentNode;
-          setTimeout(function () {
-            vis.style.display = "";
-          }, 134);
-        }
-      });
-      select.querySelector("#hiddenOptions").append(option);
-    }
-    return select;
   }
 };

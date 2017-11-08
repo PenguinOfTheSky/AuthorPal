@@ -29,8 +29,25 @@ TS.js.templates = {
           shadowTree: ['#inputs', "main"],
           editor: 'js'
         },
-        "#inputs": ``,
-        "main": `//test`
+        "main": `function() {
+          
+        }`
+      }
+      return obj
+    },
+    element: function() {
+      let obj = {
+        object_root: {
+          type: 'function',
+          shadowTree: ['#inputs', "main"],
+          editor: 'js'
+        },
+        "main": `function() {
+          let element = Object.assign(document.createElement(''), {
+            
+          });
+          return element;
+        }`
       }
       return obj
     }
@@ -260,16 +277,17 @@ TS.js.templates = {
         "#css": {
           
         },
-        "#html": {
+        "#elements": {
           
         },
         "#javascript": {
-          start: {
+          "#start": {
             object_root: {
-              type: 'function'
+              type: 'function',
+              editor: 'js'
             },
-            str: `function() {
-              //does * returns * requires input of *
+            "main": `function() {
+              console.log('hello world')
             }`
           }
         },

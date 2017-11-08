@@ -6,6 +6,7 @@ if (theme === undefined) {
   theme = "default";
 }
 let _ = TS.cssTemplates[theme];
+let defaultCSS = TS.cssTemplates["default"]
 TS.data.alignment = _.alignment;
 TS.events.updatePreferences = function () {
   TS.events.save(location.reload());
@@ -52,6 +53,9 @@ return {
       :host(:hover) {
         box-shadow: 0px 0px .1rem .2rem rgba(255, 255, 255, .1) inset;
       }
+      ${_.btn}
+      ${_.btnSubmit}
+      ${_.icon || defaultCSS.icon}
       #topDiv {
         display:block;
         flex-wrap:wrap;
@@ -176,6 +180,9 @@ return {
       }
       .functionContainer {
         ${_.functionBorder || _.border2}
+      }
+      .hl-object {
+        color: blue;
       }
       .objectContainer {
         ${_.border2}

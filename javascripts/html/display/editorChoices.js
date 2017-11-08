@@ -1,4 +1,9 @@
-TS.html.display.editorChoices = function(name) {
+TS.html.display.editorChoices = function(name, preferred) {
+  if (preferred) {
+    switch (preferred) {
+      
+    }
+  }
   let buttons = [];
   let addEditor = function(type) {
     document.body.append(TS.lib.createNode('div', {

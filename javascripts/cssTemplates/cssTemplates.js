@@ -1,6 +1,11 @@
 /* global TS */
 TS.cssTemplates.default = {
   alignment: "left",
+  icon: `
+    .icon {
+      background-color: white; 
+    }
+  `,
   link: `
       a {
         cursor: pointer;

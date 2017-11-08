@@ -9,6 +9,11 @@
     hoverable: `
       ${hover}
     `,
+    icon: `
+      .icon {
+        background-color: rgb(50,50,255); 
+      }
+    `,
     link: `
       a {
         cursor: pointer;
@@ -20,14 +25,14 @@
       button, input, select {
         font-size:1rem;
       }
-      button, input, select {
+      button, input, select, .btn {
         margin: .13rem;
         border: none;
         border-radius: .4rem;
         ${font}
         background-color: #000;
       }
-      button:hover, select:hover {
+      button:hover, select:hover, .btn {
         ${hover}
       }`,
     border1: `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
@@ -85,7 +90,7 @@
         border: none;
         ${font}
         font-size: 1rem;
-        background: none;
+        border-radius: 25%;
         padding: .25rem;
       }
       #left > *:hover {
