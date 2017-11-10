@@ -20,7 +20,7 @@ TS.js.templates.html5 = {
     let obj = {
       object_root: {
         type: 'function',
-        editor: 'js'
+        editor: 'javascript'
       },
       "main": `function() {
         
@@ -33,7 +33,7 @@ TS.js.templates.html5 = {
       object_root: {
         type: 'function',
         shadowTree: ['#inputs', "main"],
-        editor: 'js'
+        editor: 'javascript'
       },
       "main": `function() {
         let element = Object.assign(document.createElement(''), {

@@ -21,7 +21,7 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       textField.innerHTML = formatType(item);
     }
     lineBody.append(textField);
-    line.append(lineBody);
+  //  line.append(lineBody);
   } else if (typeof (item) === "object" && item.object_root && item.object_root.type == 'function') {
     /*switch (item.object_root.type) {
       case 'function': 
@@ -43,7 +43,7 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       innerHTML: TS.js.highlight(item.main, item.object_root.editor)
     });
     lineBody.append(textField);
-    line.append(lineBody);
+  //  line.append(lineBody);
   } else if (typeof (item) === "object") {
     if (maxDepth === undefined || depth < maxDepth) {
       for (let x in item) {

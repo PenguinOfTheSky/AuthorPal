@@ -26,7 +26,7 @@ TS.js.templates = {
       let obj = {
         object_root: {
           type: 'function',
-          editor: 'js'
+          editor: 'javascript'
         },
         "main": `function() {
           
@@ -39,7 +39,7 @@ TS.js.templates = {
         object_root: {
           type: 'function',
           shadowTree: ['#inputs', "main"],
-          editor: 'js'
+          editor: 'javascript'
         },
         "main": `function() {
           let element = Object.assign(document.createElement(''), {
@@ -348,7 +348,7 @@ TS.js.templates = {
           "#start": {
             object_root: {
               type: 'function',
-              editor: 'js'
+              editor: 'javascript'
             },
             "main": `function(parent) {
               //optional, can use to format inputs when setting up library

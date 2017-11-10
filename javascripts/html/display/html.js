@@ -135,9 +135,10 @@ Object.assign(TS.html.display, {
       let lineBody = TS.html.display.lineBody.handler({path: path, itemName: itemName, depth: depth, item: item, maxDepth: maxDepth, determine: determine, formatType: formatType, line: line});
     
       let title = TS.html.display.titleBar({path: path, itemName: itemName, depth: depth, unfocus: unfocus, item: item, opts: opts, focused: focused, lineBody: lineBody})
-      line.append(title);
+      line.appendChild(title);
+      line.appendChild(lineBody);
       if (typeof (item) === "object" && Object.keys(item).length !== 0) {
-        line.append(lineBody);
+      //  line.appendChild(lineBody);
       }
       if (itemName === TS.data.addedLine) {
         delete TS.data.addedLine;
