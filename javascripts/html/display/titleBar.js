@@ -85,7 +85,14 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     innerHTML: `editor`,
     className: "editor",
     onmouseenter: function() {
-      openEditorChoices = TS.html.display.editorChoices(titleContent.innerHTML, callback)
+      openEditorChoices = TS.html.display.editorChoices(titleContent.innerHTML, function(choice) {
+        TS.html.display.lineBody.callEditor(item, choice, function(content) {
+        item = content;
+        path[itemName] = item;
+        lineBody.innerHTML = TS.js.highlight(content, choice);
+        TS.events.save()
+        })
+      })
       this.append(openEditorChoices)
     },
     onmouseleave: function() {

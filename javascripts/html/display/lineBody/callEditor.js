@@ -18,7 +18,7 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
   let editor = TS.lib.createNode('div', {
     id: 'editor'
   })
-  editorContainer.append(exitEditor, editor)
+  editorContainer.append(exitEditor,"<br>", editor)
   document.body.append(editorContainer)
   let aceEditor;
   switch (type) {
