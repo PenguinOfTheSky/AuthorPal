@@ -70,42 +70,6 @@ TS.js.templates = {
       return {};
     }
   },
-  "novel outline": {
-    textblock: function () {
-      return ``;
-    },
-    container: function () {
-      return {};
-    },
-    character_Short: function () {
-      return `**blurb:**  
-**appearance:**  
-**personality:**  
-**brief timeline:** `;
-    },
-    character_Long: function() {
-      return {
-        blurb: ``,
-        appearance: ``,
-        personality: ``,
-        motivations: ``,
-        timeline: {}
-      }
-    },
-    chapter: function () {
-      let obj = {
-        "blurb": ``,
-        "locations": ``,
-        "characters": ``,
-        "atmosphere": ``,
-        "list main points": ``,
-        "deeper runthrough": {
-
-        }
-      };
-      return obj;
-    }
-  },
   topNavbar: {
     "book outline": function () {
       let obj = {
@@ -181,10 +145,15 @@ TS.js.templates = {
         main: {
           "start": function () {}
         },
-        "head": {
-          imports: ``,
-          styleTag: ``,
-          html: ``
+        "#head": {
+          "#head": `<script src=''>jquery/other ext. scripts</script>`,
+          "#css": {
+            "general": `
+            html, body{
+              height: 100;
+            }`
+          }
+          
         },
         "html": {
           "local vars": `
@@ -276,10 +245,13 @@ TS.js.templates = {
         "#css": {
           
         },
-        "#elements": {
+        "elements": {
           
         },
-        "#javascript": {
+        "js": {
+          
+        },
+        "#root": {
           "#start": {
             object_root: {
               type: 'function',
@@ -289,23 +261,98 @@ TS.js.templates = {
               if (parent) parent.innerHTML = 'Hello World'
               console.log('hello world')
             }`
-          }
-        },
-        "#advanced": {
+          },
           testScript: {
             object_root: {
               type: 'function',
               editor: 'js'
             },
             main: `function(component) {
-  //for use in testing component.
-  //for more information see the tutorial (pending)
-  console.log(component)
-  component = component(document.body)
-  console.log(component)
-  component["#javascript"]["#start"](document.body)
+              //for use in testing component.
+              //for more information see the tutorial (pending)
+              console.log(component)
+              component = component(document.body)
+              console.log(component)
+              component["#javascript"]["#start"](document.body)
 
-}`
+            }`
+          }
+        }
+      };
+      return obj;
+    }, 
+    website_JS: function () {
+      let obj = {
+        "master_root": {
+          templates: 'TS.js.templates["html5"]',
+          exportFormat: "", //fixthis
+          dateCreated: (new Date()).toLocaleString(),
+          dateModified: (new Date()).toLocaleString(),
+          type: "website"
+        },
+        "general": {
+          "title": ``,
+          "namespace": ``,
+          "blurb": ``,
+          "license": ``,
+          "Contributors": ``,
+          "Random Notes": ``
+        },
+        "#head": {
+          "#head": `<script src=''>jquery/other ext. scripts</script>`,
+          "#css": {
+            "general": {
+              object_root: {
+                type: 'css',
+                editor: 'css'
+              },
+              "main": `html, body {\n  height: 100%;\n}`
+            }
+          }
+        },
+        "js": {},
+        "elements": {},
+        "data": {},
+        "json": {},
+        "text": {}
+      };
+      return obj;
+    },
+    "library_JS": function () {
+      //for production of js-packaged webcomponent.
+      let obj = {
+        "master_root": {
+          templates: 'TS.js.templates.library_JS',
+          exportFormat: "",
+          type: "library_JS",
+          dateCreated: (new Date()).toLocaleString(),
+          dateModified: (new Date()).toLocaleString(),
+          version: "3.1.0",
+          shadowTree: {}
+        },
+        "#general": {
+          "title": `ex: Utility Functions or JS Plugins`,
+          "blurb": ``,
+          "required/suggested inputs": "example of how to run: libName(jquery, underscore)",
+          "license": ``,
+          "Contributors": ``,
+          "Random Notes": `For more information on how to use this AuthorPal project visit the FAQ`
+        },
+        "elements": {
+          
+        },
+        "utility": {
+          
+        },
+        "#root": {
+          "#start": {
+            object_root: {
+              type: 'function',
+              editor: 'js'
+            },
+            "main": `function(parent) {
+              //optional, can use to format inputs when setting up library
+            }`
           }
         }
       };

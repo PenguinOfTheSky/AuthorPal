@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<hero style='position: absolute; width: 50px; height: 50px; background-color: blue;left: 0; top: 0;'></hero>
+<script>
+  let hero = document.querySelector('hero')
+  H = function(direction) {
+  let left = 0; 
+  let top = 0;
+    switch(direction) {
+      case 'up': 
+        
+        break;
+      case 'down':
+        top += 50;
+        hero.style.top = top + 'px'
+        break;
+    }
+  }
+</script>
+</body>
+</html>

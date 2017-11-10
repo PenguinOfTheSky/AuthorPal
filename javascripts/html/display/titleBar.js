@@ -85,7 +85,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     innerHTML: `editor`,
     className: "editor",
     onmouseenter: function() {
-      openEditorChoices = TS.html.display.editorChoices(titleContent.innerHTML)
+      openEditorChoices = TS.html.display.editorChoices(titleContent.innerHTML, callback)
       this.append(openEditorChoices)
     },
     onmouseleave: function() {
@@ -129,6 +129,18 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   if (depth > 0) buttonGroup.append(focusMe);
   if (typeof(item) ==='string') {
     buttonGroup.append(editor)
+  } else if (item.object_root && item.object_root.editor){
+    let callEditor = TS.lib.createNode('button', {
+      onclick: function() {
+        TS.html.display.lineBody.callEditor(item.main, item.object_root.editor, function(content) {
+        item.main = content;
+        lineBody.innerHTML = TS.js.highlight(content, item.object_root.editor);
+        TS.events.save()
+        })
+      },
+      innerText: '<Edit>'
+    })
+    buttonGroup.append(callEditor)
   }
   return title;
 }

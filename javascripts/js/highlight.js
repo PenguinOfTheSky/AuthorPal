@@ -1,4 +1,4 @@
-TS.js.highlight = function(str) {
+TS.js.highlight = function(str, language) {
   if (str.length == 0) return ''
   let arrObjects = ['console', 'function']
 //  let regex = new RegExp('', 'g');

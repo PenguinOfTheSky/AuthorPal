@@ -183,6 +183,7 @@ TS.html.modals = {
             <option value='book outline'>Book/creative work Outline</option>
             <option value='Markdown Blog'>Markdown Blog</option>
             <option value='web component(js)'>Web Component (js-based html5)</option> 
+            <option value='website_JS'>Website (js-based html5)</option> 
           </select><br>
           <input type='submit' value='Submit' class='btnSubmit'>
           <div id='status'></div>

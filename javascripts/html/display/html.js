@@ -103,7 +103,7 @@ Object.assign(TS.html.display, {
     let style = document.createElement("style");
     style.innerHTML = TS.css.boxes.display();
     root.append(style);
-    let determine = function (item, itemName, path, {maxDepth, depth, unfocus, hidden}) {
+    let determine = function (item, itemName, path, {maxDepth, depth, unfocus}) {
       if (itemName == 'object_root' || itemName == 'master_root') return ''; //why is this being appended. Fixthis.
       let formatType;
       if (depth === undefined) depth = 0;
@@ -126,68 +126,16 @@ Object.assign(TS.html.display, {
       if (typeof (item) === "object") {
         if (item.object_root && item.object_root.type == 'function') {
           objectEditorPreference = 'js'
-          hidden = true;
           line.className += " functionContainer";
         } else {
           line.className += " objectContainer";
         }
       }
       else line.className += " stringContainer";
-      let lineBody;
-      lineBody = Object.assign(document.createElement("div"), {
-        className: "lineBody"
-      });
+      let lineBody = TS.html.display.lineBody.handler({path: path, itemName: itemName, depth: depth, item: item, maxDepth: maxDepth, determine: determine, formatType: formatType, line: line});
+    
       let title = TS.html.display.titleBar({path: path, itemName: itemName, depth: depth, unfocus: unfocus, item: item, opts: opts, focused: focused, lineBody: lineBody})
       line.append(title);
-      if (typeof (item) === "string" && maxDepth === undefined) {
-        let textField = Object.assign(document.createElement("div"), {
-          className: "textField",
-          contentEditable: true,
-          onfocus: function () {
-            this.innerText = path[itemName];
-          },
-          onblur: function () {
-            path[itemName] = this.innerText;
-            this.innerHTML = formatType(this.innerText);
-            TS.events.save();
-          }
-        });
-        if (itemName[0] === "*") {
-          textField.innerText = item;
-        } else {
-          textField.innerHTML = formatType(item);
-        }
-        lineBody.append(textField);
-        line.append(lineBody);
-      } else if (typeof (item) === "object" && item.object_root && item.object_root.type == 'function') {
-        let textField = Object.assign(document.createElement("div"), {
-          className: "textField",
-          contentEditable: true,
-          onfocus: function () {
-            this.innerText = item.main
-          },
-          onblur: function () {
-            item.main = this.innerText;
-            this.innerHTML = TS.js.highlight(this.innerText);
-            TS.events.save();
-          },
-          innerHTML: TS.js.highlight(item.main)
-        });
-        lineBody.append(textField);
-        line.append(lineBody);
-      } else if (typeof (item) === "object") {
-        if (maxDepth === undefined || depth < maxDepth) {
-          for (let x in item) {
-            if (item.hasOwnProperty(x)) {
-              if (hidden) break;
-              lineBody.append(determine(item[x], x, item, {
-                maxDepth: maxDepth,
-                depth: 1 + depth
-              }));
-            }
-          }
-        }
-      }
       if (typeof (item) === "object" && Object.keys(item).length !== 0) {
         line.append(lineBody);
       }
@@ -243,8 +191,5 @@ Object.assign(TS.html.display, {
       element: box,
       opts: opts
     };
-  },
-  textField : function({itemName, unfocus, path, item, depth, opts, focused, lineBody}) {
-    
   }
 });
