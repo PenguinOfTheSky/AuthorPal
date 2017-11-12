@@ -33,6 +33,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
       }
       if (itemName !== this.innerText)
         this.innerText = itemName;
+      TS.events.updatedFile()
       TS.events.save();
     }
   });
@@ -62,6 +63,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
         }
         TS.data.currentView = [focused[1]];
         TS.refs.treeNav[TS.data.currentView[0]].click();
+        TS.events.updatedFile()
         TS.events.save();
       };
       document.body.append(TS.html.modals.confirmationDelete(itemName, callback));
@@ -82,14 +84,15 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   });
   let openEditorChoices;
   let editor = TS.lib.createNode('div', {
-    innerHTML: `editor`,
+    innerText: ` editors `,
     className: "editor",
     onmouseenter: function() {
       openEditorChoices = TS.html.display.editorChoices(titleContent.innerHTML, function(choice) {
         TS.html.display.lineBody.callEditor(item, choice, function(content) {
         item = content;
         path[itemName] = item;
-        lineBody.innerHTML = TS.js.highlight(content, choice);
+        lineBody.opts.update(content, choice);
+        TS.events.updatedFile()
         TS.events.save()
         })
       })
@@ -141,11 +144,14 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
       onclick: function() {
         TS.html.display.lineBody.callEditor(item.main, item.object_root.editor, function(content) {
         item.main = content;
-        lineBody.innerHTML = TS.js.highlight(content, item.object_root.editor);
+        lineBody.opts.update(content, item.object_root.editor);
+        TS.events.updatedFile()
         TS.events.save()
         })
       },
-      innerText: '<Edit>'
+      style: 'background-image: url("icons/iconmonstr-edit-6-240.png"); background-size: cover;',
+      className: 'btn icon',
+      innerHTML: "&nbsp;&nbsp;"
     })
     buttonGroup.append(callEditor)
   }

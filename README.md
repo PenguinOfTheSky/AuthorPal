@@ -1,13 +1,14 @@
 # AuthorPal (https://penguinofthesky.github.io/AuthorPal/)
 ## Quick Overview
 Hate pencils? Desire Relief? Start planning your next novel/screenplay/etc digitally.
-### Update! Now supports creating Webcomponents!
 
 Product is built to be Chrome compatible. Not suggested for use with any other browser
 
-[FAQ](FAQ.html) is included in product.
+[FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.3.0 new icon for edit, more file and template options.  
+v3.2.0 preferred editors set up for some elements, quick-navs to correct editor.  Minimal syntax highlighting added outside of editors, w/room to grow.  
 v3.1.0 quick-preview button added, devMode link removed (can still access manually), webcomponent creation to alpha stage.
 v3.0.0 can now rename files; bug fixes; begun working on webcomponent creation support  
 v2.10.0 added Trash bin, improved front page  

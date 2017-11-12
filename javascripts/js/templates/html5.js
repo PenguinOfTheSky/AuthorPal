@@ -16,6 +16,26 @@ TS.js.templates.html5 = {
     }
     return obj
   },
+  "html code": function() {
+    let obj = {
+      object_root: {
+        type: 'html',
+        editor: 'html'
+      },
+      "main": ``
+    }
+    return obj
+  },
+  "rich text": function() {
+    let obj = {
+      object_root: {
+        type: 'rich text',
+        editor: 'rich text'
+      },
+      "main": ``
+    }
+    return obj
+  },
   function: function() {
     let obj = {
       object_root: {

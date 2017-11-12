@@ -59,9 +59,11 @@ TS.html.modals = {
           <button id='exit'>X</button>
           <br>
           <label>line name</label> <input required id ='name' type='text' placeholder='name'><br>
-          <label>Select Template</label> <select id='selectTemplate'>
+          <label>Either select a template</label> <select id='selectTemplate'>
             ${options}
           </select><br>
+          or <button id='clone'>Clone another file/container</button><br>
+          or <button id='copy'>Copy-paste json </button><br>
           <input type='submit' value='Submit' class='btnSubmit'>
           <div id='status'></div>
          </form>
@@ -183,7 +185,8 @@ TS.html.modals = {
             <option value='book outline'>Book/creative work Outline</option>
             <option value='Markdown Blog'>Markdown Blog</option>
             <option value='web component(js)'>Web Component (js-based html5)</option> 
-            <option value='website_JS'>Website (js-based html5)</option> 
+            <option value='website_JS'>SPA Website (js-based html5 single-page-app)</option> 
+            <option value='library'>Library</option>
           </select><br>
           <input type='submit' value='Submit' class='btnSubmit'>
           <div id='status'></div>

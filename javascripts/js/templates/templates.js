@@ -299,14 +299,20 @@ TS.js.templates = {
           "Random Notes": ``
         },
         "#head": {
-          "#head": `<script src=''>jquery/other ext. scripts</script>`,
+          "imports/title/etc": {
+            object_root: {
+              type: 'html',
+              editor: 'html'
+            },
+            "main": `<title>My first Site</title>\n<script src=''>jquery/other ext. scripts</script>`
+          },
           "#css": {
             "general": {
               object_root: {
                 type: 'css',
                 editor: 'css'
               },
-              "main": `html, body {\n  height: 100%;\n}`
+              "main": `html, body {\n\ \ height: 100%;\n}`
             }
           }
         },
@@ -322,9 +328,9 @@ TS.js.templates = {
       //for production of js-packaged webcomponent.
       let obj = {
         "master_root": {
-          templates: 'TS.js.templates.library_JS',
+          templates: 'TS.js.templates.html5',
           exportFormat: "",
-          type: "library_JS",
+          type: "library",
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
           version: "3.1.0",

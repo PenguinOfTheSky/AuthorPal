@@ -26,6 +26,11 @@ TS.start = function (parent) {
       }
     }
   })
+  TS.events.updatedFile = function() { //updates dateModified
+    if (TS.data.chosenFile.master_root) {
+      TS.data.chosenFile.master_root.dateModified = (new Date).toLocaleString()
+    }
+  }
   TS.events.save = function (callback) {
     TS.js.indexedDB(function(callback) {
       store.put({id: 'master_999', data: TS.data.local})

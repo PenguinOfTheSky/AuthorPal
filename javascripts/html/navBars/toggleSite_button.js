@@ -10,7 +10,7 @@ TS.html._navBars.toggleSite_button = function() {
     src: 'icons/iconmonstr-eye-6.svg',
     title: 'view site',
     className: 'icon',
-    style: 'margin-left: .3rem; margin-right: .3rem;',
+    style: 'margin-left: .3rem; margin-right: .3rem; display: none;',
     onclick: function() {
       let iframeStyle = `position: absolute; z-index:999; background-color: white; width: 100%; height: ${TS.refs.display.clientHeight}px; margin-top: ${TS.refs.mainNavBar.clientHeight}px;`
       switch (TS.data.chosenFile.master_root.type) {

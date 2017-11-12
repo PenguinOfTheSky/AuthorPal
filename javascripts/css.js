@@ -172,6 +172,7 @@ return {
         }`;
       str += `
       ${_.btn}
+      ${_.icon || defaultCSS.icon}
       .lineContainer {
         /*add background for margins?*/
         box-sizing:border-box;
@@ -208,6 +209,7 @@ return {
       .titleContent {
         ${_.titleFont || "color: black"};
         padding:.35rem;
+        
       }
       .lineBody {
         margin-left:.5rem;
@@ -217,6 +219,7 @@ return {
       .textField {
         cursor: text;
         padding: 0.1rem 0.3rem;
+        white-space:pre-wrap;
         min-height:.5rem;
         ${_.textField || `
           color: black;
@@ -289,12 +292,12 @@ return {
         vertical-align: middle;
         display:inline-block;
       }
-      .buttonGroup button {
+      .buttonGroup button, .buttonGroup img {
         border-radius: 0px;
         color: white;
         margin: auto;
       }
-      .buttonGroup button:hover {
+      .buttonGroup button:hover, .buttonGroup > img:hover {
         outline:none;
       }
       .buttonGroup button:first-child {

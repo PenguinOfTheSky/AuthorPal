@@ -30,7 +30,7 @@ TS.html.display.splash.js = function(vars) {
         let thisRoot = files[x].master_root
         if (thisRoot.type) helperContent += thisRoot.type
         if (thisRoot.dateCreated) helperContent += '\ncreated: ' + thisRoot.dateCreated
-        if (thisRoot.dateModified) helperContent += '\nmodified: ' + thisRoot.dateCreated
+        if (thisRoot.dateModified) helperContent += '\nmodified: ' + thisRoot.dateModified
         let div = TS.lib.createNode('div', {
           title: helperContent,
           "data-origin": 'testing',

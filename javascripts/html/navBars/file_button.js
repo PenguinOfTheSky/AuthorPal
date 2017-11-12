@@ -17,7 +17,7 @@ TS.html._navBars.file_button = function (callback, display) {
             window.open("devMode.html", "_blank");
             break;
           case "faq":
-            window.open("FAQ.html", "_blank");
+            window.open("help/FAQ.html", "_blank");
             break;
           case "home":
             display.splash();

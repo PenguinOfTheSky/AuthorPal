@@ -1,11 +1,9 @@
 //possibly move file to better folder? called by titleBar.js
 TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
   let editorContainer = TS.lib.createNode('div', {
-    style: `width: 100%; height: 100%; position: absolute; z-index: 1; display: flex; flex-direction: column;top: 0px;`
+    id: "TS.html.display.lineBody.callEditor",
+    style: `width: 100%; height: 100%; position: absolute; z-index: 1; display: flex; flex-direction: column;top: 0px;background-color:white;`
   })
-  /*
-  old style : width: ${TS.refs.display.clientWidth}px; height: ${TS.refs.display.clientHeight}px; position: absolute; z-index: 1; top: ${TS.refs.topNav.clientHeight}px; left: ${TS.refs.secondaryNavBar.clientWidth}px; display: flex; flex-direction: column;
-  */
   let exitEditor = TS.lib.createNode('button', {
     innerText: 'Exit Editor',
     onclick: function() {
@@ -27,15 +25,14 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
   let aceEditor;
   switch (type) {
     case 'rich text':
-      $(document).ready(function() {
         $('#editor').summernote();
         $('#editor').summernote({
           focus: true
         });
         document.querySelector('.note-editor').style = `
-          width: ${TS.refs.display.clientWidth}px; height: ${TS.refs.display.clientHeight}px; position: absolute; z-index: 1; top: ${TS.refs.topNav.clientHeight}px; left: ${TS.refs.secondaryNavBar.clientWidth}px
+          width: 100%; height: 100%;
         `
-        $('#editor').summernote('code', lineBody.querySelector('.textField').innerHTML);
+        $('#editor').summernote('code', itemContent);
         aceEditor = {
           getValue: function() {
             let text = $('#editor').summernote('code')
@@ -46,7 +43,6 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
           setValue: function() {// code insertion todo?
           }
         }
-      });
       break;
     default:
       aceEditor = ace.edit("editor");

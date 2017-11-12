@@ -21,7 +21,7 @@ TS.cssTemplates.default = {
         margin: .2rem;
         background-color: gold;
       }
-      button:hover {
+      button:hover, .btn:hover {
         box-shadow: 0px 0px .1rem .2rem rgba(235,255,255,.5) inset;
       }`,
   border1: `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);

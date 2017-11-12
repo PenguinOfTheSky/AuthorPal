@@ -70,6 +70,7 @@ TS.html._navBars = {
       },
       preferences: function () {},
       open: function (name) {
+        toggle.style.display='inline-block';
         TS.data.chosenFile = TS.data.local.files[name];
         let firstItem = Object.keys(TS.data.chosenFile)[0];
         if (firstItem === "master_root") {

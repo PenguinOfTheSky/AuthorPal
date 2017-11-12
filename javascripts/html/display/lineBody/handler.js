@@ -1,8 +1,12 @@
 TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDepth, determine, formatType, line}) {
+  let update;
   let lineBody = Object.assign(document.createElement("div"), {
     className: "lineBody"
   });
   if (typeof (item) === "string" && maxDepth === undefined) {
+    update = function(text) {
+      textField.innerHTML = formatType(text);
+    }
     let textField = Object.assign(document.createElement("div"), {
       className: "textField",
       contentEditable: true,
@@ -11,7 +15,8 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       },
       onblur: function () {
         path[itemName] = this.innerText;
-        this.innerHTML = formatType(this.innerText);
+        update(this.innerText);
+        TS.events.updatedFile()
         TS.events.save();
       }
     });
@@ -22,13 +27,10 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
     }
     lineBody.append(textField);
   //  line.append(lineBody);
-  } else if (typeof (item) === "object" && item.object_root && item.object_root.type == 'function') {
-    /*switch (item.object_root.type) {
-      case 'function': 
-        TS.html.display.lineBody.function(vars) 
-        break;
-    } */
-    
+  } else if (typeof (item) === "object" && item.object_root && item.object_root.type) {
+    update = function(text, type) {
+      textField.innerHTML = TS.js.highlight(text, type);
+    }
     let textField = Object.assign(document.createElement("div"), {
       className: "textField",
       contentEditable: true,
@@ -37,13 +39,13 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       },
       onblur: function () {
         item.main = this.innerText;
-        this.innerHTML = TS.js.highlight(this.innerText, item.object_root.editor);
+        update(this.innerText, item.object_root.editor)
+        TS.events.updatedFile()
         TS.events.save();
       },
       innerHTML: TS.js.highlight(item.main, item.object_root.editor)
     });
     lineBody.append(textField);
-  //  line.append(lineBody);
   } else if (typeof (item) === "object") {
     if (maxDepth === undefined || depth < maxDepth) {
       for (let x in item) {
@@ -56,5 +58,10 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       }
     }
   }
-  return lineBody;
+  let opts = {
+    update: function(text, type) {
+      update(text, type)
+    }
+  }
+  return {element: lineBody, opts: opts};
 }

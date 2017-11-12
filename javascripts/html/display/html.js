@@ -136,7 +136,7 @@ Object.assign(TS.html.display, {
     
       let title = TS.html.display.titleBar({path: path, itemName: itemName, depth: depth, unfocus: unfocus, item: item, opts: opts, focused: focused, lineBody: lineBody})
       line.appendChild(title);
-      line.appendChild(lineBody);
+      line.appendChild(lineBody.element);
       if (typeof (item) === "object" && Object.keys(item).length !== 0) {
       //  line.appendChild(lineBody);
       }

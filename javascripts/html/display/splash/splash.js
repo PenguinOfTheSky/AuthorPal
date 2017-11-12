@@ -12,7 +12,7 @@ TS.html.display.splash = function () {
       </div>
       <div id='right'>
         <div id='about'>
-          <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v3.2.2</h1>
+          <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v3.3.0</h1>
           
         </div>
         <hr>
@@ -47,7 +47,7 @@ TS.html.display.splash = function () {
           <h2>Confused?</h2>
           <div style = 'text-indent:1rem;'>
             <b>To get started click Menu (top left) and create a new project by clicking "New File"</b>
-            <p>To learn more see our <a href ='FAQ.html' target="_blank">FAQ</a>.
+            <p>To learn more see our <a href ='help/FAQ.html' target="_blank">FAQ</a>.
             Bug reports and feature requests can be filed at <a href='https://github.com/PenguinOfTheSky/AuthorPal'>https://github.com/PenguinOfTheSky/AuthorPal</a></p>
           </div>
         </div>
