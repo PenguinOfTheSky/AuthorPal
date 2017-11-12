@@ -45,7 +45,15 @@ TS.html.modals = {
       TS.data.chosenFile.master_root = {};
       TS.data.chosenFile.master_root.templates = 'TS.js.templates["novel outline"]';
     }
-    let x = eval(TS.data.chosenFile.master_root.templates); // Todo: Remove the eval, there must be a better way
+    let x;
+    if (typeof(TS.data.chosenFile.master_root.templates)) {
+      eval("x =" + TS.data.chosenFile.master_root.templates);
+    } // Todo: Remove the eval, there must be a better way
+    else {
+      x = TS.data.chosenFile.master_root.templates
+    }
+    console.log(TS.data.chosenFile.master_root.templates)
+    console.log(x)
     Object.keys(x).forEach(function (ele) {
       options += `<option value='${ele}'>${ele}</option>`;
     });

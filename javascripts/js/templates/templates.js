@@ -1,5 +1,5 @@
 /* global TS */
-TS.js.templates = {
+Object.assign(TS.js.templates, {
   default: {
     textblock: function () {
       return ``;
@@ -365,4 +365,4 @@ TS.js.templates = {
       return obj;
     }
   }
-};
+});
