@@ -4,27 +4,15 @@ TS.html._navBars.file_button = function (callback, display) {
     innerHTML: `Menu
     <div id='hiddenOptions' class='hidden'></div>`
   });
-  let options = ["home", "open", "create", "delete", "save", "upload", "preferences", "export", "faq"];
-  let values = ["Home", "Open File", "New File", "Delete File", "Download", "Upload", "Preferences", "Export File", "FAQ"];
+  let options = ["save", "upload", "export"];
+  let values = ["Download", "Upload", "Export File"];
   for (var j = 0; j < options.length; j++) {
     let option = Object.assign(document.createElement("div"), {
       className: "menuOptions",
       "value": options[j],
       "innerText": values[j],
       onclick: function () {
-        switch (this.value) {
-          case "devMode":
-            window.open("devMode.html", "_blank");
-            break;
-          case "faq":
-            window.open("help/FAQ.html", "_blank");
-            break;
-          case "home":
-            display.splash();
-            break;
-          default:
-            callback(this.value);
-        }
+        callback(this.value);
         this.parentNode.style.display = "none";
         let vis = this.parentNode;
         setTimeout(function () {

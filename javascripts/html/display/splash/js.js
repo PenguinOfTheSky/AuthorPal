@@ -37,8 +37,12 @@ TS.html.display.splash.js = function(vars) {
           className: divClass,
           draggable: true,
           onclick: function(event) {
-            TS.data.chosenFile = TS.data.local.files[x];
-            TS.events.openFile(x);
+            if (TS.data.local.files[x].master_root && TS.data.local.files[x].master_root.type == 'folder') {
+              
+            } else {
+              TS.data.chosenFile = TS.data.local.files[x];
+              TS.events.openFile(x);
+            }
           },
           oncontextmenu: function(e) {
             e.preventDefault()

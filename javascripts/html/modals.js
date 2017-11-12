@@ -46,14 +46,7 @@ TS.html.modals = {
       TS.data.chosenFile.master_root.templates = 'TS.js.templates["novel outline"]';
     }
     let x;
-    if (typeof(TS.data.chosenFile.master_root.templates)) {
-      eval("x =" + TS.data.chosenFile.master_root.templates);
-    } // Todo: Remove the eval, there must be a better way
-    else {
-      x = TS.data.chosenFile.master_root.templates
-    }
-    console.log(TS.data.chosenFile.master_root.templates)
-    console.log(x)
+    eval("x =" + TS.data.chosenFile.master_root.templates)
     Object.keys(x).forEach(function (ele) {
       options += `<option value='${ele}'>${ele}</option>`;
     });
@@ -190,6 +183,7 @@ TS.html.modals = {
           <br>
           <label>Project name</label> <input required id ='name' type='text' placeholder='name'><br>
           <label>Select Template</label> <select id='selectTemplate'>
+            <option value='folder'>Folder</option>
             <option value='book outline'>Book/creative work Outline</option>
             <option value='Markdown Blog'>Markdown Blog</option>
             <option value='web component(js)'>Web Component (js-based html5)</option> 
@@ -203,6 +197,15 @@ TS.html.modals = {
       `,
       js: function ({box,root}) {
         TS.js.baseModal(box, root);
+        root.querySelector('#createForm').onkeypress = function(event) {
+          if(event.charCode == 13){
+            event.preventDefault();
+            root.querySelector("#createForm").querySelector('.btnSubmit').click();
+            return false; // returning false will prevent the event from bubbling up.
+          } else {
+              return true;
+          }
+        }
         root.querySelector("#createForm").onsubmit = function (event) {
           event.preventDefault();
           let name = this.querySelector("#name").value;
@@ -262,38 +265,6 @@ TS.html.modals = {
     });
     return item.box;
   },
-  openFile: function ({commands}) {
-    let item = TS.lib.createComponent({
-      id: "TS.html.modals.openFile",
-      css: TS.css.modals.openFile(),
-      html: `
-        <div id='centerModal'>
-          <button id='exit'>X</button>
-          <h2> Choose file you wish to open </h2>
-        </div>
-      `,
-      js: function ({box,root}) {
-        TS.js.baseModal(box, root);
-        for (let x in TS.data.local.files) {
-          if (TS.data.local.files.hasOwnProperty(x)) {
-            let file = Object.assign(document.createElement("button"), {
-              className: "fileBtn",
-              innerText: x,
-              onclick: function () {
-                commands.open(x);
-                box.remove();
-              }
-            });
-            root.querySelector("#centerModal").appendChild(file);
-          }
-        }
-        if (Object.keys(TS.data.local.files).length === 0) root.querySelector("#centerModal").appendChild(TS.lib.createNode("h2", {
-          innerHTML: "no files found"
-        }));
-      }
-    });
-    return item.box;
-  },
   confirmationDelete: function (name, callback) {
     let item = TS.lib.createComponent({
       id: "TS.html.modals.confirmationDelete",
@@ -318,7 +289,7 @@ TS.html.modals = {
     });
     return item.box;
   },
-  exportFile: function () {
+  exportFile: function () { //fixThis
     let fileDownload = ``,
       filePreview = ``,
       text;

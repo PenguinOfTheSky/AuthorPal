@@ -288,7 +288,7 @@ Object.assign(TS.js.templates, {
           exportFormat: "", //fixthis
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
-          type: "website"
+          type: "website_JS"
         },
         "general": {
           "title": ``,
@@ -314,6 +314,19 @@ Object.assign(TS.js.templates, {
               },
               "main": `html, body {\n\ \ height: 100%;\n}`
             }
+          },
+          "#start": {
+            object_root: {
+              type: 'function',
+              editor: 'js'
+            },
+            "main": `function() {
+              //runs after everything has loaded.
+              //to preload something to body, include it in imports/title/etc
+              //access other functions/etc with me.variable.variable.variable or me["variable"]
+              document.body.innerHTML = 'Hello World'
+              console.log('hello world')
+            }`
           }
         },
         "js": {},
@@ -363,6 +376,20 @@ Object.assign(TS.js.templates, {
         }
       };
       return obj;
+    },
+    "folder": function () {
+      //for production of js-packaged webcomponent.
+      let obj = {
+        "master_root": {
+          type: "folder",
+          dateCreated: (new Date()).toLocaleString(),
+          dateModified: (new Date()).toLocaleString(),
+          version: "3.4.0",
+          shadowTree: {}
+        },
+        "files": {}
+      }
+      return obj
     }
   }
 });

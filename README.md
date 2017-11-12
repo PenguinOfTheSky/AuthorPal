@@ -7,6 +7,7 @@ Product is built to be Chrome compatible. Not suggested for use with any other b
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.4.0 prelim folder support (currently nonfunctional). Reduced excess buttons on Menu button. no more openFile modal
 v3.3.0 new icon for edit, more file and template options.  
 v3.2.0 preferred editors set up for some elements, quick-navs to correct editor.  Minimal syntax highlighting added outside of editors, w/room to grow.  
 v3.1.0 quick-preview button added, devMode link removed (can still access manually), webcomponent creation to alpha stage.
