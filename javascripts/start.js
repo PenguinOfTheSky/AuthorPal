@@ -20,7 +20,7 @@ TS.start = function (parent) {
         TS.data.local = {
           files: {},
           preferences: {
-            theme: 'default'
+            theme: 'midnight'
           }
         };
         TS.events.save(begin())
