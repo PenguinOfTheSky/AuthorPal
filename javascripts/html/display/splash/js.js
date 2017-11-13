@@ -4,7 +4,8 @@ TS.html.display.splash.js = function(vars) {
   root.querySelector('#prefForm').onsubmit = function(e) {
     e.preventDefault() 
     TS.data.local.preferences.theme = root.querySelector('#themeSelect').value;
-    TS.events.save(function() {location.reload()});
+    let reload = function() {location.reload()}
+    TS.events.save(reload);
     
   }
   root.querySelector('#left').onclick = function(event) {
