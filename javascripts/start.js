@@ -14,6 +14,7 @@ TS.start = function (parent) {
     y.onsuccess = function() {
       if (y.result) { 
         TS.data.local = y.result.data 
+        TS.data.local.files['Example files'] = TS.js.templates['Example files']()
         begin()
       } else {
         TS.data.local = {

@@ -295,29 +295,44 @@ TS.html.modals = {
       text;
     let styleChoice;
     if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
-      let formatted = TS.js.fileFormat[TS.data.chosenFile.master_root.exportFormat](TS.data.chosenFile);
-      text = formatted;
-      let keys = Object.keys(formatted);
-      try {
-        styleChoice = TS.data.chosenFile["#advanced"].styles["*chosenStyle"];
-        styleChoice = TS.data.chosenFile["#advanced"].styles[styleChoice];
-      } catch (err) {
-        return 0;
-      }
-      keys.forEach(function (ele) {
-        let textarea = Object.assign(document.createElement("textarea"), {
-          innerText: `<head> ${TS.data.chosenFile["#advanced"]["*head"]}
-          <script>${TS.data.chosenFile["#advanced"]["*script"]} </script>
-           ${styleChoice} </head>` + formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
-        });
-        var myblob = new Blob([textarea.innerText], {
-          type: "text/html"
+      if (TS.data.chosenFile.master_root.type) {
+        let hidden = document.createElement('iframe', {
+          style: 'display: none;'
+        })
+        TS.refs.container.append(hidden)
+        let data = TS.js.export.exportHandler(TS.data.chosenFile, 0, hidden)
+        hidden.remove()
+        var myblob = new Blob([data.data], {
+          type: `text/${data.type}`
         });
         let url = URL.createObjectURL(myblob);
         let date = new Date();
-        fileDownload += `<a href="${url}" download="AuthorPal-${date.toDateString()}-style:${ele}">Download style: ${ele}</a>`;
-        filePreview += `<a href="${url}" target='_blank' id='preview_${ele}'>Preview style:${ele} </a>`;
-      });
+        fileDownload += `<a href="${url}" download="AuthorPal-${date.toDateString()}}">Download .${data.type}</a>`;
+      } else {
+        let formatted = TS.js.fileFormat[TS.data.chosenFile.master_root.exportFormat](TS.data.chosenFile);
+        text = formatted;
+        let keys = Object.keys(formatted);
+        try {
+          styleChoice = TS.data.chosenFile["#advanced"].styles["*chosenStyle"];
+          styleChoice = TS.data.chosenFile["#advanced"].styles[styleChoice];
+        } catch (err) {
+          return 0;
+        }
+        keys.forEach(function (ele) {
+          let textarea = Object.assign(document.createElement("textarea"), {
+            innerText: `<head> ${TS.data.chosenFile["#advanced"]["*head"]}
+            <script>${TS.data.chosenFile["#advanced"]["*script"]} </script>
+             ${styleChoice} </head>` + formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
+          });
+          var myblob = new Blob([textarea.innerText], {
+            type: "text/html"
+          });
+          let url = URL.createObjectURL(myblob);
+          let date = new Date();
+          fileDownload += `<a href="${url}" download="AuthorPal-${date.toDateString()}-style:${ele}">Download style: ${ele}</a>`;
+          filePreview += `<a href="${url}" target='_blank' id='preview_${ele}'>Preview style:${ele} </a>`;
+        });
+      }
     }
     let item = TS.lib.createComponent({
       id: "TS.html.modals.exportFile",

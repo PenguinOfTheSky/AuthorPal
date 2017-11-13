@@ -25,9 +25,10 @@ TS.html._navBars.toggleSite_button = function() {
               style: iframeStyle
             })
             previous = viewFrame;
-            let output = TS.js.exportHandler(TS.data.chosenFile, true, viewFrame)
+            TS.refs.container.append(viewFrame)
+            let output = TS.js.export.exportHandler(TS.data.chosenFile, true, viewFrame)
             
-            viewFrame.contentDocument.body.append(output)
+            //viewFrame.contentDocument.body.append(output)
           }
           view = !view
           break;

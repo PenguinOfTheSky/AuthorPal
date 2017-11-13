@@ -170,16 +170,16 @@ Object.assign(TS.js.templates, {
       };
       return obj;
     },
-    "Markdown Blog": function () {
+    "Blog": function () {
       //Comes with __ available themes, creates a blog site with little fuss.
       let obj = {
         "master_root": {
           templates: 'TS.js.templates["staticWebsite"]',
-          exportFormat: "markdownBlog",
-          type: "markdown blog",
+          exportFormat: "Blog",
+          type: "Blog",
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
-          version: "2.9",
+          version: "3.4",
           shadowTree: {}
         },
         "#general": {
@@ -262,7 +262,7 @@ Object.assign(TS.js.templates, {
               console.log('hello world')
             }`
           },
-          testScript: {
+          "#testScript": {
             object_root: {
               type: 'function',
               editor: 'js'
@@ -273,7 +273,7 @@ Object.assign(TS.js.templates, {
               console.log(component)
               component = component(document.body)
               console.log(component)
-              component["#javascript"]["#start"](document.body)
+              component["#root"]["#start"](document.body)
 
             }`
           }

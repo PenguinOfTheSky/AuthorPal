@@ -1,7 +1,5 @@
 TS.js.export['website_JS'] = function (file, preview, viewFrame) {
   if (preview) {
-    
-    TS.refs.container.append(viewFrame)
     let root = document.createDocumentFragment()
     let comments = ``
     let script = document.createElement('script')

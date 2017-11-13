@@ -1,11 +1,12 @@
-TS.js.exportHandler = function(file, preview, viewFrame) {
+TS.js.export.exportHandler = function(file, preview, viewFrame) {
   //preview true/false
-  window.i = viewFrame
-  console.log('fish')
   if (!file.master_root) return 0;
   switch(file.master_root.type) {
-    case "markdown blog":
-    
+    case "blog":
+      return TS.js.export['blog'](file, preview, viewFrame)
+      break;
+    case "book outline":
+      return TS.js.export['book outline'](file, preview, viewFrame)
       break;
     case "website_JS":
       return TS.js.export['website_JS'](file, preview, viewFrame)

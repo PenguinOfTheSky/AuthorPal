@@ -1,8 +1,5 @@
 TS.js.export['web component(js)'] = function (file, preview, viewFrame) {
-  if (preview) {
-    
-    TS.refs.container.append(viewFrame)
-    let root = document.createDocumentFragment()
+  if (preview || !preview) {
     let comments = ``
     let script = document.createElement('script')
     script.innerHTML = `let test = function(vars) {
@@ -38,9 +35,22 @@ TS.js.export['web component(js)'] = function (file, preview, viewFrame) {
       script.innerHTML += spaces + "}"
     }
     dig(TS.data.chosenFile, 0)
-    script.innerHTML += '\n  return me\n}\n let testScript = ' + TS.data.chosenFile['#advanced'].testScript.main + '\n' + 'testScript(test)'
-    comments = document.createComment(comments)
-    root.append(comments, script)
-    return root
+    script.innerHTML += "\n  return me\n}"
+    if (TS.data.chosenFile['#root']['#testScript'].main && preview) {
+      script.innerHTML += '\n let testScript = ' + TS.data.chosenFile['#root']['#testScript'].main + '\n' + 'try { \n  testScript(test) \n} catch(err) {\n console.log(err) \n}'
+    }
+    commentsNode = document.createComment(comments)
+    if (!preview) {
+      return {
+        data: "/*" + comments + '*/\n' + "" + script.innerHTML + "",
+        type: 'js'
+      }
+    }
+    else if (preview) {
+      viewFrame.contentDocument.open()
+      viewFrame.contentDocument.write('<!DOCTYPE html>')
+      viewFrame.contentDocument.close();
+      viewFrame.contentDocument.body.append(commentsNode, script)
+    }
   }
 }
