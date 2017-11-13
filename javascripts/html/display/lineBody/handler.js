@@ -1,9 +1,7 @@
 TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDepth, determine, formatType, line}) {
   let tabDeny = function(node) {
-    console.log(node)
-    node.onkeypress = function(event) {
-      console.log(event.charCode)
-      if(event.charCode == 9){
+    node.onkeydown = function(event) {
+      if(event.key === 'Tab'){
         event.preventDefault();
       }
     }

@@ -33,7 +33,10 @@ TS.start = function (parent) {
     }
   }
   TS.events.save = function (callback) {
-    TS.js.indexedDB(function(callback) {
+    let toIndexed = function() {
+      
+    }
+    TS.js.indexedDB(function(opts) {
       store.put({id: 'master_999', data: TS.data.local})
     })
   };

@@ -22,7 +22,9 @@ TS.js.indexedDB = function(fn) {
       db: db,
       tx: tx
     }
-    if (fn) fn(opts);
+    if (fn) {
+      fn(opts);
+    }
     tx.oncomplete = function() {
         db.close();
     };
