@@ -3,7 +3,7 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
     let root = document.createDocumentFragment()
     let comments = ``
     let script = document.createElement('script')
-    script.innerHTML = `let test = function(vars) {
+    script.innerHTML = ` {
       let me = `
     let dig = function(obj, depth, parent) {
       let spaces = "";
@@ -36,9 +36,24 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
       script.innerHTML += spaces + "}"
     }
     dig(TS.data.chosenFile, 0)
-    script.innerHTML += '\n  return me\n}\n let testScript = ' + TS.data.chosenFile['#advanced'].testScript.main + '\n' + 'testScript(test)'
-    comments = document.createComment(comments)
-    root.append(comments, script)
-    return root
+    script.innerHTML += ` \n try {
+      me['#head']['#start']()
+    } catch (err) {
+      console.log(err)
+    }`
+    script.innerHTML += "\n }"
+    let commentsNode = document.createComment(comments)
+    viewFrame.contentDocument.open()
+    viewFrame.contentDocument.write('<!DOCTYPE html>')
+    viewFrame.contentDocument.close();
+    viewFrame.contentDocument.body.append(commentsNode, script)
+    window.i = viewFrame.contentDocument
+    if (!preview) {
+      return {
+        data: viewFrame.contentDocument.document.outerHTML,
+        type: 'html'
+      }
+    } else if (preview) {
+    }
   }
 }

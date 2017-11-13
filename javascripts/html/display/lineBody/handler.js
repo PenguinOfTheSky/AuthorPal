@@ -1,4 +1,13 @@
 TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDepth, determine, formatType, line}) {
+  let tabDeny = function(node) {
+    console.log(node)
+    node.onkeypress = function(event) {
+      console.log(event.charCode)
+      if(event.charCode == 9){
+        event.preventDefault();
+      }
+    }
+  }
   let update;
   let lineBody = Object.assign(document.createElement("div"), {
     className: "lineBody"
@@ -11,6 +20,7 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       className: "textField",
       contentEditable: true,
       onfocus: function () {
+        tabDeny(this)
         this.innerText = path[itemName];
       },
       onblur: function () {
@@ -35,6 +45,7 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       className: "textField",
       contentEditable: true,
       onfocus: function () {
+        tabDeny(this)
         this.innerText = item.main
       },
       onblur: function () {

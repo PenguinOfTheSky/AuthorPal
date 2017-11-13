@@ -39,7 +39,7 @@ TS.js.export['web component(js)'] = function (file, preview, viewFrame) {
     if (TS.data.chosenFile['#root']['#testScript'].main && preview) {
       script.innerHTML += '\n let testScript = ' + TS.data.chosenFile['#root']['#testScript'].main + '\n' + 'try { \n  testScript(test) \n} catch(err) {\n console.log(err) \n}'
     }
-    commentsNode = document.createComment(comments)
+    let commentsNode = document.createComment(comments)
     if (!preview) {
       return {
         data: "/*" + comments + '*/\n' + "" + script.innerHTML + "",

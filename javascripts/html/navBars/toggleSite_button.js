@@ -8,12 +8,13 @@ TS.html._navBars.toggleSite_button = function() {
   let view = false;
   let img = TS.lib.createNode('img', {
     src: 'icons/iconmonstr-eye-6.svg',
-    title: 'view site',
+    title: 'view project export preview',
     className: 'icon',
     style: 'margin-left: .3rem; margin-right: .3rem; display: none;',
     onclick: function() {
       let iframeStyle = `position: absolute; z-index:999; background-color: white; width: 100%; height: ${TS.refs.display.clientHeight}px; margin-top: ${TS.refs.mainNavBar.clientHeight}px;`
       switch (TS.data.chosenFile.master_root.type) {
+        case "website_JS": 
         case 'web component(js)':
           if (view) {
             this.src = "icons/iconmonstr-eye-6.svg"
@@ -27,11 +28,10 @@ TS.html._navBars.toggleSite_button = function() {
             previous = viewFrame;
             TS.refs.container.append(viewFrame)
             let output = TS.js.export.exportHandler(TS.data.chosenFile, true, viewFrame)
-            
-            //viewFrame.contentDocument.body.append(output)
           }
           view = !view
           break;
+        
         default: 
         if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
           let formatted = TS.js.fileFormat[TS.data.chosenFile.master_root.exportFormat](TS.data.chosenFile);
