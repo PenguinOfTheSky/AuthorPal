@@ -1,6 +1,7 @@
 TS.html._navBars.file_button = function (callback, display) {
   let select = Object.assign(document.createElement("div"), {
     id: "menu",
+    style: 'cursor: default;',
     innerHTML: `Menu
     <div id='hiddenOptions' class='hidden'></div>`
   });
@@ -8,7 +9,7 @@ TS.html._navBars.file_button = function (callback, display) {
   let values = ["Download", "Upload", "Export File"];
   for (var j = 0; j < options.length; j++) {
     let option = Object.assign(document.createElement("div"), {
-      className: "menuOptions",
+      className: "menuOptions hoverable",
       "value": options[j],
       "innerText": values[j],
       onclick: function () {

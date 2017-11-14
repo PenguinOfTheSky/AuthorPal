@@ -8,11 +8,6 @@ TS.html.display.splash.js = function(vars) {
     TS.events.save(reload);
     
   }
-  root.querySelector('#left').onclick = function(event) {
-    if (event.target.getAttribute('targetName')) {
-      root.querySelector('#' + event.target.getAttribute('targetName') ).scrollIntoView(1)
-    }
-  }
   root.querySelector("#createNewFile").onclick = function() {
     TS.refs.container.append(TS.html.modals.createFile())
   }

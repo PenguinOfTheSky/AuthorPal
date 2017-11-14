@@ -108,10 +108,10 @@ TS.html._navBars = {
     let left = Object.assign(document.createElement("div"), {
       id: "left",
       innerHTML: `
-        <img src='icons/iconmonstr-home-7-240.png' title='home' targetName = 'about'>
-        <img src='icons/iconmonstr-note-20-240.png' title='files' targetName = 'filesListContainer'>
-        <img src='icons/iconmonstr-gear-11-240.png' title='admin' targetName = 'admin'>
-        <img src='icons/iconmonstr-help-3-240.png' title='help' targetName = 'help'>
+        <img src='icons/iconmonstr-home-7-240.png' title='home' targetName = 'about' class='hoverable'>
+        <img src='icons/iconmonstr-note-20-240.png' title='files' targetName = 'filesListContainer' class='hoverable'>
+        <img src='icons/iconmonstr-gear-11-240.png' title='admin' targetName = 'admin' class='hoverable'>
+        <img src='icons/iconmonstr-help-3-240.png' title='help' targetName = 'help' class='hoverable'>
          `,
       onclick: function(e) {
         if (e.target.getAttribute('targetName')) {

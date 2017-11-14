@@ -3,6 +3,10 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
     node.onkeydown = function(event) {
       if(event.key === 'Tab'){
         event.preventDefault();
+        TS.js.insertText(node, '  ', TS.refs.display.shadowRoot.getSelection())
+      } else if(event.key === 'Enter'){
+        event.preventDefault();
+        TS.js.insertText(node, '\n', TS.refs.display.shadowRoot.getSelection())
       }
     }
   }
@@ -22,6 +26,7 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
         this.innerText = path[itemName];
       },
       onblur: function () {
+        this.onkeydown = ''
         path[itemName] = this.innerText;
         update(this.innerText);
         TS.events.updatedFile()

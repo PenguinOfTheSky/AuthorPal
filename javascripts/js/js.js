@@ -2,10 +2,34 @@
 /* global marked */
 //write .append function
 Object.assign(TS.js, {
+  insertText: function (el, newText, selection) {
+    //fix: add allow tab restructuring of highlighted rather than just insert
+    var cursor = selection.anchorOffset
+    var text = el.innerText
+    var before = text.substring(0, cursor)
+    var after  = text.substring(cursor, text.length)
+    el.innerText = (before + newText + after)
+    var textNode = selection.anchorNode;
+    var caret = cursor + newText.length; 
+    var range = document.createRange();
+    range.setStart(textNode, caret);
+    range.setEnd(textNode, caret);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range)
+  },
   baseModal: function (box, root) {
     box.onclick = function () {
       box.remove();
     };
+    let escapeModal = function(event) {
+      if(event.key === 'Escape'){
+        event.preventDefault();
+        box.remove()
+      }
+      window.removeEventListener("keydown", escapeModal)
+    }
+    window.onkeydown = escapeModal
     root.querySelector("#centerModal").onclick = function (event) {
       event.stopPropagation();
     };

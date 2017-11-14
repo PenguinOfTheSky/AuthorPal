@@ -76,6 +76,7 @@ return {
       #left {
         display: inline-block;
         margin-right:.1rem;
+        margin-left: .1rem;
       }
       #left img {
         vertical-align: middle;
@@ -322,24 +323,11 @@ return {
         display: flex;
         max-height:100%;
       }
-      #left {
-        padding: 1%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-      }
       #right {
         padding: 1%;
         overflow-y: scroll;
         max-height: 100%;
         text-align: center;
-      }
-      #trash:hover {
-        ${_.hoverable || "background-color: blue;"}
-      }
-      #left img {
-        width: 1.5rem;
-        height: 1.5rem;
       }
       hr {
         width: 100%;
@@ -367,6 +355,11 @@ return {
         height: 1.2rem;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      .fileOrFolder:hover span {
+        width: auto;
+        min-width: 8rem;
+        overflow: visible;
       }
       .fileOrFolder:hover {
         ${_.hoverable}

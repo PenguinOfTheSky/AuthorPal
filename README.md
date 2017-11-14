@@ -1,12 +1,13 @@
 # AuthorPal (https://penguinofthesky.github.io/AuthorPal/)
 ## Quick Overview
-Hate pencils? Desire Relief? Start planning your next novel/screenplay/etc digitally.
+AuthorPal is an html5-based interactive development tool for use in creating outlines, websites, JavaScript libraries, and JavaScript components.
 
-Product is built to be Chrome compatible. Not suggested for use with any other browser
+Product is built to be Chrome/Opera compatible. Not suggested for use with any other browser
 
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.6.0 removed "Sparky" theme.  AuthorPal now runs on and is being maintained on Opera browser.  Tab produces double-space in textfields. 
 v3.5.0 can now export .js webcomponent files. Prelim example files folder added. Export streamlined.
 v3.4.0 prelim folder support (currently nonfunctional). Reduced excess buttons on Menu button. no more openFile modal
 v3.3.0 new icon for edit, more file and template options.  
