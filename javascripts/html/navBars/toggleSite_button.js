@@ -15,6 +15,7 @@ TS.html._navBars.toggleSite_button = function() {
       let iframeStyle = `position: absolute; z-index:999; background-color: white; width: 100%; height: ${TS.refs.display.clientHeight}px; margin-top: ${TS.refs.mainNavBar.clientHeight}px;`
       switch (TS.data.chosenFile.master_root.type) {
         case "website_JS": 
+        // case "book outline":
         case 'web component(js)':
           if (view) {
             this.src = "icons/iconmonstr-eye-6.svg"
@@ -39,14 +40,14 @@ TS.html._navBars.toggleSite_button = function() {
           let keys = Object.keys(formatted);
           try {
             styleChoice = TS.data.chosenFile["#advanced"].styles["*chosenStyle"];
-            styleChoice = TS.data.chosenFile["#advanced"].styles[styleChoice];
+            styleChoice ="<style>" +  TS.data.chosenFile["#advanced"].styles[styleChoice].main + "</style>";
           } catch (err) {
             return 0;
           }
           keys.forEach(function (ele) {
             let textarea = Object.assign(document.createElement("textarea"), {
-              innerText: `<head> ${TS.data.chosenFile["#advanced"]["*head"] || ''}
-              <script>${TS.data.chosenFile["#advanced"]["*script"]} </script>
+              innerText: `<head> ${TS.data.chosenFile["#advanced"]["*head"].main || ''}
+              <script>${TS.data.chosenFile["#advanced"]["*script"].main} </script>
                ${styleChoice} </head>` + formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
             });
             var myblob = new Blob([textarea.innerText], {

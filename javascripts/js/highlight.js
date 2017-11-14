@@ -22,6 +22,8 @@ TS.js.highlight = function(str, language) {
     })
     //escape html
     return str
+  } else if (language == 'markdown') {
+    return marked(str)
   }
   
 }

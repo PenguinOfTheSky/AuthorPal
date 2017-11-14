@@ -15,8 +15,8 @@ return {
   modal: `
   :host {
     background-color:rgba(150,150,150,.3);
-    padding:5px;position: fixed; z-index: 4;top:0%;height:100%; width:100%;
-    padding-top: 20%;
+    padding:5px;position: absolute; z-index: 4;top:0%;height:100%; width:100%;
+    padding-top: 10%;
   }
   #centerModal {
     text-align:center;

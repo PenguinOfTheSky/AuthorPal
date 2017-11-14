@@ -124,11 +124,11 @@ Object.assign(TS.html.display, {
         className: "lineContainer "
       });
       if (typeof (item) === "object") {
-        if (item.object_root && item.object_root.type == 'function') {
-          objectEditorPreference = 'js'
-          line.className += " functionContainer";
-        } else {
+        if (item.object_root && (item.object_root.type == 'collection' || item.object_root.type == 'library' )) {
           line.className += " objectContainer";
+          
+        } else {
+          //line.className += " functionContainer";
         }
       }
       else line.className += " stringContainer";

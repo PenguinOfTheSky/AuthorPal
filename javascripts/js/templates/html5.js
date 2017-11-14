@@ -1,6 +1,10 @@
 TS.js.templates.html5 = {
-  container: function () {
-    let obj = {};
+  collection: function () {
+    let obj = {
+      object_root: {
+        type: 'collection'
+      }
+    };
     return obj;
   },
   textblock: function() {
@@ -36,6 +40,16 @@ TS.js.templates.html5 = {
     }
     return obj
   },
+  "markdown": function() {
+    let obj = {
+      object_root: {
+        type: 'markdown',
+        editor: 'markdown'
+      },
+      "main": ``
+    }
+    return obj
+  },
   function: function() {
     let obj = {
       object_root: {
@@ -48,7 +62,7 @@ TS.js.templates.html5 = {
     }
     return obj
   },
-  element: function() {
+  "element (function)": function() {
     let obj = {
       object_root: {
         type: 'function',

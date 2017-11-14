@@ -131,9 +131,9 @@ TS.html._navBars = {
       css: TS.css.boxes.displayLeftNav(),
       html: `
         <div id='left'>
-          <button class='baseButtons2' id = 'show'>Unfold</button>
-          <button class='baseButtons2' id='fold1'>Fold >1</button>
-          <button class='baseButtons2' id='fold2'>Fold >2</button>
+          <button class='baseButtons2' id = 'show' title='unfold'>~</button>
+          <button class='baseButtons2' id='fold1' title='Hide >1 deep'>\></button>
+          <button class='baseButtons2' id='fold2' title='Hide >2 deep'>\>\></button>
         </div>
         <div id='tree'></div>
       `,

@@ -77,7 +77,7 @@ Object.assign(TS.js.templates, {
           templates: 'TS.js.templates["novel outline"]',
           exportFormat: "outlineMarkdown",
           type: "book outline",
-          version: "2.9",
+          version: "3.7",
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
           shadowTree: {}
@@ -90,26 +90,37 @@ Object.assign(TS.js.templates, {
           "Random Notes": ``
         },
         "#advanced": {
-          "*head": `
-            <title></title>
-            <script src=""></script>
-          `,
+          "*head": {
+            object_root: {
+              type: 'html',
+              editor: 'html'
+            },
+            "main": `
+              <title></title>
+              <script src=""></script>`
+          },
           styles: {
             "*chosenStyle": "*default",
-            "*default": `<style>
-              .headers {
-                cursor: pointer;
-                text-decoration: underline;
-              }
-              p { text-indent: 1rem; }
-              h1 { text-align: center; }
-              ._2 {margin-left: 3%;}
-              ._3 { margin-left: 6%; }
-              ._4 { margin-left: 9%; }
-              ._5 { margin-left: 12%; }
-              ._6 { margin-left: 15%; }
-              ._7 { margin-left: 18%; }
-              </style>`
+            "*default": {
+              object_root: {
+                type: 'css',
+                editor: 'css'
+              },
+              "main": `
+                .headers {
+                  cursor: pointer;
+                  text-decoration: underline;
+                }
+                p { text-indent: 1rem; }
+                h1 { text-align: center; }
+                ._2 {margin-left: 3%;}
+                ._3 { margin-left: 6%; }
+                ._4 { margin-left: 9%; }
+                ._5 { margin-left: 12%; }
+                ._6 { margin-left: 15%; }
+                ._7 { margin-left: 18%; }
+              `
+            }
           },
           "*script": ``
         },
@@ -132,7 +143,8 @@ Object.assign(TS.js.templates, {
           exportFormat: "", //fixthis
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
-          type: "website"
+          type: "website",
+          version: 1
         },
         "general": {
           "title": ``,
@@ -231,7 +243,7 @@ Object.assign(TS.js.templates, {
           type: "web component(js)",
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
-          version: "3.0.0",
+          version: "3.1.0",
           shadowTree: {}
         },
         "#general": {
@@ -288,7 +300,8 @@ Object.assign(TS.js.templates, {
           exportFormat: "", //fixthis
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
-          type: "website_JS"
+          type: "website_JS",
+          version: 3.7
         },
         "general": {
           "title": ``,

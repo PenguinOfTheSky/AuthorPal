@@ -114,12 +114,12 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   });
   let objectType;
   if (typeof(item) === "object") {
-    if (item.object_root && item.object_root.type) {
+    if (item.object_root && item.object_root.type && item.object_root.type != 'collection') {
       let div = TS.lib.createNode('div', {
         style: "text-align: center;display: inline-block; flex-grow: 1;"
       })
       div.append(TS.lib.createNode('button', {
-        innerHTML: '<b>' + item.object_root.type + '</b>'
+        innerHTML: item.object_root.type
       }))
       objectType = div;
     }
@@ -130,7 +130,10 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
       },
       innerHTML: "+"
     });
-    buttonGroup.append(add);
+    if (item.object_root && item.object_root.editor) {}
+    else {
+      buttonGroup.append(add);
+    } 
   }
   title.append(titleContent, buttonGroup);
   if (objectType) {title.append(objectType)}
@@ -138,7 +141,8 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   if (depth === 0 && unfocus) buttonGroup.append(unfocusBtn);
   if (depth > 0) buttonGroup.append(focusMe);
   if (typeof(item) ==='string') {
-    buttonGroup.append(editor)
+  //  buttonGroup.append(editor)
+  // too buggy, remove?
   } else if (item.object_root && item.object_root.editor){
     let callEditor = TS.lib.createNode('button', {
       onclick: function() {

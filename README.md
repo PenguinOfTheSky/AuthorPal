@@ -7,6 +7,7 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.7.0 removed editor choice, added new pre-selected editor object types like 'markdown' etc. Simplified css  
 v3.6.0 removed "Sparky" theme.  AuthorPal now runs on and is being maintained on Opera browser.  Tab produces double-space in textfields. 
 v3.5.0 can now export .js webcomponent files. Prelim example files folder added. Export streamlined.
 v3.4.0 prelim folder support (currently nonfunctional). Reduced excess buttons on Menu button. no more openFile modal

@@ -1,5 +1,5 @@
 /* global TS */
-TS.html.modals = {
+Object.assign(TS.html.modals, {
   preferencesFile: function () {
     let item = TS.lib.createComponent({
       id: "TS.html.modals.preferencesFile",
@@ -295,7 +295,7 @@ TS.html.modals = {
       text;
     let styleChoice;
     if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
-      if (TS.data.chosenFile.master_root.type) {
+      if (TS.data.chosenFile.master_root.type !='book outline') {
         let hidden = document.createElement('iframe', {
           style: 'display: none;'
         })
@@ -314,14 +314,14 @@ TS.html.modals = {
         let keys = Object.keys(formatted);
         try {
           styleChoice = TS.data.chosenFile["#advanced"].styles["*chosenStyle"];
-          styleChoice = TS.data.chosenFile["#advanced"].styles[styleChoice];
+          styleChoice = "<style>" + TS.data.chosenFile["#advanced"].styles[styleChoice].main + "</style>";
         } catch (err) {
           return 0;
         }
         keys.forEach(function (ele) {
           let textarea = Object.assign(document.createElement("textarea"), {
-            innerText: `<head> ${TS.data.chosenFile["#advanced"]["*head"]}
-            <script>${TS.data.chosenFile["#advanced"]["*script"]} </script>
+            innerText: `<head> ${TS.data.chosenFile["#advanced"]["*head"].main}
+            <script>${TS.data.chosenFile["#advanced"]["*script"].main} </script>
              ${styleChoice} </head>` + formatted[ele].main + "<script>" + formatted[ele].script + "</script>"
           });
           var myblob = new Blob([textarea.innerText], {
@@ -330,7 +330,7 @@ TS.html.modals = {
           let url = URL.createObjectURL(myblob);
           let date = new Date();
           fileDownload += `<a href="${url}" download="AuthorPal-${date.toDateString()}-style:${ele}">Download style: ${ele}</a>`;
-          filePreview += `<a href="${url}" target='_blank' id='preview_${ele}'>Preview style:${ele} </a>`;
+          filePreview += ``;
         });
       }
     }
@@ -429,37 +429,5 @@ TS.html.modals = {
     }, 100)
     return div;
   },
-  trash: function() {
-    let item = TS.lib.createComponent({
-      id: "TS.html.modals.trash",
-      css: TS.css.modals.trash(),
-      html: `
-        <div id='centerModal'>
-          <div><b>Trash</b><button id='exit'>X</button></div><br>
-          <div id='list'></div>
-        </div>
-      `,
-      js: function ({box,root}) {
-        TS.js.baseModal(box, root);
-        let list = TS.lib.createNode('table', {
-          innerHTML: `
-          <tr><th>Name</th><th>Deleted</th><th>Modified</th><th>Restore</th><th>Delete</th></tr>`
-        })
-        TS.data.local.trash.forEach(ele => {
-          ele = ele.master_root
-          let line = TS.lib.createNode('tr', {
-            className: 'trashLine',
-            innerHTML: `<td>${ele.fileName}</td>
-              <td>${ele.dateDeleted}</td>
-              <td>${ele.dateModified || ''}</td>
-              <td><input type='checkbox' id='restore'></td>
-              <td><input type='checkbox' id='delete'></td>`
-          })
-          list.append(line)
-        })
-        root.querySelector('#list').append(list)
-      }
-    });
-    return item.box;
-  }
-};
+  trash: function() {TS.html.modals.trash()}
+})
