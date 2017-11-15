@@ -15,7 +15,7 @@ Object.assign(TS.html.display, {
     });
     let currentID = "";
     let sorted = "";
-    root.append(TS.html.display.splash().box);
+    root.append(TS.html.display.splash.main().box);
     let opts = {
       element: box,
       splash: function () {

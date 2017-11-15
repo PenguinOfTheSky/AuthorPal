@@ -9,7 +9,7 @@ Object.assign(TS.js, {
     var before = text.substring(0, cursor)
     var after  = text.substring(cursor, text.length)
     el.innerText = (before + newText + after)
-    var textNode = selection.anchorNode;
+    var textNode = el.firstChild;
     var caret = cursor + newText.length; 
     var range = document.createRange();
     range.setStart(textNode, caret);

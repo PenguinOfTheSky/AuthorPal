@@ -7,7 +7,7 @@ TS.js.templates.html5 = {
     };
     return obj;
   },
-  textblock: function() {
+  "plain text": function() {
     return ``;
   },
   "css": function() {

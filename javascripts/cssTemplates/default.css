@@ -52,7 +52,10 @@ TS.cssTemplates.default = {
       background: linear-gradient(0deg, rgb(22,0,0), rgb(130,10,10) 40%, rgb(22,0,0));`,
   backgroundNav2: `background-color: #DFD;`,
   backgroundModals: `
-      background: linear-gradient(0deg, rgb(10,120,0), rgb(0,145,55) 40%, rgb(20,110,40));`,
+    .bgModal {
+      background: linear-gradient(0deg, rgb(10,120,0), rgb(0,145,55) 40%, rgb(20,110,40));
+    }
+      `,
   backgroundMain: `
       color: rgb(253,255,255);
       background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));`,

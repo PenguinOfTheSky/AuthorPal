@@ -22,8 +22,8 @@ return {
     text-align:center;
     width:80%;
     margin: 0 auto;
-    ${_.backgroundModals}
   }
+  ${_.backgroundModals}
   ${_.select}
   ${_.btn}
   ${_.btnExit}
@@ -315,7 +315,9 @@ return {
     },
     splash: function () {
       return `
-      ${_.btn + _.btnSubmit}
+      ${_.btn}
+      ${_.btnSubmit}
+      ${_.btnWarn}
       ${_.link}
       :host {
         box-sizing:border-box;
@@ -325,7 +327,7 @@ return {
       }
       #right {
         padding: 1%;
-        overflow-y: scroll;
+        overflow-y: auto;
         max-height: 100%;
         text-align: center;
       }
@@ -348,6 +350,7 @@ return {
       }
       .fileOrFolder img{
         align-self: center;
+        position: relative;
       }
       .fileOrFolder span {
         width: 8rem;
@@ -356,12 +359,19 @@ return {
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .fileOrFolder:hover span {
+      .fileOrFolder span:hover {
         width: auto;
         min-width: 8rem;
-        overflow: visible;
+        background-color: rgb(240,240,240);
+        color: black;
+        position: absolute;
+        bottom: 0%;
+        margin: 0 auto;
+        z-index: 1;
       }
       .fileOrFolder:hover {
+        position: relative;
+        width: 8rem;
         ${_.hoverable}
       }
       #filesList > div {
@@ -382,14 +392,7 @@ return {
       h2 {
         font-size: 1.3rem;
       }
-      ${_.splash || `
-        #left {
-          background-color: #050505;
-        }
-        #left img:hover {
-          box-shadow: 0 0 .1rem .2rem white;
-        }
-        `}
+      ${_.backgroundModals}
       `;
     }
   },
@@ -467,11 +470,12 @@ return {
           position: absolute;
           z-index: 1;
           display: none;
-          ${_.backgroundModals}
           padding: .5rem;
           ${_.border1}
         }
+        
         .contextMenu:hover {
+          
           display: inline-block;
         }
         .fileContextTitle {
@@ -483,6 +487,7 @@ return {
         .fileContextOpts:hover {
           ${_.hoverable || "background-color: blue;"}
         }
+        ${_.backgroundModals}
       `
     }
 

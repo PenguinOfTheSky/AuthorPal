@@ -54,9 +54,12 @@
       background-color: #111;`,
     backgroundNav2: `background-color: #111;`,
     backgroundModals: `
-      padding: 1rem;
-      border-radius: 1rem;
-      background : #171717;`,
+      .bgModal {
+        padding: 1rem;
+        border-radius: 1rem;
+        background-color : #171717;
+      }
+      `,
     backgroundMain: `
       ${font}
       background-color: #222`,
@@ -97,14 +100,7 @@
         ${hover}
       }
     `,
-    btnBase2: `
-      .baseButtons2 {
-        background: none;
-      }
-      .baseButtons2:hover {
-        ${hover}
-      }
-      `,
+    btnBase2: ``,
     btnNav1: `
       .chosen {
         background: linear-gradient(-20deg, rgb(10,10,10), rgb(40,95,95) 40%, rgb(40,40,40));

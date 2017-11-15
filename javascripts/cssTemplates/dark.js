@@ -51,9 +51,12 @@
       padding: .55rem;
       background-color: #111;`,
     backgroundModals: `
-      padding: 1rem;
-      border-radius: 1rem;
-      background : #222;`,
+      .bgModal {
+        padding: 1rem;
+        border-radius: 1rem;
+        background : #222;
+      }
+      `,
     backgroundMain: `
       ${font}
       background-color: #222`,

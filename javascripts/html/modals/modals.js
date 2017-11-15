@@ -5,7 +5,7 @@ Object.assign(TS.html.modals, {
       id: "TS.html.modals.preferencesFile",
       css: TS.css.modals.preferencesFile(),
       html: `
-        <div id='centerModal'>
+        <div id='centerModal' class='bgModal'>
         <button id='exit'>X</button>
         <b>Edit Preferences </b>
         <br>
@@ -54,7 +54,7 @@ Object.assign(TS.html.modals, {
       id: "TS.html.modals.addLine",
       css: TS.css.modals.addLine(),
       html: `
-        <div id='centerModal'>
+        <div id='centerModal' class='bgModal'>
          <form id='addLineForm'>
           <b>Create New Line</b>
           <button id='exit'>X</button>
@@ -107,7 +107,7 @@ Object.assign(TS.html.modals, {
       id: "TS.html.modals.uploadFile",
       css: TS.css.modals.uploadFile(),
       html: `
-        <div id='centerModal'>
+        <div id='centerModal' class='bgModal'>
           <b>Upload backup</b>
           <button id='exit' >X</button>
           <br>
@@ -152,7 +152,7 @@ Object.assign(TS.html.modals, {
       id: "TS.html.modals.saveFile",
       css: TS.css.modals.saveFile(),
       html: `
-        <div id='centerModal'>
+        <div id='centerModal' class='bgModal'>
           <b>Save a Backup</b>
           <button id='exit'>X</button>
           <br>
@@ -176,7 +176,7 @@ Object.assign(TS.html.modals, {
       id: "TS.html.modals.createFile",
       css: TS.css.modals.createFile(),
       html: `
-        <div id='centerModal'>
+        <div id='centerModal' class='bgModal'>
          <form id = 'createForm'>
           <button id='exit'>X</button>
           <b>Create New Project</b>
@@ -233,7 +233,7 @@ Object.assign(TS.html.modals, {
       id: "TS.html.modals.deleteFile",
       css: TS.css.modals.openFile(),
       html: `
-        <div id='centerModal'>
+        <div id='centerModal' class='bgModal'>
           <button id='exit'>X</button>
           <h2> Choose the file you wish to delete </h2>
         </div>
@@ -270,7 +270,7 @@ Object.assign(TS.html.modals, {
       id: "TS.html.modals.confirmationDelete",
       css: TS.css.modals.confirmationDelete(),
       html: `
-        <div id='centerModal'>
+        <div id='centerModal' class='bgModal'>
           <button id='exit'>X</button>
           <h2>Are you sure you would like to delete "${name}"?</h2>
           <button id='yes' class='btnWarn'>Yes</button><button id='cancel'>Cancel</button>
@@ -338,7 +338,7 @@ Object.assign(TS.html.modals, {
       id: "TS.html.modals.exportFile",
       css: TS.css.modals.exportFile(),
       html: `
-        <div id='centerModal'>
+        <div id='centerModal' class='bgModal'>
           <button id='exit'>X</button>
           <h2>Export File</h2>
           <p>Unlike the download option that saves all your work in json format, this allows the selected file to be downloaded in a rendered format if compatible.</p>
@@ -357,14 +357,14 @@ Object.assign(TS.html.modals, {
     });
     return item.box;
   },
-  fileContextNav: function(event) {
-    let targ = event.target
+  fileContextNav: function(event, ele) {
+    let targ = ele
     let loc = [event.clientX, event.clientY], 
-    name = event.target.innerText,  
-    origin = event.target.dataset.origin,
-    type = event.target.classList;
+    name = ele.innerText,  
+    origin = ele.dataset.origin,
+    type = ele.classList;
     let div = TS.lib.createNode('div', {
-      className: 'contextMenu',
+      className: 'contextMenu bgModal',
       style: `left: ${loc[0]-9}px; top: ${loc[1]-9}px;display: inline-block;`
     })
     let style = TS.lib.createNode('style', {

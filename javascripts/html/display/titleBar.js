@@ -112,6 +112,15 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     },
     contentEditable: false
   });
+  let copy = Object.assign(document.createElement("button"), {
+    className: "icon",
+    style: "background-image: url('icons/iconmonstr-copy-7-240.png');background-size:contain;",
+    innerHTML: '&nbsp;&nbsp;',
+    onclick: function () {
+      TS.js.clipboard.copyItem({item: item, path: path, itemName: itemName})
+    }
+  });
+  buttonGroup.append(copy)
   let objectType;
   if (typeof(item) === "object") {
     if (item.object_root && item.object_root.type && item.object_root.type != 'collection') {
@@ -122,7 +131,8 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
         innerHTML: item.object_root.type
       }))
       objectType = div;
-    }
+    } 
+    
     let add = Object.assign(document.createElement("button"), {
       className: "addLine",
       onclick: function () {
@@ -130,6 +140,8 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
       },
       innerHTML: "+"
     });
+    
+    
     if (item.object_root && item.object_root.editor) {}
     else {
       buttonGroup.append(add);

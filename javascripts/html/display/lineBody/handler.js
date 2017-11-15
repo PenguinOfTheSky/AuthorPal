@@ -6,7 +6,11 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
         TS.js.insertText(node, '  ', TS.refs.display.shadowRoot.getSelection())
       } else if(event.key === 'Enter'){
         event.preventDefault();
-        TS.js.insertText(node, '\n', TS.refs.display.shadowRoot.getSelection())
+        let replaceText = '\n'
+        if (TS.refs.display.shadowRoot.getSelection().anchorOffset == node.innerText.length) {
+          replaceText += '\n'
+        }
+        TS.js.insertText(node, replaceText, TS.refs.display.shadowRoot.getSelection())
       }
     }
   }

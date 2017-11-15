@@ -25,7 +25,8 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
       html: {
         modals: {},
         display: {
-          lineBody: {}
+          lineBody: {},
+          splash: {}
         },
         _navBars: {},
         menu: {}
@@ -50,36 +51,59 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js' defer></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js' ></script>
-  <script src='javascripts/html/display/splash/splash.js'></script>
-  <script src='javascripts/html/display/lineBody/callEditor.js'></script>
-  <script src='javascripts/html/display/splash/js.js'></script>
-  <script src='javascripts/start.js'></script>
-  <script src='javascripts/js/templates/Example files.js'></script>
-  <script src ='javascripts/js/export/webcomponentJS.js'></script>
-  <script src = 'javascripts/js/templates/novel outline.js'></script>
-  <script src = 'javascripts/js/export/website_JS.js'></script>
-  <script src ='javascripts/js/export/exportHandler.js'></script>
-  <script src='javascripts/html/navBars/navBars.js'></script>
-  <script src='javascripts/html/navBars/file_button.js'></script>
-  <script src='javascripts/html/display/splash/html.html'></script>
-  <script src='javascripts/html/navBars/toggleSite_button.js'></script>
-  <script src='javascripts/js/templates/templates.js'></script>
-  <script src='javascripts/js/highlight.js'></script>
-  <script src='javascripts/js/templates/html5.js'></script>
-  <script src='javascripts/html/display/lineBody/handler.js'></script>
-  <script src='javascripts/js/indexedDB.js'></script>
-  <script src='javascripts/html/modals/modals.js'></script>
-  <script src='javascripts/html/modals/trash.js'></script>
-  <script src='javascripts/html/display/html.js'></script>
-  <script src='javascripts/html/display/editorChoices.js'></script>
-  <script src='javascripts/html/display/titleBar.js'></script>
-  <script src='javascripts/css.js'></script>
-  <script src='javascripts/js/js.js'></script>
-  <script src='javascripts/lib.js'></script>
-  <script src='javascripts/cssTemplates/default.css'></script>
-  <script src='javascripts/cssTemplates/midnight.js'></script>
-  <script src='javascripts/cssTemplates/Theme1.js'></script>
-  <script src='javascripts/cssTemplates/dark.js'></script>
+  <script>
+  {
+    let x = 0;
+    let loaded = function() {
+      if (x == scripts.length)
+      TS.start(document.querySelector('#root'));
+    }
+    let scripts = ["javascripts/html/display/splash/main.js",
+     "javascripts/html/display/lineBody/callEditor.js",
+    "javascripts/html/display/splash/js.js",
+    "javascripts/start.js",
+    "javascripts/js/templates/Example files.js",
+    "javascripts/js/export/webcomponentJS.js",
+    "javascripts/js/clipboard.js",
+    "javascripts/data/clipboard.js",
+    "javascripts/js/templates/novel outline.js",
+    "javascripts/js/export/website_JS.js",
+    "javascripts/js/export/exportHandler.js",
+    "javascripts/html/navBars/navBars.js",
+    "javascripts/html/navBars/file_button.js",
+    "javascripts/html/display/splash/splash_html.html",
+    "javascripts/html/display/splash/files_js.js",
+    "javascripts/html/navBars/toggleSite_button.js",
+    "javascripts/js/templates/templates.js",
+    "javascripts/js/highlight.js",
+    "javascripts/js/templates/html5.js",
+    "javascripts/html/display/lineBody/handler.js",
+    "javascripts/js/indexedDB.js",
+    "javascripts/html/modals/modals.js",
+    "javascripts/html/modals/trash.js",
+    "javascripts/html/display/html.js",
+    "javascripts/html/display/editorChoices.js",
+    "javascripts/html/display/titleBar.js",
+    "javascripts/css.js",
+    "javascripts/js/js.js",
+    "javascripts/cssTemplates/default.css",
+    'javascripts/cssTemplates/midnight.js',
+    'javascripts/cssTemplates/Theme1.js',
+    'javascripts/cssTemplates/dark.js',
+    'javascripts/lib.js'
+    ]
+    let holder = document.createDocumentFragment()
+    scripts.forEach(ele=> {
+      let script = Object.assign(document.createElement('script'), {
+        src: ele,
+        onload: function() {loaded(++x)}
+      })
+      holder.appendChild(script)
+    })
+    document.head.append(holder)
+  }
+    
+  </script>
 <body>
   <div id='root'></div>
   <style>
@@ -97,7 +121,6 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
     marked.setOptions({
       breaks: true
     })
-    TS.start(document.querySelector('#root'));
   </script>
 </body>
 </html>

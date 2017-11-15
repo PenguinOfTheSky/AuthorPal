@@ -1,5 +1,5 @@
 /* global TS */
-TS.html._navBars = {
+Object.assign(TS.html._navBars, {
   topNavFileButtons: function () {
     let box = document.createElement("div");
     Object.assign(box, {
@@ -219,4 +219,4 @@ TS.html._navBars = {
     TS.refs.secondaryNavBar = item.box;
     return item;
   }
-};
+});
