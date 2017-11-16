@@ -183,6 +183,9 @@ Object.assign(TS.html._navBars, {
             });
             for (let str in obj) {
               if (str === "master_root") continue;
+              if (str ==='object_root') {
+                if (obj[str].type != 'collection') break;
+              }
               let targ = path.concat([str]);
               let li = Object.assign(document.createElement("li"), {
                 innerHTML: str,
