@@ -7,7 +7,9 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
       let me = `
     let dig = function(obj, depth, parent) {
       let spaces = "";
+      if (depth > 15) return 0;
       for (let i = 0; i < depth; i++) {
+        
         spaces += "  "
       }
       script.innerHTML += spaces + "{\n" + spaces + '  ';
@@ -19,11 +21,18 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
             comments += obj[ele][x] + "\n"
           }
         } else {
-          if (typeof(obj[ele] == 'object')) {
+          
+          if (typeof(obj[ele]) == "object") {
             if (obj[ele].object_root) {
               if (obj[ele].object_root.type == 'function') {
                 
                 script.innerHTML += `${spaces + "  "} "${ele}": ${obj[ele].main}, \n`
+              } else if (obj[ele].object_root.type == 'html') {
+                script.innerHTML += `${spaces + "  "} "${ele}": \`${obj[ele].main}\`, \n`
+              } else if (obj[ele].object_root.type == 'collection') {
+                script.innerHTML += `${spaces + "  "} "${ele}": `
+                dig(obj[ele], depth + 1)
+                script.innerHTML += ','
               }
             } else {
               script.innerHTML += `${spaces + "  "} "${ele}": `

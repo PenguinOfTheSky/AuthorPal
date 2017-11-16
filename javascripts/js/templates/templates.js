@@ -317,7 +317,7 @@ Object.assign(TS.js.templates, {
               type: 'html',
               editor: 'html'
             },
-            "main": `<title>My first Site</title>\n<script src=''>jquery/other ext. scripts</script>`
+            "main": `<title>My first Site</title>\n<script src=''>jquery/other ext. scripts<\/script>`
           },
           "#css": {
             "general": {

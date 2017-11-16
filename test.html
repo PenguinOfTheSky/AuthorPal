@@ -1,6 +1,24 @@
 "<html><head> 
             <title>tarzan</title>
-            <script src=""></script>
+            <script>
+              let post = function callAjax(url, data, callback){
+    var xmlhttp;
+    // compatible with IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", url + '?app=github', true);
+    xmlhttp.send(data);
+    xmlhttp.onreadystatechange = function(){
+        if (xmlhttp.readyState == 4) {
+          if (xmlhttp.status == 200) {
+              callback(xmlhttp.responseText);
+          } else {
+            console.log(xmlhttp.status)
+          }
+        }
+    }
+  }
+  post('http://localhost:4000/', '', function(data) {console.log(data)})
+            </script>
           
               <script> </script>
                <style>
