@@ -52,7 +52,14 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
   //  line.append(lineBody);
 } else if (typeof (item) === "object" && item.object_root && item.object_root.type != 'collection' && item.object_root.type != 'library') {
     update = function(text, type) {
-      textField.innerHTML = TS.js.highlight(text, type);
+      if (typeof (item) === "object" && item.object_root && item.object_root.type != 'collection' && item.object_root.type != 'library') {
+        if (item.object_root.type != 'plain text') {
+          textField.innerHTML = TS.js.highlight(text, type);
+        } else {
+          textField.innerText = text
+        }
+      }
+      
     }
     let textField = Object.assign(document.createElement("div"), {
       className: "textField",
@@ -63,12 +70,17 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       },
       onblur: function () {
         item.main = this.innerText;
-        update(this.innerText, item.object_root.editor)
+        if (item.object_root.type != 'plain text') {update(this.innerText, item.object_root.editor)}
+        else {}
         TS.events.updatedFile()
         TS.events.save();
-      },
-      innerHTML: TS.js.highlight(item.main, item.object_root.editor)
+      }
     });
+    if (item.object_root.type != 'plain text') {
+      textField.innerHTML = TS.js.highlight(item.main, item.object_root.editor)
+    } else {
+      textField.innerText = item.main
+    }
     if (maxDepth === undefined) lineBody.append(textField);
   } else if (typeof (item) === "object") {
     if (maxDepth === undefined || depth < maxDepth) {

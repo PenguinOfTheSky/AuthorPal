@@ -11,6 +11,8 @@ TS.js.highlight = function(str, language) {
     return str;
   } else if (language == 'css') {
     return str ;
+  } else if (language == 'json') {
+    return str ;
   } else if (language == 'rich text') {
     return str
   } else if (language == 'html') {

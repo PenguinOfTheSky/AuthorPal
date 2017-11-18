@@ -304,12 +304,12 @@ Object.assign(TS.js.templates, {
           version: 3.7
         },
         "general": {
-          "title": ``,
-          "namespace": ``,
-          "blurb": ``,
-          "license": ``,
-          "Contributors": ``,
-          "Random Notes": ``
+          "title": TS.js.templates.html5['plain text'](),
+          "namespace": TS.js.templates.html5['plain text'](),
+          "blurb": TS.js.templates.html5['plain text'](),
+          "license": TS.js.templates.html5['plain text'](),
+          "Contributors": TS.js.templates.html5['plain text'](),
+          "Random Notes": TS.js.templates.html5['plain text']()
         },
         "#head": {
           "imports/title/etc": {
@@ -334,12 +334,12 @@ Object.assign(TS.js.templates, {
               editor: 'js'
             },
             "main": `function() {
-              //runs after everything has loaded.
-              //to preload something to body, include it in imports/title/etc
-              //access other functions/etc with me.variable.variable.variable or me["variable"]
-              document.body.innerHTML = 'Hello World'
-              console.log('hello world')
-            }`
+  //runs after everything has loaded.
+  //to preload something to body, include it in imports/title/etc
+  //access other functions/etc with me.variable.variable.variable or me["variable"]
+  document.body.innerHTML = 'Hello World'
+  console.log('hello world')
+}`
           }
         },
         "js": {},
@@ -348,19 +348,25 @@ Object.assign(TS.js.templates, {
         "json": {},
         "text": {},
         "lib1": {
-          makeHTML: function(obj) {
-            /* takes obj of ex:  {'h1', {innerHTML: "", style: '', className: '', ref: ""}}
-            ref is an optional attribute (like all the others) that adds a reference key "ref value" to elements.refs that leads to the html node.
-            */
-            let elements = {
-                html: document.createDocumentFragment(),
-                refs: {}
-            };
-            (Object.keys(obj)).forEach(ele => {
-                elements.html.appendChild(Object.assign(document.createElement(ele), obj[ele]))
-                if (obj[ele].ref) elements.refs[obj[ele].ref] = elements.html.lastChild
-            })
-            return elements;
+          makeHTML: {
+            object_root: {
+              type: 'function',
+              editor: 'javascript'
+            },
+            "main": `function(obj) {
+  /* takes obj of ex:  {'h1', {innerHTML: "", style: '', className: '', ref: ""}}
+  ref is an optional attribute (like all the others) that adds a reference key "ref value" to elements.refs that leads to the html node.
+  */
+  let elements = {
+      html: document.createDocumentFragment(),
+      refs: {}
+  };
+  (Object.keys(obj)).forEach(ele => {
+      elements.html.appendChild(Object.assign(document.createElement(ele), obj[ele]))
+      if (obj[ele].ref) elements.refs[obj[ele].ref] = elements.html.lastChild
+  })
+  return elements;
+}`
           }
         }
       };

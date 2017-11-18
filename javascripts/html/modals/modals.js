@@ -171,7 +171,7 @@ Object.assign(TS.html.modals, {
     });
     return item.box;
   },
-  createFile: function () {
+  createFile: function (fileManager) {
     let item = TS.lib.createComponent({
       id: "TS.html.modals.createFile",
       css: TS.css.modals.createFile(),
@@ -213,7 +213,11 @@ Object.assign(TS.html.modals, {
           if (name !== "" && TS.data.local.files[name] === undefined) {
             TS.data.local.files[name] = TS.js.templates.topNavbar[template]();
             box.remove();
-            TS.events.openFile(name);
+            if (template !='folder') {
+              TS.events.openFile(name)
+            } else {
+              fileManager.reload()
+            }
             TS.events.save()
           } else {
             let msg = Object.assign(document.createElement("b"), {

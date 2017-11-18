@@ -8,7 +8,13 @@ TS.js.templates.html5 = {
     return obj;
   },
   "plain text": function() {
-    return ``;
+    return {
+      object_root: {
+        type: 'plain text',
+        editor: 'text'
+      },
+      "main": ``
+    };
   },
   "css": function() {
     let obj = {
@@ -45,6 +51,16 @@ TS.js.templates.html5 = {
       object_root: {
         type: 'markdown',
         editor: 'markdown'
+      },
+      "main": ``
+    }
+    return obj
+  },
+  "json": function() {
+    let obj = {
+      object_root: {
+        type: 'json',
+        editor: 'json'
       },
       "main": ``
     }
