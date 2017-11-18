@@ -7,8 +7,9 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.10.0 added always-fold option.
 v3.9.0 added json support to website.  
-v3.8.0 clipboard stub, bug fixes, something I can't remember.
+v3.8.0 clipboard stub, bug fixes, better highlighting.
 v3.7.0 removed editor choice, added new pre-selected editor object types like 'markdown' etc. Simplified css  
 v3.6.0 removed "Sparky" theme.  AuthorPal now runs on and is being maintained on Opera browser.  Tab produces double-space in textfields. 
 v3.5.0 can now export .js webcomponent files. Prelim example files folder added. Export streamlined.

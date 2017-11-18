@@ -135,7 +135,7 @@ Object.assign(TS.html._navBars, {
           <button class='baseButtons2' id='fold1' title='Hide >1 deep'>\></button>
           <button class='baseButtons2' id='fold2' title='Hide >2 deep'>\>\></button>
         </div>
-        <!--<button><input type='checkbox'> File Mode </button>-->
+        <button id='always-fold'><input type='checkbox' onclick='this.checked = !this.checked'> Always-fold </button>
         <div id='tree'></div>
       `,
       js: function ({root, opts}) {
@@ -148,6 +148,14 @@ Object.assign(TS.html._navBars, {
         root.querySelector("#fold2").onclick = function () {
           mainDisplay.fold(2);
         };
+        root.querySelector('#always-fold input').checked = TS.data.foldPreference
+        root.querySelector('#always-fold').onclick = function(e) {
+          let checked = !(this.querySelector('input').checked)
+          this.querySelector('input').checked = checked
+          TS.data.foldPreference = checked;
+          if (checked == true) mainDisplay.fold(99)
+          else (mainDisplay.showAll())
+        }
         let treeButtons = root.querySelector("#tree");
         let ul = document.createElement("ul");
         ul.className = "ul_0";
@@ -194,6 +202,9 @@ Object.assign(TS.html._navBars, {
                 onclick: function () {
                   TS.data.currentView = targ;
                   TS.refs.displayOpts.swapFocus(obj, str);
+                  if (TS.data.foldPreference == true) {
+                    mainDisplay.fold(99);
+                  }
                   let discard = list.slice(depth + 1);
                   list = list.slice(0, depth + 1);
                   if (discard.length > 0) discard[0].remove();
