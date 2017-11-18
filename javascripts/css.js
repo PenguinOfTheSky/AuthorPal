@@ -120,7 +120,7 @@ return {
         padding: .15rem;
         ${_.backgroundNav2}
         max-height: 100%;
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden;
         width:20%;
         display:inline-block;
@@ -183,9 +183,8 @@ return {
       .functionContainer {
         ${_.functionBorder || _.border2}
       }
-      .hl-object {
-        color: blue;
-      }
+      ${_.highlight || defaultCSS.hightlight}
+      
       .objectContainer {
         ${_.border2}
       }

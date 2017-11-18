@@ -20,7 +20,7 @@ Object.assign(TS.html.display, {
       element: box,
       splash: function () {
         root.innerHTML = "";
-        let splash = TS.html.display.splash()
+        let splash = TS.html.display.splash.main()
         root.append(splash.box);
         return splash
       },

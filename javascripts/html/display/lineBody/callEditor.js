@@ -2,7 +2,7 @@
 TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
   let editorContainer = TS.lib.createNode('div', {
     id: "TS.html.display.lineBody.callEditor",
-    style: `width: 100%; height: 100%; position: absolute; z-index: 1; display: flex; flex-direction: column;top: 0px;background-color:white;`
+    style: `width: ${TS.refs.display.offsetWidth}px; height: ${TS.refs.display.clientHeight}px; position: absolute; z-index: 1; display: flex; flex-direction: column;right: 0px; bottom: 0px;background-color:white;`
   })
   let exitEditor = TS.lib.createNode('button', {
     innerText: 'Exit Editor',

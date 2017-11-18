@@ -130,11 +130,12 @@ Object.assign(TS.html._navBars, {
       id: "TS.html._navBars.displayLeftNav",
       css: TS.css.boxes.displayLeftNav(),
       html: `
-        <div id='left'>
+        <div id='foldOpts'>
           <button class='baseButtons2' id = 'show' title='unfold'>~</button>
           <button class='baseButtons2' id='fold1' title='Hide >1 deep'>\></button>
           <button class='baseButtons2' id='fold2' title='Hide >2 deep'>\>\></button>
         </div>
+        <!--<button><input type='checkbox'> File Mode </button>-->
         <div id='tree'></div>
       `,
       js: function ({root, opts}) {

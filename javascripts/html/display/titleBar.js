@@ -1,5 +1,6 @@
 TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts, focused, lineBody}) {
   let title = TS.lib.createNode("div", {
+    name: 'TS.html.display.titleBar',
     className: "title",
     draggable: "true",
     ondragstart: function (event) {
@@ -159,10 +160,10 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     let callEditor = TS.lib.createNode('button', {
       onclick: function() {
         TS.html.display.lineBody.callEditor(item.main, item.object_root.editor, function(content) {
-        item.main = content;
-        lineBody.opts.update(content, item.object_root.editor);
-        TS.events.updatedFile()
-        TS.events.save()
+          item.main = content;
+          lineBody.opts.update(content, item.object_root.editor);
+          TS.events.updatedFile()
+          TS.events.save()
         })
       },
       style: 'background-image: url("icons/iconmonstr-edit-6-240.png"); background-size: cover;',

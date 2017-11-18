@@ -3,6 +3,14 @@ TS.cssTemplates.default = {
   hoverable: `
     box-shadow: 0px 0px .1rem .2rem rgba(0,30,155,.7);
   `,
+  highlight: ` 
+    .highlight-one {
+      color: red;
+    }
+    .highlight-two {
+      color: blue;
+    }
+  `,
   icon: ``,
   link: ``,
   btn: `

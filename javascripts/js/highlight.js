@@ -3,8 +3,9 @@ TS.js.highlight = function(str, language) {
     if (str.length == 0) return ''
     let arrObjects = ['console', 'function']
   //  let regex = new RegExp('', 'g');
-    str = str.replace(/(console|function)/g, function(found) {
-      return '<span class="hl-object">' + found + '</span>'
+    str = str.replace(/([a-zA-Z_]*[?!\s]*\.|function)(?!(.*["']))/g, function(found) {
+      if (found == 'function') return '<span class="highlight-two">' + found + '</span>'
+      return '<span class="highlight-one">' + found + '</span>'
     })
     str = str.replace(/\n/g, '<br>')
     return str;
