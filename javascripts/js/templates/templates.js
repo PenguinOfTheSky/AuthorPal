@@ -303,9 +303,8 @@ Object.assign(TS.js.templates, {
           type: "website_JS",
           version: 3.7
         },
-        "general": {
+        "#general": {
           "title": TS.js.templates.html5['plain text'](),
-          "namespace": TS.js.templates.html5['plain text'](),
           "blurb": TS.js.templates.html5['plain text'](),
           "license": TS.js.templates.html5['plain text'](),
           "Contributors": TS.js.templates.html5['plain text'](),

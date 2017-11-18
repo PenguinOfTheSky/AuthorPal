@@ -12,7 +12,6 @@ TS.html._navBars.toggleSite_button = function() {
     className: 'icon',
     style: 'margin-left: .3rem; margin-right: .3rem; display: none;',
     onclick: function() {
-      console.log('running')
       let iframeStyle = `position: absolute; z-index:999; background-color: white; width: 100%; height: ${TS.refs.display.clientHeight}px; margin-top: ${TS.refs.mainNavBar.clientHeight}px;`
       switch (TS.data.chosenFile.master_root.type) {
         case "website_JS": 

@@ -18,7 +18,19 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
         if (ele === 'master_root' || ele === '#advanced') return 0;
         else if (ele === '#general' && depth === 0) {
           for (let x in obj[ele]) {
-            comments += obj[ele][x] + "\n"
+            if (typeof(obj[ele][x]) =='string') {
+              //for backwards compat
+              obj[ele][x] = {
+                object_root: {
+                  type: 'plain text',
+                  editor: 'text'
+                },
+                "main": obj[ele][x]
+              }
+            } 
+            if (obj[ele][x].object_root.type == 'plain text') {
+              comments += x + ' :=> ' + obj[ele][x].main + "\n\n"
+            }
           }
         } else {
           
@@ -55,8 +67,8 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
     viewFrame.contentDocument.open()
     viewFrame.contentDocument.write('<!DOCTYPE html>')
     viewFrame.contentDocument.close();
-    viewFrame.contentDocument.body.append(commentsNode, script)
-    window.i = viewFrame.contentDocument
+    viewFrame.contentDocument.insertBefore(commentsNode, viewFrame.contentDocument.firstChild)
+    viewFrame.contentDocument.body.append( script)
     if (!preview) {
       return {
         data: viewFrame.contentDocument.document.outerHTML,
