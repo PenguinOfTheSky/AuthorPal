@@ -183,8 +183,7 @@ return {
       .functionContainer {
         ${_.functionBorder || _.border2}
       }
-      ${_.highlight || defaultCSS.hightlight}
-      
+      ${_.highlight || defaultCSS.highlight}
       .objectContainer {
         ${_.border2}
       }
