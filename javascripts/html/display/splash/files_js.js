@@ -106,10 +106,10 @@ TS.html.display.splash.files_js = function(root) {
               e.preventDefault()
             },
             onblur: function(e) {
-              if (this.innerText !== x) { //add folder support later
-                if (!TS.data.local.files[this.innerText]) {
-                  TS.data.local.files[this.innerText] = TS.data.local.files[x]
-                  delete TS.data.local.files[x]
+              if (this.innerText !== x) { 
+                if (!files[this.innerText]) {
+                  files[this.innerText] = files[x]
+                  delete files[x]
                   x = this.innerText
                   TS.events.save()
                 } else {
@@ -117,7 +117,6 @@ TS.html.display.splash.files_js = function(root) {
                   this.innerText = x;
                 }
               }
-              console.log(this.innerText)
             }
           }))
           list.append(div) 
@@ -152,19 +151,20 @@ TS.html.display.splash.files_js = function(root) {
       dragged.path.forEach(ele=> {
         base = base[ele]
       })
+      let files = base.files
       e.preventDefault()
       this.style.width = ''
       this.style.height = ''
       item.style.display = 'none'
       if (!TS.data.local.trash) TS.data.local.trash = []
       let name = item.querySelector('span').innerText
-      if (!TS.data.local.files[name].master_root) {
-        TS.data.local.files[name].master_root = {}
+      if (!files[name].master_root) {
+        files[name].master_root = {}
       }
-      TS.data.local.files[name].master_root.dateDeleted = (new Date()).toLocaleString()
-      TS.data.local.files[name].master_root.fileName = name
-      TS.data.local.trash.push(TS.data.local.files[name])
-      delete TS.data.local.files[name]
+      files[name].master_root.dateDeleted = (new Date()).toLocaleString()
+      files[name].master_root.fileName = name
+      TS.data.local.trash.push(files[name])
+      delete files[name]
       TS.events.save()
     }
   })

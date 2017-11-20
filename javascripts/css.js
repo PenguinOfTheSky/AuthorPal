@@ -359,6 +359,8 @@ return {
         height: 1.2rem;
         overflow: hidden;
         text-overflow: ellipsis;
+        padding: .1rem;
+        font-weight: 500;
       }
       .fileOrFolder span:hover {
         width: auto;
@@ -370,8 +372,12 @@ return {
         margin: 0 auto;
         z-index: 1;
       }
-      .fileOrFolder:hover {
+      .fileOrFolder {
         position: relative;
+        width: 8rem;
+        height: 3rem;
+      }
+      .fileOrFolder:hover {
         width: 8rem;
         ${_.hoverable}
       }
