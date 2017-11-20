@@ -54,20 +54,29 @@ Object.assign(TS.js.templates, {
   staticWebsite: {
     "blog entry": function () {
       let obj = {
-        "#type": "blog entry",
-        date: (new Date()).toLocaleString(),
-        title: ``,
-        keywords: ``,
-        category: ``,
-        text: ``
+        object_root: {
+          type: 'collection',
+          subtype: "blog entry"
+        },
+        date: TS.js.templates.html5['plain text']((new Date()).toLocaleString()),
+        title: TS.js.templates.html5['rich text'](),
+        keywords: TS.js.templates.html5['plain text'](),
+        category: TS.js.templates.html5['plain text'](),
+        text: TS.js.templates.html5['rich text']()
       };
       return obj;
     },
-    textblock: function () {
-      return ``;
+    "plain text": function () {
+      return TS.js.templates.html5['plain text']();
     },
-    container: function () {
-      return {};
+    collection: function () {
+      return TS.js.templates.html5['collection'];
+    },
+    "rich text": function() {
+      return TS.js.templates.html5['rich text']();
+    },
+    "markdown": function() {
+      return TS.js.templates.html5['markdown']();
     }
   },
   topNavbar: {
@@ -187,8 +196,8 @@ Object.assign(TS.js.templates, {
       let obj = {
         "master_root": {
           templates: 'TS.js.templates["staticWebsite"]',
-          exportFormat: "Blog",
-          type: "Blog",
+          exportFormat: "blog",
+          type: "blog",
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
           version: "3.4",
@@ -202,17 +211,35 @@ Object.assign(TS.js.templates, {
           "Random Notes": ``
         },
         "#advanced": {
-          styles: {
-            "*chosenStyle": "*default",
-            "*default": `<style></style>`
+          "imports/title/etc": {
+            object_root: {
+              type: 'html',
+              editor: 'html'
+            },
+            "main": `<title>My first Site</title>\n<script src=''>jquery/other ext. scripts<\/script>`
           },
-          "*head": `
-            <title></title>
-            <script src=''></script>
-            <script> console.log('hello') </script>
-          `,
-          "*script": ``
-
+          "#css": {
+            "#chosenStyle": TS.js.templates.html5['plain text']("default"),
+            "default": {
+              object_root: {
+                type: 'css',
+                editor: 'css'
+              },
+              "main": `html, body {\n\ \ height: 100%;\n}`
+            }
+          },
+          "#script": {
+            object_root: {
+              type: 'function',
+              editor: 'js'
+            },
+            "main": `function() {
+  //optional. runs after everything has loaded.
+  //to preload something to body, include it in imports/title/etc
+  //access other functions/etc with me.variable.variable.variable or me["variable"]
+  console.log('hello world')
+}`
+          }
         },
         "archive": {
           "January 20XX": {}

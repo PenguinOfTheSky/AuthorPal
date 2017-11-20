@@ -7,13 +7,13 @@ TS.js.templates.html5 = {
     };
     return obj;
   },
-  "plain text": function() {
+  "plain text": function(text) {
     return {
       object_root: {
         type: 'plain text',
         editor: 'text'
       },
-      "main": ``
+      "main": (text || ``)
     };
   },
   "css": function() {

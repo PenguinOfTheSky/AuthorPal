@@ -185,10 +185,10 @@ Object.assign(TS.html.modals, {
           <label>Select Template</label> <select id='selectTemplate'>
             <option value='folder'>Folder</option>
             <option value='book outline'>Book/creative work Outline</option>
-            <option value='Markdown Blog'>Markdown Blog</option>
+            <option value='Blog'>Blog</option>
             <option value='web component(js)'>Web Component (js-based html5)</option> 
             <option value='website_JS'>SPA Website (js-based html5 single-page-app)</option> 
-            <option value='library'>Library</option>
+            <option value='library_JS'>Javascript Library</option>
           </select><br>
           <input type='submit' value='Submit' class='btnSubmit'>
           <div id='status'></div>

@@ -151,7 +151,8 @@ TS.html.display.splash.files_js = function(root) {
       dragged.path.forEach(ele=> {
         base = base[ele]
       })
-      let files = base.files
+      let files = base
+      if (dragged.path.length > 0) files = files.files
       e.preventDefault()
       this.style.width = ''
       this.style.height = ''
