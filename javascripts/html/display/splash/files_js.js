@@ -1,15 +1,26 @@
 TS.html.display.splash.files_js = function(root) {
   let fileManager = {
     current: null,
-    reload: function() {
-      render()
+    reload: function(path) {
+      render(path)
     }
+  }
+  let dragged = {
+    item: null,
+    path: null,
+    ref: null
   }
   root.querySelector("#createNewFile").onclick = function() {
     TS.refs.container.append(TS.html.modals.createFile(fileManager))
   }
-  let render = function() {
+  let render = function(path) {
+    if (!path) path = []
+    root.querySelector('#path').innerText = "~/" + path.join('/')
     let files = TS.data.local.files;
+    path.forEach(ele => {
+      files = (files[ele] || files.files[ele])
+    })
+    if (path.length > 0) files = files.files
     if (Object.keys(files).length > 0) {
       let list = document.createDocumentFragment();
       for (let x in files) {
@@ -30,12 +41,20 @@ TS.html.display.splash.files_js = function(root) {
             "data-origin": 'testing',
             className: divClass,
             draggable: true,
+            ondragstart: function() {
+              dragged = {
+                path: path,
+                item: x,
+                ref: this
+              }
+            },
             onclick: function(event) {
-              if (TS.data.local.files[x].master_root && TS.data.local.files[x].master_root.type == 'folder') {
-                
+              if (files[x].master_root && files[x].master_root.type == 'folder') {
+                path.push(x)
+                render(path)
               } else {
-                TS.data.chosenFile = TS.data.local.files[x];
-                TS.events.openFile(x);
+                TS.data.chosenFile = files[x];
+                TS.events.openFile(files[x], x);
               }
             },
             oncontextmenu: function(e) {
@@ -44,6 +63,38 @@ TS.html.display.splash.files_js = function(root) {
               root.append(TS.html.modals.fileContextNav(e, div))
             }
           })
+          if (files[x].master_root.type == 'folder') {
+            Object.assign(div, {
+              ondragenter: function(e) {
+                div.style["box-shadow"] = "0px 0px .1rem .2rem white inset"
+              },
+              ondragleave: function(e) {
+                div.style["box-shadow"] = ""
+              },
+              ondragover: function(e) {
+                e.preventDefault()
+              },
+              ondrop: function(e) {
+                div.style["box-shadow"] = ""
+                let move = function(n) {
+                  let name = dragged.item;
+                  if (files[x].files[dragged.item]) {
+                    if (files[x].files[dragged.item + '_' + n]) {
+                      move(n+1)
+                      return 0;
+                    } else {
+                      name = dragged.item + '_' + n
+                    }
+                  } 
+                  files[x].files[name] = files[dragged.item]
+                  delete files[dragged.item]
+                  dragged.ref.remove()
+                  TS.events.save()
+                }
+                move(1)
+              }
+            })
+          }
           div.append(TS.lib.createNode('img', {
             draggable: false,
             src: 'icons/' + img
@@ -74,15 +125,7 @@ TS.html.display.splash.files_js = function(root) {
       }
       root.querySelector("#filesList").innerHTML = ''
       root.querySelector("#filesList").append( list);
-      root.querySelectorAll('.fileOrFolder').forEach(ele => {
-        ele.ondragstart = function(e) {
-          TS.refs.draggedItem = this
-        }
-        ele.ondrop = function(e) {
-          e.preventDefault()
-          console.log('pim')
-        }
-      })
+      
     } else {
       root.querySelector("#filesList").innerHTML = "<i style='font-size: .9rem;'> No projects found </i>"
     }
@@ -104,7 +147,11 @@ TS.html.display.splash.files_js = function(root) {
       e.preventDefault()
     },
     ondrop: function(e) {
-      let item = TS.refs.draggedItem
+      let item = dragged.ref
+      let base = TS.data.local.files
+      dragged.path.forEach(ele=> {
+        base = base[ele]
+      })
       e.preventDefault()
       this.style.width = ''
       this.style.height = ''

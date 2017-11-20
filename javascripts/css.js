@@ -290,9 +290,11 @@ return {
       .buttonGroup {
         margin-left: .4rem;
         vertical-align: middle;
-        display:inline-block;
+        display:inline-flex;
       }
       .buttonGroup button, .buttonGroup img {
+        width: 1.5rem;
+        height: auto;
         border-radius: 0px;
         color: white;
         margin: auto;

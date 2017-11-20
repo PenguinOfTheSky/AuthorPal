@@ -34,6 +34,7 @@ TS.start = function (parent) {
   }
   TS.events.save = function (callback) {
     TS.js.indexedDB(function(opts) {
+      console.log(TS.data.local.files['Example files'])
       store.put({id: 'master_999', data: TS.data.local})
       if (callback) callback()
     })

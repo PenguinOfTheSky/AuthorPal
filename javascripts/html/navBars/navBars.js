@@ -69,9 +69,9 @@ Object.assign(TS.html._navBars, {
         display.render(choice);
       },
       preferences: function () {},
-      open: function (name) {
+      open: function (file, name) {
         toggle.style.display='inline-block';
-        TS.data.chosenFile = TS.data.local.files[name];
+        TS.data.chosenFile = file;
         let firstItem = Object.keys(TS.data.chosenFile)[0];
         if (firstItem === "master_root") {
           firstItem = Object.keys(TS.data.chosenFile)[1];
