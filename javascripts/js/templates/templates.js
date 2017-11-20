@@ -309,6 +309,9 @@ h1 { text-align: center; }
             "main": `<title>My first Site</title>\n<script src=''>jquery/other ext. scripts<\/script>`
           },
           "#css": {
+            "object_root": {
+              type: 'collection'
+            },
             "general": {
               object_root: {
                 type: 'css',

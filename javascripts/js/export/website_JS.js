@@ -64,11 +64,39 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
     }`
     script.innerHTML += "\n }"
     let commentsNode = document.createComment(comments)
+    let css = document.createElement('style')
+    let digCSS = function(obj) {
+      console.log(obj)
+      if (typeof(obj) == 'object') {
+        if (obj.object_root) {
+          if (obj.object_root.type == 'css') {
+            css.innerHTML += obj.main
+          } else if (obj.object_root.type='collection') {
+            for (let i in obj) {
+              digCSS(obj[i])
+            }
+          }
+        }
+      }
+    }
+    try {
+      //backwards compat line
+      if (!file['#head']['#css'].object_root) {
+        file['#head']['#css'].object_root = {
+          type: 'collection'
+        }
+      }
+      digCSS(file['#head']['#css'])
+    } catch(err) {
+      console.log("no css found")
+    }
+    console.log(css)
     viewFrame.contentDocument.open()
     viewFrame.contentDocument.write('<!DOCTYPE html>')
     viewFrame.contentDocument.close();
     viewFrame.contentDocument.insertBefore(commentsNode, viewFrame.contentDocument.firstChild)
-    viewFrame.contentDocument.body.append( script)
+    viewFrame.contentDocument.head.append(css)
+    viewFrame.contentDocument.body.append(script)
     if (!preview) {
       return {
         data: viewFrame.contentDocument.document.outerHTML,

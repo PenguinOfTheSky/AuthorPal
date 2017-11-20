@@ -14,6 +14,10 @@
     `,
     alignment: "left",
     btn: `
+      .icon {
+        background: white; 
+        border-radius: .4rem;
+      }
       button, input, select {
         font-size:1rem;
       }
@@ -38,7 +42,6 @@
     backgroundTitle: `#444`,
     titleBar: `
       .focusMe {
-        display: none; /*screws up last-child border-radius.*/
       }
     `,
     titleFont: `
