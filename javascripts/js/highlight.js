@@ -3,6 +3,10 @@ TS.js.highlight = function(str, language) {
     if (str.length == 0) return ''
     let arrObjects = ['console', 'function']
   //  let regex = new RegExp('', 'g');
+    str = str.replace(/[<]/g, function(found) {
+      if (found === '<') return "&#60;"
+      else if (found ==='>') return "	&#62;"
+    })
     str = str.replace(/([a-zA-Z_]*[?!\s]*\.|function)(?!(.*["']))/g, function(found) {
       if (found == 'function') return '<span class="highlight-two">' + found + '</span>'
       return '<span class="highlight-one">' + found + '</span>'
@@ -16,12 +20,9 @@ TS.js.highlight = function(str, language) {
   } else if (language == 'rich text') {
     return str
   } else if (language == 'html') {
-    str = str.replace(/[<"'=]/g, function(found) {
+    str = str.replace(/[<]/g, function(found) {
       if (found === '<') return "&#60;"
       else if (found ==='>') return "	&#62;"
-      else if (found ==='"') return "&#34;"
-      else if (found ==="'") return "&#39;"
-      else if (found ==='=') return "&#61;"
     })
     //escape html
     return str

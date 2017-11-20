@@ -15,7 +15,7 @@
     alignment: "left",
     btn: `
       .icon {
-        background: white; 
+        background-color: white; 
         border-radius: .4rem;
       }
       button, input, select {
@@ -93,7 +93,6 @@
         border: none;
         ${font}
         font-size: 1rem;
-        background: none;
         padding: .25rem;
       }
       #left > *:hover {
