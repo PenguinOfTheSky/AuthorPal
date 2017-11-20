@@ -35,7 +35,7 @@ TS.js.templates.html5 = {
       "main": ``
     }
     return obj
-  },
+  }, /*
   "rich text": function() {
     let obj = {
       object_root: {
@@ -45,7 +45,7 @@ TS.js.templates.html5 = {
       "main": ``
     }
     return obj
-  },
+  }, */
   "markdown": function() {
     let obj = {
       object_root: {

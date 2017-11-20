@@ -81,7 +81,7 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
     } else {
       textField.innerText = item.main
     }
-    if (maxDepth === undefined) lineBody.append(textField);
+    if (maxDepth === undefined || depth == 0) lineBody.append(textField);
   } else if (typeof (item) === "object") {
     if (maxDepth === undefined || depth < maxDepth) {
       for (let x in item) {

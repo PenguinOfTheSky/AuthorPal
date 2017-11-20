@@ -7,6 +7,7 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.12.0 removed summernote rich text editor, removed bootstrap/jquery dependencies. Added dual-screen markdown previewer, moving to markdown focus from rich text. Always-fold option no longer folds when clicking end-nodes.  
 v3.11.0 folders now have basic functionality.  
 v3.10.0 added always-fold option.  
 v3.9.0 added json support to website.  

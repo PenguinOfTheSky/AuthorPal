@@ -60,7 +60,7 @@ TS.html.display.splash.files_js = function(root) {
             oncontextmenu: function(e) {
               e.preventDefault()
               // if (e.target !== this) return 0;
-              root.append(TS.html.modals.fileContextNav(e, div))
+              root.append(TS.html.modals.fileContextNav(e, {ref: div, files: files, name: x}))
             }
           })
           if (files[x].master_root.type == 'folder') {

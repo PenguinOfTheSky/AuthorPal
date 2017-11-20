@@ -27,14 +27,13 @@ TS.start = function (parent) {
       }
     }
   })
-  TS.events.updatedFile = function() { //updates dateModified
+  TS.events.updatedFile = function() { 
     if (TS.data.chosenFile.master_root) {
       TS.data.chosenFile.master_root.dateModified = (new Date).toLocaleString()
     }
   }
   TS.events.save = function (callback) {
     TS.js.indexedDB(function(opts) {
-      console.log(TS.data.local.files['Example files'])
       store.put({id: 'master_999', data: TS.data.local})
       if (callback) callback()
     })

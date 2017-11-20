@@ -1,7 +1,7 @@
 TS.js.templates["novel outline"] = {
   "plain text": function () {
-    return ``;
-  },
+    return TS.js.templates.html5['plain text']();
+  },/*
   "rich text": function() {
     let obj = {
       object_root: {
@@ -11,7 +11,7 @@ TS.js.templates["novel outline"] = {
       "main": ``
     }
     return obj
-  },
+  }, */
   "markdown": function() {
     let obj = {
       object_root: {

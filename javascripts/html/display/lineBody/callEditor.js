@@ -2,16 +2,20 @@
 TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
   let editorContainer = TS.lib.createNode('div', {
     id: "TS.html.display.lineBody.callEditor",
-    style: `width: ${TS.refs.display.offsetWidth}px; height: ${TS.refs.display.clientHeight}px; position: absolute; z-index: 1; display: flex; flex-direction: column;right: 0px; bottom: 0px;background-color:white;`
+    style: `width: ${TS.refs.display.offsetWidth}px; height: ${TS.refs.display.clientHeight}px;max-height: ${TS.refs.display.clientHeight}px; position: absolute; z-index: 1;right: 0px; bottom: 0px;background-color:#111; font-size:1rem;`
   })
-  let exitEditor = TS.lib.createNode('button', {
+  let exitEditor = TS.lib.createNode('div', {
+    style: 'min-height: 1.6rem;'
+  })
+  let exitEditor_button = TS.lib.createNode('button', {
     innerText: 'Exit Editor',
     onclick: function() {
       callback(aceEditor.getValue())
       editorContainer.remove();
     },
-    style: 'float: right; border: none; background-color: #333; color: #FAFAFA;'
+    style: 'float: right; border: none; background-color: #333; color: #FAFAFA; font-size: 1rem;'
   })
+  exitEditor.append(exitEditor_button)
   let buttonBar = TS.lib.createNode('div', {
     style: 'background-color: #191919;'
   })
@@ -20,6 +24,7 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
     id: 'editor', 
     style: 'height: 100%; width: 100%;'
   })
+  
   editorContainer.append(buttonBar, editor)
   document.body.append(editorContainer)
   let aceEditor;
@@ -44,6 +49,14 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
           }
         }
       break;
+    case 'markdown':
+      let textfield = TS.lib.createNode('textarea', {
+        value: itemContent,
+        id: 'markdownText',
+        style: 'color: white; background-color: #111; font-size: 1rem; width: 100%; height: 100%;'
+      })
+      editor.append(textfield)
+      break;
     default:
       aceEditor = ace.edit("editor");
       aceEditor.setTheme("ace/theme/monokai");
@@ -55,5 +68,25 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
         fontSize: "1rem"
       });
       aceEditor.setValue(itemContent);
+  }
+  if (type == 'markdown') {
+    aceEditor = {
+      getValue: function() {
+        return editor.querySelector('#markdownText').value
+      }
+    } 
+    editor.style.width = '48%'
+    editor.style.display = 'inline-block'
+    let showMd = TS.lib.createNode('div', {
+      style: 'color: #FCFCFC; font-size:1rem; display:inline-block;margin-left:2%;vertical-align:top;overflow: auto; max-width:50%;height: 90%;max-height:93%;',
+      innerHTML: marked(itemContent)
+    })
+    editorContainer.append(showMd)
+    editor.onkeyup = function(event) {
+      clearTimeout(TS.events.updateMarkdown)
+      TS.events.updateMarkdown = setTimeout(function() {
+        showMd.innerHTML = marked(document.querySelector('#markdownText').value)
+      }, 300) 
+    }
   }
 }

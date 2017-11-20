@@ -14,43 +14,6 @@ Object.assign(TS.js.templates, {
   website: {
 
   },
-  "web component(js)": {
-    container: function () {
-      let obj = {};
-      return obj;
-    },
-    textblock: function() {
-      return ``;
-    },
-    function: function() {
-      let obj = {
-        object_root: {
-          type: 'function',
-          editor: 'javascript'
-        },
-        "main": `function() {
-          
-        }`
-      }
-      return obj
-    },
-    element: function() {
-      let obj = {
-        object_root: {
-          type: 'function',
-          shadowTree: ['#inputs', "main"],
-          editor: 'javascript'
-        },
-        "main": `function() {
-          let element = Object.assign(document.createElement(''), {
-            
-          });
-          return element;
-        }`
-      }
-      return obj
-    }
-  },
   staticWebsite: {
     "blog entry": function () {
       let obj = {
@@ -59,10 +22,10 @@ Object.assign(TS.js.templates, {
           subtype: "blog entry"
         },
         date: TS.js.templates.html5['plain text']((new Date()).toLocaleString()),
-        title: TS.js.templates.html5['rich text'](),
+        title: TS.js.templates.html5['plain text'](),
         keywords: TS.js.templates.html5['plain text'](),
         category: TS.js.templates.html5['plain text'](),
-        text: TS.js.templates.html5['rich text']()
+        text: TS.js.templates.html5['markdown']()
       };
       return obj;
     },
@@ -71,10 +34,10 @@ Object.assign(TS.js.templates, {
     },
     collection: function () {
       return TS.js.templates.html5['collection'];
-    },
+    },/*
     "rich text": function() {
       return TS.js.templates.html5['rich text']();
-    },
+    }, */
     "markdown": function() {
       return TS.js.templates.html5['markdown']();
     }
@@ -92,11 +55,11 @@ Object.assign(TS.js.templates, {
           shadowTree: {}
         },
         "general": {
-          "title": ``,
-          "premise": ``,
-          "genre(s)": ``,
-          "zeitgeist": ``,
-          "Random Notes": ``
+          "title": TS.js.templates.html5['markdown'](),
+          "premise": TS.js.templates.html5['markdown'](),
+          "genre(s)": TS.js.templates.html5['markdown'](),
+          "zeitgeist": TS.js.templates.html5['markdown'](),
+          "Random Notes": TS.js.templates.html5['markdown']()
         },
         "#advanced": {
           "*head": {
@@ -116,18 +79,18 @@ Object.assign(TS.js.templates, {
                 editor: 'css'
               },
               "main": `
-                .headers {
-                  cursor: pointer;
-                  text-decoration: underline;
-                }
-                p { text-indent: 1rem; }
-                h1 { text-align: center; }
-                ._2 {margin-left: 3%;}
-                ._3 { margin-left: 6%; }
-                ._4 { margin-left: 9%; }
-                ._5 { margin-left: 12%; }
-                ._6 { margin-left: 15%; }
-                ._7 { margin-left: 18%; }
+.headers {
+  cursor: pointer;
+  text-decoration: underline;
+}
+p { text-indent: 1rem; }
+h1 { text-align: center; }
+._2 {margin-left: 3%;}
+._3 { margin-left: 6%; }
+._4 { margin-left: 9%; }
+._5 { margin-left: 12%; }
+._6 { margin-left: 15%; }
+._7 { margin-left: 18%; }
               `
             }
           },
@@ -204,11 +167,11 @@ Object.assign(TS.js.templates, {
           shadowTree: {}
         },
         "#general": {
-          "title": ``,
-          "blurb": ``,
-          "license": ``,
-          "Contributors": ``,
-          "Random Notes": ``
+          "title": TS.js.templates.html5['plain text'](),
+          "blurb": TS.js.templates.html5['plain text'](),
+          "license": TS.js.templates.html5['plain text'](),
+          "Contributors": TS.js.templates.html5['plain text'](),
+          "Random Notes": TS.js.templates.html5['plain text']()
         },
         "#advanced": {
           "imports/title/etc": {
@@ -265,7 +228,7 @@ Object.assign(TS.js.templates, {
       //for production of js-packaged webcomponent.
       let obj = {
         "master_root": {
-          templates: 'TS.js.templates["web component(js)"]',
+          templates: 'TS.js.templates["html5"]',
           exportFormat: "web component(js)",
           type: "web component(js)",
           dateCreated: (new Date()).toLocaleString(),
