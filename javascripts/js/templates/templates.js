@@ -247,7 +247,7 @@ h1 { text-align: center; }
         "#css": {
           
         },
-        "elements": {
+        "view": {
           
         },
         "js": {
@@ -335,29 +335,50 @@ h1 { text-align: center; }
           }
         },
         "js": {},
-        "elements": {},
+        "view": {},
         "data": {},
         "json": {},
         "text": {},
         "lib1": {
-          makeHTML: {
+          'jtml': {
             object_root: {
               type: 'function',
               editor: 'javascript'
             },
-            "main": `function(obj) {
-  /* takes obj of ex:  {'h1', {innerHTML: "", style: '', className: '', ref: ""}}
-  ref is an optional attribute (like all the others) that adds a reference key "ref value" to elements.refs that leads to the html node.
+            "main": `function(arr) {
+  /*
+    give arr in form [
+      'h1', {innerText: 'hello world'},
+      'h2', {innerText: 'Onwards', ref: 'firstChapter',
+      'p', {children: [
+        'span', {innerText: 'hello'}
+        ]}
+    ]
+    optional: ref, children, must give at least a blank {}
   */
-  let elements = {
-      html: document.createDocumentFragment(),
-      refs: {}
-  };
-  (Object.keys(obj)).forEach(ele => {
-      elements.html.appendChild(Object.assign(document.createElement(ele), obj[ele]))
-      if (obj[ele].ref) elements.refs[obj[ele].ref] = elements.html.lastChild
-  })
-  return elements;
+    let elements = {
+        html: document.createDocumentFragment(),
+        refs: {}
+    };
+for (let i = 0; i < arr.length; i+=2) {
+    let children = null;
+    if (arr[i+1].children) {
+        children = arr[i+1].children
+        delete arr[i+1].children
+    }
+    let ele = Object.assign(document.createElement(arr[i]), arr[i+1])
+    elements.html.append(ele)
+    console.log(ele, arr[i+1])
+  if (arr[i+1].ref) {
+      elements.ref[refs[arr[i+1]].ref] = ele
+  } 
+    if (arr[i+1].children) {
+      let children = me.lib1.jtml(arr[i+1].children)
+      ele.append(children.html)
+      Object.assign(elements.refs, children.refs)
+  } 
+}
+    return elements;
 }`
           }
         }
@@ -384,7 +405,7 @@ h1 { text-align: center; }
           "Contributors": ``,
           "Random Notes": `For more information on how to use this AuthorPal project visit the FAQ`
         },
-        "elements": {
+        "view": {
           
         },
         "utility": {

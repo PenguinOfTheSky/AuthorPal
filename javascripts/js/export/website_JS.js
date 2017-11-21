@@ -1,5 +1,8 @@
 TS.js.export['website_JS'] = function (file, preview, viewFrame) {
-  if (preview) {
+  if (!preview) {
+    viewFrame.style.display = 'none'
+  }
+  if (preview || !preview) {
     let root = document.createDocumentFragment()
     let comments = ``
     let script = document.createElement('script')
@@ -94,8 +97,9 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
     viewFrame.contentDocument.head.append(css)
     viewFrame.contentDocument.body.append(script)
     if (!preview) {
+      //needs work. check for iframe memory leak (is it getting removed?)
       return {
-        data: viewFrame.contentDocument.document.outerHTML,
+        data: ("<!DOCTYPE html> \n <html> \n <!--\n" + comments + "\n-->"+  viewFrame.contentDocument.head.outerHTML + "\n<body>\n" +  script.outerHTML + '\n</body>\n</html>'),
         type: 'html'
       }
     } else if (preview) {

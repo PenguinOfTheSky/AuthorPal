@@ -294,13 +294,14 @@ Object.assign(TS.html.modals, {
       filePreview = ``,
       text;
     let styleChoice;
-    if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
+    if (TS.data.chosenFile /*&& TS.data.chosenFile.master_root.exportFormat*/) {
       if (TS.data.chosenFile.master_root.type !='book outline') {
         let hidden = document.createElement('iframe', {
           style: 'display: none;'
         })
         TS.refs.container.append(hidden)
         let data = TS.js.export.exportHandler(TS.data.chosenFile, 0, hidden)
+        console.log(data)
         hidden.remove()
         var myblob = new Blob([data.data], {
           type: `text/${data.type}`
