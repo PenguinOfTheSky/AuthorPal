@@ -64,7 +64,6 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
     let commentsNode = document.createComment(comments)
     let css = document.createElement('style')
     let digCSS = function(obj) {
-      console.log(obj)
       if (typeof(obj) == 'object') {
         if (obj.object_root) {
           if (obj.object_root.type == 'css') {
@@ -88,7 +87,6 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
     } catch(err) {
       console.log("no css found")
     }
-    console.log(css)
     viewFrame.contentDocument.open()
     viewFrame.contentDocument.write('<!DOCTYPE html>')
     viewFrame.contentDocument.close();
