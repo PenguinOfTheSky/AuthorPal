@@ -57,11 +57,9 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
       script.innerHTML += spaces + "}"
     }
     dig(TS.data.chosenFile, 0)
-    script.innerHTML += ` \n try {
+    script.innerHTML += ` \n 
       me['#head']['#start']()
-    } catch (err) {
-      console.log(err)
-    }`
+    `
     script.innerHTML += "\n }"
     let commentsNode = document.createComment(comments)
     let css = document.createElement('style')

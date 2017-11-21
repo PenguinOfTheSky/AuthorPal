@@ -5,10 +5,10 @@ TS.cssTemplates.default = {
   `,
   highlight: ` 
     .highlight-one {
-      color: #AAF;
+      color: #99F;
     }
     .highlight-two {
-      color: #FBB;
+      color: #FAA;
     }
   `,
   icon: ``,
