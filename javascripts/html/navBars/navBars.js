@@ -17,7 +17,7 @@ Object.assign(TS.html._navBars, {
     root.append(openedFiles, style);
     let openFiles = {};
     let opts = {
-      add: function (name) {
+      add: function (name, filePointer) {
         if (openFiles[name] !== undefined) return 0;
         openFiles[name] = true;
         if (TS.data.chosenFileButton) {
@@ -27,7 +27,7 @@ Object.assign(TS.html._navBars, {
           className: 'navButton chosen',
           innerText: name,
           onclick: function () {
-            TS.events.openFile(name, true);
+            TS.events.openFile(filePointer, name);
             if (TS.data.chosenFileButton) {
               TS.data.chosenFileButton.className = 'navButton'
             }
@@ -78,7 +78,7 @@ Object.assign(TS.html._navBars, {
         }
         display.render(firstItem);
         TS.refs.treeNav[firstItem].click();
-        buttons.opts.add(name);
+        buttons.opts.add(name, file);
       }
     };
     TS.refs.displayOpts = display;

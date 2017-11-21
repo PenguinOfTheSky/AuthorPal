@@ -237,12 +237,12 @@ h1 { text-align: center; }
           shadowTree: {}
         },
         "#general": {
-          "title": `ex: navbar`,
-          "blurb": `makes a navbar`,
-          "inputs": "{color: somecolor} (inputs are required/not required)",
-          "license": ``,
-          "Contributors": ``,
-          "Random Notes": `For more information on how to use this AuthorPal project visit the FAQ`
+          "title": TS.js.templates.html5['plain text'](`ex: navbar`),
+          "blurb": TS.js.templates.html5['plain text'](`makes a navbar`),
+          "inputs": TS.js.templates.html5['plain text']("{color: somecolor} (inputs are required/not required)"),
+          "license": TS.js.templates.html5['plain text'](``),
+          "Contributors": TS.js.templates.html5['plain text'](``),
+          "Random Notes": TS.js.templates.html5['plain text'](`For more information on how to use this AuthorPal project visit the FAQ`)
         },
         "#css": {
           
