@@ -21,7 +21,7 @@
       button, input, select {
         font-size:1rem;
       }
-      button {
+      button, .btn {
         border: none;
         border-radius: .4rem;
         ${font}
@@ -29,7 +29,7 @@
         padding: 0.3rem 0.6rem;
         background-color: #444;
       }
-      button:hover {
+      button:hover, .btn:hover {
         ${hover}
       }`,
     border1: `

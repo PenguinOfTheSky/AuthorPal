@@ -9,11 +9,7 @@
     hoverable: `
       ${hover}
     `,
-    icon: `
-      .icon {
-        background-color: rgb(50,50,255); 
-      }
-    `,
+    icon: ``,
     link: `
       a {
         cursor: pointer;
@@ -22,6 +18,9 @@
     `,
     alignment: "left",
     btn: `
+      .icon {
+        background-color: rgb(50,50,255); 
+      }
       button, input, select {
         font-size:1rem;
       }

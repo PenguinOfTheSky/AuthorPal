@@ -39,7 +39,7 @@ TS.html.display.splash.files_js = function(root) {
           let div = TS.lib.createNode('div', {
             title: helperContent,
             "data-origin": 'testing',
-            className: divClass,
+            className: divClass + ' btn',
             draggable: true,
             ondragstart: function() {
               dragged = {
@@ -97,7 +97,8 @@ TS.html.display.splash.files_js = function(root) {
           }
           div.append(TS.lib.createNode('img', {
             draggable: false,
-            src: 'icons/' + img
+            src: 'icons/' + img,
+            className: 'icon'
           }), TS.lib.createNode('span', {
             contentEditable: true,
             innerText: x,
