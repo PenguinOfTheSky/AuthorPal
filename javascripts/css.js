@@ -111,6 +111,12 @@ return {
     }
     ${_.btn}
     ${_.btnNav1}
+    .navButton > .btnWarn {
+      display: none;
+    }
+    .navButton:hover > .btnWarn {
+      display: inline-block;
+    }
     `;
     },
     displayLeftNav: function () {
@@ -317,7 +323,7 @@ return {
       return `
       ${_.btn}
       ${_.btnSubmit}
-      ${_.btnWarn}
+      ${_.btnWarn || ''}
       ${_.link}
       :host {
         box-sizing:border-box;
@@ -437,7 +443,7 @@ return {
     confirmationDelete: function () {
       return `
       ${TS.css.modal}
-      ${_.btnWarn}
+      ${_.btnWarn || ''}
       `;
     },
     preferencesFile: function () {

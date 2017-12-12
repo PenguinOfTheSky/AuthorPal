@@ -33,7 +33,11 @@
       }
       button:hover, select:hover, .btn:hover, .hoverable:hover {
         ${hover}
-      }`,
+      }
+      .btnWarn {
+        background-color : rgb(230,0,0);
+      }
+      `,
     border1: `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
       box-sizing:border-box;`,
     border2: `
@@ -62,10 +66,6 @@
     backgroundMain: `
       ${font}
       background-color: #222`,
-    btnWarn: `
-      .btnWarn {
-        background-color : rgb(230,0,0);
-      }`,
     btnExit: `
       #exit {
         border: 2px solid black;float:right;

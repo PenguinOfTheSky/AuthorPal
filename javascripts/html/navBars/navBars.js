@@ -18,14 +18,17 @@ Object.assign(TS.html._navBars, {
     let openFiles = {};
     let opts = {
       add: function (name, filePointer) {
-        if (openFiles[name] !== undefined) return 0;
-        openFiles[name] = true;
+        if (openFiles[name] !== undefined) {
+          if (1) return 0; //fix to allow same-name different folder files.
+          else if (openFiles[name] === filePointer) return 0;
+        }
+        openFiles[name] = filePointer;
         if (TS.data.chosenFileButton) {
           TS.data.chosenFileButton.className = 'navButton'
         }
         let btn = TS.lib.createNode("button", {
           className: 'navButton chosen',
-          innerText: name,
+          innerText: name + ' ',
           onclick: function () {
             TS.events.openFile(filePointer, name);
             if (TS.data.chosenFileButton) {
@@ -35,6 +38,16 @@ Object.assign(TS.html._navBars, {
             TS.data.chosenFileButton = this
           }
         });
+        let closeBtn = TS.lib.createNode('button', {
+          innerText: 'X',
+          className: 'btnWarn',
+          onclick: function(e) {
+            e.stopPropagation()
+            delete openFiles[name]
+            this.parentNode.remove()
+          }
+        })
+        btn.append(closeBtn)
         TS.data.chosenFileButton = btn;
         root.querySelector("#openedFiles").append(btn);
         return root;

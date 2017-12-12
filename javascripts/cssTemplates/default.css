@@ -67,7 +67,6 @@ TS.cssTemplates.default = {
   backgroundMain: `
       color: rgb(253,255,255);
       background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));`,
-  btnWarn: ``,
   btnExit: `
       #exit {
         border: 2px solid black;float:right;
