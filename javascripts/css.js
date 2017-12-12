@@ -7,7 +7,6 @@ if (theme === undefined) {
 }
 let _ = TS.cssTemplates[theme];
 let defaultCSS = TS.cssTemplates["default"]
-TS.data.alignment = _.alignment;
 TS.events.updatePreferences = function () {
   TS.events.save(location.reload());
 };
@@ -78,14 +77,13 @@ return {
         margin-right:.1rem;
         margin-left: .1rem;
       }
-      #left img {
-        vertical-align: middle;
+      #left > img {
         width: 1.4rem;
         height: 1.4rem;
       }
       #left > * {
-        vertical-align: middle;
         display: inline-block;
+        vertical-align: middle;
       }
       #hiddenOptions {
         padding-top:.3rem;

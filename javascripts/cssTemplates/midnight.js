@@ -10,16 +10,16 @@
       ${hover}
     `,
     icon: ``,
-    link: `
+    link: ``,
+    btn: `
       a {
         cursor: pointer;
         color: blue;
       }
-    `,
-    alignment: "left",
-    btn: `
       .icon {
-        background-color: rgb(50,50,255); 
+        background-color: rgb(200,200,0); 
+        filter: invert(100%);
+        border-radius:25%;
       }
       button, input, select {
         font-size:1rem;
