@@ -10,6 +10,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
       TS.js.events.dragTitle(event)
     }
   });
+  title.append(document.querySelector('#font-awesome').cloneNode(1))
   let titleContent = Object.assign(document.createElement("span"), {
     className: "titleContent",
     innerHTML: itemName,
@@ -42,7 +43,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     className: "buttonGroup"
   });
   let keyDelete = Object.assign(document.createElement("button"), {
-    innerHTML: "<b>-</b>",
+    innerHTML: "<icon class='fa fa-minus'></icon>",
     className: "deleteLine btnWarn",
     onclick: function () {
       let callback = function () {
@@ -72,7 +73,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     contentEditable: false
   });
   let unfocusBtn = Object.assign(document.createElement("button"), {
-    innerHTML: "&nbsp;&nbsp;",
+    innerHTML: "<icon class='fa fa-undo'></icon>",
     title: `unfocus element`,
     className: "unfocusMe icon",
     onclick: function() {
@@ -85,7 +86,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   });
 
   let focusMe = Object.assign(document.createElement("button"), {
-    innerHTML: TS.svg.focus,
+    innerHTML: "<icon class='fa fa-search-plus'></icon>",
     title: `focus this element`,
     className: "focusMe icon",
     onclick: function () {
@@ -95,7 +96,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   });
   let copy = Object.assign(document.createElement("button"), {
     className: "icon",
-    innerHTML: TS.svg.copy,
+    innerHTML: `<icon class='fa fa-clone'></icon>`,
     onclick: function () {
       TS.js.clipboard.copyItem({item: item, path: path, itemName: itemName})
     }
@@ -118,7 +119,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
       onclick: function () {
         TS.refs.container.append(TS.html.modals.addLine(path[itemName], focused));
       },
-      innerHTML: "+"
+      innerHTML: "<icon class='fa fa-plus'></icon>"
     });
     
     

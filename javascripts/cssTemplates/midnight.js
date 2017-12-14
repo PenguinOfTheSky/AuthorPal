@@ -9,6 +9,7 @@
     hoverable: `
       ${hover}
     `,
+    link: '',
     btn: `
       a {
         cursor: pointer;

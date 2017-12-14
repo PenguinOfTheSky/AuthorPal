@@ -7,6 +7,7 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.13.0 switched from svgs to Font Awesome.  
 v3.12.7 white icons support  
 v3.12.5 added ability to close open project tabs.  
 v3.12.0 removed summernote rich text editor, removed bootstrap/jquery dependencies. Added dual-screen markdown previewer, moving to markdown focus from rich text. Always-fold option no longer folds when clicking end-nodes.  

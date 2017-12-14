@@ -38,6 +38,7 @@ return {
         max-height:100%;
         display: flex;
         flex-direction: column;
+        box-sizing:border-box;
         ${_.backgroundMain}
       }`;
     },
@@ -103,18 +104,18 @@ return {
     },
     topNavFileButtons: function () {
       return `
-    :host {
-      display:inline-block;
-      ${_.backgroundNav1}
-    }
-    ${_.btn}
-    ${_.btnNav1}
-    .navButton > .btnWarn {
-      display: none;
-    }
-    .navButton:hover > .btnWarn {
-      display: inline-block;
-    }
+      :host {
+        display:inline-block;
+        ${_.backgroundNav1}
+      }
+      ${_.btn}
+      ${_.btnNav1}
+      .navButton > .btnWarn {
+        display: none;
+      }
+      .navButton:hover > .btnWarn {
+        display: inline-block;
+      }
     `;
     },
     displayLeftNav: function () {
@@ -177,7 +178,6 @@ return {
         }`;
       str += `
       ${_.btn}
-      ${_.icon || defaultCSS.icon}
       .lineContainer {
         /*add background for margins?*/
         box-sizing:border-box;
@@ -257,7 +257,6 @@ return {
         width: 1.5rem;
         height: 1.5rem;
         border-radius: 0px;
-        color: white;
         margin: auto;
       }
       .buttonGroup button:hover, .buttonGroup > img:hover {

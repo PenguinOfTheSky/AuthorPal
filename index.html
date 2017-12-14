@@ -17,12 +17,12 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
 <head>
   <title>AuthorPal</title>
   <link rel="shortcut icon" type="image/x-icon" href="icons/favicon.ico">
+  <link id = 'font-awesome' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script>
     window.TS = {
       data: {},
       events: {},
       refs: {},
-      svg: {},
       html: {
         modals: {},
         display: {
@@ -60,7 +60,6 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
       TS.start(document.querySelector('#root'));
     }
     let scripts = [
-      "javascripts/svg/main.js",
       "javascripts/html/modals/fileContextNav.js",
       "javascripts/html/display/splash/main.js",
       "javascripts/js/export/blog.js",
@@ -107,7 +106,7 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
   }
     
   </script>
-<body>
+<body style='display: flex; flex-direction: column; height: 100%;'>
   <div id='root'></div>
   <style>
     html, body{

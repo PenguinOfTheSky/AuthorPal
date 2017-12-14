@@ -11,16 +11,12 @@ TS.cssTemplates.default = {
       color: #FAA;
     }
   `,
-  icon: ``,
   link: ``,
   btn: `
     .hover:hover {
       box-shadow: 0px 0px .1rem .2rem rgba(0,30,155,.7);
     }
-    .icon {
-      background: white; 
-      border-radius: .4rem;
-    }
+    
     button, input, select, select option {
       font-size:1rem;
     }
@@ -36,6 +32,12 @@ TS.cssTemplates.default = {
     }
     input[type=button]:active, button:active, select:active, .btn:active {
       box-shadow: 0px 0px .1rem .2rem rgba(255,255,0,.5);
+    }
+    .icon {
+      background-color: #FDFDFD; 
+      color: black;
+      padding:.1rem;
+      border-radius: .4rem;
     }
     .btnWarn {
       background-color : red;
@@ -73,7 +75,10 @@ TS.cssTemplates.default = {
         background-color: red;
       }`,
   btnSubmit: ``,
-  btnBase1: ``,
+  btnBase1: `
+    #left {
+      font-size:1.4rem;
+      }`,
   btnBase2: ``,
   btnNav1: `
       .navButton {

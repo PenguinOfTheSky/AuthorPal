@@ -69,7 +69,7 @@ Object.assign(TS.html._navBars, {
     });
     let style = document.createElement("style");
     style.innerHTML = TS.css.boxes.topLeftNav();
-    root.append(style);
+    root.append(style, document.querySelector('#font-awesome').cloneNode(1));
     let buttons;
     let commands = {
       file: function (choice) {
@@ -121,10 +121,10 @@ Object.assign(TS.html._navBars, {
     let left = Object.assign(document.createElement("div"), {
       id: "left",
       innerHTML: `
-        <img src='icons/iconmonstr-home-7-240.png' title='home' targetName = 'about' class='hoverable icon'>
-        <img src='icons/iconmonstr-note-20-240.png' title='files' targetName = 'filesListContainer' class='hoverable icon'>
-        <img src='icons/iconmonstr-gear-11-240.png' title='admin' targetName = 'admin' class='hoverable icon'>
-        <img src='icons/iconmonstr-help-3-240.png' title='help' targetName = 'help' class='hoverable icon'>
+        <icon class='icon hoverable fa fa-home' title='home' targetName = 'about'></icon>
+        <icon class='icon hoverable fa fa-folder-open' title='home' targetName = 'filesListContainer'></icon>
+        <icon class='icon hoverable fa fa-cogs' title='home' targetName = 'admin'></icon>
+        <icon class='icon hoverable fa fa-info-circle' title='home' targetName = 'help'></icon>
          `,
       onclick: function(e) {
         if (e.target.getAttribute('targetName')) {
