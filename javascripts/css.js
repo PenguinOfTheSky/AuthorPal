@@ -121,6 +121,7 @@ return {
     displayLeftNav: function () {
       let str = ``;
       str += `
+      ${_.btn}
       :host {
         padding: .15rem;
         ${_.backgroundNav2}
@@ -139,8 +140,8 @@ return {
       }
       `;
       str += `
-      ${_.btn}
-      ${_.btnBase2}
+      
+      ${_.btnBase2 || ''}
       ul {
         padding-left: 1rem;
       }
@@ -240,9 +241,6 @@ return {
         margin: .1rem;
         padding: 0px;
         padding-left: 1rem;
-      }
-      .addLine {
-        background-color: #5cb85c;
       }
       .unfocusMe {
         background-image: url("icons/iconmonstr-undo-1-240.png");
@@ -349,9 +347,6 @@ return {
       #filesListContainer img{
         width: 1.5rem;
         height: 1.5rem;
-      }
-      .file {
-        
       }
       h1 {
         font-size: 1.6rem;

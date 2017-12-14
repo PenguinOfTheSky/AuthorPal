@@ -6,10 +6,9 @@ TS.html._navBars.toggleSite_button = function() {
   let output;
   let previous;
   let view = false;
-  let img = TS.lib.createNode('img', {
-    src: 'icons/iconmonstr-eye-6.svg',
+  let img = TS.lib.createNode('button', {
     title: 'view project export preview',
-    className: 'icon',
+    className: 'icon fa fa-eye',
     style: 'margin-left: .3rem; margin-right: .3rem; display: none;',
     onclick: function() {
       let iframeStyle = `position: absolute; z-index:999; background-color: white; width: 100%; height: ${TS.refs.display.clientHeight}px; margin-top: ${TS.refs.mainNavBar.clientHeight}px;`
@@ -18,10 +17,10 @@ TS.html._navBars.toggleSite_button = function() {
         // case "book outline":
         case 'web component(js)':
           if (view) {
-            this.src = "icons/iconmonstr-eye-6.svg"
+            this.className = 'btn icon fa fa-eye'
             previous.remove()
           } else {
-            this.src = "icons/iconmonstr-eye-10.svg"
+            this.className = 'btn icon fa fa-eye-slash'
             let viewFrame = TS.lib.createNode('iframe', {
               className: 'iframe-preview',
               style: iframeStyle

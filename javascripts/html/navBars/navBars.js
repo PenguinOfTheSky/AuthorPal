@@ -121,10 +121,10 @@ Object.assign(TS.html._navBars, {
     let left = Object.assign(document.createElement("div"), {
       id: "left",
       innerHTML: `
-        <icon class='icon hoverable fa fa-home' title='home' targetName = 'about'></icon>
-        <icon class='icon hoverable fa fa-folder-open' title='home' targetName = 'filesListContainer'></icon>
-        <icon class='icon hoverable fa fa-cogs' title='home' targetName = 'admin'></icon>
-        <icon class='icon hoverable fa fa-info-circle' title='home' targetName = 'help'></icon>
+        <icon class='icon btn hoverable fa fa-home' title='home' targetName = 'about'></icon>
+        <icon class='icon btn hoverable fa fa-folder-open' title='home' targetName = 'filesListContainer'></icon>
+        <icon class='icon btn hoverable fa fa-cogs' title='home' targetName = 'admin'></icon>
+        <icon class='icon btn hoverable fa fa-info-circle' title='home' targetName = 'help'></icon>
          `,
       onclick: function(e) {
         if (e.target.getAttribute('targetName')) {
@@ -145,8 +145,8 @@ Object.assign(TS.html._navBars, {
       html: `
         <div id='foldOpts'>
           <button class='baseButtons2' id = 'show' title='unfold'>~</button>
-          <button class='baseButtons2' id='fold1' title='Hide >1 deep'>\></button>
-          <button class='baseButtons2' id='fold2' title='Hide >2 deep'>\>\></button>
+          <button class='baseButtons2 btn' id='fold1' title='Hide >1 deep'>\></button>
+          <button class='baseButtons2 btn' id='fold2' title='Hide >2 deep'>\>\></button>
         </div>
         <button id='always-fold'><input type='checkbox' onclick='this.checked = !this.checked'> Always-fold </button>
         <div id='tree'></div>

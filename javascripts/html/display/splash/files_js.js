@@ -15,6 +15,15 @@ TS.html.display.splash.files_js = function(root) {
   }
   let render = function(path) {
     if (!path) path = []
+    if (path.length > 0) {
+      root.querySelector('#backPath').style.display='inline-block'
+      root.querySelector('#backPath').onclick = function() {
+        path.pop();
+        render(path)
+      }
+    } else {
+      root.querySelector('#backPath').style.display='none'
+    }
     root.querySelector('#path').innerText = "~/" + path.join('/')
     let files = TS.data.local.files;
     path.forEach(ele => {
@@ -25,10 +34,10 @@ TS.html.display.splash.files_js = function(root) {
       let list = document.createDocumentFragment();
       for (let x in files) {
         if (files.hasOwnProperty(x)) {
-          let img = 'iconmonstr-note-20-240.png'
+          let img = 'fa-file'
           let divClass = 'file fileOrFolder'
           if (files[x].master_root.type == 'folder') {
-            img = 'iconmonstr-folder-19-240.png'
+            img = 'fa-folder-open-o'
             divClass = 'folder fileOrFolder dropzone'
           }
           let helperContent = ``;
@@ -95,10 +104,9 @@ TS.html.display.splash.files_js = function(root) {
               }
             })
           }
-          div.append(TS.lib.createNode('img', {
+          div.append(TS.lib.createNode('icon', {
             draggable: false,
-            src: 'icons/' + img,
-            className: 'icon'
+            className: `icon fa ${img}`
           }), TS.lib.createNode('span', {
             contentEditable: true,
             innerText: x,

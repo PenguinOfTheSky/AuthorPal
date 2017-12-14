@@ -115,7 +115,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     } 
     
     let add = Object.assign(document.createElement("button"), {
-      className: "addLine",
+      className: "addLine btnSubmit",
       onclick: function () {
         TS.refs.container.append(TS.html.modals.addLine(path[itemName], focused));
       },
@@ -145,9 +145,8 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
           TS.events.save()
         })
       },
-      style: 'background-image: url("icons/iconmonstr-edit-6-240.png"); background-size: cover;',
-      className: 'icon',
-      innerHTML: "&nbsp;&nbsp;"
+      className: '',
+      innerHTML: "<icon class='icon fa fa-pencil-square-o'></icon>"
     })
     buttonGroup.append(callEditor)
   }

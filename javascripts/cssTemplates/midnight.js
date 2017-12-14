@@ -15,12 +15,6 @@
         cursor: pointer;
         color: blue;
       }
-      .icon {
-        background-color: blue; 
-        fill: white;
-        border-radius:25%;
-        padding: .1rem;
-      }
       button, input, select {
         font-size:1rem;
       }
@@ -30,12 +24,22 @@
         border-radius: .4rem;
         ${font}
         background-color: #000;
+        box-shadow: 0px 0px .05rem rgba(255,255,255,.4)
       }
       button:hover, select:hover, .btn:hover, .hoverable:hover {
         ${hover}
       }
+      .icon {
+        
+        fill: white;
+        border-radius:25%;
+        padding: .1rem;
+      }
+      .icon.fa {
+        font-size:1.3rem;
+      }
       .btnWarn {
-        background-color : rgb(230,0,0);
+        color : rgb(230,0,0);
       }
       `,
     border1: `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
