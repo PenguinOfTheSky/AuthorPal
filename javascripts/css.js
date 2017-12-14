@@ -229,9 +229,6 @@ return {
           background-color: rgb(240,245,240);
           `}
       }
-      .ace_editor {
-        font-size: 1rem ;
-      }
       .textField > p {
         margin: 0;
         margin-bottom: .2rem;
@@ -246,49 +243,10 @@ return {
       }
       .addLine {
         background-color: #5cb85c;
-        border-color: #4cae4c;
-      }
-      .addLine:hover {
-        background-color: #449d44;
-        border-color: #398439;
-      }
-      .deleteLine {
-        background-color: #d9534f;
-        border-color: #d43f3a;
-      }
-      .deleteLine:hover {
-        background-color: #c9302c;
-        border-color: #ac2925;
       }
       .unfocusMe {
         background-image: url("icons/iconmonstr-undo-1-240.png");
         background-size: cover;
-        border-color: #2e6da4;
-      }
-      .unfocusMe:hover {
-        background-color: #286090;
-        border-color: #204d74;
-      }
-      .focusMe {
-        background-color: #337ab7;
-        background-image: url("icons/iconmonstr-crosshair-8-240.png");
-        background-size: cover;
-        border-color: #2e6da4;
-      }
-      .focusMe:hover {
-        background-color: #286090;
-        border-color: #204d74;
-      }
-      .editHTML {
-        background-color: #5bc0de;
-        border-color: #46b8da;
-      }
-      .editHTML:hover {
-        background-color: #31b0d5;
-        border-color: #269abc;
-      }
-      .isRaw {
-        box-shadow: 0px 0px 1px 3px rgba(222, 0, 222, .5) inset;
       }
       .buttonGroup {
         margin-left: .4rem;
@@ -297,7 +255,7 @@ return {
       }
       .buttonGroup button, .buttonGroup img {
         width: 1.5rem;
-        height: auto;
+        height: 1.5rem;
         border-radius: 0px;
         color: white;
         margin: auto;

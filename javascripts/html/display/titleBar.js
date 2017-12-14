@@ -43,7 +43,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   });
   let keyDelete = Object.assign(document.createElement("button"), {
     innerHTML: "<b>-</b>",
-    className: "deleteLine",
+    className: "deleteLine btnWarn",
     onclick: function () {
       let callback = function () {
         delete path[itemName];
@@ -74,7 +74,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   let unfocusBtn = Object.assign(document.createElement("button"), {
     innerHTML: "&nbsp;&nbsp;",
     title: `unfocus element`,
-    className: "unfocusMe",
+    className: "unfocusMe icon",
     onclick: function() {
       let targ = TS.data.chosenFile
       TS.data.currentView.forEach(function(ele, i) {
@@ -83,31 +83,11 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
       opts.focus(targ, TS.data.currentView[TS.data.currentView.length-1]);
     }
   });
-  let openEditorChoices;
-  let editor = TS.lib.createNode('div', {
-    innerText: ` editors `,
-    className: "editor",
-    onmouseenter: function() {
-      openEditorChoices = TS.html.display.editorChoices(titleContent.innerHTML, function(choice) {
-        TS.html.display.lineBody.callEditor(item, choice, function(content) {
-        item = content;
-        path[itemName] = item;
-        lineBody.opts.update(content, choice);
-        TS.events.updatedFile()
-        TS.events.save()
-        })
-      })
-      this.append(openEditorChoices)
-    },
-    onmouseleave: function() {
-        openEditorChoices.remove()
-    }
-  })
 
   let focusMe = Object.assign(document.createElement("button"), {
-    innerHTML: `&nbsp;&nbsp;`,
+    innerHTML: TS.svg.focus,
     title: `focus this element`,
-    className: "focusMe",
+    className: "focusMe icon",
     onclick: function () {
       opts.focus(path, itemName, true);
     },
@@ -115,8 +95,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   });
   let copy = Object.assign(document.createElement("button"), {
     className: "icon",
-    style: "background-image: url('icons/iconmonstr-copy-7-240.png');background-size:contain;",
-    innerHTML: '&nbsp;&nbsp;',
+    innerHTML: TS.svg.copy,
     onclick: function () {
       TS.js.clipboard.copyItem({item: item, path: path, itemName: itemName})
     }
@@ -154,8 +133,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   if (depth === 0 && unfocus) buttonGroup.append(unfocusBtn);
   if (depth > 0) buttonGroup.append(focusMe);
   if (typeof(item) ==='string') {
-  //  buttonGroup.append(editor)
-  // too buggy, remove?
+  console.log('string')
   } else if (item.object_root && item.object_root.editor){
     let callEditor = TS.lib.createNode('button', {
       onclick: function() {
@@ -167,7 +145,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
         })
       },
       style: 'background-image: url("icons/iconmonstr-edit-6-240.png"); background-size: cover;',
-      className: 'btn icon',
+      className: 'icon',
       innerHTML: "&nbsp;&nbsp;"
     })
     buttonGroup.append(callEditor)

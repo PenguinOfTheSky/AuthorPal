@@ -4,22 +4,21 @@
   let font = `
     color: rgb(240,240,240);
   `;
-  let hover = `box-shadow: 0px 0px .1rem .2rem rgba(0,30,155,.7);`;
+  let hover = `box-shadow: 0px 0px .1rem .2rem rgba(255,210,75,.6);`;
   TS.cssTemplates.midnight = {
     hoverable: `
       ${hover}
     `,
-    icon: ``,
-    link: ``,
     btn: `
       a {
         cursor: pointer;
         color: blue;
       }
       .icon {
-        background-color: rgb(200,200,0); 
-        filter: invert(100%);
+        background-color: blue; 
+        fill: white;
         border-radius:25%;
+        padding: .1rem;
       }
       button, input, select {
         font-size:1rem;
@@ -73,8 +72,6 @@
       }`,
     btnSubmit: `
       .btnSubmit {
-        border: none;
-        ${font}
         background-color: #e62e00;
       }
       .btnSubmit:hover {
@@ -119,9 +116,6 @@
         background: linear-gradient(0deg, rgb(0, 0, 0), rgb(4, 154, 154) 80%, rgb(40, 40, 40));
       }`,
     treeNav: `
-      li {
-        ${font}
-      }
       li:hover {
         ${hover}
       }
