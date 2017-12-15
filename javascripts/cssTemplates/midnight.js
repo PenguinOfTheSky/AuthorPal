@@ -79,8 +79,8 @@
       background-color: #222`,
     btnExit: `
       #exit {
-        border: 2px solid black;float:right;
-        background-color : rgb(230,0,0);
+        float:right;
+        color : rgb(230,0,0);
       }`,
     btnBase1: `
       .menuOptions:hover {

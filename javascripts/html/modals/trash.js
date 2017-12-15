@@ -3,7 +3,7 @@ TS.html.modals.trash = function() {
     id: "TS.html.modals.trash",
     css: TS.css.modals.trash(),
     html: `
-      <div id='centerModal'>
+      <div id='centerModal' class='bgModal'>
         <div><b>Trash</b><button id='exit'>X</button></div><br>
         <div id='list'></div>
       </div>

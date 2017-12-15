@@ -14,14 +14,10 @@
     `,
     alignment: "left",
     btn: `
-      .icon {
-        background-color: white; 
-        border-radius: .4rem;
-      }
       button, input, select {
         font-size:1rem;
       }
-      button, .btn {
+      button, .btn, select {
         border: none;
         border-radius: .4rem;
         ${font}
@@ -31,7 +27,28 @@
       }
       button:hover, .btn:hover {
         ${hover}
-      }`,
+      }
+      .icon {
+        fill: white;
+        border-radius:25%;
+        padding: .1rem;
+      }
+      .icon.fa {
+        font-size:1.3rem;
+      }
+      .icon-medium.fa {
+        font-size: 2rem;
+      }
+      .icon-large.fa {
+        font-size: 4rem;
+      }
+      .btnSubmit {
+        color: green;
+      }
+      .btnWarn {
+        color : rgb(230,0,0);
+      }
+      `,
     border1: `
       border-bottom: 1px solid #888;
       box-sizing:border-box;`,
@@ -63,25 +80,11 @@
     backgroundMain: `
       ${font}
       background-color: #222`,
-    btnWarn: `
-      .btnWarn {
-        background-color : rgb(230,0,0);
-      }`,
     btnExit: `
       #exit {
         border: 2px solid black;float:right;
         background-color : rgb(230,0,0);
       }`,
-    btnSubmit: `
-      .btnSubmit {
-        border: none;
-        ${font}
-        background-color: #e62e00;
-      }
-      .btnSubmit:hover {
-        background-color: #ff3300;
-      }
-      `,
     btnBase1: `
       .menuOptions:hover {
         ${hover}
@@ -128,23 +131,6 @@
     textField: `
       ${font}
       background-color: #666;
-    `,
-    select: `
-      select {
-        color: white;
-        border: none;
-        font-size: 1rem;
-        background: linear-gradient(0deg, rgb(30, 0, 0), rgb(60, 10, 5) 80%, rgb(40, 5, 0));
-      }
-      select option {
-        color: white;
-        background-color: rgb(0,0,0);
-        border: none;
-        font-size: 1rem;
-      }
-      select option:checked {
-        color: white;
-        background-color: rgb(0,33,0);
-      }`
+    `
   };
 }

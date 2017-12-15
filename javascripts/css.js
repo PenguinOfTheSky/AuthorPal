@@ -411,7 +411,8 @@ return {
       ${TS.css.modal}`;
     },
     trash: function() {
-      return `${TS.css.modal}
+      return `
+      ${TS.css.modal}
         table, th, td {
          border: 1px solid black;
         }
