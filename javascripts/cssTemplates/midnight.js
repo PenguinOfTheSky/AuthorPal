@@ -23,7 +23,7 @@
         border-radius: .4rem;
         ${font}
         background-color: #000;
-        box-shadow: 0px 0px .05rem rgba(255,255,255,.4)
+        
       }
       button:hover, select:hover, .btn:hover, .hoverable:hover {
         ${hover}
@@ -65,7 +65,7 @@
     `,
     backgroundNav1: `
       color: rgb(255,255,255);
-      background-color: #111;`,
+      background-color: #333;`,
     backgroundNav2: `background-color: #111;`,
     backgroundModals: `
       .bgModal {

@@ -285,6 +285,7 @@ return {
         overflow-y: auto;
         max-height: 100%;
         text-align: center;
+        width: 100%;
       }
       hr {
         width: 100%;
