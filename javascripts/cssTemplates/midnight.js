@@ -30,13 +30,18 @@
         ${hover}
       }
       .icon {
-        
         fill: white;
         border-radius:25%;
         padding: .1rem;
       }
       .icon.fa {
         font-size:1.3rem;
+      }
+      .icon-medium.fa {
+        font-size: 2rem;
+      }
+      .icon-large.fa {
+        font-size: 4rem;
       }
       .btnWarn {
         color : rgb(230,0,0);

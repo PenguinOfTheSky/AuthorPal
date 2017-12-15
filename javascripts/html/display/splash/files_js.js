@@ -144,12 +144,10 @@ TS.html.display.splash.files_js = function(root) {
       TS.refs.container.appendChild(TS.html.modals.trash())
     },
     ondragenter: function(e) {
-      this.style.width = '2.5rem'
-      this.style.height = '2.5rem'
+      this.classList.toggle('icon-large')
     },
     ondragleave: function(e) {
-      this.style.width = ''
-      this.style.height = ''
+      this.classList.toggle('icon-large')
     },
     ondragover: function(e) {
       e.preventDefault()
@@ -163,9 +161,9 @@ TS.html.display.splash.files_js = function(root) {
       let files = base
       if (dragged.path.length > 0) files = files.files
       e.preventDefault()
-      this.style.width = ''
-      this.style.height = ''
+      this.classList.remove('icon-large')
       item.style.display = 'none'
+      console.log('deleted ' + name)
       if (!TS.data.local.trash) TS.data.local.trash = []
       let name = item.querySelector('span').innerText
       if (!files[name].master_root) {

@@ -41,6 +41,12 @@ TS.cssTemplates.default = {
     .icon.fa {
       font-size: 1.3rem;
     }
+    .icon-medium.fa {
+      font-size: 2rem;
+    }
+    .icon-large.fa {
+      font-size: 4rem;
+    }
     .btnWarn {
       background-color : red;
     }
