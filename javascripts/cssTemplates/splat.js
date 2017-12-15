@@ -1,5 +1,5 @@
 /* global TS */
-TS.cssTemplates.default = {
+TS.cssTemplates.splat = {
   hoverable: `
     box-shadow: 0px 0px .1rem .2rem rgb(0,30,155);
   `,
@@ -11,6 +11,7 @@ TS.cssTemplates.default = {
       color: #FAA;
     }
   `,
+  link: ``,
   btn: `
     .hover:hover {
       box-shadow: 0px 0px .1rem .2rem rgba(0,30,155,.7);
@@ -65,8 +66,8 @@ TS.cssTemplates.default = {
   backgroundTitle: ``,
   titleFont: ``,
   backgroundNav1: `
-      color: black;
-      background: linear-gradient(0deg, silver, white 40%, silver);`,
+      color: rgb(255,255,255);
+      background: linear-gradient(0deg, rgb(22,0,0), rgb(130,10,10) 40%, rgb(22,0,0));`,
   backgroundNav2: `background-color: #DFD;`,
   backgroundModals: `
     .bgModal {
@@ -74,18 +75,18 @@ TS.cssTemplates.default = {
       border: .1rem inset #111;
       box-shadow: .05rem .05rem .3rem .1rem black;
       padding: .7rem;
-      background: #F3F3F3;
+      background: linear-gradient(0deg, rgb(10,120,0), rgb(0,145,55) 40%, rgb(20,110,40));
     }
       `,
   backgroundMain: `
-      color: #000;
-      background-color:#FFF;
-      `,
+      color: rgb(253,255,255);
+      background: linear-gradient(0deg, rgb(0,0,0), rgb(0,55,55) 40%, rgb(40,40,40));`,
   btnExit: `
       #exit {
         border: 2px solid black;float:right;
         background-color: red;
       }`,
+  btnSubmit: ``,
   btnBase1: `
     #left {
       font-size:1.4rem;

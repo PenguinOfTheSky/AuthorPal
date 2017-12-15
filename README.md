@@ -7,6 +7,7 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.14.0 added "light" theme, rename old default to 'splat'  
 v3.13.5 added back button on folder to go up filesystem. 
 v3.13.0 switched from svgs to Font Awesome.  
 v3.12.7 white icons support  

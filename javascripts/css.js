@@ -23,7 +23,6 @@ return {
     margin: 0 auto;
   }
   ${_.backgroundModals}
-  ${_.select}
   ${_.btn}
   ${_.btnExit}
 `,
@@ -275,9 +274,6 @@ return {
     splash: function () {
       return `
       ${_.btn}
-      ${_.btnSubmit}
-      ${_.btnWarn || ''}
-      ${_.link}
       :host {
         box-sizing:border-box;
         width: 100%;

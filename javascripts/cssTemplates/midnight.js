@@ -9,7 +9,6 @@
     hoverable: `
       ${hover}
     `,
-    link: '',
     btn: `
       a {
         cursor: pointer;
@@ -42,6 +41,9 @@
       }
       .icon-large.fa {
         font-size: 4rem;
+      }
+      .btnSubmit {
+        color: green;
       }
       .btnWarn {
         color : rgb(230,0,0);
@@ -80,14 +82,6 @@
         border: 2px solid black;float:right;
         background-color : rgb(230,0,0);
       }`,
-    btnSubmit: `
-      .btnSubmit {
-        background-color: #e62e00;
-      }
-      .btnSubmit:hover {
-        background-color: #ff3300;
-      }
-      `,
     btnBase1: `
       .menuOptions:hover {
         ${hover}
@@ -114,10 +108,6 @@
       .navButton {
         color: white;
         background-color: #040404;
-        border-top: 0.1rem solid white;
-        border-left: 0.1rem solid #add;
-        border-right: 0.1rem solid grey;
-        border-bottom: 0.1rem solid grey;
         border-radius: 20% 20% 1% 1%;
         margin: 0.1rem;
       }
@@ -134,22 +124,5 @@
       ${font}
       background-color: #111;
     `,
-    select: `
-      select {
-        color: white;
-        border: none;
-        font-size: 1rem;
-        background: linear-gradient(0deg, rgb(30, 0, 0), rgb(60, 10, 5) 80%, rgb(40, 5, 0));
-      }
-      select option {
-        color: white;
-        background-color: rgb(0,0,0);
-        border: none;
-        font-size: 1rem;
-      }
-      select option:checked {
-        color: white;
-        background-color: rgb(0,33,0);
-      }`
   };
 }
