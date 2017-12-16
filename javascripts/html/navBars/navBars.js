@@ -101,8 +101,9 @@ Object.assign(TS.html._navBars, {
     buttons = TS.html._navBars.topNavFileButtons(commands.changeTab);
     let collapsed = false;
     let bottomDiv = Object.assign(document.createElement("div"), {
-      innerHTML: `<button id='collapseNav'>^</button>`,
-      style: `height: .4rem;text-align:center;`,
+      id: 'bottomDiv',
+      innerHTML: `<icon id='collapseNav' class='icon btn fa fa-chevron-circle-up' onclick="this.classList.toggle('fa-chevron-circle-up'); this.classList.toggle('fa-chevron-circle-down')"></icon>`,
+      style: `height: 0rem;text-align:center;`,
       onclick: function (event) {
         if (event.target.id !== "collapseNav")
           return;

@@ -49,8 +49,11 @@ return {
         ${_.border1}
         ${_.backgroundNav1}
       }
-      :host(:hover) {
-        box-shadow: 0px 0px .1rem .2rem rgba(255, 255, 255, .1) inset;
+      :host(:hover) #collapseNav {
+        display: inline-block;
+        position: absolute;
+        z-index: 1;
+        box-shadow: 0px 0px .1rem .05rem black;
       }
       ${_.btn}
       ${_.btnSubmit}
@@ -68,6 +71,7 @@ return {
         position:relative;
         border:none;
         max-height:.9rem;
+        display: none;
       }
       #collapseNav:hover {
         box-shadow: 0px 0px .1rem .2rem rgba(100,255,188,.6) inset;
