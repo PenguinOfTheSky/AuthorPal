@@ -1,6 +1,6 @@
 TS.html.display.splash.files_js = function(root) {
   let fileManager = {
-    current: null,
+    path: null,
     reload: function(path) {
       render(path)
     }
@@ -11,10 +11,11 @@ TS.html.display.splash.files_js = function(root) {
     ref: null
   }
   root.querySelector("#createNewFile").onclick = function() {
-    TS.refs.container.append(TS.html.modals.createFile(fileManager))
+    TS.refs.container.append(TS.html.modals.createFile(fileManager)) 
   }
   let render = function(path) {
     if (!path) path = []
+    fileManager.path = path
     if (path.length > 0) {
       root.querySelector('#backPath').style.display='inline-block'
       root.querySelector('#backPath').onclick = function() {
@@ -85,6 +86,7 @@ TS.html.display.splash.files_js = function(root) {
               },
               ondrop: function(e) {
                 div.style["box-shadow"] = ""
+                if (dragged.item == x) return 0;
                 let move = function(n) {
                   let name = dragged.item;
                   if (files[x].files[dragged.item]) {
@@ -163,9 +165,10 @@ TS.html.display.splash.files_js = function(root) {
       e.preventDefault()
       this.classList.remove('icon-large')
       item.style.display = 'none'
-      console.log('deleted ' + name)
+      
       if (!TS.data.local.trash) TS.data.local.trash = []
       let name = item.querySelector('span').innerText
+      console.log('deleted ' + name)
       if (!files[name].master_root) {
         files[name].master_root = {}
       }

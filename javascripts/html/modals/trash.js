@@ -20,10 +20,25 @@ TS.html.modals.trash = function() {
           className: 'trashLine',
           innerHTML: `<td>${ele.fileName}</td>
             <td>${ele.dateDeleted}</td>
-            <td>${ele.dateModified || ''}</td>
-            <td><input type='checkbox' id='restore'></td>
-            <td><input type='checkbox' id='delete'></td>`
+            <td>${ele.dateModified || ''}</td>`
         })
+        let tds = [
+          TS.lib.createNode('td', {}),
+          TS.lib.createNode('td', {})
+        ]
+        tds[0].appendChild(TS.lib.createNode('input', {
+          type: 'checkbox', 
+          className: 'restore',
+          name: 'restore',
+          id: 'restore'
+        }))
+        tds[1].append(TS.lib.createNode('input', {
+          type: 'checkbox', 
+          className: 'delete',
+          name: 'delete',
+          id: 'delete'
+        }))
+        line.append(...tds)
         list.append(line)
       })
       root.querySelector('#list').append(list)

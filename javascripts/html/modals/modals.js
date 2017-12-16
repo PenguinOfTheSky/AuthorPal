@@ -172,6 +172,7 @@ Object.assign(TS.html.modals, {
     return item.box;
   },
   createFile: function (fileManager) {
+    console.log(fileManager)
     let item = TS.lib.createComponent({
       id: "TS.html.modals.createFile",
       css: TS.css.modals.createFile(),
@@ -210,14 +211,15 @@ Object.assign(TS.html.modals, {
           event.preventDefault();
           let name = this.querySelector("#name").value;
           let template = this.querySelector("#selectTemplate").value;
-          if (name !== "" && TS.data.local.files[name] === undefined) {
-            TS.data.local.files[name] = TS.js.templates.topNavbar[template]();
+          let base = TS.data.local.files
+          fileManager.path.forEach(ele => {
+            base = base[ele].files
+          })
+          window.i = base;
+          if (name !== "" && base[name] === undefined) {
+            base[name] = TS.js.templates.topNavbar[template]();
             box.remove();
-            if (template !='folder') {
-              TS.events.openFile(TS.data.local.files[name], name)
-            } else {
-              fileManager.reload()
-            }
+            fileManager.reload(fileManager.path)
             TS.events.save()
           } else {
             root.querySelector('#status').innerHTML = '<b class="btnWarn"> Name is Already Taken! </b>'
