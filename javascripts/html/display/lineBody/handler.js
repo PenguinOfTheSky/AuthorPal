@@ -26,7 +26,6 @@ TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDep
       } else {
         textField.innerText = text
       }
-      
     }
     let textField = Object.assign(document.createElement("div"), {
       className: "textField",

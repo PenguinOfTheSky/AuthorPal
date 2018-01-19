@@ -90,10 +90,12 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
     } catch(err) {
       console.log("no css found")
     }
+    let head = file['#head']["imports/title/etc"].main
     viewFrame.contentDocument.open()
     viewFrame.contentDocument.write('<!DOCTYPE html>')
     viewFrame.contentDocument.close();
     viewFrame.contentDocument.insertBefore(commentsNode, viewFrame.contentDocument.firstChild)
+    viewFrame.contentDocument.head.innerHTML = head
     viewFrame.contentDocument.head.append(css)
     viewFrame.contentDocument.body.append(script)
     if (!preview) {

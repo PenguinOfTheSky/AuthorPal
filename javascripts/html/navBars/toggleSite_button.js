@@ -31,7 +31,22 @@ TS.html._navBars.toggleSite_button = function() {
           }
           view = !view
           break;
-        
+          case 'json':
+            if (view) {
+              this.className = 'btn icon fa fa-eye'
+              previous.remove()
+            } else {
+              this.className = 'btn icon fa fa-eye-slash'
+              let viewFrame = TS.lib.createNode('iframe', {
+                className: 'iframe-preview',
+                style: iframeStyle
+              })
+              previous = viewFrame;
+              TS.refs.container.append(viewFrame)
+              let output = TS.js.export.exportHandler(TS.data.chosenFile, true, viewFrame)
+            }
+            view = !view
+            break;
         default: 
         if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
           let formatted = TS.js.fileFormat[TS.data.chosenFile.master_root.exportFormat](TS.data.chosenFile);

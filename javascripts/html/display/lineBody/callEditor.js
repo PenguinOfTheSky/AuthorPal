@@ -65,7 +65,8 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
       aceEditor.$blockScrolling = Infinity
       aceEditor.setOptions({
         wrap: true,
-        fontSize: "1rem"
+        fontSize: "1rem",
+        tabSize: 2
       });
       aceEditor.setValue(itemContent);
   }

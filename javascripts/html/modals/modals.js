@@ -190,6 +190,7 @@ Object.assign(TS.html.modals, {
             <option value='web component(js)'>Web Component (js-based html5)</option> 
             <option value='website_JS'>SPA Website (js-based html5 single-page-app)</option> 
             <option value='library_JS'>Javascript Library</option>
+            <option value='json'>JSON file</option>
           </select><br>
           <input type='submit' value='Submit' class='btnSubmit'>
           <div id='status'></div>

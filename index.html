@@ -19,6 +19,30 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
   <link rel="shortcut icon" type="image/x-icon" href="icons/favicon.ico">
   <link id = 'font-awesome' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script>
+  // Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/append()/append().md
+  (function (arr) { //polyfill append
+    arr.forEach(function (item) {
+      if (item.hasOwnProperty('append')) {
+        return;
+      }
+      Object.defineProperty(item, 'append', {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: function append() {
+          var argArr = Array.prototype.slice.call(arguments),
+            docFrag = document.createDocumentFragment();
+          
+          argArr.forEach(function (argItem) {
+            var isNode = argItem instanceof Node;
+            docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+          });
+          
+          this.appendChild(docFrag);
+        }
+      });
+    });
+  })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
     window.TS = {
       data: {},
       events: {},
@@ -41,15 +65,6 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
       cssTemplates: {}
     }
   </script>
-  <!-- include libraries(jQuery, bootstrap)
-  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" defer rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" defer></script>
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js" defer></script>
- -->
-  <!-- include summernote css/js
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" defer rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js" defer></script>
--->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js' defer></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js' ></script>
   <script>
@@ -63,6 +78,7 @@ Copyright {2017} {Trey Russell, Lycelia Studios}
       "javascripts/html/modals/fileContextNav.js",
       "javascripts/html/display/splash/main.js",
       "javascripts/js/export/blog.js",
+      "javascripts/js/export/json.js",
      "javascripts/html/display/lineBody/callEditor.js",
     "javascripts/html/display/splash/js.js",
     "javascripts/start.js",

@@ -107,6 +107,7 @@ Object.assign(TS.html.display, {
       if (itemName == 'object_root' || itemName == 'master_root') return ''; //why is this being appended. Fixthis.
       let formatType;
       if (depth === undefined) depth = 0;
+      if (itemName === undefined) return 0;
       if (itemName[0] === "*") {
         formatType = function (a) {
           return a;

@@ -7,6 +7,7 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.16.0 added JSON support.  
 v3.15.0 fixed critical folder error (dropping folder same folder deleted the folder); fixed dark theme; new collapse-top-menu icon.  
 v3.14.0 added "light" theme, rename old default to 'splat'  
 v3.13.5 added back button on folder to go up filesystem. 

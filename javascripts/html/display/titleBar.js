@@ -64,6 +64,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
           TS.events.bodyChange([]);
         }
         TS.data.currentView = [focused[1]];
+        if (TS.data.currentView[0] === undefined) return;
         TS.refs.treeNav[TS.data.currentView[0]].click();
         TS.events.updatedFile()
         TS.events.save();
@@ -146,6 +147,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
         })
       },
       className: '',
+      title: 'editor',
       innerHTML: "<icon class='icon fa fa-pencil-square-o'></icon>"
     })
     buttonGroup.append(callEditor)

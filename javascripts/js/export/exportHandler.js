@@ -37,6 +37,9 @@ TS.js.export.exportHandler = function(file, preview, viewFrame) {
     case "website_JS":
       return TS.js.export['website_JS'](file, preview, viewFrame)
       break;
+    case "json": 
+      return TS.js.export['json'](file, preview, viewFrame)
+      break;
     case "web component(js)":
       return TS.js.export['web component(js)'](file, preview, viewFrame)
       break;

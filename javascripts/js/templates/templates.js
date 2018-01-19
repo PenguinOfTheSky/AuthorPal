@@ -340,6 +340,15 @@ h1 { text-align: center; }
         "json": {},
         "text": {},
         "lib1": {
+          'createNode': {
+            object_root: {
+              type: 'function',
+              editor: 'javascript'
+            },
+            "main": `function(type, obj) {
+              return Object.assign( document.createElement(type), obj);
+            }`
+          },
           'jtml': {
             object_root: {
               type: 'function',
@@ -347,7 +356,7 @@ h1 { text-align: center; }
             },
             "main": `function(arr) {
   /*
-    give arr in form [
+    give in form [
       'h1', {innerText: 'hello world'},
       'h2', {innerText: 'Onwards', ref: 'firstChapter',
       'p', {children: [
@@ -356,29 +365,28 @@ h1 { text-align: center; }
     ]
     optional: ref, children, must give at least a blank {}
   */
-    let elements = {
-        html: document.createDocumentFragment(),
-        refs: {}
-    };
-for (let i = 0; i < arr.length; i+=2) {
+  let elements = {
+    html: document.createDocumentFragment(),
+    refs: {}
+  };
+  for (let i = 0; i < arr.length; i+=2) {
     let children = null;
     if (arr[i+1].children) {
-        children = arr[i+1].children
-        delete arr[i+1].children
+      children = arr[i+1].children
+      delete arr[i+1].children
     }
     let ele = Object.assign(document.createElement(arr[i]), arr[i+1])
     elements.html.append(ele)
-    console.log(ele, arr[i+1])
-  if (arr[i+1].ref) {
-      elements.ref[refs[arr[i+1]].ref] = ele
-  } 
-    if (arr[i+1].children) {
-      let children = me.lib1.jtml(arr[i+1].children)
-      ele.append(children.html)
-      Object.assign(elements.refs, children.refs)
-  } 
-}
-    return elements;
+    if (arr[i+1].ref) {
+        elements.refs[arr[i+1].ref] = ele
+    } 
+      if (children) {
+        children = SR.lib.jtml(children)
+        ele.append(children.html)
+        Object.assign(elements.refs, children.refs)
+    } 
+  }
+  return elements;
 }`
           }
         }
@@ -438,6 +446,22 @@ for (let i = 0; i < arr.length; i+=2) {
         "files": {}
       }
       return obj
+    },
+    json: function () {
+      let obj = {
+        "master_root": {
+          templates: 'TS.js.templates.html5',
+          exportFormat: "json", //fixthis
+          dateCreated: (new Date()).toLocaleString(),
+          dateModified: (new Date()).toLocaleString(),
+          type: "json",
+          version: 3.16
+        },
+        "example": {
+          "nestedExample": TS.js.templates.html5['plain text']('hulloooo... Can also use markdown/etc.... or define your own templates (this part coming soooooon)')
+        },
+      };
+      return obj;
     }
   }
 });
