@@ -47,6 +47,7 @@ Object.assign(TS.html.modals, {
     }
     let x;
     eval("x =" + TS.data.chosenFile.master_root.templates)
+    Object.assign(x, TS.data.chosenFile.master_root.userTemplates || {})
     Object.keys(x).forEach(function (ele) {
       options += `<option value='${ele}'>${ele}</option>`;
     });
