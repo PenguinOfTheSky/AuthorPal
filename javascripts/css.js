@@ -173,6 +173,7 @@ return {
     display: function () {
       let str = ``;
       str += `
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css');
         :host {
           display: inline-block;
           max-height: 100%;
