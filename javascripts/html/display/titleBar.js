@@ -135,7 +135,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   if (depth === 0 && unfocus) buttonGroup.append(unfocusBtn);
   if (depth > 0) buttonGroup.append(focusMe);
   if (typeof(item) ==='string') {
-  console.log('string')
+  //console.log('string')
   } else if (item.object_root && item.object_root.editor){
     let callEditor = TS.lib.createNode('button', {
       onclick: function() {

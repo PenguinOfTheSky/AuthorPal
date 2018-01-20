@@ -226,7 +226,7 @@ return {
       .textField {
         cursor: text;
         padding: 0.1rem 0.3rem;
-        white-space:pre-wrap;
+      /*  white-space:pre-wrap; */
         min-height:.5rem;
         ${_.textField || `
           color: black;
@@ -234,9 +234,11 @@ return {
           `}
       }
       .textField > p {
-        margin: 0;
-        margin-bottom: .2rem;
+        margin: .05rem;
         line-height: 1.15;
+        text-indent: 1rem;
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 0em;
       }
       .textField ul, .textField ol {
         display:flex;
@@ -244,6 +246,11 @@ return {
         margin: .1rem;
         padding: 0px;
         padding-left: 1rem;
+      }
+      .textField > h1, .textField > h2, .textField > h3, .textField > h4, .textField > h5, .textField > h6 {
+        margin: .2rem;
+        -webkit-margin-before: .1rem;
+        -webkit-margin-after: .1rem;
       }
       .unfocusMe {
         background-image: url("icons/iconmonstr-undo-1-240.png");

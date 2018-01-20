@@ -12,11 +12,11 @@ TS.js.highlight = function(str, language) {
       return '<span class="highlight-one">' + found + '</span>'
     })
     str = str.replace(/\n/g, '<br>')
-    return str;
+    return `<pre>${str}</pre>`;
   } else if (language == 'css') {
-    return str ;
+    return `<pre>${str}</pre>` ;
   } else if (language == 'json') {
-    return str ;
+    return `<pre>${str}</pre>`;
   } else if (language == 'rich text') {
     return str
   } else if (language == 'html') {
@@ -25,7 +25,7 @@ TS.js.highlight = function(str, language) {
       else if (found ==='>') return "	&#62;"
     })
     //escape html
-    return str
+    return `<pre>${str}</pre>`
   } else if (language == 'markdown') {
     return marked(str)
   }

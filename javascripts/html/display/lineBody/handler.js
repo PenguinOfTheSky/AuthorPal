@@ -1,10 +1,10 @@
 TS.html.display.lineBody.handler = function({itemName, path, item, depth, maxDepth, determine, formatType, line}) {
   let tabDeny = function(node) {
     node.onkeydown = function(event) {
-      if(event.key === 'Tab'){
+      if(event.key === 'DTab'){
         event.preventDefault();
         TS.js.insertText(node, '  ', TS.refs.display.shadowRoot.getSelection())
-      } else if(event.key === 'Enter'){
+      } else if(event.key === 'DEnter'){
         event.preventDefault();
         let replaceText = '\n'
         if (TS.refs.display.shadowRoot.getSelection().anchorOffset == node.innerText.length) {
