@@ -7,6 +7,7 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.18.0 CSS overhaul. Streamlined and touched up. Couple minor glitch fixes. Added optional test server for better Q/A (feb 25, 2018)  
 v3.17.0 added syntax highlighting, improved markdown readability.  
 v3.16.0 added JSON support.  
 v3.15.0 fixed critical folder error (dropping folder same folder deleted the folder); fixed dark theme; new collapse-top-menu icon.  

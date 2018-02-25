@@ -14,7 +14,6 @@ TS.html._navBars.toggleSite_button = function() {
       let iframeStyle = `position: absolute; z-index:999; background-color: white; width: 100%; height: ${TS.refs.display.clientHeight}px; margin-top: ${TS.refs.mainNavBar.clientHeight}px;`
       switch (TS.data.chosenFile.master_root.type) {
         case "website_JS": 
-        // case "book outline":
         case 'web component(js)':
           if (view) {
             this.className = 'btn icon fa fa-eye'
@@ -47,6 +46,7 @@ TS.html._navBars.toggleSite_button = function() {
             }
             view = !view
             break;
+          //case "book outline":
         default: 
         if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
           let formatted = TS.js.fileFormat[TS.data.chosenFile.master_root.exportFormat](TS.data.chosenFile);

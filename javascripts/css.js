@@ -1,12 +1,12 @@
 /* global TS */
 TS.css = function () {
 let theme = TS.data.local.preferences.theme;
-if (theme === undefined) {
-  TS.data.local.preferences.theme = "default";
-  theme = "default";
+if (!theme|| !TS.cssTemplates[theme]) {
+  TS.data.local.preferences.theme = "midnight";
+  theme = "midnight";
 }
 let _ = TS.cssTemplates[theme];
-let defaultCSS = TS.cssTemplates["default"]
+let defaultCSS = TS.cssTemplates["midnight"]
 TS.events.updatePreferences = function () {
   TS.events.save(location.reload());
 };

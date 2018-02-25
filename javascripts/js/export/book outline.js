@@ -1,11 +1,16 @@
 TS.js.export['book outline'] = function (file, preview, viewFrame) {
-  /* totally bugged, needs complete fix */
+  /* totally bugged, needs complete fix 
+  ! 
+  !
+  !
+  */
   if (preview || !preview) {
     let comments = ``
     let script = document.createElement('script')
     script.innerHTML = `let test = function(vars) {
       let me = `
     let dig = function(obj, depth, parent) {
+      console.log('bing')
       let spaces = "";
       for (let i = 0; i < depth; i++) {
         spaces += "  "
@@ -19,11 +24,20 @@ TS.js.export['book outline'] = function (file, preview, viewFrame) {
             comments += obj[ele][x] + "\n"
           }
         } else {
+          console.log('test')
           if (typeof(obj[ele] == 'object')) {
+            console.log('fish')
             if (obj[ele].object_root) {
+              console.log(obj[ele].object_root.type)
               if (obj[ele].object_root.type == 'function') {
                 
                 script.innerHTML += `${spaces + "  "} "${ele}": ${obj[ele].main}, \n`
+              } else if (obj[ele].object_root.type == 'markdown'){
+                script.innerHTML += `${spaces + "  "} "${ele}": `
+                script.innerHTML += ','
+              } else if (obj[ele].object_root.type == 'plain text'){
+                script.innerHTML += `${spaces + "  "} "${ele}": `
+                script.innerHTML += ','
               }
             } else {
               script.innerHTML += `${spaces + "  "} "${ele}": `

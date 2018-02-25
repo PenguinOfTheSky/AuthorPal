@@ -23,7 +23,10 @@
         border-radius: .4rem;
         ${font}
         background-color: #000;
-        
+      }
+      input[type=radio] {
+        transform: scale(1.5);
+        filter: contrast(5);
       }
       button:hover, select:hover, .btn:hover, .hoverable:hover {
         ${hover}
@@ -55,6 +58,9 @@
       border: .1rem solid rgba(250,250,250,.7);
       border-radius:.1rem;
       box-shadow: 0px 0px 1px 2px black inset;`,
+    border3: `
+      border-bottom-left-radius: 0.5rem;
+    `,
     functionBorder: `
       margin: .4rem 0px;
       box-shadow: 0px 0px .05rem .1rem orange;

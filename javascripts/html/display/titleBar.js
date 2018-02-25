@@ -109,7 +109,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
       let div = TS.lib.createNode('div', {
         style: "text-align: center;display: inline-block; flex-grow: 1;"
       })
-      div.append(TS.lib.createNode('button', {
+      div.append(TS.lib.createNode('span', {
         innerHTML: item.object_root.type
       }))
       objectType = div;

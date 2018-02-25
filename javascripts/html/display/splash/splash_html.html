@@ -3,7 +3,7 @@ TS.html.display.splash.splash_html = function() {
   <link id = 'font-awesome' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <div id='right'>
     <div id='about'>
-      <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v3.17.0</h1>
+      <h1><a href='http://www.lycelia.com'><i>Lycelia</i></a>'s <i>AuthorPal</i> v3.18.0</h1>
     </div>
     <hr>
     <div id='filesListContainer' class='filesListContainer'>
@@ -21,13 +21,19 @@ TS.html.display.splash.splash_html = function() {
         <fieldset>
           <h3>Edit Preferences </h3>
           Themes change what AuthorPal looks like <br>
-          <label for='themeSelect'>Chosen theme </label>
+          <input type="radio" id="lightTheme"
+           name="themeSelect" value="default">
+          <label for="lightTheme">Light</label>
+
+          <input type="radio" id="darkTheme"
+           name="themeSelect" value="midnight">
+          <label for="darkTheme">Dark</label>
+          
+          <!--<label for='themeSelect'>Chosen theme </label>
           <select id='themeSelect'>
-            <option value='default'>default / light</option>
-            <option value='splat'>splat</option>
-            <option value='dark'>Dark</option>
-            <option value='midnight'>Midnight</option>
-          </select>
+            <option value='default'>light</option>
+            <option value='midnight'>Dark</option>
+          </select>-->
           <br>
           <button type = 'submit' class='btnSubmit'>Submit</button>
         </fieldset>

@@ -142,6 +142,7 @@ Object.assign(TS.js, {
       let title;
       try {
         title = file.general.title;
+        if (typeof(title) == 'object') title = title.main
       } catch (err) {
         title = "";
       }
@@ -160,10 +161,28 @@ Object.assign(TS.js, {
         tableOfContents += "<ul>";
         let keys = Object.keys(obj);
         keys.forEach(ele => {
-          if (ele === "master_root" || ele === "#advanced") return 0;
-          tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
-          str += `<h${depth} id='${path + ele}' class='headers _${depth}'>${ele}</h${depth}>`;
-          format(obj[ele], depth + 1, path + ele, ele);
+          if (ele === "master_root" || ele === "#advanced" || ele == 'object_root') {
+            return 0
+          } else if (obj[ele].object_root && 0) { //add in parsing options
+            switch (obj[ele].object_root) {
+              case 'collection': 
+                console.log('bing')
+                tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
+                str += `<h${depth} id='${path + ele}' class='headers _${depth}'>${ele}</h${depth}>`;
+                format(obj[ele].main, depth + 1, path + ele, ele);
+                break;
+              case 'markdown': 
+                console.log('md')
+                tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
+                str += `<h${depth} id='${path + ele}' class='headers _${depth}'>${ele}</h${depth}>`;
+                format(obj[ele].main, depth + 1, path + ele, ele);
+                break;
+            }
+          } else {
+            tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
+            str += `<h${depth} id='${path + ele}' class='headers _${depth}'><a href='#tableOfContents'>${ele}</h${depth}>`;
+            format(obj[ele], depth + 1, path + ele, ele);
+          }
         });
         tableOfContents += "</ul>";
       };
@@ -177,7 +196,7 @@ Object.assign(TS.js, {
           head: {
           },
           main: tableOfContents + str,
-          script: script
+          /*script: script*/
         }
       };
     },

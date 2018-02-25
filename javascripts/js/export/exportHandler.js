@@ -5,7 +5,7 @@ TS.js.export.exportHandler = function(file, preview, viewFrame) {
     case "blog":
       return TS.js.export['blog'](file, preview, viewFrame)
       break;
-    case "book outline":
+    /*case "book outline":
       // return TS.js.export['book outline'](file, preview, viewFrame)
       let url
       if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
@@ -33,7 +33,7 @@ TS.js.export.exportHandler = function(file, preview, viewFrame) {
       }
       if (!url) return 0;
       else return url;
-      break;
+      break; */
     case "website_JS":
       return TS.js.export['website_JS'](file, preview, viewFrame)
       break;

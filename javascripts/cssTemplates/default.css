@@ -19,12 +19,18 @@ TS.cssTemplates.default = {
     button, input, select, select option {
       font-size:1rem;
     }
+    input[type=radio] {
+      transform: scale(1.5);
+      filter: contrast(5) drop-shadow(0px 0px .1rem black);
+    }
     input[type=button], button, select, .btn {
-      color: white;
+      color: black;
       border-radius: .4rem;
       border: none;
       padding: .05rem;
-      background-color: rgb(45,70,255);
+      margin:.1rem;
+      box-shadow: .05rem .05rem .1rem .05rem black;
+      background-color: transparent;
     }
     button:hover, select:hover, .btn:hover, .hoverable:hover {
       box-shadow: 0px 0px .1rem .2rem rgba(255,255,235,1), 0px 0px .1rem rgba(245,245,255,.7) inset;
@@ -33,9 +39,10 @@ TS.cssTemplates.default = {
       box-shadow: 0px 0px .1rem .2rem rgba(255,255,0,.5);
     }
     .icon {
-      color: white;
+      color: black;
       padding:.2rem;
       border-radius: .4rem;
+      background-color: transparent;
     }
     .icon.fa {
       font-size: 1.3rem;
@@ -47,10 +54,10 @@ TS.cssTemplates.default = {
       font-size: 4rem;
     }
     .btnWarn {
-      background-color : red;
+      color: red;
     }
     .btnSubmit {
-      background-color: green;
+      color: green;
     }
     a {
       cursor: pointer;
@@ -61,7 +68,9 @@ TS.cssTemplates.default = {
   border2: `
       margin: .5rem 0px;
       box-shadow: 0px 0px 0.1rem 0.2rem rgb(55,155,255);`,
-  border3: ``,
+  border3: `
+    border-bottom-left-radius: 0.5rem;
+  `,
   backgroundTitle: ``,
   titleFont: ``,
   backgroundNav1: `
@@ -95,14 +104,15 @@ TS.cssTemplates.default = {
       .navButton {
         border: 1px solid #CCD;
         margin: 0.1rem;
+        font-size:1.3rem;
         border-radius: 25% 25% 2% 2%;
-        background: linear-gradient(0deg, rgb(55,55,55), rgb(0,255,155) 40%, rgb(77,77,77));
+        background-color:transparent;
       }
       .navButton:hover {
         box-shadow: 0px 1px 1px 2px rgb(240,255,250);
       }
       .chosen {
-        background: linear-gradient(0deg, rgb(0,0,0), rgb(0,255,55) 40%, rgb(40,40,40));
+        background-color:white;
       }
       `,
   treeNav: `
