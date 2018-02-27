@@ -138,6 +138,7 @@ Object.assign(TS.js, {
       };
     },
     outlineMarkdown: function (file) {
+		console.log('test')
       let str = ``;
       let title;
       try {
@@ -179,7 +180,7 @@ Object.assign(TS.js, {
                 break;
             }
           } else {
-            tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
+            if (depth < 3) tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
             str += `<h${depth} id='${path + ele}' class='headers _${depth}'><a href='#tableOfContents'>${ele}</h${depth}>`;
             format(obj[ele], depth + 1, path + ele, ele);
           }

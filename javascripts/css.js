@@ -216,7 +216,7 @@ return {
       }
       .titleContent {
         ${_.titleFont || "color: black"};
-        padding:.35rem;
+        padding:.25rem;
         
       }
       .lineBody {

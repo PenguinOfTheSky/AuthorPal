@@ -3,11 +3,11 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     name: 'TS.html.display.titleBar',
     className: "title",
     draggable: "true",
-    ondragstart: function (event) {
-      TS.js.events.dragTitle(event);
+    ondragstart: function (e) {
+      TS.js.events.dragTitle(e);
     },
-    ondragend: function(event) {
-      TS.js.events.dragTitle(event)
+    ondragend: function(e) {
+      TS.js.events.dragTitle(e)
     }
   });
   title.append(document.querySelector('#font-awesome').cloneNode(1))
@@ -40,11 +40,15 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     }
   });
   let buttonGroup = Object.assign(document.createElement("div"), {
-    className: "buttonGroup"
+    className: "buttonGroup",
+    onmousedown: function(e) {
+		e.preventDefault();
+	}
   });
   let keyDelete = Object.assign(document.createElement("button"), {
     innerHTML: "<icon class='fa fa-minus'></icon>",
     className: "deleteLine btnWarn",
+    title: 'delete',
     onclick: function () {
       let callback = function () {
         delete path[itemName];
@@ -98,6 +102,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   let copy = Object.assign(document.createElement("button"), {
     className: "icon",
     innerHTML: `<icon class='fa fa-clone'></icon>`,
+    title: 'copy (currently nonfunctional)',
     onclick: function () {
       TS.js.clipboard.copyItem({item: item, path: path, itemName: itemName})
     }
@@ -117,6 +122,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     
     let add = Object.assign(document.createElement("button"), {
       className: "addLine btnSubmit",
+      title: 'add child',
       onclick: function () {
         TS.refs.container.append(TS.html.modals.addLine(path[itemName], focused));
       },

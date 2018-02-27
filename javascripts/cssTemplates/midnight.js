@@ -12,7 +12,7 @@
     btn: `
       a {
         cursor: pointer;
-        color: blue;
+        color: #3ad2f5;
       }
       button, input, select {
         font-size:1rem;
