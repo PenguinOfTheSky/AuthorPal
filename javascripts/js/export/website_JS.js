@@ -12,7 +12,7 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
       let spaces = "";
       if (depth > 15) return 0;
       for (let i = 0; i < depth; i++) {
-        
+
         spaces += "  "
       }
       script.innerHTML += spaces + "{\n" + spaces + '  ';
@@ -30,17 +30,17 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
                 },
                 "main": obj[ele][x]
               }
-            } 
+            }
             if (obj[ele][x].object_root.type == 'plain text') {
               comments += x + ' :=> ' + obj[ele][x].main + "\n\n"
             }
           }
         } else {
-          
+
           if (typeof(obj[ele]) == "object") {
             if (obj[ele].object_root) {
               if (obj[ele].object_root.type == 'function') {
-                
+
                 script.innerHTML += `${spaces + "  "} "${ele}": ${obj[ele].main}, \n`
               } else if (obj[ele].object_root.type == 'html') {
                 script.innerHTML += `${spaces + "  "} "${ele}": \`${obj[ele].main}\`, \n`
@@ -48,6 +48,8 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
                 script.innerHTML += `${spaces + "  "} "${ele}": `
                 dig(obj[ele], depth + 1)
                 script.innerHTML += ','
+              } else {
+                script.innerHTML += `${spaces + "  "} "${ele}": \`${obj[ele].main}\`, \n`
               }
             } else {
               script.innerHTML += `${spaces + "  "} "${ele}": `
@@ -60,7 +62,7 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
       script.innerHTML += spaces + "}"
     }
     dig(TS.data.chosenFile, 0)
-    script.innerHTML += ` \n 
+    script.innerHTML += ` \n
       me['#head']['#start']()
     `
     script.innerHTML += "\n }"

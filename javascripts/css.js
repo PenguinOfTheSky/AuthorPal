@@ -44,7 +44,7 @@ return {
     topLeftNav: function () {
       return `
       :host {
-        padding-top:.3rem;
+        padding-top:.1rem;
         width:100%;
         ${_.border1}
         ${_.backgroundNav1}
@@ -66,7 +66,6 @@ return {
         font-weight:900;
         background-color:rgba(0,0,0,0);font-size:1rem;
         padding:none;
-        color:white;
         top:-.3rem;
         position:relative;
         border:none;

@@ -13,7 +13,7 @@ TS.html._navBars.toggleSite_button = function() {
     onclick: function() {
       let iframeStyle = `position: absolute; z-index:999; background-color: white; width: 100%; height: ${TS.refs.display.clientHeight}px; margin-top: ${TS.refs.mainNavBar.clientHeight}px;`
       switch (TS.data.chosenFile.master_root.type) {
-        case "website_JS": 
+        case "website_JS":
         case 'web component(js)':
           if (view) {
             this.className = 'btn icon fa fa-eye'
@@ -47,12 +47,20 @@ TS.html._navBars.toggleSite_button = function() {
             view = !view
             break;
           //case "book outline":
-        default: 
+        default:
+        console.log(TS.data.chosenFile.master_root.exportFormat)
+        if (!TS.data.chosenFile.master_root.exportFormat && TS.data.chosenFile.master_root.templates == `TS.js.templates["novel outline"]`) {
+          TS.data.chosenFile.master_root.exportFormat = "outlineMarkdown"
+        }
         if (TS.data.chosenFile && TS.data.chosenFile.master_root.exportFormat) {
           let formatted = TS.js.fileFormat[TS.data.chosenFile.master_root.exportFormat](TS.data.chosenFile);
           text = formatted;
           let keys = Object.keys(formatted);
           try {
+            console.log(TS.data.chosenFile.master_root.templates)
+            if (!TS.data.chosenFile["#advanced"] && TS.data.chosenFile.master_root.templates == `TS.js.templates["novel outline"]`) {
+              TS.data.chosenFile["#advanced"] = (TS.js.templates.topNavbar["book outline"]())["#advanced"]
+            }
             styleChoice = TS.data.chosenFile["#advanced"].styles["*chosenStyle"];
             styleChoice ="<style>" +  TS.data.chosenFile["#advanced"].styles[styleChoice].main + "</style>";
           } catch (err) {
@@ -73,7 +81,7 @@ TS.html._navBars.toggleSite_button = function() {
           });
         }
         if (!output) return 0;
-        
+
         if (view) {
           this.src = "icons/iconmonstr-eye-6.svg"
           previous.remove()

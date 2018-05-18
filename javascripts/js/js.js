@@ -10,7 +10,7 @@ Object.assign(TS.js, {
     var after  = text.substring(cursor, text.length)
     el.innerText = (before + newText + after)
     var textNode = el.firstChild;
-    var caret = cursor + newText.length; 
+    var caret = cursor + newText.length;
     var range = document.createRange();
     range.setStart(textNode, caret);
     range.setEnd(textNode, caret);
@@ -147,6 +147,7 @@ Object.assign(TS.js, {
       } catch (err) {
         title = "";
       }
+      str += `<hr>`;
       if (title) {
         str += `<h1>${title}</h1>`;
       }
@@ -164,24 +165,9 @@ Object.assign(TS.js, {
         keys.forEach(ele => {
           if (ele === "master_root" || ele === "#advanced" || ele == 'object_root') {
             return 0
-          } else if (obj[ele].object_root && 0) { //add in parsing options
-            switch (obj[ele].object_root) {
-              case 'collection': 
-                console.log('bing')
-                tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
-                str += `<h${depth} id='${path + ele}' class='headers _${depth}'>${ele}</h${depth}>`;
-                format(obj[ele].main, depth + 1, path + ele, ele);
-                break;
-              case 'markdown': 
-                console.log('md')
-                tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
-                str += `<h${depth} id='${path + ele}' class='headers _${depth}'>${ele}</h${depth}>`;
-                format(obj[ele].main, depth + 1, path + ele, ele);
-                break;
-            }
           } else {
-            if (depth < 3) tableOfContents += `<li><a href="#${path + ele}">${ele}</a></li>`;
-            str += `<h${depth} id='${path + ele}' class='headers _${depth}'><a href='#tableOfContents'>${ele}</h${depth}>`;
+            if (depth < 3) tableOfContents += `<li><a href="#${path + ele}" >${ele}</a></li>`;
+            str += `<h${depth} id='${path + ele}' class='headers _${depth}'><a href='#tableOfContents' style='text-decoration: none; color:black;'>${ele}</h${depth}>`;
             format(obj[ele], depth + 1, path + ele, ele);
           }
         });
@@ -202,10 +188,10 @@ Object.assign(TS.js, {
       };
     },
     "web component(js)": function(file) {
-      
+
     }
   },
   objectToString: function(obj) {
-    
+
   }
 });

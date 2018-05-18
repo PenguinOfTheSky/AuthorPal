@@ -110,10 +110,10 @@ Object.assign(TS.html._navBars, {
         collapsed = !collapsed;
         if (collapsed) {
           topDiv.style.display = "none";
-          this.style = "height: .4rem;text-align:center;margin-top: .2rem;";
+          this.style = "height: .5rem;text-align:center;margin-top: 0rem;";
         } else {
           topDiv.style.display = "flex";
-          this.style = "height: .4rem;text-align:center;margin-top: 0rem;";
+          this.style = "height: 0rem;text-align:center;margin-top: 0rem;";
         }
       }
     });
