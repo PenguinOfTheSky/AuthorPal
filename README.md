@@ -7,12 +7,13 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.19.0 UI changes, bug fixes, now auto-hides preview when switching to home; several junk files deleted, some code trimmed.  
 v3.18.0 CSS overhaul. Streamlined and touched up. Couple minor glitch fixes. Added optional test server for better Q/A (feb 25, 2018)  
 v3.17.0 added syntax highlighting, improved markdown readability.  
 v3.16.0 added JSON support.  
 v3.15.0 fixed critical folder error (dropping folder same folder deleted the folder); fixed dark theme; new collapse-top-menu icon.  
 v3.14.0 added "light" theme, rename old default to 'splat'  
-v3.13.5 added back button on folder to go up filesystem. 
+v3.13.5 added back button on folder to go up filesystem.
 v3.13.0 switched from svgs to Font Awesome.  
 v3.12.7 white icons support  
 v3.12.5 added ability to close open project tabs.  
@@ -22,7 +23,7 @@ v3.10.0 added always-fold option.
 v3.9.0 added json support to website.  
 v3.8.0 clipboard stub, bug fixes, better highlighting.
 v3.7.0 removed editor choice, added new pre-selected editor object types like 'markdown' etc. Simplified css  
-v3.6.0 removed "Sparky" theme.  AuthorPal now runs on and is being maintained on Opera browser.  Tab produces double-space in textfields. 
+v3.6.0 removed "Sparky" theme.  AuthorPal now runs on and is being maintained on Opera browser.  Tab produces double-space in textfields.
 v3.5.0 can now export .js webcomponent files. Prelim example files folder added. Export streamlined.
 v3.4.0 prelim folder support (currently nonfunctional). Reduced excess buttons on Menu button. no more openFile modal
 v3.3.0 new icon for edit, more file and template options.  

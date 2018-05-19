@@ -23,7 +23,7 @@
         border-radius: .4rem;
         ${font}
         background-color: #000;
-        box-shadow: 0px 0px .05rem .1rem rgba(255,255,255,.12);
+        box-shadow: .03rem .04rem .05rem .1rem rgba(255,255,255,.22);
       }
       input[type=radio] {
         transform: scale(1.5);
@@ -36,6 +36,7 @@
         fill: white;
         border-radius:25%;
         padding: .1rem;
+        cursor:pointer;
       }
       .icon.fa {
         font-size:1.3rem;

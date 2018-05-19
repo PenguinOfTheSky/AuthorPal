@@ -142,7 +142,7 @@ return {
       }
       `;
       str += `
-      
+
       ${_.btnBase2 || ''}
       ul {
         padding-left: 1rem;
@@ -216,7 +216,7 @@ return {
       .titleContent {
         ${_.titleFont || "color: black"};
         padding:.25rem;
-        
+
       }
       .lineBody {
         margin-left:.5rem;
@@ -265,8 +265,9 @@ return {
         width: 1.5rem;
         height: 1.5rem;
         border-radius: 0px;
-        margin: auto;
       }
+
+      
       .buttonGroup button:hover, .buttonGroup > img:hover {
         outline:none;
       }
@@ -444,9 +445,9 @@ return {
           padding: .5rem;
           ${_.border1}
         }
-        
+
         .contextMenu:hover {
-          
+
           display: inline-block;
         }
         .fileContextTitle {

@@ -92,6 +92,7 @@ Object.assign(TS.html._navBars, {
         display.render(firstItem);
         TS.refs.treeNav[firstItem].click();
         buttons.opts.add(name, file);
+        TS.refs.togglePreview.style.visibility = 'visible'
       }
     };
     TS.refs.displayOpts = display;
@@ -118,17 +119,21 @@ Object.assign(TS.html._navBars, {
       }
     });
     let file = TS.html._navBars.file_button(commands.file, display);
-    let toggle = TS.html._navBars.toggleSite_button() 
+    let toggle = TS.html._navBars.toggleSite_button()
     let left = Object.assign(document.createElement("div"), {
       id: "left",
       innerHTML: `
         <icon class='icon btn hoverable fa fa-home' title='home' targetName = 'about'></icon>
-        <icon class='icon btn hoverable fa fa-folder-open' title='home' targetName = 'filesListContainer'></icon>
-        <icon class='icon btn hoverable fa fa-cogs' title='home' targetName = 'admin'></icon>
-        <icon class='icon btn hoverable fa fa-info-circle' title='home' targetName = 'help'></icon>
+        <icon class='icon btn hoverable fa fa-folder-open' title='files' targetName = 'filesListContainer'></icon>
+        <icon class='icon btn hoverable fa fa-cogs' title='settings' targetName = 'admin'></icon>
+        <icon class='icon btn hoverable fa fa-info-circle' title='info' targetName = 'help'></icon>
          `,
       onclick: function(e) {
         if (e.target.getAttribute('targetName')) {
+          if (TS.data.toggleSite) {
+            TS.refs.togglePreview.click()
+          }
+          TS.refs.togglePreview.style.visibility = 'hidden'
           let d = display.splash();
           d.opts.scroll(e.target.getAttribute('targetName'))
         }

@@ -6,7 +6,9 @@ TS.html._navBars.toggleSite_button = function() {
   let output;
   let previous;
   let view = false;
+  TS.data.toggleSite = view
   let img = TS.lib.createNode('button', {
+    id: 'togglePreview',
     title: 'view project export preview',
     className: 'icon fa fa-eye',
     style: 'margin-left: .3rem; margin-right: .3rem; display: none;',
@@ -48,7 +50,7 @@ TS.html._navBars.toggleSite_button = function() {
             break;
           //case "book outline":
         default:
-        console.log(TS.data.chosenFile.master_root.exportFormat)
+        let output = true //? checking
         if (!TS.data.chosenFile.master_root.exportFormat && TS.data.chosenFile.master_root.templates == `TS.js.templates["novel outline"]`) {
           TS.data.chosenFile.master_root.exportFormat = "outlineMarkdown"
         }
@@ -80,13 +82,13 @@ TS.html._navBars.toggleSite_button = function() {
             filePreview += `<a href="${url}" target='_blank' id='preview_${ele}'>Preview style:${ele} </a>`;
           });
         }
-        if (!output) return 0;
 
+        if (!output) return 0;
         if (view) {
-          this.src = "icons/iconmonstr-eye-6.svg"
+          this.classList = "icon fa fa-eye"
           previous.remove()
         } else {
-          this.src = "icons/iconmonstr-eye-10.svg"
+          this.classList = 'icon fa fa-eye-slash'
           let viewFrame = TS.lib.createNode('iframe', {
             src: output,
             className: 'iframe-preview',
@@ -96,8 +98,10 @@ TS.html._navBars.toggleSite_button = function() {
           TS.refs.container.append(viewFrame)
         }
         view = !view
+        TS.data.toggleSite = view
       }
     }
   })
+  TS.refs.togglePreview = img
   return img
 }
