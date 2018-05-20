@@ -22,6 +22,7 @@
         border: none;
         border-radius: .4rem;
         ${font}
+        cursor: pointer;
         background-color: #000;
         box-shadow: .03rem .04rem .05rem .1rem rgba(255,255,255,.22);
       }

@@ -3,7 +3,7 @@ TS.cssTemplates.default = {
   hoverable: `
     box-shadow: 0px 0px .1rem .2rem rgb(0,30,155);
   `,
-  highlight: ` 
+  highlight: `
     .highlight-one {
       color: #99F;
     }
@@ -15,9 +15,10 @@ TS.cssTemplates.default = {
     .hover:hover {
       box-shadow: 0px 0px .1rem .2rem rgba(0,30,155,.7);
     }
-    
+
     button, input, select, select option {
       font-size:1rem;
+      cursor: pointer;
     }
     input[type=radio] {
       transform: scale(1.5);
@@ -43,6 +44,7 @@ TS.cssTemplates.default = {
       padding:.2rem;
       border-radius: .4rem;
       background-color: transparent;
+      cursor: pointer;
     }
     .icon.fa {
       font-size: 1.3rem;

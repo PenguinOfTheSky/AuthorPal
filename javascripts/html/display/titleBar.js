@@ -47,7 +47,7 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   });
   let keyDelete = Object.assign(document.createElement("button"), {
     innerHTML: "<icon class='fa fa-minus'></icon>",
-    className: "deleteLine btnWarn",
+    className: "deleteLine btnWarn icon",
     title: 'delete',
     onclick: function () {
       let callback = function () {
@@ -118,22 +118,22 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
         innerHTML: item.object_root.type
       }))
       objectType = div;
-    } 
-    
+    }
+
     let add = Object.assign(document.createElement("button"), {
-      className: "addLine btnSubmit",
+      className: "addLine btnSubmit icon",
       title: 'add child',
       onclick: function () {
         TS.refs.container.append(TS.html.modals.addLine(path[itemName], focused));
       },
       innerHTML: "<icon class='fa fa-plus'></icon>"
     });
-    
-    
+
+
     if (item.object_root && item.object_root.editor) {}
     else {
       buttonGroup.append(add);
-    } 
+    }
   }
   title.append(titleContent, buttonGroup);
   if (objectType) {title.append(objectType)}

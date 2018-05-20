@@ -85,6 +85,7 @@ Object.assign(TS.html._navBars, {
       open: function (file, name) {
         toggle.style.display='inline-block';
         TS.data.chosenFile = file;
+        TS.data.chosenFileTitle = name
         let firstItem = Object.keys(TS.data.chosenFile)[0];
         if (firstItem === "master_root") {
           firstItem = Object.keys(TS.data.chosenFile)[1];
@@ -124,10 +125,10 @@ Object.assign(TS.html._navBars, {
       id: "left",
       innerHTML: `
         <icon class='icon btn hoverable fa fa-home' title='home' targetName = 'about'></icon>
-        <icon class='icon btn hoverable fa fa-folder-open' title='files' targetName = 'filesListContainer'></icon>
-        <icon class='icon btn hoverable fa fa-cogs' title='settings' targetName = 'admin'></icon>
+        <!--<icon class='icon btn hoverable fa fa-folder-open' title='files' targetName = 'filesListContainer'></icon>
+        <icon class='icon btn hoverable fa fa-cogs' title='settings' targetName = 'admin'></icon>-->
         <icon class='icon btn hoverable fa fa-info-circle' title='info' targetName = 'help'></icon>
-         `,
+         `, //Disabled 2 buttons until find some need.
       onclick: function(e) {
         if (e.target.getAttribute('targetName')) {
           if (TS.data.toggleSite) {

@@ -1,8 +1,8 @@
 TS.html.modals.fileContextNav = function(event, obj) {
   let ele = obj.ref
   let targ = ele
-  let loc = [event.clientX, event.clientY], 
-  name = obj.name,  
+  let loc = [event.clientX, event.clientY],
+  name = obj.name,
   origin = obj.files,
   type = ele.classList;
   let div = TS.lib.createNode('div', {
@@ -25,7 +25,18 @@ TS.html.modals.fileContextNav = function(event, obj) {
       innerText: 'export',
       onclick: function() {
         TS.data.chosenFile = obj.files[obj.name]
+        TS.data.chosenFileTitle = obj.name
         TS.refs.container.append(TS.html.modals["exportFile"]())
+      }
+    }),
+    download: TS.lib.createNode('div', {
+      className: 'fileContextOpts',
+      innerText: 'download backup of file',
+      title: "can be sent to someone else's authorpal",
+      onclick: function() {
+        TS.data.chosenFile = obj.files[obj.name]
+        TS.data.chosenFileTitle = obj.name
+        TS.refs.container.append(TS.html.modals["downloadFile"]())
       }
     }),
     copy: TS.lib.createNode('div', {
@@ -50,13 +61,13 @@ TS.html.modals.fileContextNav = function(event, obj) {
   }
   div.append(style)
   switch(true) {
-    case type.contains('file'): 
-      div.append(btns.title, btns.copy, btns.cut, btns.export)
+    case type.contains('file'):
+      div.append(btns.title, btns.copy, btns.cut, btns.export, btns.download)
       break;
     case type.contains('folder'):
-      div.append(btns.title, btns.copy, btns.cut)
+      div.append(btns.title, btns.copy, btns.cut, btns.download)
       break;
-    default: 
+    default:
       console.log('test')
   }
   let undisplay = function() {

@@ -138,7 +138,6 @@ Object.assign(TS.js, {
       };
     },
     outlineMarkdown: function (file) {
-		console.log('test')
       let str = ``;
       let title;
       try {

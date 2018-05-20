@@ -129,7 +129,8 @@ Object.assign(TS.html.modals, {
             var textFile = input.files[0];
             reader.onload = function (e) {
               Object.assign(TS.data.local.files, JSON.parse(e.target.result));
-              TS.events.save(location.reload())
+              TS.events.save()
+              location.reload()
             };
             reader.readAsText(textFile);
           } else {
@@ -154,13 +155,13 @@ Object.assign(TS.html.modals, {
       css: TS.css.modals.saveFile(),
       html: `
         <div id='centerModal' class='bgModal'>
-          <b>Save a Backup</b>
+          <b>Save a backup of data</b>
           <button id='exit'>X</button>
           <br>
           Your files are saved automatically to your browser cache every time you offclick a text field but if you wipe your cookies you could lose them.
-          To avoid that, save a backup copy to your computer using the button below. (upload it back to project to recover lost data)
+          To avoid that, save a backup copy to your computer using the button below. (upload it back to AuthorPal to recover lost data)
           Left-click to save to downloads folder or right-click to choose location on harddrive to save to.
-          <a href="${url}" download="AuthorPal-${date.toDateString()}">Download</a>
+          <a href="${url}" download="AuthorPal-${date.toDateString()}">Download Backup</a>
         </div>
       `,
       js: function ({
@@ -188,8 +189,8 @@ Object.assign(TS.html.modals, {
             <option value='folder'>Folder</option>
             <option value='book outline'>Book/creative work Outline</option>
             <option value='Blog'>Blog</option>
-            <option value='web component(js)'>Web Component (js-based html5)</option> 
-            <option value='website_JS'>SPA Website (js-based html5 single-page-app)</option> 
+            <option value='web component(js)'>Web Component (js-based html5)</option>
+            <option value='website_JS'>SPA Website (js-based html5 single-page-app)</option>
             <option value='library_JS'>Javascript Library</option>
             <option value='json'>JSON file</option>
           </select><br>
@@ -295,7 +296,6 @@ Object.assign(TS.html.modals, {
   },
   exportFile: function () { //fixThis
     let fileDownload = ``,
-      filePreview = ``,
       text;
     let styleChoice;
     if (TS.data.chosenFile /*&& TS.data.chosenFile.master_root.exportFormat*/) {
@@ -305,7 +305,6 @@ Object.assign(TS.html.modals, {
         })
         TS.refs.container.append(hidden)
         let data = TS.js.export.exportHandler(TS.data.chosenFile, 0, hidden)
-        console.log(data)
         hidden.remove()
         var myblob = new Blob([data.data], {
           type: `text/${data.type}`
@@ -321,6 +320,7 @@ Object.assign(TS.html.modals, {
           styleChoice = TS.data.chosenFile["#advanced"].styles["*chosenStyle"];
           styleChoice = "<style>" + TS.data.chosenFile["#advanced"].styles[styleChoice].main + "</style>";
         } catch (err) {
+          console.log('err444')
           return 0;
         }
         keys.forEach(function (ele) {
@@ -334,8 +334,7 @@ Object.assign(TS.html.modals, {
           });
           let url = URL.createObjectURL(myblob);
           let date = new Date();
-          fileDownload += `<a href="${url}" download="AuthorPal-${date.toDateString()}-style:${ele}">Download style: ${ele}</a>`;
-          filePreview += ``;
+          fileDownload += `<a href="${url}" download="AP-${date.toDateString()}-${TS.data.chosenFileTitle}">Download style: ${ele}</a>`;
         });
       }
     }
@@ -346,9 +345,10 @@ Object.assign(TS.html.modals, {
         <div id='centerModal' class='bgModal'>
           <button id='exit'>X</button>
           <h2>Export File</h2>
-          <p>Unlike the download option that saves all your work in json format, this allows the selected file to be downloaded in a rendered format if compatible.</p>
-          ${fileDownload || ""}<br>
-          ${filePreview || ""}
+          <p>Allows  selected file to be downloaded in a rendered format if compatible.</p>
+          <p>
+          To save as a particular file name to a particular file, right-click the link and choose "save link as..." or configure your browser settings to do so automatically.</p>
+          ${fileDownload || ""}
         </div>
       `,
       js: function ({box, root}) {
@@ -362,5 +362,35 @@ Object.assign(TS.html.modals, {
     });
     return item.box;
   },
-  trash: function() {TS.html.modals.trash()}
+  trash: function() {TS.html.modals.trash()},
+  downloadFile: function () {
+    let textarea = Object.assign(document.createElement("textarea"), {
+      innerText: `{\n  "${TS.data.chosenFileTitle + '_' + (Math.random().toFixed(3) * 1000)}": ${JSON.stringify(TS.data.chosenFile, 0, 2)}\n}`
+    });
+    var myblob = new Blob([textarea.innerText], {
+      type: "text/plain"
+    });
+    let url = URL.createObjectURL(myblob);
+    let date = new Date();
+    let item = TS.lib.createComponent({
+      id: "TS.html.modals.saveFile",
+      css: TS.css.modals.saveFile(),
+      html: `
+        <div id='centerModal' class='bgModal'>
+          <b>Save backup of file</b>
+          <button id='exit'>X</button>
+          <br>
+          <p> File can be sent to another's AuthorPal or used to restore old data.
+          <a href="${url}" download="AP-${date.toDateString()}-${TS.data.chosenFileTitle}">Download Backup</a>
+        </div>
+      `,
+      js: function ({
+        box,
+        root
+      }) {
+        TS.js.baseModal(box, root);
+      }
+    });
+    return item.box;
+  }
 })

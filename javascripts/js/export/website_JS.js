@@ -96,10 +96,15 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
     viewFrame.contentDocument.open()
     viewFrame.contentDocument.write('<!DOCTYPE html>')
     viewFrame.contentDocument.close();
-    viewFrame.contentDocument.insertBefore(commentsNode, viewFrame.contentDocument.firstChild)
-    viewFrame.contentDocument.head.innerHTML = head
-    viewFrame.contentDocument.head.append(css)
-    viewFrame.contentDocument.body.append(script)
+    try {
+      viewFrame.contentDocument.insertBefore(commentsNode, viewFrame.contentDocument.firstChild)
+      viewFrame.contentDocument.head.innerHTML = head
+      viewFrame.contentDocument.head.append(css)
+      viewFrame.contentDocument.body.append(script)
+    } catch (err) {
+      console.log(err)
+    }
+
     if (!preview) {
       //needs work. check for iframe memory leak (is it getting removed?)
       return {
