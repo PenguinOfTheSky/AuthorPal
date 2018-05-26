@@ -1,10 +1,11 @@
 TS.js.templates.html5 = {
-  collection: function () {
+  collection: function (children) {
     let obj = {
       object_root: {
         type: 'collection'
       }
     };
+    if (children) Object.assign(obj, children)
     return obj;
   },
   "plain text": function(text) {
@@ -73,7 +74,7 @@ TS.js.templates.html5 = {
         editor: 'javascript'
       },
       "main": `function() {
-        
+
       }`
     }
     return obj
@@ -87,7 +88,7 @@ TS.js.templates.html5 = {
       },
       "main": `function() {
         let element = Object.assign(document.createElement(''), {
-          
+
         });
         return element;
       }`

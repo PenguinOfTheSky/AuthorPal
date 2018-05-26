@@ -18,9 +18,10 @@ TS.js.export['website_JS'] = function (file, preview, viewFrame) {
       script.innerHTML += spaces + "{\n" + spaces + '  ';
       let keys = Object.keys(obj)
       keys.forEach((ele, i) => {
-        if (ele === 'master_root' || ele === '#advanced') return 0;
+        if (ele === 'master_root' || ele === '#advanced' || (ele[0] === '_' && ele[1] ==='_')) return 0;
         else if (ele === '#general' && depth === 0) {
           for (let x in obj[ele]) {
+            if ((x[0] === '_' && x[1] ==='_')) continue;
             if (typeof(obj[ele][x]) =='string') {
               //for backwards compat
               obj[ele][x] = {

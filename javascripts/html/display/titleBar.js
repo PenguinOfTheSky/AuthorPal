@@ -1,14 +1,7 @@
 TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts, focused, lineBody}) {
   let title = TS.lib.createNode("div", {
     name: 'TS.html.display.titleBar',
-    className: "title",
-    draggable: "true",
-    ondragstart: function (e) {
-      TS.js.events.dragTitle(e);
-    },
-    ondragend: function(e) {
-      TS.js.events.dragTitle(e)
-    }
+    className: "title"
   });
   title.append(document.querySelector('#font-awesome').cloneNode(1))
   let titleContent = Object.assign(document.createElement("span"), {
@@ -41,9 +34,6 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
   });
   let buttonGroup = Object.assign(document.createElement("div"), {
     className: "buttonGroup",
-    onmousedown: function(e) {
-		e.preventDefault();
-	}
   });
   let keyDelete = Object.assign(document.createElement("button"), {
     innerHTML: "<icon class='fa fa-minus'></icon>",
@@ -52,6 +42,17 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     onclick: function () {
       let callback = function () {
         delete path[itemName];
+        let lastItem
+        for (let i = 0; i <path.__order.length; i++) {
+          if (path[path.__order[i]] === undefined) delete path.__order[i]
+          if (path.__order[i]!==undefined) {
+            lastItem = i;
+          }
+          if (path.__order[i] === itemName) {
+            path.__order.splice(i, 1)
+          }
+        }
+        path.__order.length = lastItem+1
         if (path === TS.data.chosenFile) {
           let x;
           for (let i in TS.data.chosenFile) {
@@ -108,18 +109,52 @@ TS.html.display.titleBar = function({itemName, unfocus, path, item, depth, opts,
     }
   });
   buttonGroup.append(copy)
-  let objectType;
+  let objectType = TS.lib.createNode('div',{
+    style: "display: flex; flex-grow:1;"
+  })
   if (typeof(item) === "object") {
-    if (item.object_root && item.object_root.type && item.object_root.type != 'collection') {
+    if (item.object_root && item.object_root.type) {
       let div = TS.lib.createNode('div', {
         style: "text-align: center;display: inline-block; flex-grow: 1;"
       })
       div.append(TS.lib.createNode('span', {
         innerHTML: item.object_root.type
       }))
-      objectType = div;
+      objectType.append(div);
     }
-
+    let div = TS.lib.createNode('div', {
+      style: "text-align: right;display: inline-block; flex-grow: 1;"
+    })
+    if (!path.__order) {
+      path.__order = Object.keys(path)
+    }
+    let position = path.__order
+    for (let i = 0; i < position.length; i++) {
+      if (itemName == position[i]) {
+        position = i+1;
+        break;
+      }
+    }
+    let prevOrderValue = position
+    div.append(TS.lib.createNode('input', {
+      value: position,
+      type:'number',
+      maxlength: 2,
+      style: 'width: 2.1rem;',
+      onchange: function() {
+        if (+this.value < 0) this.value = 0
+        let key = path.__order.splice(prevOrderValue - 1, 1)
+        path.__order.splice(+this.value - 1, 0, key)
+        let targ = TS.data.chosenFile
+        TS.data.currentView.forEach(function(ele, i) {
+          if (i < TS.data.currentView.length -1) targ = targ[ele]
+        })
+        opts.focus(targ, TS.data.currentView[TS.data.currentView.length-1]);
+        TS.events.updatedFile()
+        TS.events.save()
+      }
+    }))
+    objectType.append(div)
     let add = Object.assign(document.createElement("button"), {
       className: "addLine btnSubmit icon",
       title: 'add child',

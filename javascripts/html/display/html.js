@@ -29,7 +29,7 @@ Object.assign(TS.html.display, {
         root.innerHTML = "";
         sorted = TS.html.display.sort(id);
         root.append(sorted.element);
-      }, 
+      },
       swapTab: function (id) {
         currentID = id;
         sorted.opts.swapTab(id);
@@ -104,7 +104,7 @@ Object.assign(TS.html.display, {
     style.innerHTML = TS.css.boxes.display();
     root.append(style);
     let determine = function (item, itemName, path, {maxDepth, depth, unfocus}) {
-      if (itemName == 'object_root' || itemName == 'master_root') return ''; //why is this being appended. Fixthis.
+      if (itemName == 'object_root' || itemName == 'master_root' || (itemName[0] == '_' && itemName[1] == '_')) return ''; //why is this being appended. Fixthis.
       let formatType;
       if (depth === undefined) depth = 0;
       if (itemName === undefined) return 0;
@@ -127,20 +127,17 @@ Object.assign(TS.html.display, {
       if (typeof (item) === "object") {
         if (item.object_root && (item.object_root.type == 'collection' || item.object_root.type == 'library' )) {
           line.className += " objectContainer";
-          
+
         } else {
           //line.className += " functionContainer";
         }
       }
       else line.className += " stringContainer";
       let lineBody = TS.html.display.lineBody.handler({path: path, itemName: itemName, depth: depth, item: item, maxDepth: maxDepth, determine: determine, formatType: formatType, line: line});
-    
+
       let title = TS.html.display.titleBar({path: path, itemName: itemName, depth: depth, unfocus: unfocus, item: item, opts: opts, focused: focused, lineBody: lineBody})
       line.appendChild(title);
       line.appendChild(lineBody.element);
-      if (typeof (item) === "object" && Object.keys(item).length !== 0) {
-      //  line.appendChild(lineBody);
-      }
       if (itemName === TS.data.addedLine) {
         delete TS.data.addedLine;
         TS.data.scrollToLine = line;

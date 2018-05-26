@@ -7,6 +7,11 @@ Product is built to be Chrome/Opera compatible. Not suggested for use with any o
 [FAQ](help/FAQ.html) is included in product.
 
 ## Patch notes:
+v3.24 - improved container css to better show collections. Improved more code highlighting.
+v3.23 - improved code highlighting.
+v3.22 - added rich text option + editor.  
+v3.21 - can now reorganize elements.  
+v3.20.0 added better error reporting for website builder. Added ability to save a single file for backup/sharing purposes.  
 v3.19.0 UI changes, bug fixes, now auto-hides preview when switching to home; several junk files deleted, some code trimmed.  
 v3.18.0 CSS overhaul. Streamlined and touched up. Couple minor glitch fixes. Added optional test server for better Q/A (feb 25, 2018)  
 v3.17.0 added syntax highlighting, improved markdown readability.  

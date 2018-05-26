@@ -58,9 +58,8 @@
     border1: `box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, .5);
       box-sizing:border-box;`,
     border2: `
-      border: .1rem solid rgba(250,250,250,.7);
-      border-radius:.1rem;
-      box-shadow: 0px 0px 1px 2px black inset;`,
+      border-left: .15rem solid rgba(250,250,250,.7);
+      border-radius:.1rem;`,
     border3: `
       border-bottom-left-radius: 0.5rem;
     `,

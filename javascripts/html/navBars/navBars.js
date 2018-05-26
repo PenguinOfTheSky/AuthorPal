@@ -211,7 +211,7 @@ Object.assign(TS.html._navBars, {
               vTarget = vTarget[ele];
             });
             for (let str in obj) {
-              if (str === "master_root") continue;
+              if (str === "master_root" || (str[0] == '_' && str[1] =='_')) continue;
               if (str ==='object_root') {
                 if (obj[str].type != 'collection') break;
                 else continue;

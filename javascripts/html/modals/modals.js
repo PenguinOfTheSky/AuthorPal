@@ -1,44 +1,6 @@
 /* global TS */
 Object.assign(TS.html.modals, {
-  preferencesFile: function () {
-    let item = TS.lib.createComponent({
-      id: "TS.html.modals.preferencesFile",
-      css: TS.css.modals.preferencesFile(),
-      html: `
-        <div id='centerModal' class='bgModal'>
-        <button id='exit'>X</button>
-        <b>Edit Preferences </b>
-        <br>
-        <form id = 'prefForm'>
-          <label for='themeSelect'><b>Choose a style theme below</b></label>
-          <select id='themeSelect'>
-            <option value='default'>default</option>
-            <option value='sparky'>Sparky</option>
-            <!-- <option value='Theme1'>Theme1</option> -->
-            <option value='dark'>Dark</option>
-            <option value='midnight'>Midnight</option>
-          </select>
-          <button type = 'submit' class='btnSubmit'>Submit</button>
-        </form>
-        </div>
-      `,
-      js: function ({
-        box,
-        root
-      }) {
-        TS.js.baseModal(box, root);
-        root.querySelector("#themeSelect").value = TS.data.local.preferences.theme;
-        root.querySelector("#prefForm").onsubmit = function (event) {
-          event.preventDefault();
-          TS.data.local.preferences.theme = root.querySelector("#themeSelect").value;
-          TS.events.updatePreferences(root.querySelector("#themeSelect").value);
-          box.remove();
-          return 0;
-        };
-      }
-    });
-    return item.box;
-  },
+
   addLine: function (path) {
     let options = ``;
     if (TS.data.chosenFile.master_root === undefined) {
@@ -88,6 +50,10 @@ Object.assign(TS.html.modals, {
           let template = this.querySelector("#selectTemplate").value;
           if (name !== "" && path[name] === undefined) {
             path[name] = x[template]();
+            if (!path.__order) {
+              path.__order = Object.keys(item)
+            }
+            path.__order.push(name)
             TS.data.addedLine = name;
             let i = TS.data.chosenFile;
             TS.data.currentView.forEach(function (ele, n) {

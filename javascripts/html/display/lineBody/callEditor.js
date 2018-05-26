@@ -21,16 +21,39 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
   })
   buttonBar.append(exitEditor)
   let editor = TS.lib.createNode('div', {
-    id: 'editor', 
+    id: 'editor',
     style: 'height: 100%; width: 100%;'
   })
-  
+
   editorContainer.append(buttonBar, editor)
   document.body.append(editorContainer)
   let aceEditor;
   switch (type) {
     case 'rich text':
-        $('#editor').summernote();
+      let iframe = D.make('iframe', {
+        style: 'width:100%;height:100%;',
+        src: './richText/richText.html'
+      })
+      D.find('#editor').append(iframe)
+      //add safety script deleter here?
+      let set = function() {
+        setTimeout(function() {
+          if (iframe.contentDocument.querySelector('#textBox')) iframe.contentDocument.querySelector('#textBox').innerHTML = itemContent
+          else set();
+        }, 20)
+      }
+      set()
+      aceEditor = {
+        getValue: function() {
+          let text = iframe.contentDocument.querySelector('#textBox').innerHTML
+          iframe.remove()
+
+          return text;
+        },
+        setValue: function() {// code insertion todo?
+        }
+      }
+      /*  $('#editor').summernote();
         $('#editor').summernote({
           focus: true
         });
@@ -47,7 +70,7 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
           },
           setValue: function() {// code insertion todo?
           }
-        }
+        } */
       break;
     case 'markdown':
       let textfield = TS.lib.createNode('textarea', {
@@ -75,7 +98,7 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
       getValue: function() {
         return editor.querySelector('#markdownText').value
       }
-    } 
+    }
     editor.style.width = '48%'
     editor.style.display = 'inline-block'
     let showMd = TS.lib.createNode('div', {
@@ -87,7 +110,7 @@ TS.html.display.lineBody.callEditor = function (itemContent, type, callback) {
       clearTimeout(TS.events.updateMarkdown)
       TS.events.updateMarkdown = setTimeout(function() {
         showMd.innerHTML = marked(document.querySelector('#markdownText').value)
-      }, 300) 
+      }, 300)
     }
   }
 }

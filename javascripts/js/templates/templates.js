@@ -49,7 +49,7 @@ Object.assign(TS.js.templates, {
           templates: 'TS.js.templates["novel outline"]',
           exportFormat: "outlineMarkdown",
           type: "book outline",
-          version: "3.7",
+          version: "3.21",
           dateCreated: (new Date()).toLocaleString(),
           dateModified: (new Date()).toLocaleString(),
           shadowTree: {}
@@ -97,9 +97,9 @@ h1 { text-align: center; }
           "*script": ``
         },
         "characters": {
-          "main": {},
-          "supporting": {},
-          "minor": {}
+          "main": TS.js.templates.html5['collection'](),
+          "minor": TS.js.templates.html5['collection'](),
+          "items": TS.js.templates.html5['collection']()
         },
         "locations": {},
         "chapters": {},
@@ -137,7 +137,7 @@ h1 { text-align: center; }
               height: 100;
             }`
           }
-          
+
         },
         "html": {
           "local vars": `
@@ -245,13 +245,13 @@ h1 { text-align: center; }
           "Random Notes": TS.js.templates.html5['plain text'](`For more information on how to use this AuthorPal project visit the FAQ`)
         },
         "#css": {
-          
+
         },
         "view": {
-          
+
         },
         "js": {
-          
+
         },
         "#root": {
           "#start": {
@@ -282,7 +282,7 @@ h1 { text-align: center; }
         }
       };
       return obj;
-    }, 
+    },
     website_JS: function () {
       let obj = {
         "master_root": {
@@ -379,12 +379,12 @@ h1 { text-align: center; }
     elements.html.append(ele)
     if (arr[i+1].ref) {
         elements.refs[arr[i+1].ref] = ele
-    } 
+    }
       if (children) {
         children = SR.lib.jtml(children)
         ele.append(children.html)
         Object.assign(elements.refs, children.refs)
-    } 
+    }
   }
   return elements;
 }`
@@ -414,10 +414,10 @@ h1 { text-align: center; }
           "Random Notes": `For more information on how to use this AuthorPal project visit the FAQ`
         },
         "view": {
-          
+
         },
         "utility": {
-          
+
         },
         "#root": {
           "#start": {

@@ -188,13 +188,14 @@ return {
       }
       .stringContainer {
       }
+      .objectContainer {
+        ${_.border2}
+      }
       .functionContainer {
         ${_.functionBorder || _.border2}
       }
       ${_.highlight || defaultCSS.highlight}
-      .objectContainer {
-        ${_.border2}
-      }
+
       .objectContainer > .title > .titleContent {
         text-decoration: underline;
       }
@@ -233,6 +234,9 @@ return {
           background-color: rgb(240,245,240);
           `}
       }
+      .textField > pre {
+        margin: .05rem;
+      }
       .textField > p {
         margin: .05rem;
         line-height: 1.15;
@@ -267,7 +271,7 @@ return {
         border-radius: 0px;
       }
 
-      
+
       .buttonGroup button:hover, .buttonGroup > img:hover {
         outline:none;
       }
@@ -281,6 +285,7 @@ return {
       }
       ${_.titleBar || ''}
       `;
+      console.log(str)
       return str;
     },
     splash: function () {
