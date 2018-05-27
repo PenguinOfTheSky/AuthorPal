@@ -140,11 +140,11 @@ Object.assign(TS.js, {
     outlineMarkdown: function (file) {
       let str = ``;
       let title;
-      try {
-        title = file.general.title;
+      if (file.general && file.general.title) {
         if (typeof(title) == 'object') title = title.main
-      } catch (err) {
-        title = "";
+        else title = title
+      } else {
+        title = TS.data.chosenFileTitle
       }
       str += `<hr>`;
       if (title) {
@@ -156,6 +156,12 @@ Object.assign(TS.js, {
           str += `<div class='content _${depth}'>`;
           if (parent[0] === "*") str += obj; //add _ support later.
           else str += marked(obj);
+          str += "</div>";
+          return 0;
+        } else if (obj.object_root && obj.object_root.type != 'collection') {
+          str += `<div class='content _${depth}'>`;
+          if (parent[0] === "*") str += obj.main; //add _ support later.
+          else str += marked(obj.main);
           str += "</div>";
           return 0;
         }
