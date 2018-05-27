@@ -162,10 +162,13 @@ Object.assign(TS.js, {
         tableOfContents += "<ul>";
         let keys = Object.keys(obj);
         keys.forEach(ele => {
-          if (ele === "master_root" || ele === "#advanced" || ele == 'object_root') {
+          if (ele === "master_root" || ele === "#advanced" || ele == 'object_root' ||(ele[0] === '_' && ele[1] ==='_')) {
             return 0
           } else {
-            if (depth < 3) tableOfContents += `<li><a href="#${path + ele}" >${ele}</a></li>`;
+            if (depth < 3) {
+              tableOfContents += `<li><a href="#${path + ele}" >${ele}</a></li>`;
+              str += '<hr>'
+            }
             str += `<h${depth} id='${path + ele}' class='headers _${depth}'><a href='#tableOfContents' style='text-decoration: none; color:black;'>${ele}</h${depth}>`;
             format(obj[ele], depth + 1, path + ele, ele);
           }
